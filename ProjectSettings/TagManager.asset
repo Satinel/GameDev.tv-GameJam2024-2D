@@ -53,3 +53,6 @@ TagManager:
   - name: FloatingText
     uniqueID: 1521703825
     locked: 0
+  - name: Shop
+    uniqueID: 743488233
+    locked: 0
