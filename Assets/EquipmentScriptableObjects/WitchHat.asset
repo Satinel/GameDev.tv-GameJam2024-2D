@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f86f0e575a772274fad942e2dbbc8bcb, type: 3}
+  m_Name: WitchHat
+  m_EditorClassIdentifier: 
+  Name: Witch Hat
+  Slot: 2
+  Sprite: {fileID: 21300000, guid: f92dab247c753284db02104b901bc42e, type: 3}
+  HasOffset: 1
+  SpriteOffset: {x: -0.166, y: 0.47, z: 0}
+  SpriteScale: {x: 1.15, y: 1.15, z: 1.15}
+  SpriteFlipped: 1
+  AttackIncrease: 3
+  HealthIncrease: 1
+  Skill: {fileID: 0}
