@@ -1,18 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseSkill : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [field:SerializeField] public string SkillName {get; private set;}
+
+    [SerializeField] protected AudioClip _audioClip;
+    [SerializeField] protected AudioSource _audioSource;
+    [SerializeField] protected Animator _unitAnimator;
+    [SerializeField] protected float _audioVolume;
+    [SerializeField] protected float _cooldown;
+
+
+    protected readonly int MSWING_HASH = Animator.StringToHash("MainSwing");
+    protected readonly int MSTAB_HASH = Animator.StringToHash("MainStab");
+    protected readonly int OSWING_HASH = Animator.StringToHash("OffSwing");
+    protected readonly int OSTAB_HASH = Animator.StringToHash("OffStab");
+
+    protected void Awake()
     {
-        
+        _unitAnimator = GetComponentInParent<Animator>();
+        if(!_audioSource) _audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            UseSkill();
+        }
+    }
+
+    protected virtual void UseSkill()
+    {
+        if(_audioClip && _audioSource)
+        {
+            _audioSource.PlayOneShot(_audioClip, _audioVolume);
+        }
     }
 }

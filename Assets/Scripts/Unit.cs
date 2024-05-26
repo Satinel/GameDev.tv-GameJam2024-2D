@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using Unity.VisualScripting;
 
 public class Unit : MonoBehaviour
 {
@@ -11,9 +8,18 @@ public class Unit : MonoBehaviour
     [SerializeField] TextMeshProUGUI _attackText;
     [SerializeField] TextMeshProUGUI _healthText;
     [SerializeField] GameObject _equipMain, _equipOffhand, _equipHeadgear;
+    [SerializeField] Animator _animator;
 
     public int Attack() => _attack;
     public int Health() => _health;
+
+    void Awake()
+    {
+        if(!_animator)
+        {
+            _animator = GetComponent<Animator>();
+        }
+    }
 
     void Start()
     {
@@ -22,11 +28,16 @@ public class Unit : MonoBehaviour
     }
 
     // [SerializeField] EquipmentScriptableObject test;
+    // [SerializeField] EquipmentScriptableObject test2;
     // void Update()
     // {
-    //     if(Input.GetKeyDown(KeyCode.E))
+    //     if(Input.GetKeyDown(KeyCode.P))
     //     {
     //         NewGear(test);
+    //     }
+    //     if(Input.GetKeyDown(KeyCode.K))
+    //     {
+    //         NewGear(test2);
     //     }
     // }
 
@@ -35,7 +46,7 @@ public class Unit : MonoBehaviour
         _health += healthChange;
         if(_health < 0) _health = 0;
         _healthText.text = _health.ToString();
-        if(healthChange == 0) Die();
+        if(_health == 0) Die();
     }
 
     public void ChangeAttack(int attackChange)
@@ -48,6 +59,7 @@ public class Unit : MonoBehaviour
     void Die()
     {
         // TODO Handle Death however that's going to work
+        // TODO Probably play an animation
         Debug.Log(name + " is Dead!");
     }
 
@@ -83,6 +95,7 @@ public class Unit : MonoBehaviour
         spriteRenderer.flipX = gear.SpriteFlipped;
         ChangeHealth(gear.HealthIncrease);
         ChangeAttack(gear.AttackIncrease);
+        Instantiate(gear.Skill, transform);
     }
 
 }

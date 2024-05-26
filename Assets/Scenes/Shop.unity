@@ -181,7 +181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7797904195554527099, guid: 53291c28ba03c3c48a9a318e894fdc00, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -406,7 +406,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7797904195554527099, guid: 53291c28ba03c3c48a9a318e894fdc00, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -528,7 +528,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7797904195554527099, guid: 53291c28ba03c3c48a9a318e894fdc00, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -721,7 +721,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7797904195554527099, guid: 53291c28ba03c3c48a9a318e894fdc00, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -921,6 +921,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2448113114261741379, guid: 53291c28ba03c3c48a9a318e894fdc00, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3149813780152174012, guid: 53291c28ba03c3c48a9a318e894fdc00, type: 3}
       propertyPath: m_Size.x
       value: 1.28
@@ -930,6 +934,18 @@ PrefabInstance:
       value: 1.28
       objectReference: {fileID: 0}
     - target: {fileID: 3149813780152174012, guid: 53291c28ba03c3c48a9a318e894fdc00, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5191231138918434314, guid: 53291c28ba03c3c48a9a318e894fdc00, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5191231138918434314, guid: 53291c28ba03c3c48a9a318e894fdc00, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5191231138918434314, guid: 53291c28ba03c3c48a9a318e894fdc00, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 0
       objectReference: {fileID: 0}
