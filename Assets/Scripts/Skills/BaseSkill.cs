@@ -10,7 +10,8 @@ public class BaseSkill : MonoBehaviour
     [SerializeField] protected float _audioVolume;
     [SerializeField] protected float _cooldown;
 
-
+    public float Cooldown => _cooldown;
+    
     protected readonly int MSWING_HASH = Animator.StringToHash("MainSwing");
     protected readonly int MSTAB_HASH = Animator.StringToHash("MainStab");
     protected readonly int OSWING_HASH = Animator.StringToHash("OffSwing");
