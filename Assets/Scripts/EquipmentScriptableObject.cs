@@ -12,5 +12,6 @@ public class EquipmentScriptableObject : ScriptableObject
     public bool SpriteFlipped;
     public int AttackIncrease;
     public int HealthIncrease;
+    public int Price;
     public BaseSkill Skill;
 }

@@ -1,13 +1,16 @@
 using UnityEngine;
 using TMPro;
+using System;
 
 public class Unit : MonoBehaviour
 {
+    public static event EventHandler<Unit> OnAnyUnitClicked;
+
     [SerializeField] int _attack;
     [SerializeField] int _health;
     [SerializeField] TextMeshProUGUI _attackText;
     [SerializeField] TextMeshProUGUI _healthText;
-    [SerializeField] GameObject _equipMain, _equipOffhand, _equipHeadgear;
+    [SerializeField] GameObject _equipMain, _equipOffhand, _equipHeadgear, _highlight;
     [SerializeField] Animator _animator;
 
     public int Attack() => _attack;
@@ -19,6 +22,16 @@ public class Unit : MonoBehaviour
         {
             _animator = GetComponent<Animator>();
         }
+    }
+
+    void OnEnable()
+    {
+        OnAnyUnitClicked += HighlightUnit;
+    }
+
+    void OnDisable()
+    {
+        OnAnyUnitClicked -= HighlightUnit;
     }
 
     void Start()
@@ -56,6 +69,25 @@ public class Unit : MonoBehaviour
         _attackText.text = _attack.ToString();
     }
 
+
+    public void OnUnitClicked()
+    {
+        OnAnyUnitClicked?.Invoke(this, this);
+    }
+
+    void HighlightUnit(object sender, Unit e)
+    {
+        if(e == this)
+        {
+            _highlight.SetActive(true);
+        }
+        else
+        {
+            _highlight.SetActive(false);
+        }
+    }
+
+
     void Die()
     {
         // TODO Handle Death however that's going to work
@@ -63,7 +95,7 @@ public class Unit : MonoBehaviour
         Debug.Log(name + " is Dead!");
     }
 
-    void NewGear(EquipmentScriptableObject gear)
+    public void NewGear(EquipmentScriptableObject gear)
     {
         switch (gear.Slot)
         {
