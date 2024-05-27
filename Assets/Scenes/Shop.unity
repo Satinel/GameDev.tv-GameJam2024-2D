@@ -1431,6 +1431,10 @@ PrefabInstance:
       propertyPath: _moneyText
       value: 
       objectReference: {fileID: 6368669579916183168}
+    - target: {fileID: 5743451174950993338, guid: 011ad25c768e8264689086347a5789e5, type: 3}
+      propertyPath: <TotalMoney>k__BackingField
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 7198764462049374882, guid: 011ad25c768e8264689086347a5789e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1610,7 +1614,7 @@ PrefabInstance:
       objectReference: {fileID: 564941336}
     - target: {fileID: 4011845831625711601, guid: b932141b019653840bc0a5a4cf0b8a8a, type: 3}
       propertyPath: _allItems.Array.size
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4011845831625711601, guid: b932141b019653840bc0a5a4cf0b8a8a, type: 3}
       propertyPath: _shopItems.Array.size
@@ -1636,6 +1640,14 @@ PrefabInstance:
       propertyPath: _allItems.Array.data[4]
       value: 
       objectReference: {fileID: 11400000, guid: ce6f224918eac7a4b8a97827eb0cc6ed, type: 2}
+    - target: {fileID: 4011845831625711601, guid: b932141b019653840bc0a5a4cf0b8a8a, type: 3}
+      propertyPath: _allItems.Array.data[5]
+      value: 
+      objectReference: {fileID: 11400000, guid: 992658297c629db4b9c8f683a2b51ab2, type: 2}
+    - target: {fileID: 4011845831625711601, guid: b932141b019653840bc0a5a4cf0b8a8a, type: 3}
+      propertyPath: _allItems.Array.data[6]
+      value: 
+      objectReference: {fileID: 11400000, guid: 1b0d7f010f7281347aae089915cc8e26, type: 2}
     - target: {fileID: 4011845831625711601, guid: b932141b019653840bc0a5a4cf0b8a8a, type: 3}
       propertyPath: _shopItems.Array.data[0]
       value: 

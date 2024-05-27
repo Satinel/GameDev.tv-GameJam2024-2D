@@ -7,14 +7,20 @@ public class Unit : MonoBehaviour
     public static event EventHandler<Unit> OnAnyUnitClicked;
 
     [SerializeField] int _attack;
-    [SerializeField] int _health;
+    [SerializeField] int _maxHealth;
+    [SerializeField] int _currentHealth;
     [SerializeField] TextMeshProUGUI _attackText;
     [SerializeField] TextMeshProUGUI _healthText;
-    [SerializeField] GameObject _equipMain, _equipOffhand, _equipHeadgear, _highlight;
+    [SerializeField] GameObject _highlight;
+    [SerializeField] EquipmentSlot _equipMain, _equipOffhand, _equipHeadgear;
     [SerializeField] Animator _animator;
 
     public int Attack() => _attack;
-    public int Health() => _health;
+    public int MaxHealth() => _maxHealth;
+    public int CurrentHealth() => _currentHealth;
+    public EquipmentSlot Main() => _equipMain;
+    public EquipmentSlot Offhand() => _equipOffhand;
+    public EquipmentSlot Headgear() => _equipHeadgear;
 
     void Awake()
     {
@@ -36,8 +42,9 @@ public class Unit : MonoBehaviour
 
     void Start()
     {
+        _currentHealth = _maxHealth;
+        _healthText.text = _currentHealth.ToString();
         _attackText.text = _attack.ToString();
-        _healthText.text = _health.ToString();
     }
 
     // [SerializeField] EquipmentScriptableObject test;
@@ -54,25 +61,20 @@ public class Unit : MonoBehaviour
     //     }
     // }
 
-    public void ChangeHealth(int healthChange)
-    {
-        _health += healthChange;
-        if(_health < 0) _health = 0;
-        _healthText.text = _health.ToString();
-        if(_health == 0) Die();
-    }
-
-    public void ChangeAttack(int attackChange)
-    {
-        _attack += attackChange;
-        if(_attack < 0) _attack = 0;
-        _attackText.text = _attack.ToString();
-    }
-
 
     public void OnUnitClicked()
     {
         OnAnyUnitClicked?.Invoke(this, this);
+    }
+
+    public void TakeDamage(int damage)
+    {
+        _currentHealth -= damage;
+        if(_currentHealth < 0)
+        {
+            _currentHealth = 0;
+            Die();
+        }
     }
 
     void HighlightUnit(object sender, Unit e)
@@ -95,39 +97,36 @@ public class Unit : MonoBehaviour
         Debug.Log(name + " is Dead!");
     }
 
-    public void NewGear(EquipmentScriptableObject gear)
+    public void BuyGear(EquipmentScriptableObject gear)
     {
-        switch (gear.Slot)
-        {
-            case EquipmentSlot.Main:
-            Equip(gear, _equipMain.GetComponent<SpriteRenderer>());
-            break;
-            case EquipmentSlot.Offhand:
-            Equip(gear, _equipOffhand.GetComponent<SpriteRenderer>());
-            break;
-            case EquipmentSlot.Headgear:
-            Equip(gear, _equipHeadgear.GetComponent<SpriteRenderer>());
-            break;
-            default:
-            Debug.Log("Missing EquipmentSlot in " + gear.Name);
-            break;
-        }
+        ChangeMaxHealth(gear.HealthIncrease);
+        ChangeAttack(gear.AttackIncrease);
     }
 
-    void Equip(EquipmentScriptableObject gear, SpriteRenderer spriteRenderer)
+    public void SellGear(EquipmentScriptableObject gear, int upgradeLevel)
     {
-        // TODO Check if there is already equipment in slot and also if it's the same equipment that's being passed through
+        ChangeMaxHealth(-gear.HealthIncrease * upgradeLevel);
+        ChangeAttack(-gear.AttackIncrease * upgradeLevel);
+    }
 
-        spriteRenderer.sprite = gear.Sprite;
-        if(gear.HasOffset)
-        {
-            spriteRenderer.transform.localPosition = gear.SpriteOffset;
-        }
-        spriteRenderer.transform.localScale = gear.SpriteScale;
-        spriteRenderer.flipX = gear.SpriteFlipped;
-        ChangeHealth(gear.HealthIncrease);
-        ChangeAttack(gear.AttackIncrease);
-        Instantiate(gear.Skill, transform);
+    void ChangeMaxHealth(int? healthChange)
+    {
+        if(!healthChange.HasValue) { return; }
+
+        _maxHealth += (int)healthChange;
+        _currentHealth += (int)healthChange;
+        if(_maxHealth < 0) _maxHealth = 1;
+        if(_currentHealth < 0) _currentHealth = 1;
+        _healthText.text = _currentHealth.ToString();
+    }
+
+    void ChangeAttack(int? attackChange)
+    {
+        if(!attackChange.HasValue) { return; }
+
+        _attack += (int)attackChange;
+        if(_attack < 0) _attack = 1;
+        _attackText.text = _attack.ToString();
     }
 
 }

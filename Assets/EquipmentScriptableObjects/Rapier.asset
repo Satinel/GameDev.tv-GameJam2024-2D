@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f86f0e575a772274fad942e2dbbc8bcb, type: 3}
-  m_Name: Club
+  m_Name: Rapier
   m_EditorClassIdentifier: 
-  Name: Club
+  Name: Rapier
   Slot: 0
-  Sprite: {fileID: 707332885, guid: e066e81862c395a47b853a6899507130, type: 3}
-  RareSprite: {fileID: -1197218500, guid: e066e81862c395a47b853a6899507130, type: 3}
-  EpicSprite: {fileID: 906520109, guid: e066e81862c395a47b853a6899507130, type: 3}
-  LegendarySprite: {fileID: -608463412, guid: e066e81862c395a47b853a6899507130, type: 3}
+  Sprite: {fileID: 41804078, guid: e066e81862c395a47b853a6899507130, type: 3}
+  RareSprite: {fileID: 1676192277, guid: e066e81862c395a47b853a6899507130, type: 3}
+  EpicSprite: {fileID: -804439161, guid: e066e81862c395a47b853a6899507130, type: 3}
+  LegendarySprite: {fileID: -296517018, guid: e066e81862c395a47b853a6899507130, type: 3}
   HasOffset: 0
   SpriteOffset: {x: 0, y: 0, z: 0}
   SpriteScale: {x: 1, y: 1, z: 1}
   SpriteFlipped: 0
-  AttackIncrease: 4
-  HealthIncrease: 0
+  AttackIncrease: 2
+  HealthIncrease: 1
   Price: 3
-  Skill: {fileID: 2699173055729536405, guid: c94a976d0eca6224c8acdd59b31a62b7, type: 3}
+  Skill: {fileID: 5926601248323093078, guid: 232d0158d1f2d0246beac0a7bffc6f48, type: 3}

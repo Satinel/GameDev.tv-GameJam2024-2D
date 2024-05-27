@@ -226,6 +226,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4033875064386713201}
   - component: {fileID: 2448113114261741379}
+  - component: {fileID: 8819312028684833594}
   m_Layer: 0
   m_Name: Offhand
   m_TagString: Untagged
@@ -300,6 +301,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8819312028684833594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981969759475378396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b116ad74d9f6f8341a3f45d95a257c27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 1
+  _spriteRenderer: {fileID: 2448113114261741379}
+  _skill: {fileID: 0}
 --- !u!1 &1176247148518637271
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,6 +790,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6364182813879609429}
   - component: {fileID: 5191231138918434314}
+  - component: {fileID: 4984920565899661152}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -848,6 +865,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &4984920565899661152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6758328612559317286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b116ad74d9f6f8341a3f45d95a257c27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 0
+  _spriteRenderer: {fileID: 5191231138918434314}
+  _skill: {fileID: 0}
 --- !u!1 &6853301490810010098
 GameObject:
   m_ObjectHideFlags: 0
@@ -1004,13 +1036,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attack: 2
-  _health: 3
+  _maxHealth: 3
+  _currentHealth: 0
   _attackText: {fileID: 3754220281688019854}
   _healthText: {fileID: 4903395061056751241}
-  _equipMain: {fileID: 6758328612559317286}
-  _equipOffhand: {fileID: 981969759475378396}
-  _equipHeadgear: {fileID: 8275567315678398297}
   _highlight: {fileID: 922962693307884596}
+  _equipMain: {fileID: 4984920565899661152}
+  _equipOffhand: {fileID: 8819312028684833594}
+  _equipHeadgear: {fileID: 5099967347984152480}
   _animator: {fileID: 8647161984636256011}
 --- !u!95 &8647161984636256011
 Animator:
@@ -1118,6 +1151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7422404990779992164}
   - component: {fileID: 3149813780152174012}
+  - component: {fileID: 5099967347984152480}
   m_Layer: 0
   m_Name: Headgear
   m_TagString: Untagged
@@ -1192,6 +1226,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5099967347984152480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8275567315678398297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b116ad74d9f6f8341a3f45d95a257c27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _type: 2
+  _spriteRenderer: {fileID: 3149813780152174012}
+  _skill: {fileID: 0}
 --- !u!1 &8802513001890171458
 GameObject:
   m_ObjectHideFlags: 0

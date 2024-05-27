@@ -47,7 +47,7 @@ public class ShopItem : MonoBehaviour
         _priceText.text = gear.Price.ToString();
         _imageRenderer.sprite = gear.Sprite;
 
-        if(gear.Slot == EquipmentSlot.Offhand)
+        if(gear.Slot == EquipmentType.Offhand)
         {
             _imageRenderer.transform.localScale = new Vector3(-1f, 1f, 1f);
             _imageRenderer.rectTransform.anchoredPosition = new Vector3(1.1f, -0.1f, 0f);
@@ -74,5 +74,10 @@ public class ShopItem : MonoBehaviour
     {
         _lock.SetActive(false);
         IsLocked = false;
+    }
+
+    internal void ResetBorder()
+    {
+        _borderImage.color = Color.white;
     }
 }

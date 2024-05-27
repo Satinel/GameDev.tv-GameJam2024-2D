@@ -56,16 +56,49 @@ public class Shop : MonoBehaviour
 
     void CheckBuyButton()
     {
-        if(_selectedShopItem && _selectedUnit)
-        {
-            _buyButton.interactable = true;
-            _buyText.text = "Buy!";
-        }
-        else
+        if(!_selectedShopItem || !_selectedUnit)
         {
             _buyButton.interactable = false;
             _buyText.text = "Buy";
+            return;
         }
+
+        _buyButton.interactable = true;
+
+        EquipmentType type = _selectedShopItem.Gear.Slot;
+
+        switch (type)
+        {
+            case EquipmentType.Main:
+                if(_selectedUnit.Main().Gear && _selectedUnit.Main().Gear == _selectedShopItem.Gear)
+                {
+                    _buyText.text = "Upgrade!!";
+                    return;
+                }
+            break;
+
+            case EquipmentType.Offhand:
+                if(_selectedUnit.Offhand().Gear && _selectedUnit.Offhand().Gear == _selectedShopItem.Gear)
+                {
+                    _buyText.text = "Upgrade!!";
+                    return;
+                }
+            break;
+            
+            case EquipmentType.Headgear:
+                if(_selectedUnit.Headgear().Gear && _selectedUnit.Headgear().Gear == _selectedShopItem.Gear)
+                {
+                    _buyText.text = "Upgrade!!";
+                    return;
+                }
+            break;
+            
+            default:
+                Debug.Log("IMPOSSIBLE!");
+            break;
+        }
+
+        _buyText.text = "Buy!";
     }
 
     public void Leave()
@@ -75,7 +108,7 @@ public class Shop : MonoBehaviour
 
     public void BuyReroll()
     {
-        if(!_wallet.AskToSpend(_rerollCost)) { return; } // TODO Message that player doesn't have enough money + SFX
+        if(!_wallet.AskToSpend(_rerollCost)) { return; }
 
         Reroll();
     }
@@ -84,13 +117,16 @@ public class Shop : MonoBehaviour
     {
         foreach (ShopItem shopItem in _shopItems)
         {
+            _selectedShopItem = null;
             shopItem.gameObject.SetActive(true);
+            shopItem.ResetBorder();
 
             if (!shopItem.IsLocked)
             {
-                shopItem.Setup(_allItems[Random.Range(0, _allItems.Count)]); // TODO Split items into tiers and unlock later tiers over time (POSSIBLY in Wallet instead of here)
+                shopItem.Setup(_allItems[Random.Range(0, _allItems.Count)]); // TODO Split items into tiers and unlock later tiers over time
             }
         }
+        CheckBuyButton();
     }
 
     public void Lock()
@@ -117,12 +153,101 @@ public class Shop : MonoBehaviour
 
     public void Buy()
     {
-        if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price)) { return; } // TODO Message that player doesn't have enough money + SFX (possibly in Wallet instead of here)
+        if(!_selectedShopItem) { return; }
+        if(!_selectedUnit) { return; }
 
-        _selectedUnit.NewGear(_selectedShopItem.Gear);
+        EquipmentType type = _selectedShopItem.Gear.Slot;
+
+        switch (type)
+        {
+            case EquipmentType.Main:
+                if(_selectedUnit.Main().Gear)
+                {
+                    if(_selectedUnit.Main().Gear == _selectedShopItem.Gear)
+                    {
+                        if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price)) { return; }
+                        _selectedUnit.Main().UpgradeItem(_selectedShopItem.Gear);
+                        break;
+                    }
+                    else
+                    {
+                        if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price - Mathf.RoundToInt(_selectedUnit.Main().Gear.Price * _selectedUnit.Main().UpgradeLevel) / 3)) { return; }
+                        TradeIn(_selectedUnit.Main().Gear, _selectedUnit.Main().UpgradeLevel);
+                        _selectedUnit.Main().EquipItem(_selectedShopItem.Gear);
+                        break;
+                    }
+                }
+
+                if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price)) { return; }
+                _selectedUnit.Main().EquipItem(_selectedShopItem.Gear);
+                break;
+
+            case EquipmentType.Offhand:
+                if(_selectedUnit.Offhand().Gear)
+                {
+                    if(_selectedUnit.Offhand().Gear == _selectedShopItem.Gear)
+                    {
+                        if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price)) { return; }
+                        _selectedUnit.Offhand().UpgradeItem(_selectedShopItem.Gear);
+                        break;
+                    }
+                    else
+                    {
+                        if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price - Mathf.RoundToInt(_selectedUnit.Offhand().Gear.Price * _selectedUnit.Offhand().UpgradeLevel) / 3)) { return; }
+                        TradeIn(_selectedUnit.Offhand().Gear, _selectedUnit.Offhand().UpgradeLevel);
+                        _selectedUnit.Offhand().EquipItem(_selectedShopItem.Gear);
+                        break;
+                    }
+                }
+
+                if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price)) { return; }
+                _selectedUnit.Offhand().EquipItem(_selectedShopItem.Gear);
+                break;
+
+            case EquipmentType.Headgear:
+                if(_selectedUnit.Headgear().Gear)
+                {
+                    if(_selectedUnit.Headgear().Gear == _selectedShopItem.Gear)
+                    {
+                        if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price)) { return; }
+                        _selectedUnit.Headgear().UpgradeItem(_selectedShopItem.Gear);
+                        break;
+                    }
+                    else
+                    {
+                        if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price - Mathf.RoundToInt(_selectedUnit.Headgear().Gear.Price * _selectedUnit.Headgear().UpgradeLevel) / 3)) { return; }
+                        TradeIn(_selectedUnit.Headgear().Gear, _selectedUnit.Headgear().UpgradeLevel);
+                        _selectedUnit.Headgear().EquipItem(_selectedShopItem.Gear);
+                        break;
+                    }
+                }
+
+                if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price)) { return; }
+                _selectedUnit.Headgear().EquipItem(_selectedShopItem.Gear);
+                break;
+
+            default:
+                Debug.Log("Missing EquipmentSlot in " + _selectedShopItem.Gear.Name);
+                return;
+        }
+
+        _selectedUnit.BuyGear(_selectedShopItem.Gear);
+        CompletePurchase();
+    }
+
+    void CompletePurchase()
+    {
         _selectedShopItem.UnLock();
+        _selectedShopItem.ResetBorder();
         _selectedShopItem.gameObject.SetActive(false);
         _selectedShopItem = null;
         CheckBuyButton();
+    }
+
+    void TradeIn(EquipmentScriptableObject currentItem, int upgradeLevel)
+    {
+        _selectedUnit.SellGear(currentItem, upgradeLevel);
+        // TODO Message to player informing them that currentItem sold for Mathf.RoundToInt(currentItem.Price * upgradeLevel / 3)
+        Debug.Log(currentItem.Name + " sold for " + Mathf.RoundToInt(currentItem.Price * upgradeLevel / 3));
     }
 }

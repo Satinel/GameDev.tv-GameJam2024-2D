@@ -15,6 +15,9 @@ MonoBehaviour:
   Name: Short Sword
   Slot: 0
   Sprite: {fileID: 742660967, guid: e066e81862c395a47b853a6899507130, type: 3}
+  RareSprite: {fileID: 1368505634, guid: e066e81862c395a47b853a6899507130, type: 3}
+  EpicSprite: {fileID: -722892816, guid: e066e81862c395a47b853a6899507130, type: 3}
+  LegendarySprite: {fileID: -602781659, guid: e066e81862c395a47b853a6899507130, type: 3}
   HasOffset: 0
   SpriteOffset: {x: 0, y: 0, z: 0}
   SpriteScale: {x: 1, y: 1, z: 1}

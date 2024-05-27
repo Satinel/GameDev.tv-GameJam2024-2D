@@ -1,4 +1,4 @@
-public enum EquipmentSlot
+public enum EquipmentType
 {
     Main,
     Offhand,

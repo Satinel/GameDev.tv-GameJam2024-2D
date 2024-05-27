@@ -15,6 +15,9 @@ MonoBehaviour:
   Name: Spear
   Slot: 1
   Sprite: {fileID: 1500669006, guid: e066e81862c395a47b853a6899507130, type: 3}
+  RareSprite: {fileID: -1165544482, guid: e066e81862c395a47b853a6899507130, type: 3}
+  EpicSprite: {fileID: -1320638230, guid: e066e81862c395a47b853a6899507130, type: 3}
+  LegendarySprite: {fileID: 1103076174, guid: e066e81862c395a47b853a6899507130, type: 3}
   HasOffset: 0
   SpriteOffset: {x: 0, y: 0, z: 0}
   SpriteScale: {x: 1, y: 1, z: 1}
@@ -22,4 +25,4 @@ MonoBehaviour:
   AttackIncrease: 2
   HealthIncrease: 2
   Price: 3
-  Skill: {fileID: 1386096591735808426, guid: 7c4a504d4659c0243b09abbf668a693f, type: 3}
+  Skill: {fileID: -3143665187948345606, guid: 69eaf554f6d2b6d4cacaf9bf391ce8bc, type: 3}

@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f86f0e575a772274fad942e2dbbc8bcb, type: 3}
-  m_Name: Dagger
+  m_Name: Kunai
   m_EditorClassIdentifier: 
-  Name: Dagger
+  Name: Kunai
   Slot: 1
-  Sprite: {fileID: -1353189372, guid: e066e81862c395a47b853a6899507130, type: 3}
-  RareSprite: {fileID: 1357223605, guid: e066e81862c395a47b853a6899507130, type: 3}
-  EpicSprite: {fileID: 963599950, guid: e066e81862c395a47b853a6899507130, type: 3}
-  LegendarySprite: {fileID: -876271252, guid: e066e81862c395a47b853a6899507130, type: 3}
+  Sprite: {fileID: -430034713, guid: e066e81862c395a47b853a6899507130, type: 3}
+  RareSprite: {fileID: -274326721, guid: e066e81862c395a47b853a6899507130, type: 3}
+  EpicSprite: {fileID: -1590336822, guid: e066e81862c395a47b853a6899507130, type: 3}
+  LegendarySprite: {fileID: 1232143443, guid: e066e81862c395a47b853a6899507130, type: 3}
   HasOffset: 0
   SpriteOffset: {x: 0, y: 0, z: 0}
   SpriteScale: {x: 1, y: 1, z: 1}
   SpriteFlipped: 1
-  AttackIncrease: 2
-  HealthIncrease: 0
+  AttackIncrease: 3
+  HealthIncrease: 1
   Price: 3
-  Skill: {fileID: 1386096591735808426, guid: 7c4a504d4659c0243b09abbf668a693f, type: 3}
+  Skill: {fileID: -3143665187948345606, guid: 69eaf554f6d2b6d4cacaf9bf391ce8bc, type: 3}

@@ -15,6 +15,9 @@ MonoBehaviour:
   Name: Witch Hat
   Slot: 2
   Sprite: {fileID: 21300000, guid: f92dab247c753284db02104b901bc42e, type: 3}
+  RareSprite: {fileID: 21300000, guid: f92dab247c753284db02104b901bc42e, type: 3}
+  EpicSprite: {fileID: 21300000, guid: f92dab247c753284db02104b901bc42e, type: 3}
+  LegendarySprite: {fileID: 21300000, guid: f92dab247c753284db02104b901bc42e, type: 3}
   HasOffset: 1
   SpriteOffset: {x: -0.166, y: 0.47, z: 0}
   SpriteScale: {x: 1.15, y: 1.15, z: 1.15}

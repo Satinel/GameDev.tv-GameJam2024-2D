@@ -4,8 +4,8 @@ using UnityEngine;
 public class EquipmentScriptableObject : ScriptableObject
 {
     public string Name;
-    public EquipmentSlot Slot;
-    public Sprite Sprite;
+    public EquipmentType Slot;
+    public Sprite Sprite, RareSprite, EpicSprite, LegendarySprite;
     public bool HasOffset;
     public Vector3 SpriteOffset;
     public Vector3 SpriteScale = Vector3.one;
