@@ -15,6 +15,8 @@ public class Unit : MonoBehaviour
     [SerializeField] EquipmentSlot _equipMain, _equipOffhand, _equipHeadgear;
     [SerializeField] Animator _animator;
 
+    bool _isHighlighted = false;
+
     public int Attack() => _attack;
     public int MaxHealth() => _maxHealth;
     public int CurrentHealth() => _currentHealth;
@@ -81,11 +83,21 @@ public class Unit : MonoBehaviour
     {
         if(e == this)
         {
-            _highlight.SetActive(true);
+            if(_isHighlighted)
+            {
+                _highlight.SetActive(false);
+                _isHighlighted = false;
+            }
+            else
+            {
+                _highlight.SetActive(true);
+                _isHighlighted = true;
+            }
         }
         else
         {
             _highlight.SetActive(false);
+            _isHighlighted = false;
         }
     }
 

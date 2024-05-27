@@ -50,7 +50,14 @@ public class Shop : MonoBehaviour
 
     void Unit_OnAnyUnitClicked(object sender, Unit unit)
     {
-        _selectedUnit = unit;
+        if(_selectedUnit == unit)
+        {
+            _selectedUnit = null;
+        }
+        else
+        {
+            _selectedUnit = unit;
+        }
         CheckBuyButton();
     }
 

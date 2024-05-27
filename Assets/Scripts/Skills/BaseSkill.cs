@@ -23,13 +23,17 @@ public class BaseSkill : MonoBehaviour
         if(!_audioSource) _audioSource = GetComponent<AudioSource>();
     }
 
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            UseSkill();
-        }
-    }
+    // void Update()
+    // {
+    //     if(Input.GetKeyDown(KeyCode.E))
+    //     {
+    //         UseSkill();
+    //     }
+    //     if(Input.GetKeyDown(KeyCode.S))
+    //     {
+    //         Time.timeScale = 0.1f;
+    //     }
+    // }
 
     protected virtual void UseSkill()
     {
