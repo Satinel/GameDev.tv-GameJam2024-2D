@@ -44,6 +44,9 @@ TagManager:
   - name: Background
     uniqueID: 80483819
     locked: 0
+  - name: Shop
+    uniqueID: 743488233
+    locked: 0
   - name: Character
     uniqueID: 3648208235
     locked: 0
@@ -52,7 +55,4 @@ TagManager:
     locked: 0
   - name: FloatingText
     uniqueID: 1521703825
-    locked: 0
-  - name: Shop
-    uniqueID: 743488233
     locked: 0
