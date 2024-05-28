@@ -12,9 +12,18 @@ public class Shop : MonoBehaviour
     [SerializeField] Wallet _wallet;
     [SerializeField] Button _lockButton, _buyButton;
     [SerializeField] TextMeshProUGUI _lockText, _buyText;
+    [SerializeField] GameObject _shopParent;
 
     ShopItem _selectedShopItem;
     Unit _selectedUnit;
+
+    void Awake()
+    {
+        if(!_wallet)
+        {
+            _wallet = FindFirstObjectByType<Wallet>();
+        }
+    }
 
     void OnEnable()
     {
@@ -110,7 +119,9 @@ public class Shop : MonoBehaviour
 
     public void Leave()
     {
-        // TODO Load Battle Scene
+        // TODO Implement a switch to a 'main' town area OR just switch to the only other relevant town area (portal/recovery room)
+            // Screen Wipe effect animation and Change music basically! (Plus enable the _otherParent GameObject)
+        _shopParent.SetActive(false);
     }
 
     public void BuyReroll()
@@ -155,7 +166,7 @@ public class Shop : MonoBehaviour
 
     public void Sell()
     {
-        // TODO Sell!
+        // TODO Sell! (This is probably not important for game jam but maybe SOMEDAY)
     }
 
     public void Buy()

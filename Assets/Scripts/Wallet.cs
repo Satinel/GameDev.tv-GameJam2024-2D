@@ -10,6 +10,11 @@ public class Wallet : MonoBehaviour
     [SerializeField] AudioClip _spendMoneySFX, _tooPoorSFX;
     [SerializeField] float _spendVolume = 1, _poorVolume = 1;
 
+    void Awake()
+    {
+        SetMoneyText();
+    }
+
     public void GainMoney(int gains)
     {
         TotalMoney += gains;
