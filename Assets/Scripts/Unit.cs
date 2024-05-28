@@ -5,6 +5,7 @@ using System;
 public class Unit : MonoBehaviour
 {
     public static event EventHandler<Unit> OnAnyUnitClicked;
+    public Enemy CurrentTarget { get; private set; }
 
     [SerializeField] int _attack;
     [SerializeField] int _maxHealth;
@@ -15,7 +16,7 @@ public class Unit : MonoBehaviour
     [SerializeField] EquipmentSlot _equipMain, _equipOffhand, _equipHeadgear;
     [SerializeField] Animator _animator;
 
-    bool _isHighlighted = false;
+    bool _isSelected = false;
 
     public int Attack() => _attack;
     public int MaxHealth() => _maxHealth;
@@ -34,12 +35,14 @@ public class Unit : MonoBehaviour
 
     void OnEnable()
     {
-        OnAnyUnitClicked += HighlightUnit;
+        OnAnyUnitClicked += SelectUnit;
+        Enemy.OnAnyEnemyClicked += Enemy_OnAnyEnemyClicked;
     }
 
     void OnDisable()
     {
-        OnAnyUnitClicked -= HighlightUnit;
+        OnAnyUnitClicked -= SelectUnit;
+        Enemy.OnAnyEnemyClicked -= Enemy_OnAnyEnemyClicked;
     }
 
     void Start()
@@ -63,44 +66,57 @@ public class Unit : MonoBehaviour
     //     }
     // }
 
-
     public void OnUnitClicked()
     {
         OnAnyUnitClicked?.Invoke(this, this);
     }
 
+    void Enemy_OnAnyEnemyClicked(object sender, Enemy enemy)
+    {
+        if(_isSelected)
+        {
+            SetTarget(enemy);
+        }
+    }
+
+    void SetTarget(Enemy enemy)
+    {
+        CurrentTarget = enemy; // TODO Set a chevron indicator colour coded for this unit above enemy
+    }
+
     public void TakeDamage(int damage)
     {
         _currentHealth -= damage;
+        _healthText.text = _currentHealth.ToString();
         if(_currentHealth < 0)
         {
             _currentHealth = 0;
+            _healthText.text = _currentHealth.ToString();
             Die();
         }
     }
 
-    void HighlightUnit(object sender, Unit e)
+    void SelectUnit(object sender, Unit e)
     {
         if(e == this)
         {
-            if(_isHighlighted)
+            if(_isSelected)
             {
                 _highlight.SetActive(false);
-                _isHighlighted = false;
+                _isSelected = false;
             }
             else
             {
                 _highlight.SetActive(true);
-                _isHighlighted = true;
+                _isSelected = true;
             }
         }
         else
         {
             _highlight.SetActive(false);
-            _isHighlighted = false;
+            _isSelected = false;
         }
     }
-
 
     void Die()
     {

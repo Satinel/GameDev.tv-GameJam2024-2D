@@ -19,7 +19,12 @@ public class Wallet : MonoBehaviour
     {
         TotalMoney += gains;
         SetMoneyText();
-        // TODO make an event to update UI as soon as I look up how to do events who can remember these things or maybe we don't really need to bother with this one
+    }
+
+    public void LoseMoney(int losses)
+    {
+        TotalMoney -= losses;
+        SetMoneyText();
     }
 
     public bool AskToSpend(int cost)

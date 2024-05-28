@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4b8ae6f83650c940b24ca4d1a1f28a9, type: 3}
+  m_Name: TestEnemy
+  m_EditorClassIdentifier: 
+  Name: Enemy Witch
+  Sprite: {fileID: 21300000, guid: 17257e5b80b411f4183a40bc23705f63, type: 3}
+  HasOffset: 0
+  SpriteOffset: {x: 0, y: 0, z: 0}
+  SpriteScale: {x: 1, y: 1, z: 1}
+  SpriteFlipped: 0
+  Attack: 2
+  MaxHealth: 1
+  AttackSpeed: 5
+  GoldValue: 5
+  AttackSFX: {fileID: 8300000, guid: 9002661ab9c14774b895d12eb0fe62df, type: 3}
+  ClipVolume: 1

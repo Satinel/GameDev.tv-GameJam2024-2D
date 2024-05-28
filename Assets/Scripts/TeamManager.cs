@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class TeamManager : MonoBehaviour
 {
-    [SerializeField] List<Unit> _team;
+    [field:SerializeField] public List<Unit> Team { get; private set; }
 
     public void AddUnit(Unit unit)
     {
-        _team.Insert(_team.Count, unit);
+        Team.Insert(Team.Count, unit);
     }
 
     public void RemoveUnit(Unit unit)
     {
-        if(_team.Contains(unit))
+        if(Team.Contains(unit))
         {
-            _team.Remove(unit);
+            Team.Remove(unit);
         }
     }
 
