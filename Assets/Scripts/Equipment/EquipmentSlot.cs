@@ -4,8 +4,10 @@ public class EquipmentSlot : MonoBehaviour
 {
     [field:SerializeField] public EquipmentScriptableObject Gear {get; private set;}
     public int UpgradeLevel {get; private set;} = 1;
+    public BaseSkill Skill {get; private set;}
 
     [SerializeField] SpriteRenderer _spriteRenderer;
+
 
 
     void Awake()
@@ -32,7 +34,7 @@ public class EquipmentSlot : MonoBehaviour
         {
             Destroy(GetComponentInChildren<BaseSkill>().gameObject);
         }
-        Instantiate(gear.Skill, transform);
+        Skill = Instantiate(gear.Skill, transform);
     }
 
     public void UpgradeItem(EquipmentScriptableObject gear)
@@ -55,5 +57,10 @@ public class EquipmentSlot : MonoBehaviour
             break;
         }
         Debug.Log("Upgraded " + gear.Name);
+    }
+
+    public void SetSkill()
+    {
+        Skill = GetComponentInChildren<BaseSkill>();
     }
 }

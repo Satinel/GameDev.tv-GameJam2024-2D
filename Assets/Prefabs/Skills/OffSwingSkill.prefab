@@ -46,9 +46,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <SkillName>k__BackingField: Swing
-  _audioClip: {fileID: 0}
+  <VisualEffect>k__BackingField: {fileID: 480921929387271824, guid: 4f24455a86b6c5247a3cf124e17a1744, type: 3}
+  _audioClips:
+  - {fileID: 8300000, guid: 00c384a9afcb27d4ea3c0d7948491b40, type: 3}
+  - {fileID: 8300000, guid: 0f025f64268bfc94f9360973e0cf1334, type: 3}
+  - {fileID: 8300000, guid: 8fc52f404a0f231478f323351324e6a5, type: 3}
+  - {fileID: 8300000, guid: a4f8c926726050449b6fb56df20f7219, type: 3}
+  - {fileID: 8300000, guid: 354bfe00df6be3d4ba43f4ce0f18082b, type: 3}
+  - {fileID: 8300000, guid: 924c26c575557e54aa77e0e4920535b8, type: 3}
+  - {fileID: 8300000, guid: 439f0889a32d8334082920238020b6d5, type: 3}
+  - {fileID: 8300000, guid: f9ac1db0845e85448b26eae96f58ceb9, type: 3}
   _audioSource: {fileID: 8481916518067668773}
-  _unitAnimator: {fileID: 0}
   _audioVolume: 1
   _cooldown: 5
 --- !u!82 &8481916518067668773

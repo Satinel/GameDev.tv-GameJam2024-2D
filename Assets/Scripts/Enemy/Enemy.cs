@@ -110,6 +110,8 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if(!_isFighting) { return; }
+
         if(_floatingText)
         {
             FloatingText floatingText = Instantiate(_floatingText, transform);

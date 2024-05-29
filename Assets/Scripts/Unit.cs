@@ -59,21 +59,8 @@ public class Unit : MonoBehaviour
         _currentHealth = MaxHealth;
         _healthText.text = _currentHealth.ToString();
         _attackText.text = Attack.ToString();
+        _equipMain.SetSkill();
     }
-
-    // [SerializeField] EquipmentScriptableObject test;
-    // [SerializeField] EquipmentScriptableObject test2;
-    // void Update()
-    // {
-    //     if(Input.GetKeyDown(KeyCode.P))
-    //     {
-    //         NewGear(test);
-    //     }
-    //     if(Input.GetKeyDown(KeyCode.K))
-    //     {
-    //         NewGear(test2);
-    //     }
-    // }
 
     public void OnUnitClicked()
     {
@@ -109,8 +96,32 @@ public class Unit : MonoBehaviour
         EnemyTarget = enemy; // TODO Set a chevron indicator colour coded for this unit above enemy
     }
 
+    public void DealDamage()
+    {
+        if(!EnemyTarget) { return; }
+
+        EnemyTarget.TakeDamage(Attack);
+    }
+
+    public void MainSkill()
+    {
+        _equipMain.Skill.SkillEffect();
+    }
+
+    public void OffSKill()
+    {
+        _equipOffhand.Skill.SkillEffect();
+    }
+
+    public void HeadSkill()
+    {
+        _equipHeadgear.Skill.SkillEffect();
+    }
+
     public void TakeDamage(int damage)
     {
+        if(IsDead) { return; }
+
         if(_floatingText)
         {
             FloatingText floatingText = Instantiate(_floatingText, transform);

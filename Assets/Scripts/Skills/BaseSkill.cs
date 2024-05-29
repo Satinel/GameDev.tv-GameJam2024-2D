@@ -1,10 +1,12 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class BaseSkill : MonoBehaviour
 {
     [field:SerializeField] public string SkillName {get; private set;}
+    [field:SerializeField] public GameObject VisualEffect {get; private set;}
 
-    [SerializeField] protected AudioClip _audioClip;
+    [SerializeField] protected List<AudioClip> _audioClips;
     [SerializeField] protected AudioSource _audioSource;
     [SerializeField] protected float _audioVolume;
     [SerializeField] protected float _cooldown;
@@ -60,13 +62,7 @@ public class BaseSkill : MonoBehaviour
         }
     }
 
-    protected virtual void UseSkill()
-    {
-        if(_audioClip && _audioSource)
-        {
-            _audioSource.PlayOneShot(_audioClip, _audioVolume);
-        }
-    }
+    protected virtual void UseSkill() { }
 
     protected void Battle_OnBattleStarted()
     {
@@ -77,6 +73,14 @@ public class BaseSkill : MonoBehaviour
     protected void Battle_OnBattleEnded(object sender, bool e)
     {
         _isFighting = false;
+    }
+
+    public virtual void SkillEffect()
+    {
+        if(_audioClips.Count > 0 && _audioSource)
+        {
+            _audioSource.PlayOneShot(_audioClips[Random.Range(0, _audioClips.Count)], _audioVolume);
+        }
     }
 
 }
