@@ -47,9 +47,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <SkillName>k__BackingField: Punch
-  _audioClip: {fileID: 0}
+  _audioClip: {fileID: 8300000, guid: 924c26c575557e54aa77e0e4920535b8, type: 3}
   _audioSource: {fileID: 4757076595118570003}
-  _unitAnimator: {fileID: 0}
   _audioVolume: 1
   _cooldown: 3
 --- !u!82 &4757076595118570003
@@ -187,7 +186,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -646759061
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 15
   m_Sprite: {fileID: 2014542921, guid: c08fae3b09ae91240987e07d636b7335, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

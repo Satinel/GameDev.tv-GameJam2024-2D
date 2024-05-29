@@ -1034,15 +1034,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef148bf02ebe630409e63ca6526b5f45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _attack: 2
-  _maxHealth: 3
-  _currentHealth: 0
+  <Attack>k__BackingField: 2
+  <MaxHealth>k__BackingField: 200
   _attackText: {fileID: 3754220281688019854}
   _healthText: {fileID: 4903395061056751241}
-  _highlight: {fileID: 922962693307884596}
   _equipMain: {fileID: 4984920565899661152}
   _equipOffhand: {fileID: 8819312028684833594}
   _equipHeadgear: {fileID: 5099967347984152480}
+  _highlight: {fileID: 922962693307884596}
   _animator: {fileID: 8647161984636256011}
   _floatingText: {fileID: 4702419758329665534, guid: ee656e085c3ac6b4d81c6830989cc7d8, type: 3}
 --- !u!95 &8647161984636256011

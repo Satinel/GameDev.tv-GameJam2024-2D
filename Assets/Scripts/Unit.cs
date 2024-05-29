@@ -7,23 +7,23 @@ public class Unit : MonoBehaviour
     public static event EventHandler<Unit> OnAnyUnitClicked;
     public static event EventHandler<Unit> OnAnyUnitKilled;
 
-    public Enemy CurrentTarget { get; private set; }
 
-    [SerializeField] int _attack;
-    [SerializeField] int _maxHealth;
-    [SerializeField] int _currentHealth;
+    [field:SerializeField] public int Attack { get; private set; }
+    [field:SerializeField] public int MaxHealth { get; private set; }
+    public bool IsDead { get; private set; } = false;
+    public Enemy CurrentTarget { get; private set; }
+    
+    
     [SerializeField] TextMeshProUGUI _attackText;
     [SerializeField] TextMeshProUGUI _healthText;
-    [SerializeField] GameObject _highlight;
     [SerializeField] EquipmentSlot _equipMain, _equipOffhand, _equipHeadgear;
+    [SerializeField] GameObject _highlight;
     [SerializeField] Animator _animator;
     [SerializeField] FloatingText _floatingText;
 
+    int _currentHealth;
     bool _isSelected = false;
 
-    public int Attack() => _attack;
-    public int MaxHealth() => _maxHealth;
-    public int CurrentHealth() => _currentHealth;
     public EquipmentSlot Main() => _equipMain;
     public EquipmentSlot Offhand() => _equipOffhand;
     public EquipmentSlot Headgear() => _equipHeadgear;
@@ -52,9 +52,9 @@ public class Unit : MonoBehaviour
 
     void Start()
     {
-        _currentHealth = _maxHealth;
+        _currentHealth = MaxHealth;
         _healthText.text = _currentHealth.ToString();
-        _attackText.text = _attack.ToString();
+        _attackText.text = Attack.ToString();
     }
 
     // [SerializeField] EquipmentScriptableObject test;
@@ -142,6 +142,7 @@ public class Unit : MonoBehaviour
         // TODO Probably play an animation
         OnAnyUnitKilled?.Invoke(this, this);
         Debug.Log(name + " is Dead!");
+        IsDead = true;
     }
 
     public void BuyGear(EquipmentScriptableObject gear)
@@ -160,9 +161,9 @@ public class Unit : MonoBehaviour
     {
         if(!healthChange.HasValue) { return; }
 
-        _maxHealth += (int)healthChange;
+        MaxHealth += (int)healthChange;
         _currentHealth += (int)healthChange;
-        if(_maxHealth < 0) _maxHealth = 1;
+        if(MaxHealth < 0) MaxHealth = 1;
         if(_currentHealth < 0) _currentHealth = 1;
         _healthText.text = _currentHealth.ToString();
     }
@@ -171,9 +172,9 @@ public class Unit : MonoBehaviour
     {
         if(!attackChange.HasValue) { return; }
 
-        _attack += (int)attackChange;
-        if(_attack < 0) _attack = 1;
-        _attackText.text = _attack.ToString();
+        Attack += (int)attackChange;
+        if(Attack < 0) Attack = 1;
+        _attackText.text = Attack.ToString();
     }
 
 }

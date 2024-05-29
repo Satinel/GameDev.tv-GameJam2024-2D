@@ -11,6 +11,8 @@ public class Wallet : MonoBehaviour
     [SerializeField] AudioClip _spendMoneySFX, _tooPoorSFX;
     [SerializeField] float _spendVolume = 1, _poorVolume = 1;
 
+    int _goldEarnedThisBattle = 0;
+
     void Awake()
     {
         SetMoneyText();
@@ -19,10 +21,12 @@ public class Wallet : MonoBehaviour
     void OnEnable()
     {
         Enemy.OnAnyEnemyKilled += Enemey_OnAnyEnemyKilled;
+        Battle.OnBattleEnded += Battle_OnBattleEnded;
     }
 
     void OnDisable()
     {
+        Battle.OnBattleEnded -= Battle_OnBattleEnded;
         Enemy.OnAnyEnemyKilled -= Enemey_OnAnyEnemyKilled;
     }
 
@@ -70,8 +74,18 @@ public class Wallet : MonoBehaviour
         _moneyText.text = TotalMoney.ToString();
     }
 
-    void Enemey_OnAnyEnemyKilled(object sender, Enemy e)
+    void Battle_OnBattleEnded(object sender, bool hasWon)
     {
-        GainMoney(e.GoldValue);
+        if(!hasWon)
+        {
+            LoseMoney(Mathf.FloorToInt(_goldEarnedThisBattle / 2)); // TODO Message about losing gold amount also consider losing ALL money
+        }
+        _goldEarnedThisBattle = 0;
+    }
+
+    void Enemey_OnAnyEnemyKilled(object sender, Enemy enemy)
+    {
+        _goldEarnedThisBattle += enemy.GoldValue;
+        GainMoney(enemy.GoldValue);
     }
 }

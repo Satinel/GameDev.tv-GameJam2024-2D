@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] float _attackSpeed;
 
     float _timeSinceLastAttack;
+    bool _isFighting = false;
 
     EnemyScriptableObject _currentEnemy;
     Unit _currentTarget;
@@ -53,9 +54,21 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    void OnEnable()
+    {
+        Battle.OnBattleStarted += Battle_OnBattleStarted;
+        Battle.OnBattleEnded += Battle_OnBattleEnded;
+    }
+
+    void OnDisable()
+    {
+        Battle.OnBattleStarted -= Battle_OnBattleStarted;
+        Battle.OnBattleEnded -= Battle_OnBattleEnded;
+    }
+
     void Update()
     {
-        if(_currentEnemy == null) { return; }
+        if(!_currentEnemy || !_isFighting) { return; }
 
         _timeSinceLastAttack += Time.deltaTime;
 
@@ -92,6 +105,7 @@ public class Enemy : MonoBehaviour
         _attackText.text = Attack.ToString();
         _timeSinceLastAttack = 0;
         _animator.SetTrigger(SPAWN_HASH);
+        _isFighting = true;
     }
 
     public void TakeDamage(int damage)
@@ -134,6 +148,17 @@ public class Enemy : MonoBehaviour
         _animator.SetTrigger(DIE_HASH);
         OnAnyEnemyKilled?.Invoke(this, this);
         Debug.Log(name + " is Dead!");
+        _isFighting = false;
+    }
+
+    void Battle_OnBattleStarted()
+    {
+        _isFighting = true;
+    }
+
+    void Battle_OnBattleEnded(object sender, bool e)
+    {
+        _isFighting = false;
     }
 
 }
