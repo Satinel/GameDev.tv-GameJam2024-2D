@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -13,6 +14,16 @@ public class Wallet : MonoBehaviour
     void Awake()
     {
         SetMoneyText();
+    }
+
+    void OnEnable()
+    {
+        Enemy.OnAnyEnemyKilled += Enemey_OnAnyEnemyKilled;
+    }
+
+    void OnDisable()
+    {
+        Enemy.OnAnyEnemyKilled -= Enemey_OnAnyEnemyKilled;
     }
 
     public void GainMoney(int gains)
@@ -57,5 +68,10 @@ public class Wallet : MonoBehaviour
     void SetMoneyText()
     {
         _moneyText.text = TotalMoney.ToString();
+    }
+
+    void Enemey_OnAnyEnemyKilled(object sender, Enemy e)
+    {
+        GainMoney(e.GoldValue);
     }
 }

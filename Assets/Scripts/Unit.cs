@@ -5,6 +5,8 @@ using System;
 public class Unit : MonoBehaviour
 {
     public static event EventHandler<Unit> OnAnyUnitClicked;
+    public static event EventHandler<Unit> OnAnyUnitKilled;
+
     public Enemy CurrentTarget { get; private set; }
 
     [SerializeField] int _attack;
@@ -15,6 +17,7 @@ public class Unit : MonoBehaviour
     [SerializeField] GameObject _highlight;
     [SerializeField] EquipmentSlot _equipMain, _equipOffhand, _equipHeadgear;
     [SerializeField] Animator _animator;
+    [SerializeField] FloatingText _floatingText;
 
     bool _isSelected = false;
 
@@ -37,12 +40,14 @@ public class Unit : MonoBehaviour
     {
         OnAnyUnitClicked += SelectUnit;
         Enemy.OnAnyEnemyClicked += Enemy_OnAnyEnemyClicked;
+        Enemy.OnAnyEnemyKilled += Enemy_OnAnyEnemyKilled;
     }
 
     void OnDisable()
     {
         OnAnyUnitClicked -= SelectUnit;
         Enemy.OnAnyEnemyClicked -= Enemy_OnAnyEnemyClicked;
+        Enemy.OnAnyEnemyKilled -= Enemy_OnAnyEnemyKilled;
     }
 
     void Start()
@@ -79,6 +84,14 @@ public class Unit : MonoBehaviour
         }
     }
 
+    void Enemy_OnAnyEnemyKilled(object sender, Enemy enemy)
+    {
+        if(CurrentTarget == enemy)
+        {
+            CurrentTarget = null; // TODO Auto Retarget when target lost
+        }
+    }
+
     void SetTarget(Enemy enemy)
     {
         CurrentTarget = enemy; // TODO Set a chevron indicator colour coded for this unit above enemy
@@ -86,6 +99,11 @@ public class Unit : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        if(_floatingText)
+        {
+            FloatingText floatingText = Instantiate(_floatingText, transform);
+            floatingText.Setup(damage);
+        }
         _currentHealth -= damage;
         _healthText.text = _currentHealth.ToString();
         if(_currentHealth < 0)
@@ -122,6 +140,7 @@ public class Unit : MonoBehaviour
     {
         // TODO Handle Death however that's going to work
         // TODO Probably play an animation
+        OnAnyUnitKilled?.Invoke(this, this);
         Debug.Log(name + " is Dead!");
     }
 

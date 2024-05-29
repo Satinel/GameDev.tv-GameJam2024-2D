@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,22 @@ using UnityEngine;
 public class TeamManager : MonoBehaviour
 {
     [field:SerializeField] public List<Unit> Team { get; private set; }
+
+
+    void OnEnable()
+    {
+        Unit.OnAnyUnitKilled += Unit_OnAnyUnitKilled;
+    }
+
+    void OnDisable()
+    {
+        Unit.OnAnyUnitKilled -= Unit_OnAnyUnitKilled;
+    }
+
+    private void Unit_OnAnyUnitKilled(object sender, Unit unit)
+    {
+        RemoveUnit(unit); // TODO probably don't do this, just make the unit untargetable
+    }
 
     public void AddUnit(Unit unit)
     {

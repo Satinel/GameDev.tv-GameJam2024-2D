@@ -11,12 +11,15 @@ public class Enemy : MonoBehaviour
     public int MaxHealth {get; private set;}
     public int CurrentHealth {get; private set;}
     public int GoldValue {get; private set;}
+    
+    [field:SerializeField] public int Row {get; private set;}
 
     [SerializeField] TextMeshProUGUI _attackText;
     [SerializeField] TextMeshProUGUI _healthText;
     [SerializeField] Animator _animator;
     [SerializeField] AudioSource _audioSource;
     [SerializeField] SpriteRenderer _spriteRenderer;
+    [SerializeField] FloatingText _floatingText;
 
     [SerializeField] float _attackSpeed;
 
@@ -26,6 +29,9 @@ public class Enemy : MonoBehaviour
     Unit _currentTarget;
 
     TeamManager _teamManager;
+
+    protected readonly int DIE_HASH = Animator.StringToHash("Die");
+    protected readonly int SPAWN_HASH = Animator.StringToHash("Spawn");
 
     void Awake()
     {
@@ -85,10 +91,16 @@ public class Enemy : MonoBehaviour
         _healthText.text = CurrentHealth.ToString();
         _attackText.text = Attack.ToString();
         _timeSinceLastAttack = 0;
+        _animator.SetTrigger(SPAWN_HASH);
     }
 
     public void TakeDamage(int damage)
     {
+        if(_floatingText)
+        {
+            FloatingText floatingText = Instantiate(_floatingText, transform);
+            floatingText.Setup(damage);
+        }
         CurrentHealth -= damage;
         _healthText.text = CurrentHealth.ToString();
         if(CurrentHealth < 0)
@@ -119,7 +131,7 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         // TODO Handle Death however that's going to work
-        // TODO Probably play an animation of the enemy fading awayyyyyy
+        _animator.SetTrigger(DIE_HASH);
         OnAnyEnemyKilled?.Invoke(this, this);
         Debug.Log(name + " is Dead!");
     }
