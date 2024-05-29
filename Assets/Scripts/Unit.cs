@@ -11,13 +11,15 @@ public class Unit : MonoBehaviour
     [field:SerializeField] public int Attack { get; private set; }
     [field:SerializeField] public int MaxHealth { get; private set; }
     public bool IsDead { get; private set; } = false;
-    public Enemy CurrentTarget { get; private set; }
+    public Enemy EnemyTarget { get; private set; }
+    public Unit FriendlyTarget { get; private set; } // TODO Figure out how to target friendly units with healing/etc.
     
     
     [SerializeField] TextMeshProUGUI _attackText;
     [SerializeField] TextMeshProUGUI _healthText;
     [SerializeField] EquipmentSlot _equipMain, _equipOffhand, _equipHeadgear;
     [SerializeField] GameObject _highlight;
+    [SerializeField] Transform _targetIndicator;
     [SerializeField] Animator _animator;
     [SerializeField] FloatingText _floatingText;
 
@@ -41,6 +43,7 @@ public class Unit : MonoBehaviour
         OnAnyUnitClicked += SelectUnit;
         Enemy.OnAnyEnemyClicked += Enemy_OnAnyEnemyClicked;
         Enemy.OnAnyEnemyKilled += Enemy_OnAnyEnemyKilled;
+        Battle.OnBattleEnded += Battle_OnBattleEnded;
     }
 
     void OnDisable()
@@ -48,6 +51,7 @@ public class Unit : MonoBehaviour
         OnAnyUnitClicked -= SelectUnit;
         Enemy.OnAnyEnemyClicked -= Enemy_OnAnyEnemyClicked;
         Enemy.OnAnyEnemyKilled -= Enemy_OnAnyEnemyKilled;
+        Battle.OnBattleEnded -= Battle_OnBattleEnded;
     }
 
     void Start()
@@ -81,20 +85,28 @@ public class Unit : MonoBehaviour
         if(_isSelected)
         {
             SetTarget(enemy);
+            _targetIndicator.gameObject.SetActive(true);
+            _targetIndicator.position = enemy.transform.position;
         }
     }
 
     void Enemy_OnAnyEnemyKilled(object sender, Enemy enemy)
     {
-        if(CurrentTarget == enemy)
+        if(EnemyTarget == enemy)
         {
-            CurrentTarget = null; // TODO Auto Retarget when target lost
+            _targetIndicator.gameObject.SetActive(false);
+            EnemyTarget = null; // TODO Auto Retarget when target lost
         }
+    }
+
+    void Battle_OnBattleEnded(object sender, bool hasWon)
+    {
+        _targetIndicator.gameObject.SetActive(false);
     }
 
     void SetTarget(Enemy enemy)
     {
-        CurrentTarget = enemy; // TODO Set a chevron indicator colour coded for this unit above enemy
+        EnemyTarget = enemy; // TODO Set a chevron indicator colour coded for this unit above enemy
     }
 
     public void TakeDamage(int damage)
@@ -143,6 +155,7 @@ public class Unit : MonoBehaviour
         OnAnyUnitKilled?.Invoke(this, this);
         Debug.Log(name + " is Dead!");
         IsDead = true;
+        _targetIndicator.gameObject.SetActive(false);
     }
 
     public void BuyGear(EquipmentScriptableObject gear)

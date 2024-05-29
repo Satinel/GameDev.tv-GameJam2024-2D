@@ -50,11 +50,11 @@ public class BaseSkill : MonoBehaviour
 
         if(_timeSinceLastAttack >= _cooldown)
         {
-            if(!_unit.CurrentTarget)
+            if(!_unit.EnemyTarget)
             {
                 return;
             }
-            
+
             _timeSinceLastAttack = 0;
             UseSkill();
         }

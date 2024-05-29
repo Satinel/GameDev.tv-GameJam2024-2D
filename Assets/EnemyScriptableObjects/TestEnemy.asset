@@ -19,7 +19,7 @@ MonoBehaviour:
   SpriteScale: {x: 1, y: 1, z: 1}
   SpriteFlipped: 0
   Attack: 2
-  MaxHealth: 1
+  MaxHealth: 5
   AttackSpeed: 5
   GoldValue: 5
   AttackSFX: {fileID: 8300000, guid: 9002661ab9c14774b895d12eb0fe62df, type: 3}

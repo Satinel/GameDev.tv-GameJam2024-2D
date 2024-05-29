@@ -6,6 +6,6 @@ public class UnarmedSkill : BaseSkill
         base.UseSkill();
         _unitAnimator.SetTrigger(UNARMED_HASH);
         
-        _unit.CurrentTarget.TakeDamage(_unit.Attack);
+        _unit.EnemyTarget.TakeDamage(_unit.Attack);
     }
 }

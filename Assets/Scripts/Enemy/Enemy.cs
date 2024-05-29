@@ -117,7 +117,7 @@ public class Enemy : MonoBehaviour
         }
         CurrentHealth -= damage;
         _healthText.text = CurrentHealth.ToString();
-        if(CurrentHealth < 0)
+        if(CurrentHealth <= 0)
         {
             _healthText.text = CurrentHealth.ToString();
             CurrentHealth = 0;
