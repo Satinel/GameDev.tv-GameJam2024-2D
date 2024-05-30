@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,10 +12,12 @@ public class Campaign : MonoBehaviour
     public int Days { get; private set; }
 
     [SerializeField] AudioClip _defeatSFX, _victorySFX, _gameOverSFX;
-    [SerializeField] GameObject _overlay, _victorySplash, _retreatSplash, _defeatSplash, _gameOverSplash, _toBattleButton;
+    [SerializeField] GameObject _overlay, _victorySplash, _retreatSplash, _defeatSplash, _gameOverSplash, _toBattleButton, _quitButton;
     [SerializeField] List<Image> _lives;
 
     [SerializeField] AudioSource _audioSource;
+    [SerializeField] TextMeshProUGUI _goldEarnedText;
+    [SerializeField] Wallet _wallet;
 
     void Awake()
     {
@@ -50,7 +53,9 @@ public class Campaign : MonoBehaviour
 
     void Battle_OnBattleEnded()
     {
+        _goldEarnedText.text = $"Gold Earned: {_wallet.GoldEarnedThisBattle}";
         _overlay.SetActive(true);
+        Time.timeScale = 1;
     }
 
     void Battle_OnBattleWon()
@@ -84,6 +89,7 @@ public class Campaign : MonoBehaviour
         {
             _defeatSplash.SetActive(true);
             StartCoroutine(LoseLifeRoutine());
+            StartCoroutine(LoseGoldRoutine());
         }
         else
         {
@@ -98,6 +104,10 @@ public class Campaign : MonoBehaviour
             _audioSource.PlayOneShot(_gameOverSFX);
         }
         _gameOverSplash.SetActive(true);
+        if(Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            _quitButton.SetActive(false);
+        }
     }
 
     IEnumerator LoseLifeRoutine()
@@ -115,6 +125,23 @@ public class Campaign : MonoBehaviour
         {
             _lives[Losses].fillAmount -= Time.deltaTime;
             yield return null;
+        }
+    }
+
+    IEnumerator LoseGoldRoutine()
+    {
+        int goldEarned = _wallet.GoldEarnedThisBattle;
+        int goldLost = Mathf.FloorToInt(goldEarned / 2);
+        int goldKept = goldEarned - goldLost;
+
+        _wallet.LoseMoney(goldLost);
+        // TODO A fading away floating up text of goldLost.ToString()
+        
+        while(goldEarned > goldKept)
+        {
+            goldEarned--; // This is going to be far too slow for large sums of lost money but I'd need to figure out maths to do a percentage reduction!
+            _goldEarnedText.text = $"Gold Earned: {goldEarned}";
+            yield return new WaitForSeconds(0.1f);
         }
     }
 
@@ -145,5 +172,10 @@ public class Campaign : MonoBehaviour
         // TODO A nice transition effect?
         SceneManager.LoadScene(0);
         Destroy(gameObject);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

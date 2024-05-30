@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Wallet : MonoBehaviour
 {
-    [field:SerializeField] public int TotalMoney {get; set;}
+    [field:SerializeField] public int TotalMoney {get; private set;}
+    public int GoldEarnedThisBattle {get; private set;} = 0;
 
     [SerializeField] TextMeshProUGUI _moneyText;
     [SerializeField] AudioSource _audioSource;
     [SerializeField] AudioClip _spendMoneySFX, _tooPoorSFX;
     [SerializeField] float _spendVolume = 1, _poorVolume = 1;
 
-    int _goldEarnedThisBattle = 0;
 
     void Awake()
     {
@@ -21,15 +21,13 @@ public class Wallet : MonoBehaviour
     void OnEnable()
     {
         Battle.OnBattleStarted += Battle_OnBattleStarted;
-        Enemy.OnAnyEnemyKilled += Enemey_OnAnyEnemyKilled;
-        Battle.OnBattleLost += Battle_OnBattleLost;
+        Enemy.OnAnyEnemyKilled += Enemy_OnAnyEnemyKilled;
     }
 
     void OnDisable()
     {
         Battle.OnBattleStarted -= Battle_OnBattleStarted;
-        Battle.OnBattleLost -= Battle_OnBattleLost;
-        Enemy.OnAnyEnemyKilled -= Enemey_OnAnyEnemyKilled;
+        Enemy.OnAnyEnemyKilled -= Enemy_OnAnyEnemyKilled;
     }
 
     public void GainMoney(int gains)
@@ -78,17 +76,12 @@ public class Wallet : MonoBehaviour
 
     void Battle_OnBattleStarted()
     {
-        _goldEarnedThisBattle = 0;
+        GoldEarnedThisBattle = 0;
     }
 
-    void Battle_OnBattleLost()
+    void Enemy_OnAnyEnemyKilled(object sender, Enemy enemy)
     {
-        LoseMoney(Mathf.FloorToInt(_goldEarnedThisBattle / 2)); // TODO Message about losing gold amount also consider losing ALL money
-    }
-
-    void Enemey_OnAnyEnemyKilled(object sender, Enemy enemy)
-    {
-        _goldEarnedThisBattle += enemy.GoldValue;
+        GoldEarnedThisBattle += enemy.GoldValue;
         GainMoney(enemy.GoldValue);
     }
 }

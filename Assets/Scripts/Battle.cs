@@ -10,12 +10,14 @@ public class Battle : MonoBehaviour
     public static event Action OnBattleWon;
     public static event Action OnRetreated;
     public static event Action OnBattleLost;
+    public static event EventHandler<List<Enemy>> OnEnemyListCreated;
 
     [SerializeField] float _respawnTime;
     [SerializeField] List<Enemy> _enemies;
     [SerializeField] EnemyScriptableObject _incomingRow1, _incomingRow2, _incomingRow3;
     [SerializeField] SpriteRenderer _iRow1Sprite, _iRow2Sprite, _iRow3Sprite;
     [SerializeField] List<EnemyScriptableObject> _bestiary;
+    [SerializeField] GameObject _retreatPrompt;
 
     float _currentTimeSpeed = 1;
     bool _wasPaused;
@@ -44,6 +46,8 @@ public class Battle : MonoBehaviour
         {
             enemy.SetUp(_bestiary[UnityEngine.Random.Range(0, _bestiary.Count)]); // TODO Tiers for enemies same as items based on number of player wins
         }
+        OnEnemyListCreated?.Invoke(this, _enemies);
+
         _incomingRow1 = _bestiary[UnityEngine.Random.Range(0, _bestiary.Count)]; // TODO Tiers for enemies same as items based on number of player wins
         _incomingRow2 = _bestiary[UnityEngine.Random.Range(0, _bestiary.Count)]; // TODO Tiers for enemies same as items based on number of player wins
         _incomingRow3 = _bestiary[UnityEngine.Random.Range(0, _bestiary.Count)]; // TODO Tiers for enemies same as items based on number of player wins
@@ -112,12 +116,24 @@ public class Battle : MonoBehaviour
         // TODO Show (earned gold)/(lost gold)
     }
 
-    public void Retreat()
+    public void PromptRetreat()
+    {
+        PauseBattle();
+        _retreatPrompt.SetActive(true);
+    }
+
+    public void ConfirmRetreat()
     {
         StopAllCoroutines();
         OnBattleEnded?.Invoke();
         OnRetreated?.Invoke();
         // TODO Show Gold earned
+    }
+
+    public void CancelRetreat()
+    {
+        _retreatPrompt.SetActive(false);
+        UnpauseBattle();
     }
 
     void Victory()

@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
 {
     public static event EventHandler<Enemy> OnAnyEnemyClicked;
     public static event EventHandler<Enemy> OnAnyEnemyKilled;
+    public static event EventHandler<Enemy> OnAnyEnemySpawned;
 
     public int Attack {get; private set;}
     public int MaxHealth {get; private set;}
@@ -13,6 +14,7 @@ public class Enemy : MonoBehaviour
     public int GoldValue {get; private set;}
     
     [field:SerializeField] public int Row {get; private set;}
+    public bool IsDead() => !_isFighting;
 
     [SerializeField] TextMeshProUGUI _attackText;
     [SerializeField] TextMeshProUGUI _healthText;
@@ -107,8 +109,13 @@ public class Enemy : MonoBehaviour
         _attackText.text = Attack.ToString();
         _timeSinceLastAttack = 0;
         _animator.SetTrigger(SPAWN_HASH);
-        _isFighting = true;
         _currentTarget = null;
+    }
+
+    void SetIsFightingAnimationEvent()
+    {
+        _isFighting = true;
+        OnAnyEnemySpawned?.Invoke(this, this);
     }
 
     public void TakeDamage(int damage)

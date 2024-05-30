@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System;
+using System.Collections.Generic;
 
 public class Unit : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class Unit : MonoBehaviour
 
     int _currentHealth;
     bool _isSelected = false;
+    List<Enemy> _enemyList = new();
 
     public EquipmentSlot Main() => _equipMain;
     public EquipmentSlot Offhand() => _equipOffhand;
@@ -43,6 +45,8 @@ public class Unit : MonoBehaviour
         OnAnyUnitClicked += SelectUnit;
         Enemy.OnAnyEnemyClicked += Enemy_OnAnyEnemyClicked;
         Enemy.OnAnyEnemyKilled += Enemy_OnAnyEnemyKilled;
+        Enemy.OnAnyEnemySpawned += Enemy_OnAnyEnemySpawned;
+        Battle.OnEnemyListCreated += Battle_OnEnemyListCreated;
         Battle.OnBattleEnded += Battle_OnBattleEnded;
     }
 
@@ -51,6 +55,8 @@ public class Unit : MonoBehaviour
         OnAnyUnitClicked -= SelectUnit;
         Enemy.OnAnyEnemyClicked -= Enemy_OnAnyEnemyClicked;
         Enemy.OnAnyEnemyKilled -= Enemy_OnAnyEnemyKilled;
+        Enemy.OnAnyEnemySpawned -= Enemy_OnAnyEnemySpawned;
+        Battle.OnEnemyListCreated -= Battle_OnEnemyListCreated;
         Battle.OnBattleEnded -= Battle_OnBattleEnded;
     }
 
@@ -69,12 +75,11 @@ public class Unit : MonoBehaviour
 
     void Enemy_OnAnyEnemyClicked(object sender, Enemy enemy)
     {
-        if(_isSelected)
-        {
-            SetTarget(enemy);
-            _targetIndicator.gameObject.SetActive(true);
-            _targetIndicator.position = enemy.transform.position;
-        }
+        if(!_isSelected) { return; }
+        if(IsDead) { return; }
+        if(enemy.IsDead()) { return; }
+
+        SetTarget(enemy);
     }
 
     void Enemy_OnAnyEnemyKilled(object sender, Enemy enemy)
@@ -82,8 +87,39 @@ public class Unit : MonoBehaviour
         if(EnemyTarget == enemy)
         {
             _targetIndicator.gameObject.SetActive(false);
-            EnemyTarget = null; // TODO Auto Retarget when target lost
+            EnemyTarget = null;
+            
+            List<Enemy> newTargetsList = new();
+            foreach(Enemy target in _enemyList)
+            {
+                if(target != enemy && !target.IsDead())
+                {
+                    newTargetsList.Add(target);
+                }
+            }
+
+            if(newTargetsList.Count > 0)
+            {
+                SetTarget(newTargetsList[UnityEngine.Random.Range(0, newTargetsList.Count)]);
+            }
         }
+    }
+
+    void Enemy_OnAnyEnemySpawned(object sender, Enemy enemy)
+    {
+        if(!EnemyTarget)
+        {
+            SetTarget(enemy);
+        }
+    }
+
+    void Battle_OnEnemyListCreated(object sender, List<Enemy> enemies)
+    {
+        _enemyList.Clear();
+
+        _enemyList = enemies;
+
+        SetTarget(_enemyList[UnityEngine.Random.Range(0, _enemyList.Count)]);
     }
 
     void Battle_OnBattleEnded()
@@ -95,7 +131,11 @@ public class Unit : MonoBehaviour
 
     void SetTarget(Enemy enemy)
     {
-        EnemyTarget = enemy; // TODO Set a chevron indicator colour coded for this unit above enemy
+        if(IsDead) { return; }
+
+        EnemyTarget = enemy;
+        _targetIndicator.gameObject.SetActive(true);
+        _targetIndicator.position = enemy.transform.position;
     }
 
     public void DealDamage()
@@ -141,6 +181,8 @@ public class Unit : MonoBehaviour
 
     void SelectUnit(object sender, Unit e)
     {
+        if(IsDead) { return; }
+
         if(e == this)
         {
             if(_isSelected)
@@ -163,12 +205,13 @@ public class Unit : MonoBehaviour
 
     void Die()
     {
-        // TODO Handle Death however that's going to work
         // TODO Probably play an animation
         OnAnyUnitKilled?.Invoke(this, this);
         Debug.Log(name + " is Dead!");
         IsDead = true;
         _targetIndicator.gameObject.SetActive(false);
+        _highlight.SetActive(false);
+        _isSelected = false;
     }
 
     public void BuyGear(EquipmentScriptableObject gear)
