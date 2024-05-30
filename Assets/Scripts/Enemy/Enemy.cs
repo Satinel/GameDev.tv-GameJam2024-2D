@@ -58,12 +58,14 @@ public class Enemy : MonoBehaviour
     {
         Battle.OnBattleStarted += Battle_OnBattleStarted;
         Battle.OnBattleEnded += Battle_OnBattleEnded;
+        Unit.OnAnyUnitKilled += Unit_OnAnyUnitKilled;
     }
 
     void OnDisable()
     {
         Battle.OnBattleStarted -= Battle_OnBattleStarted;
         Battle.OnBattleEnded -= Battle_OnBattleEnded;
+        Unit.OnAnyUnitKilled -= Unit_OnAnyUnitKilled;
     }
 
     void Update()
@@ -164,6 +166,14 @@ public class Enemy : MonoBehaviour
     void Battle_OnBattleEnded()
     {
         _isFighting = false;
+    }
+
+    void Unit_OnAnyUnitKilled(object sender, Unit unit)
+    {
+        if(_currentTarget ==  unit)
+        {
+            _currentTarget = null;
+        }
     }
 
 }

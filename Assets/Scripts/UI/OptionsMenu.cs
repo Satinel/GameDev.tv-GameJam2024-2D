@@ -1,14 +1,17 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 public class OptionsMenu : MonoBehaviour
 {
+    public static event Action OnOptionsOpened;
+    public static event Action OnOptionsClosed;
+
     [SerializeField] Canvas _optionsCanvas;
     [SerializeField] GameObject _closeMenuButton;
     [SerializeField] GameObject _quitPrompt;
     [SerializeField] GameObject _quitGameButton;
-    [SerializeField] float _currentTimeScale = 1;
 
 
     public void EnableOptionsCanvas()
@@ -27,18 +30,17 @@ public class OptionsMenu : MonoBehaviour
     {
         _optionsCanvas.gameObject.SetActive(true);
         EnableOptionsCanvas();
-        Time.timeScale = 0;
+        OnOptionsOpened?.Invoke();
     }
 
     public void CloseOptions()
     {
         _optionsCanvas.gameObject.SetActive(false);
-        Time.timeScale = _currentTimeScale;
+        OnOptionsClosed?.Invoke();
     }
 
     public void ReloadScene()
     {
-        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

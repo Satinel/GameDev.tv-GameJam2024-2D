@@ -17,16 +17,25 @@ public class Battle : MonoBehaviour
     [SerializeField] SpriteRenderer _iRow1Sprite, _iRow2Sprite, _iRow3Sprite;
     [SerializeField] List<EnemyScriptableObject> _bestiary;
 
+    float _currentTimeSpeed = 1;
+    bool _wasPaused;
+
     void OnEnable()
     {
+        OptionsMenu.OnOptionsOpened += Options_OnOptionsOpened;
+        OptionsMenu.OnOptionsClosed += Options_OnOptionsClosed;
         Enemy.OnAnyEnemyKilled += Enemy_OnAnyEnemyKilled;
         TeamManager.OnPartyWipe += TeamManager_OnPartyWipe;
+        Timer.OnTimerCompleted += Timer_OnTimerCompleted;
     }
 
     void OnDisable()
     {
+        OptionsMenu.OnOptionsOpened -= Options_OnOptionsOpened;
+        OptionsMenu.OnOptionsClosed -= Options_OnOptionsClosed;
         Enemy.OnAnyEnemyKilled -= Enemy_OnAnyEnemyKilled;
         TeamManager.OnPartyWipe -= TeamManager_OnPartyWipe;
+        Timer.OnTimerCompleted -= Timer_OnTimerCompleted;
     }
 
     void Start()
@@ -45,17 +54,54 @@ public class Battle : MonoBehaviour
         OnBattleStarted?.Invoke();
     }
 
-    // void Update()
-    // {
-    //     if(Input.GetKeyUp(KeyCode.V))
-    //     {
-    //         Victory();
-    //     }
-    // }
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            SetNormalSpeed();
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            SetDoubleSpeed();
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            SetQuadSpeed();
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            PauseBattle();
+        }
+    }
+
+    void Options_OnOptionsOpened()
+    {
+        if(Time.timeScale > 0)
+        {   
+            PauseBattle();
+            _wasPaused = false;
+        }
+        else
+        {
+            _wasPaused = true;
+        }
+    }
+
+    void Options_OnOptionsClosed()
+    {
+        if(_wasPaused) { return; }
+
+        UnpauseBattle();
+    }
 
     void TeamManager_OnPartyWipe()
     {
         Defeat();
+    }
+
+    void Timer_OnTimerCompleted()
+    {
+        Victory();
     }
 
     void Defeat()
@@ -63,7 +109,7 @@ public class Battle : MonoBehaviour
         StopAllCoroutines();
         OnBattleEnded?.Invoke();
         OnBattleLost?.Invoke();
-        // TODO Defeat Message and load Portal/Town scene   
+        // TODO Show (earned gold)/(lost gold)
     }
 
     public void Retreat()
@@ -71,7 +117,7 @@ public class Battle : MonoBehaviour
         StopAllCoroutines();
         OnBattleEnded?.Invoke();
         OnRetreated?.Invoke();
-        // TODO Retreat Message and load Shop/Town scene
+        // TODO Show Gold earned
     }
 
     void Victory()
@@ -79,7 +125,35 @@ public class Battle : MonoBehaviour
         StopAllCoroutines();
         OnBattleEnded?.Invoke();
         OnBattleWon?.Invoke();
-        // TODO Victory Message and load Shop/Town scene
+        // TODO Show Gold earned
+    }
+
+    public void SetNormalSpeed()
+    {
+        _currentTimeSpeed = 1;
+        UnpauseBattle();
+    }
+
+    public void SetDoubleSpeed()
+    {
+        _currentTimeSpeed = 2;
+        UnpauseBattle();
+    }
+
+    public void SetQuadSpeed()
+    {
+        _currentTimeSpeed = 4;
+        UnpauseBattle();
+    }
+
+    public void PauseBattle()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void UnpauseBattle()
+    {
+        Time.timeScale = _currentTimeSpeed;
     }
 
     void Enemy_OnAnyEnemyKilled(object sender, Enemy enemy)

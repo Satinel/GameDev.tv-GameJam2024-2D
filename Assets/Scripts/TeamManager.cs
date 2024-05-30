@@ -36,7 +36,10 @@ public class TeamManager : MonoBehaviour
 
         foreach(Unit unit in GetComponentsInChildren<Unit>())
         {
-            AddUnit(unit);
+            if(!unit.IsDead)
+            {
+                AddUnit(unit);
+            }
         }
     }
 

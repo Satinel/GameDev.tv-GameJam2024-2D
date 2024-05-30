@@ -131,7 +131,7 @@ public class Unit : MonoBehaviour
         }
         _currentHealth -= damage;
         _healthText.text = _currentHealth.ToString();
-        if(_currentHealth < 0)
+        if(_currentHealth <= 0)
         {
             _currentHealth = 0;
             _healthText.text = _currentHealth.ToString();
