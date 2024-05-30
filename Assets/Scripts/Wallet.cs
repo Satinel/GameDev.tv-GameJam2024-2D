@@ -20,13 +20,15 @@ public class Wallet : MonoBehaviour
 
     void OnEnable()
     {
+        Battle.OnBattleStarted += Battle_OnBattleStarted;
         Enemy.OnAnyEnemyKilled += Enemey_OnAnyEnemyKilled;
-        Battle.OnBattleEnded += Battle_OnBattleEnded;
+        Battle.OnBattleLost += Battle_OnBattleLost;
     }
 
     void OnDisable()
     {
-        Battle.OnBattleEnded -= Battle_OnBattleEnded;
+        Battle.OnBattleStarted -= Battle_OnBattleStarted;
+        Battle.OnBattleLost -= Battle_OnBattleLost;
         Enemy.OnAnyEnemyKilled -= Enemey_OnAnyEnemyKilled;
     }
 
@@ -74,13 +76,14 @@ public class Wallet : MonoBehaviour
         _moneyText.text = TotalMoney.ToString();
     }
 
-    void Battle_OnBattleEnded(object sender, bool hasWon)
+    void Battle_OnBattleStarted()
     {
-        if(!hasWon)
-        {
-            LoseMoney(Mathf.FloorToInt(_goldEarnedThisBattle / 2)); // TODO Message about losing gold amount also consider losing ALL money
-        }
         _goldEarnedThisBattle = 0;
+    }
+
+    void Battle_OnBattleLost()
+    {
+        LoseMoney(Mathf.FloorToInt(_goldEarnedThisBattle / 2)); // TODO Message about losing gold amount also consider losing ALL money
     }
 
     void Enemey_OnAnyEnemyKilled(object sender, Enemy enemy)

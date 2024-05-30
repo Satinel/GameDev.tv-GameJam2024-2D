@@ -9,7 +9,7 @@ public class OffSwingSkill : BaseSkill
     public override void SkillEffect()
     {
         base.SkillEffect();
-        if(VisualEffect)
+        if(VisualEffect && _unit.EnemyTarget)
         {
             Instantiate(VisualEffect, _unit.EnemyTarget.transform);
         }

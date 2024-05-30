@@ -86,9 +86,11 @@ public class Unit : MonoBehaviour
         }
     }
 
-    void Battle_OnBattleEnded(object sender, bool hasWon)
+    void Battle_OnBattleEnded()
     {
         _targetIndicator.gameObject.SetActive(false);
+        _highlight.SetActive(false);
+        _isSelected = false;
     }
 
     void SetTarget(Enemy enemy)

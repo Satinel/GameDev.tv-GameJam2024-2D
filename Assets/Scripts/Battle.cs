@@ -6,7 +6,10 @@ using UnityEngine;
 public class Battle : MonoBehaviour
 {
     public static event Action OnBattleStarted;
-    public static event EventHandler<bool> OnBattleEnded;
+    public static event Action OnBattleEnded;
+    public static event Action OnBattleWon;
+    public static event Action OnRetreated;
+    public static event Action OnBattleLost;
 
     [SerializeField] float _respawnTime;
     [SerializeField] List<Enemy> _enemies;
@@ -17,11 +20,13 @@ public class Battle : MonoBehaviour
     void OnEnable()
     {
         Enemy.OnAnyEnemyKilled += Enemy_OnAnyEnemyKilled;
+        TeamManager.OnPartyWipe += TeamManager_OnPartyWipe;
     }
 
     void OnDisable()
     {
         Enemy.OnAnyEnemyKilled -= Enemy_OnAnyEnemyKilled;
+        TeamManager.OnPartyWipe -= TeamManager_OnPartyWipe;
     }
 
     void Start()
@@ -42,30 +47,38 @@ public class Battle : MonoBehaviour
 
     // void Update()
     // {
-    //     if(Input.GetKeyUp(KeyCode.K))
+    //     if(Input.GetKeyUp(KeyCode.V))
     //     {
-    //         _enemies[UnityEngine.Random.Range(0, _enemies.Count)].TakeDamage(5);
+    //         Victory();
     //     }
     // }
+
+    void TeamManager_OnPartyWipe()
+    {
+        Defeat();
+    }
 
     void Defeat()
     {
         StopAllCoroutines();
-        OnBattleEnded?.Invoke(this, false);
+        OnBattleEnded?.Invoke();
+        OnBattleLost?.Invoke();
         // TODO Defeat Message and load Portal/Town scene   
     }
 
     public void Retreat()
     {
         StopAllCoroutines();
-        OnBattleEnded?.Invoke(this, false);
+        OnBattleEnded?.Invoke();
+        OnRetreated?.Invoke();
         // TODO Retreat Message and load Shop/Town scene
     }
 
     void Victory()
     {
         StopAllCoroutines();
-        OnBattleEnded?.Invoke(this, true);
+        OnBattleEnded?.Invoke();
+        OnBattleWon?.Invoke();
         // TODO Victory Message and load Shop/Town scene
     }
 

@@ -618,6 +618,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LockText
       objectReference: {fileID: 0}
+    - target: {fileID: 6054543767870850278, guid: b932141b019653840bc0a5a4cf0b8a8a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 2991320802891625457, guid: b932141b019653840bc0a5a4cf0b8a8a, type: 3}

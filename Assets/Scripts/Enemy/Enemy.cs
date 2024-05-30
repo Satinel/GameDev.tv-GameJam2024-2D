@@ -106,6 +106,7 @@ public class Enemy : MonoBehaviour
         _timeSinceLastAttack = 0;
         _animator.SetTrigger(SPAWN_HASH);
         _isFighting = true;
+        _currentTarget = null;
     }
 
     public void TakeDamage(int damage)
@@ -141,15 +142,17 @@ public class Enemy : MonoBehaviour
         {
             _audioSource.PlayOneShot(_currentEnemy.AttackSFX, _currentEnemy.ClipVolume);
         }
+        if(_currentEnemy.SkillVFX)
+        {
+            Instantiate(_currentEnemy.SkillVFX, _currentTarget.transform);
+        }
         _currentTarget.TakeDamage(Attack);
     }
 
     void Die()
     {
-        // TODO Handle Death however that's going to work
         _animator.SetTrigger(DIE_HASH);
         OnAnyEnemyKilled?.Invoke(this, this);
-        Debug.Log(name + " is Dead!");
         _isFighting = false;
     }
 
@@ -158,7 +161,7 @@ public class Enemy : MonoBehaviour
         _isFighting = true;
     }
 
-    void Battle_OnBattleEnded(object sender, bool e)
+    void Battle_OnBattleEnded()
     {
         _isFighting = false;
     }

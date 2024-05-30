@@ -15,5 +15,6 @@ public class EnemyScriptableObject : ScriptableObject
     public int AttackSpeed = 10;
     public int GoldValue = 5;
     public AudioClip AttackSFX;
+    public SkillVFX SkillVFX;
     public float ClipVolume = 1f;
 }

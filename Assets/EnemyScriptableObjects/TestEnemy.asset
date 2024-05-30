@@ -22,5 +22,6 @@ MonoBehaviour:
   MaxHealth: 5
   AttackSpeed: 5
   GoldValue: 5
-  AttackSFX: {fileID: 8300000, guid: 9002661ab9c14774b895d12eb0fe62df, type: 3}
+  AttackSFX: {fileID: 8300000, guid: 924c26c575557e54aa77e0e4920535b8, type: 3}
+  SkillVFX: {fileID: 7764922303510143599, guid: 4f24455a86b6c5247a3cf124e17a1744, type: 3}
   ClipVolume: 1

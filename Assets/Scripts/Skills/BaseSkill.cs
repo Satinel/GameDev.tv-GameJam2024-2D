@@ -70,13 +70,15 @@ public class BaseSkill : MonoBehaviour
         _timeSinceLastAttack = 0;
     }
 
-    protected void Battle_OnBattleEnded(object sender, bool e)
+    protected void Battle_OnBattleEnded()
     {
         _isFighting = false;
     }
 
     public virtual void SkillEffect()
     {
+        if(!_isFighting) { return; }
+
         if(_audioClips.Count > 0 && _audioSource)
         {
             _audioSource.PlayOneShot(_audioClips[Random.Range(0, _audioClips.Count)], _audioVolume);

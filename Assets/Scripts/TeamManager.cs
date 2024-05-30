@@ -1,24 +1,43 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class TeamManager : MonoBehaviour
 {
+    public static event Action OnPartyWipe;
+
     [field:SerializeField] public List<Unit> Team { get; private set; }
 
 
     void OnEnable()
     {
+        Battle.OnBattleStarted += Battle_OnBattleStarted;
         Unit.OnAnyUnitKilled += Unit_OnAnyUnitKilled;
     }
 
     void OnDisable()
     {
+        Battle.OnBattleStarted -= Battle_OnBattleStarted;
         Unit.OnAnyUnitKilled -= Unit_OnAnyUnitKilled;
     }
 
-    private void Unit_OnAnyUnitKilled(object sender, Unit unit)
+    void Unit_OnAnyUnitKilled(object sender, Unit unit)
     {
-        RemoveUnit(unit); // TODO probably don't do this, just make the unit untargetable
+        RemoveUnit(unit);
+        if(Team.Count <= 0)
+        {
+            OnPartyWipe?.Invoke();
+        }
+    }
+
+    void Battle_OnBattleStarted()
+    {
+        Team.Clear();
+
+        foreach(Unit unit in GetComponentsInChildren<Unit>())
+        {
+            AddUnit(unit);
+        }
     }
 
     public void AddUnit(Unit unit)
