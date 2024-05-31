@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: WhiteSlime
   m_EditorClassIdentifier: 
   Name: White Slime
-  Sprite: {fileID: 1384808774, guid: 30c6cd1c6f9e9314d8d1259d937b2fbf, type: 3}
+  Sprite: {fileID: 21300000, guid: 5e2a5389071794342bbcf8a632dc2d28, type: 3}
   HasOffset: 0
   SpriteOffset: {x: 0, y: 0, z: 0}
   SpriteScale: {x: 1, y: 1, z: 1}
-  SpriteFlipped: 1
+  SpriteFlipped: 0
   Attack: 1
   MaxHealth: 3
   AttackSpeed: 15

@@ -16,7 +16,8 @@ public class Campaign : MonoBehaviour
 
     [SerializeField] AudioClip _defeatSFX, _victorySFX, _gameOverSFX;
     [SerializeField] GameObject _overlay, _victorySplash, _retreatSplash, _defeatSplash, _gameOverSplash, _toBattleButton, _quitButton, _lostGoldFloatingText;
-    [SerializeField] List<Image> _lives;
+    [SerializeField] List<Image> _lives = new();
+    [SerializeField] SkillVFX _explosionVFX;
 
     [SerializeField] AudioSource _audioSource;
     [SerializeField] TextMeshProUGUI _goldEarnedText, _goldLostText;
@@ -123,6 +124,8 @@ public class Campaign : MonoBehaviour
         }
 
         yield return new WaitForSeconds(1f);
+
+        Instantiate(_explosionVFX.transform, _lives[Losses].transform);
 
         while(_lives[Losses].fillAmount > 0)
         {

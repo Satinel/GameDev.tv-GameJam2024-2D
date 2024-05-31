@@ -6,7 +6,7 @@ public class TeamManager : MonoBehaviour
 {
     public static event Action OnPartyWipe;
 
-    [field:SerializeField] public List<Unit> Team { get; private set; }
+    [field:SerializeField] public List<Unit> Team { get; private set; } = new();
 
 
     void OnEnable()

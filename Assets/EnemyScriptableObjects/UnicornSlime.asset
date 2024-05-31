@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: UnicornSlime
   m_EditorClassIdentifier: 
   Name: Unicorn Slime
-  Sprite: {fileID: 21300000, guid: 4db13ec2396101a4995380d570198f6c, type: 3}
+  Sprite: {fileID: 21300000, guid: 076e28712ecf4ed4985bf610fd75fa4e, type: 3}
   HasOffset: 0
   SpriteOffset: {x: 0, y: 0, z: 0}
   SpriteScale: {x: 1, y: 1, z: 1}
-  SpriteFlipped: 1
+  SpriteFlipped: 0
   Attack: 8
   MaxHealth: 16
   AttackSpeed: 10

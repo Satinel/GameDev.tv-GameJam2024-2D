@@ -7,8 +7,8 @@ public class Shop : MonoBehaviour
 {
     [SerializeField] int _rerollCost = 1;
 
-    [SerializeField] List<EquipmentScriptableObject> _allItems;
-    [SerializeField] List<ShopItem> _shopItems;
+    [SerializeField] List<EquipmentScriptableObject> _allItems = new();
+    [SerializeField] List<ShopItem> _shopItems = new();
     [SerializeField] Wallet _wallet;
     [SerializeField] Button _lockButton, _buyButton;
     [SerializeField] TextMeshProUGUI _lockText, _buyText;

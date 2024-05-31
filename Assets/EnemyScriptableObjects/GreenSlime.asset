@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: GreenSlime
   m_EditorClassIdentifier: 
   Name: Green Slime
-  Sprite: {fileID: -704555717, guid: 0f70949068d800241b63b754193b1b16, type: 3}
+  Sprite: {fileID: 21300000, guid: ce380a1491578884485b352021db2f76, type: 3}
   HasOffset: 0
   SpriteOffset: {x: 0, y: 0, z: 0}
   SpriteScale: {x: 1, y: 1, z: 1}
-  SpriteFlipped: 1
+  SpriteFlipped: 0
   Attack: 1
   MaxHealth: 5
   AttackSpeed: 15

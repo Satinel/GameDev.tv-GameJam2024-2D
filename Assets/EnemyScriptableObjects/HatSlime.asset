@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: HatSlime
   m_EditorClassIdentifier: 
   Name: Hat Slime
-  Sprite: {fileID: 1543554427, guid: 0f70949068d800241b63b754193b1b16, type: 3}
+  Sprite: {fileID: 21300000, guid: c92e6633fee8e1648a95446a9fbb013b, type: 3}
   HasOffset: 0
   SpriteOffset: {x: 0, y: 0, z: 0}
   SpriteScale: {x: 1, y: 1, z: 1}
-  SpriteFlipped: 1
+  SpriteFlipped: 0
   Attack: 1
   MaxHealth: 4
   AttackSpeed: 12

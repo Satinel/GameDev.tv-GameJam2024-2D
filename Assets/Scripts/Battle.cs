@@ -13,10 +13,10 @@ public class Battle : MonoBehaviour
     public static event EventHandler<List<Enemy>> OnEnemyListCreated;
 
     [SerializeField] float _respawnTime;
-    [SerializeField] List<Enemy> _enemies;
+    [SerializeField] List<Enemy> _enemies = new();
     [SerializeField] EnemyScriptableObject _incomingRow1, _incomingRow2, _incomingRow3;
     [SerializeField] SpriteRenderer _iRow1Sprite, _iRow2Sprite, _iRow3Sprite;
-    [SerializeField] List<EnemyScriptableObject> _bestiary;
+    [SerializeField] List<EnemyScriptableObject> _bestiary = new();
     [SerializeField] GameObject _retreatPrompt;
 
     float _currentTimeSpeed = 1;
@@ -97,7 +97,6 @@ public class Battle : MonoBehaviour
         StopAllCoroutines();
         OnBattleEnded?.Invoke();
         OnBattleLost?.Invoke();
-        // TODO Show (earned gold)/(lost gold)
     }
 
     public void PromptRetreat()

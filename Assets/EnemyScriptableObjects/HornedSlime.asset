@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: HornedSlime
   m_EditorClassIdentifier: 
   Name: Horned Slime
-  Sprite: {fileID: 288683588, guid: 0f70949068d800241b63b754193b1b16, type: 3}
+  Sprite: {fileID: 21300000, guid: 52d6248360c9f17478ca27a380f9a72b, type: 3}
   HasOffset: 0
   SpriteOffset: {x: 0, y: 0, z: 0}
   SpriteScale: {x: 1, y: 1, z: 1}
-  SpriteFlipped: 1
+  SpriteFlipped: 0
   Attack: 3
   MaxHealth: 5
   AttackSpeed: 20

@@ -6,7 +6,7 @@ public class BaseSkill : MonoBehaviour
     [field:SerializeField] public string SkillName {get; private set;}
     [field:SerializeField] public GameObject VisualEffect {get; private set;}
 
-    [SerializeField] protected List<AudioClip> _audioClips;
+    [SerializeField] protected List<AudioClip> _audioClips = new();
     [SerializeField] protected AudioSource _audioSource;
     [SerializeField] protected float _audioVolume;
     [SerializeField] protected float _cooldown;

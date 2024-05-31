@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: HeadbandSlime
   m_EditorClassIdentifier: 
   Name: Kungfu Slime
-  Sprite: {fileID: 19961958, guid: 0f70949068d800241b63b754193b1b16, type: 3}
+  Sprite: {fileID: 21300000, guid: 6d050f6941ce56440a26ea499641890b, type: 3}
   HasOffset: 0
   SpriteOffset: {x: 0, y: 0, z: 0}
   SpriteScale: {x: 1, y: 1, z: 1}
-  SpriteFlipped: 1
+  SpriteFlipped: 0
   Attack: 3
   MaxHealth: 3
   AttackSpeed: 18

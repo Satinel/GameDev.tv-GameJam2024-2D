@@ -601,6 +601,7 @@ MonoBehaviour:
   - {fileID: 5557227121123253811}
   - {fileID: 994569240450902039}
   - {fileID: 3451611681007091551}
+  _explosionVFX: {fileID: 3226775788270336480, guid: c5d8e2927b5e49c44b0b0f706c435be3, type: 3}
   _audioSource: {fileID: 6425782211915235707}
   _goldEarnedText: {fileID: 8920844458212849843}
   _goldLostText: {fileID: 5364396376863327454}
@@ -940,7 +941,7 @@ GameObject:
   - component: {fileID: 781770470398462543}
   - component: {fileID: 2573375379843020068}
   m_Layer: 5
-  m_Name: CampaignOverlay
+  m_Name: CampaignOverlay(Disable THIS)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
