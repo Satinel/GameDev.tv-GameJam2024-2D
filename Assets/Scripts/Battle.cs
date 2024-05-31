@@ -62,26 +62,6 @@ public class Battle : MonoBehaviour
         OnBattleStarted?.Invoke();
     }
 
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SetNormalSpeed();
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SetDoubleSpeed();
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            SetQuadSpeed();
-        }
-        if(Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            PauseBattle();
-        }
-    }
-
     void Options_OnOptionsOpened()
     {
         if(Time.timeScale > 0)

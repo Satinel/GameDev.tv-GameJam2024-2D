@@ -1258,7 +1258,10 @@ MonoBehaviour:
   _highlight: {fileID: 922962693307884596}
   _targetIndicator: {fileID: 7077024996416758286}
   _animator: {fileID: 8647161984636256011}
+  _unitSpriteRenderer: {fileID: 5350295330232938640}
   _floatingText: {fileID: 4702419758329665534, guid: ee656e085c3ac6b4d81c6830989cc7d8, type: 3}
+  _normalSprite: {fileID: 0}
+  _deathSprite: {fileID: 0}
 --- !u!95 &8647161984636256011
 Animator:
   serializedVersion: 5

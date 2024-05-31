@@ -22,7 +22,9 @@ public class Unit : MonoBehaviour
     [SerializeField] GameObject _highlight;
     [SerializeField] Transform _targetIndicator;
     [SerializeField] Animator _animator;
+    [SerializeField] SpriteRenderer _unitSpriteRenderer;
     [SerializeField] FloatingText _floatingText;
+    [SerializeField] Sprite _normalSprite, _deathSprite;
 
     int _currentHealth;
     bool _isSelected = false;
@@ -48,6 +50,7 @@ public class Unit : MonoBehaviour
         Enemy.OnAnyEnemySpawned += Enemy_OnAnyEnemySpawned;
         Battle.OnEnemyListCreated += Battle_OnEnemyListCreated;
         Battle.OnBattleEnded += Battle_OnBattleEnded;
+        Campaign.OnReturnToTown += Campaign_OnReturnToTown;
     }
 
     void OnDisable()
@@ -58,6 +61,7 @@ public class Unit : MonoBehaviour
         Enemy.OnAnyEnemySpawned -= Enemy_OnAnyEnemySpawned;
         Battle.OnEnemyListCreated -= Battle_OnEnemyListCreated;
         Battle.OnBattleEnded -= Battle_OnBattleEnded;
+        Campaign.OnReturnToTown -= Campaign_OnReturnToTown;
     }
 
     void Start()
@@ -66,6 +70,7 @@ public class Unit : MonoBehaviour
         _healthText.text = _currentHealth.ToString();
         _attackText.text = Attack.ToString();
         _equipMain.SetSkill();
+        _normalSprite = _unitSpriteRenderer.sprite;
     }
 
     public void OnUnitClicked()
@@ -127,6 +132,14 @@ public class Unit : MonoBehaviour
         _targetIndicator.gameObject.SetActive(false);
         _highlight.SetActive(false);
         _isSelected = false;
+    }
+
+    void Campaign_OnReturnToTown()
+    {
+        _currentHealth = MaxHealth;
+        _healthText.text = _currentHealth.ToString();
+        _unitSpriteRenderer.sprite = _normalSprite;
+        IsDead = false;
     }
 
     void SetTarget(Enemy enemy)
@@ -205,9 +218,8 @@ public class Unit : MonoBehaviour
 
     void Die()
     {
-        // TODO Probably play an animation
+        _unitSpriteRenderer.sprite = _deathSprite;
         OnAnyUnitKilled?.Invoke(this, this);
-        Debug.Log(name + " is Dead!");
         IsDead = true;
         _targetIndicator.gameObject.SetActive(false);
         _highlight.SetActive(false);

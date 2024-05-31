@@ -641,6 +641,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2418192191072856897}
     m_Modifications:
+    - target: {fileID: 754338724913800792, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
+      propertyPath: _deathSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b1fa06745012356479d23a808e6839e4, type: 3}
     - target: {fileID: 817754789159719334, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
       propertyPath: m_Color.b
       value: 0.754717
@@ -657,6 +661,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: TeamManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3841472146224528907, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
+      propertyPath: _deathSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 572537fe88775404dbecd4bde20b270f, type: 3}
+    - target: {fileID: 4625052113880249478, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
+      propertyPath: _deathSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fbd77fb17e7887844b789d7897dd5d4b, type: 3}
+    - target: {fileID: 5526514276419826425, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
+      propertyPath: _deathSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 8f8250d286c1a264dafd130258c0ba5b, type: 3}
     - target: {fileID: 6127637904655564538, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -713,6 +729,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.11764707
       objectReference: {fileID: 0}
+    - target: {fileID: 7908604962976618497, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
+      propertyPath: _deathSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: da3c26c92f39e7843bcb3202a1588e61, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

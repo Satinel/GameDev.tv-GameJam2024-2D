@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -7,16 +8,18 @@ using UnityEngine.UI;
 
 public class Campaign : MonoBehaviour
 {
+    public static event Action OnReturnToTown;
+
     public int Wins { get; private set; }
     [field:SerializeField] public int Losses { get; private set; } = 5;
     public int Days { get; private set; }
 
     [SerializeField] AudioClip _defeatSFX, _victorySFX, _gameOverSFX;
-    [SerializeField] GameObject _overlay, _victorySplash, _retreatSplash, _defeatSplash, _gameOverSplash, _toBattleButton, _quitButton;
+    [SerializeField] GameObject _overlay, _victorySplash, _retreatSplash, _defeatSplash, _gameOverSplash, _toBattleButton, _quitButton, _lostGoldFloatingText;
     [SerializeField] List<Image> _lives;
 
     [SerializeField] AudioSource _audioSource;
-    [SerializeField] TextMeshProUGUI _goldEarnedText;
+    [SerializeField] TextMeshProUGUI _goldEarnedText, _goldLostText;
     [SerializeField] Wallet _wallet;
 
     void Awake()
@@ -135,13 +138,14 @@ public class Campaign : MonoBehaviour
         int goldKept = goldEarned - goldLost;
 
         _wallet.LoseMoney(goldLost);
-        // TODO A fading away floating up text of goldLost.ToString()
+        _lostGoldFloatingText.SetActive(true);
+        _goldLostText.text = $"{goldLost}";
         
         while(goldEarned > goldKept)
         {
             goldEarned--; // This is going to be far too slow for large sums of lost money but I'd need to figure out maths to do a percentage reduction!
             _goldEarnedText.text = $"Gold Earned: {goldEarned}";
-            yield return new WaitForSeconds(0.1f);
+            yield return null;
         }
     }
 
@@ -162,6 +166,8 @@ public class Campaign : MonoBehaviour
         _defeatSplash.SetActive(false);
         _toBattleButton.SetActive(true);
         _audioSource.Stop();
+        _lostGoldFloatingText.SetActive(false);
+        OnReturnToTown?.Invoke();
         SceneManager.LoadScene("Shop");
     }
 
