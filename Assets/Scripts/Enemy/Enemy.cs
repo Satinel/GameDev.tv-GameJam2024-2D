@@ -16,8 +16,8 @@ public class Enemy : MonoBehaviour
     [field:SerializeField] public int Row {get; private set;}
     public bool IsDead() => !_isFighting;
 
-    [SerializeField] TextMeshProUGUI _attackText;
-    [SerializeField] TextMeshProUGUI _healthText;
+    [SerializeField] TextMeshProUGUI _attackText, _healthText, _goldText;
+    [SerializeField] GameObject _earnedGoldGameObject;
     [SerializeField] Animator _animator;
     [SerializeField] AudioSource _audioSource;
     [SerializeField] SpriteRenderer _spriteRenderer;
@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour
 
     protected readonly int DIE_HASH = Animator.StringToHash("Die");
     protected readonly int SPAWN_HASH = Animator.StringToHash("Spawn");
+    protected readonly int ATTACK_HASH = Animator.StringToHash("Attack");
 
     void Awake()
     {
@@ -94,29 +95,18 @@ public class Enemy : MonoBehaviour
         MaxHealth = _currentEnemy.MaxHealth;
         Attack = _currentEnemy.Attack;
         _spriteRenderer.sprite = _currentEnemy.Sprite;
-        if(_currentEnemy.SpriteFlipped)
-        {
-            _spriteRenderer.flipX = true;
-        }
-        else
-        {
-            _spriteRenderer.flipX = false;
-        }
         _attackSpeed = _currentEnemy.AttackSpeed;
-        GoldValue = _currentEnemy.GoldValue;
         CurrentHealth = MaxHealth;
         _healthText.text = CurrentHealth.ToString();
         _attackText.text = Attack.ToString();
-        _timeSinceLastAttack = 0;
+        _timeSinceLastAttack = UnityEngine.Random.Range(-2f, 0); // Sets an initiative so every like enemy has variance in time of attack
         _animator.SetTrigger(SPAWN_HASH);
         _currentTarget = null;
+        _earnedGoldGameObject.SetActive(false);
+        GoldValue = Mathf.CeilToInt(((float)_currentEnemy.Attack / _currentEnemy.AttackSpeed) + ((float)_currentEnemy.MaxHealth / 4));
+        _goldText.text = $"+{GoldValue} GOLD";
     }
 
-    void SetIsFightingAnimationEvent()
-    {
-        _isFighting = true;
-        OnAnyEnemySpawned?.Invoke(this, this);
-    }
 
     public void TakeDamage(int damage)
     {
@@ -146,7 +136,18 @@ public class Enemy : MonoBehaviour
             _currentTarget = _teamManager.Team[UnityEngine.Random.Range(0, _teamManager.Team.Count)]; // TODO Target based on 'Heat' or similar rather than random (ALSO check if Unit is alive)
         }
 
-        // TODO Play "animation"
+        _animator.SetTrigger(ATTACK_HASH);
+    }
+
+    void DealDamageAnimationEvent()
+    {
+        if(!_currentTarget)
+        {
+            if(_teamManager.Team.Count <= 0) { return; }
+
+            _currentTarget = _teamManager.Team[UnityEngine.Random.Range(0, _teamManager.Team.Count)]; // TODO Target based on 'Heat' or similar rather than random (ALSO check if Unit is alive)
+        }
+
         if(_currentEnemy.AttackSFX)
         {
             _audioSource.PlayOneShot(_currentEnemy.AttackSFX, _currentEnemy.ClipVolume);
@@ -158,8 +159,15 @@ public class Enemy : MonoBehaviour
         _currentTarget.TakeDamage(Attack);
     }
 
+    void SetIsFightingAnimationEvent()
+    {
+        _isFighting = true;
+        OnAnyEnemySpawned?.Invoke(this, this);
+    }
+
     void Die()
     {
+        _earnedGoldGameObject.SetActive(true);
         _animator.SetTrigger(DIE_HASH);
         OnAnyEnemyKilled?.Invoke(this, this);
         _isFighting = false;
