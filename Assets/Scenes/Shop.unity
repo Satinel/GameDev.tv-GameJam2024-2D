@@ -226,11 +226,11 @@ PrefabInstance:
     - target: {fileID: 1629448765884913132, guid: 95733b89416f494478260365bbf331b4, type: 3}
       propertyPath: _mainSong
       value: 
-      objectReference: {fileID: 8300000, guid: 367457dde1d64ac42965e123aaf86d33, type: 3}
+      objectReference: {fileID: 8300000, guid: 0c75ad7eaac13154aa087fb58465eb35, type: 3}
     - target: {fileID: 1629448765884913132, guid: 95733b89416f494478260365bbf331b4, type: 3}
       propertyPath: _introClip
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: 297ecaa619e4dcc4ea6ce15b2796336a, type: 3}
     - target: {fileID: 6283697976374133196, guid: 95733b89416f494478260365bbf331b4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

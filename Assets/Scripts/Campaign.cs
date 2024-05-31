@@ -161,11 +161,13 @@ public class Campaign : MonoBehaviour
         _retreatSplash.SetActive(false);
         _defeatSplash.SetActive(false);
         _toBattleButton.SetActive(true);
+        _audioSource.Stop();
         SceneManager.LoadScene("Shop");
     }
 
     public void ReturnToTitle()
     {
+        _audioSource.Stop();
         Player player = GetComponentInParent<Player>();  // TODO A less messy alternative if possible
         transform.SetParent(null, true);
         Destroy(player.gameObject);

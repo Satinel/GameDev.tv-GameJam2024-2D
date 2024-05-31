@@ -584,9 +584,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Losses>k__BackingField: 5
-  _defeatSFX: {fileID: 8300000, guid: 9943c56ccfbf17e43b6558ac3fef613a, type: 3}
-  _victorySFX: {fileID: 8300000, guid: 33d2d624c75a5eb49bb94729a5f51006, type: 3}
-  _gameOverSFX: {fileID: 0}
+  _defeatSFX: {fileID: 8300000, guid: feabca77594f2bf4ab9397c49a4633f2, type: 3}
+  _victorySFX: {fileID: 8300000, guid: 7c3bc8b1942013c47924c8f37fbe3350, type: 3}
+  _gameOverSFX: {fileID: 8300000, guid: 80fe09a9eeea9e942ba3a6735080e8d4, type: 3}
   _overlay: {fileID: 5235715915541892355}
   _victorySplash: {fileID: 3364894327399386016}
   _retreatSplash: {fileID: 1260604816959097273}
@@ -612,7 +612,7 @@ AudioSource:
   m_GameObject: {fileID: 2656507710871774568}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 3619767544925984969, guid: 5e1c0a38a4db87d4f970a1af46a46770, type: 2}
+  OutputAudioMixerGroup: {fileID: 1462747661866214708, guid: 5e1c0a38a4db87d4f970a1af46a46770, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1

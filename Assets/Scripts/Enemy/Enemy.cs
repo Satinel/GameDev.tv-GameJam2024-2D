@@ -91,10 +91,10 @@ public class Enemy : MonoBehaviour
     public void SetUp(EnemyScriptableObject enemySpawn)
     {
         _currentEnemy = enemySpawn;
-        MaxHealth = enemySpawn.MaxHealth;
-        Attack = enemySpawn.Attack;
+        MaxHealth = _currentEnemy.MaxHealth;
+        Attack = _currentEnemy.Attack;
         _spriteRenderer.sprite = _currentEnemy.Sprite;
-        if(enemySpawn.SpriteFlipped)
+        if(_currentEnemy.SpriteFlipped)
         {
             _spriteRenderer.flipX = true;
         }
@@ -102,8 +102,8 @@ public class Enemy : MonoBehaviour
         {
             _spriteRenderer.flipX = false;
         }
-        _attackSpeed = enemySpawn.AttackSpeed;
-        GoldValue = enemySpawn.GoldValue;
+        _attackSpeed = _currentEnemy.AttackSpeed;
+        GoldValue = _currentEnemy.GoldValue;
         CurrentHealth = MaxHealth;
         _healthText.text = CurrentHealth.ToString();
         _attackText.text = Attack.ToString();

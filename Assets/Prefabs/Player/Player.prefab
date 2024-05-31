@@ -641,6 +641,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2418192191072856897}
     m_Modifications:
+    - target: {fileID: 817754789159719334, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
+      propertyPath: m_Color.b
+      value: 0.754717
+      objectReference: {fileID: 0}
+    - target: {fileID: 817754789159719334, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
+      propertyPath: m_Color.g
+      value: 0.34812656
+      objectReference: {fileID: 0}
+    - target: {fileID: 817754789159719334, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
+      propertyPath: m_Color.r
+      value: 0.21003917
+      objectReference: {fileID: 0}
     - target: {fileID: 2450854015008003541, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
       propertyPath: m_Name
       value: TeamManager
@@ -684,6 +696,22 @@ PrefabInstance:
     - target: {fileID: 6127637904655564538, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6232065004740100237, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 637ddf950c2a77f4191a5ccea8aa8fef, type: 3}
+    - target: {fileID: 6436833099606436396, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
+      propertyPath: m_Color.b
+      value: 0.39607847
+      objectReference: {fileID: 0}
+    - target: {fileID: 6436833099606436396, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
+      propertyPath: m_Color.g
+      value: 0.18823531
+      objectReference: {fileID: 0}
+    - target: {fileID: 6436833099606436396, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
+      propertyPath: m_Color.r
+      value: 0.11764707
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

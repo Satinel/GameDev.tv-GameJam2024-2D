@@ -55,6 +55,10 @@ public class Battle : MonoBehaviour
         _iRow2Sprite.sprite = _incomingRow2.Sprite;
         _iRow3Sprite.sprite = _incomingRow3.Sprite;
 
+        // _incomingRow1.SpriteFlipped = true ? _iRow1Sprite.flipX = true : _iRow1Sprite.flipX = false; // Gamejam forcing me to learn ternary!
+        // _incomingRow2.SpriteFlipped = true ? _iRow2Sprite.flipX = true : _iRow2Sprite.flipX = false; // But I don't have time to figure out what's going on here
+        // _incomingRow3.SpriteFlipped = true ? _iRow3Sprite.flipX = true : _iRow3Sprite.flipX = false;
+
         OnBattleStarted?.Invoke();
     }
 
@@ -186,12 +190,13 @@ public class Battle : MonoBehaviour
             case 1:
                 enemy.SetUp(_incomingRow1);
                 _incomingRow1 = _bestiary[UnityEngine.Random.Range(0, _bestiary.Count)]; // TODO Tiers for enemies same as items based on number of player wins
-                _iRow1Sprite.sprite = _incomingRow3.Sprite;
+                _iRow1Sprite.sprite = _incomingRow1.Sprite;
+                // _incomingRow1.SpriteFlipped = true ? _iRow1Sprite.flipX = true : _iRow1Sprite.flipX = false; // This is switching the wrong sprites
                 break;
             case 2:
                 enemy.SetUp(_incomingRow2);
                 _incomingRow2 = _bestiary[UnityEngine.Random.Range(0, _bestiary.Count)]; // TODO Tiers for enemies same as items based on number of player wins
-                _iRow2Sprite.sprite = _incomingRow3.Sprite;
+                _iRow2Sprite.sprite = _incomingRow2.Sprite;
                 break;
             case 3:
                 enemy.SetUp(_incomingRow3);

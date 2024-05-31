@@ -223,6 +223,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1629448765884913132, guid: 95733b89416f494478260365bbf331b4, type: 3}
+      propertyPath: _mainSong
+      value: 
+      objectReference: {fileID: 8300000, guid: c9220bedf44ab93428fd0aaa1421a73a, type: 3}
+    - target: {fileID: 1629448765884913132, guid: 95733b89416f494478260365bbf331b4, type: 3}
+      propertyPath: _introClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 163948d8ab194b04399dd150edb72253, type: 3}
     - target: {fileID: 6283697976374133196, guid: 95733b89416f494478260365bbf331b4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
