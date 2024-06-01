@@ -6,12 +6,14 @@ using TMPro;
 public class Shop : MonoBehaviour
 {
     [SerializeField] int _rerollCost = 1;
+    [SerializeField] int _rerollCostMultiplyer = 3;
 
     [SerializeField] List<EquipmentScriptableObject> _allItems = new();
     [SerializeField] List<ShopItem> _shopItems = new();
+    [SerializeField] ShopItem _unitEquipmentWindow;
     [SerializeField] Wallet _wallet;
     [SerializeField] Button _lockButton, _buyButton;
-    [SerializeField] TextMeshProUGUI _lockText, _buyText;
+    [SerializeField] TextMeshProUGUI _lockText, _buyText, _rerollText;
     [SerializeField] GameObject _shopParent;
 
     ShopItem _selectedShopItem;
@@ -72,6 +74,8 @@ public class Shop : MonoBehaviour
 
     void CheckBuyButton()
     {
+        _unitEquipmentWindow.gameObject.SetActive(false);
+
         if(!_selectedShopItem || !_selectedUnit)
         {
             _buyButton.interactable = false;
@@ -80,41 +84,57 @@ public class Shop : MonoBehaviour
         }
 
         _buyButton.interactable = true;
+        _buyText.text = "Buy!";
 
         EquipmentType type = _selectedShopItem.Gear.Slot;
 
         switch (type)
         {
             case EquipmentType.Main:
-                if(_selectedUnit.Main().Gear && _selectedUnit.Main().Gear == _selectedShopItem.Gear)
+                if(_selectedUnit.Main().Gear)
+                {
+                    _unitEquipmentWindow.gameObject.SetActive(true);
+                    _unitEquipmentWindow.EquippedSetup(_selectedUnit.Main().Gear, _selectedUnit.Main().UpgradeLevel, _selectedUnit.Main().ItemSprite());
+                    _buyText.text = "Trade?";
+                }
+                if(_selectedUnit.Main().Gear == _selectedShopItem.Gear)
                 {
                     _buyText.text = "Upgrade!!";
+                    _unitEquipmentWindow.HideSellPrice();
                     return;
                 }
             break;
 
             case EquipmentType.Offhand:
-                if(_selectedUnit.Offhand().Gear && _selectedUnit.Offhand().Gear == _selectedShopItem.Gear)
+                if(_selectedUnit.Offhand().Gear)
+                {
+                    _unitEquipmentWindow.gameObject.SetActive(true);
+                    _unitEquipmentWindow.EquippedSetup(_selectedUnit.Offhand().Gear, _selectedUnit.Offhand().UpgradeLevel, _selectedUnit.Offhand().ItemSprite());
+                    _buyText.text = "Trade?";
+                }
+                if(_selectedUnit.Offhand().Gear == _selectedShopItem.Gear)
                 {
                     _buyText.text = "Upgrade!!";
+                    _unitEquipmentWindow.HideSellPrice();
                     return;
                 }
             break;
             
             case EquipmentType.Headgear:
-                if(_selectedUnit.Headgear().Gear && _selectedUnit.Headgear().Gear == _selectedShopItem.Gear)
+                if(_selectedUnit.Headgear().Gear)
+                {
+                    _unitEquipmentWindow.gameObject.SetActive(true);
+                    _unitEquipmentWindow.EquippedSetup(_selectedUnit.Headgear().Gear, _selectedUnit.Headgear().UpgradeLevel, _selectedUnit.Headgear().ItemSprite());
+                    _buyText.text = "Trade?";
+                }
+                if(_selectedUnit.Headgear().Gear == _selectedShopItem.Gear)
                 {
                     _buyText.text = "Upgrade!!";
+                    _unitEquipmentWindow.HideSellPrice();
                     return;
                 }
             break;
-            
-            default:
-                Debug.Log("IMPOSSIBLE!");
-            break;
         }
-
-        _buyText.text = "Buy!";
     }
 
     public void Leave()
@@ -127,6 +147,9 @@ public class Shop : MonoBehaviour
     public void BuyReroll()
     {
         if(!_wallet.AskToSpend(_rerollCost)) { return; }
+
+        _rerollCost *= _rerollCostMultiplyer;
+        _rerollText.text = _rerollCost.ToString();
 
         Reroll();
     }
@@ -266,6 +289,6 @@ public class Shop : MonoBehaviour
     {
         _selectedUnit.SellGear(currentItem, upgradeLevel);
         // TODO Message to player informing them that currentItem sold for Mathf.RoundToInt(currentItem.Price * upgradeLevel / 3)
-        Debug.Log(currentItem.Name + " sold for " + Mathf.RoundToInt(currentItem.Price * upgradeLevel / 3));
+        // Debug.Log(currentItem.Name + " sold for " + Mathf.RoundToInt(currentItem.Price * upgradeLevel / 3));
     }
 }

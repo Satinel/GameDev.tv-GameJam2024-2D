@@ -4,7 +4,7 @@ public class FireballSkill : BaseSkill
 {
     protected override void UseSkill()
     {
-        Debug.Log("FIREBALL!");
+        // Debug.Log("FIREBALL!");
     }
 
     public override void SkillEffect()

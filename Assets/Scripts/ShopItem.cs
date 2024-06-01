@@ -8,7 +8,7 @@ public class ShopItem : MonoBehaviour
     public static event EventHandler<ShopItem> OnAnyShopItemClicked;
 
     [SerializeField] TextMeshProUGUI _itemName, _cooldownText, _attackText, _healthText, _priceText;
-    [SerializeField] Image _imageRenderer, _borderImage;
+    [SerializeField] Image _imageRenderer, _borderImage, _priceImage;
     [SerializeField] EquipmentScriptableObject _gear;
     [SerializeField] GameObject _lock;
 
@@ -57,6 +57,42 @@ public class ShopItem : MonoBehaviour
             _imageRenderer.transform.localScale = new Vector3(1f, 1f, 1f);
             _imageRenderer.rectTransform.anchoredPosition = new Vector3(0.1f, -0.1f, 0f);
         }
+    }
+
+    public void EquippedSetup(EquipmentScriptableObject gear, int upgradeLevel, Sprite sprite)
+    {
+        _gear = gear;
+        if(upgradeLevel > 1)
+        {
+            _itemName.text = $"{gear.Name} +{upgradeLevel - 1}";
+        }
+        else
+        {
+            _itemName.text = $"{gear.Name}";
+        }
+        _cooldownText.text = gear.Skill.Cooldown.ToString();
+        _attackText.text = (gear.AttackIncrease * upgradeLevel).ToString();
+        _healthText.text = (gear.HealthIncrease * upgradeLevel).ToString();
+        _priceImage.enabled = true;
+        _priceText.text = $"Trade in: {gear.Price * upgradeLevel / 3}";
+        _imageRenderer.sprite = sprite;
+
+        if(gear.Slot == EquipmentType.Offhand)
+        {
+            _imageRenderer.transform.localScale = new Vector3(-1f, 1f, 1f);
+            _imageRenderer.rectTransform.anchoredPosition = new Vector3(1.1f, -0.1f, 0f);
+        }
+        else
+        {
+            _imageRenderer.transform.localScale = new Vector3(1f, 1f, 1f);
+            _imageRenderer.rectTransform.anchoredPosition = new Vector3(0.1f, -0.1f, 0f);
+        }
+    }
+
+    public void HideSellPrice()
+    {
+        _priceText.text = $" ";
+        _priceImage.enabled = false;
     }
 
     public void OnButtonClick()

@@ -389,6 +389,7 @@ MonoBehaviour:
   _priceText: {fileID: 5238944531933408705}
   _imageRenderer: {fileID: 1761866494936314214}
   _borderImage: {fileID: 3465829450686549555}
+  _priceImage: {fileID: 8455330597057483931}
   _gear: {fileID: 0}
   _lock: {fileID: 5432764638550313179}
 --- !u!1 &4459594045730897357

@@ -8,7 +8,7 @@ public class EquipmentSlot : MonoBehaviour
 
     [SerializeField] SpriteRenderer _spriteRenderer;
 
-
+    public Sprite ItemSprite() => _spriteRenderer.sprite;
 
     void Awake()
     {
@@ -56,7 +56,6 @@ public class EquipmentSlot : MonoBehaviour
             default:
             break;
         }
-        Debug.Log("Upgraded " + gear.Name);
     }
 
     public void SetSkill()
