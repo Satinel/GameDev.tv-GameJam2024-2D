@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9c7d61bd7ba1ed948a50f74fa9c9f175
+guid: bfceafbcea1a4944c93d7c3f26a7816d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 16
+  spritePixelsToUnits: 8
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -136,13 +136,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Chicken_0
+      name: GDFlippedPinkSlime_0
       rect:
         serializedVersion: 2
-        x: 4
-        y: 2
-        width: 19
-        height: 21
+        x: 7
+        y: 10
+        width: 17
+        height: 13
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,8 +150,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 759e2d13e0900924f852d54cabac9b05
-      internalID: -974135444
+      spriteID: 851ab0f813f88864b8c4225813c53be5
+      internalID: 1205917079
       vertices: []
       indices: 
       edges: []
@@ -167,7 +167,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Chicken_0: -974135444
+      GDFlippedPinkSlime_0: 1205917079
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

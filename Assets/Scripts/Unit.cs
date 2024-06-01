@@ -28,6 +28,7 @@ public class Unit : MonoBehaviour
 
     int _currentHealth;
     bool _isSelected = false;
+    bool _isManual = false;
     List<Enemy> _enemyList = new();
 
     public EquipmentSlot Main() => _equipMain;
@@ -103,7 +104,7 @@ public class Unit : MonoBehaviour
                 }
             }
 
-            if(newTargetsList.Count > 0)
+            if(newTargetsList.Count > 0 && !_isManual)
             {
                 SetTarget(newTargetsList[UnityEngine.Random.Range(0, newTargetsList.Count)]);
             }
@@ -112,7 +113,7 @@ public class Unit : MonoBehaviour
 
     void Enemy_OnAnyEnemySpawned(object sender, Enemy enemy)
     {
-        if(!EnemyTarget)
+        if(!EnemyTarget && !_isManual)
         {
             SetTarget(enemy);
         }
@@ -124,7 +125,10 @@ public class Unit : MonoBehaviour
 
         _enemyList = enemies;
 
-        SetTarget(_enemyList[UnityEngine.Random.Range(0, _enemyList.Count)]);
+        if(!_isManual)
+        {
+            SetTarget(_enemyList[UnityEngine.Random.Range(0, _enemyList.Count)]);
+        }
     }
 
     void Battle_OnBattleEnded()
@@ -149,6 +153,15 @@ public class Unit : MonoBehaviour
         EnemyTarget = enemy;
         _targetIndicator.gameObject.SetActive(true);
         _targetIndicator.position = enemy.transform.position;
+    }
+
+    public void SetManual(bool setting)
+    {
+        _isManual = setting;
+        if(!_isManual && !EnemyTarget)
+        {
+            SetTarget(_enemyList[UnityEngine.Random.Range(0, _enemyList.Count)]);
+        }
     }
 
     public void DealDamage()

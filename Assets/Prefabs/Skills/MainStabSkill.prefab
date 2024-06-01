@@ -46,16 +46,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <SkillName>k__BackingField: Stab
-  <VisualEffect>k__BackingField: {fileID: 480921929387271824, guid: 4f24455a86b6c5247a3cf124e17a1744, type: 3}
+  <VisualEffect>k__BackingField: {fileID: 8321269181105624153, guid: c4eaf0323b639044da020e13d148e28e, type: 3}
   _audioClips:
-  - {fileID: 8300000, guid: 00c384a9afcb27d4ea3c0d7948491b40, type: 3}
-  - {fileID: 8300000, guid: 0f025f64268bfc94f9360973e0cf1334, type: 3}
-  - {fileID: 8300000, guid: 8fc52f404a0f231478f323351324e6a5, type: 3}
-  - {fileID: 8300000, guid: a4f8c926726050449b6fb56df20f7219, type: 3}
-  - {fileID: 8300000, guid: 354bfe00df6be3d4ba43f4ce0f18082b, type: 3}
-  - {fileID: 8300000, guid: 924c26c575557e54aa77e0e4920535b8, type: 3}
-  - {fileID: 8300000, guid: 439f0889a32d8334082920238020b6d5, type: 3}
-  - {fileID: 8300000, guid: f9ac1db0845e85448b26eae96f58ceb9, type: 3}
+  - {fileID: 8300000, guid: 944540a04eaf50040a29dd41c3918de2, type: 3}
+  - {fileID: 8300000, guid: 741e5ec02fe83b74d86d4905313de02f, type: 3}
+  - {fileID: 8300000, guid: 37f73946cb04ef64e8d6fc0cab89a0ad, type: 3}
+  - {fileID: 8300000, guid: 9002661ab9c14774b895d12eb0fe62df, type: 3}
+  - {fileID: 8300000, guid: d48577988f650414ebce12010d8e6a3c, type: 3}
   _audioSource: {fileID: 4757076595118570003}
   _audioVolume: 1
   _cooldown: 3

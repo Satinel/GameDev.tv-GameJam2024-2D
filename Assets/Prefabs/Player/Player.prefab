@@ -669,6 +669,14 @@ PrefabInstance:
       propertyPath: _deathSprite
       value: 
       objectReference: {fileID: 21300000, guid: fbd77fb17e7887844b789d7897dd5d4b, type: 3}
+    - target: {fileID: 5365814850542850578, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
+      propertyPath: _autoButton
+      value: 
+      objectReference: {fileID: 5948126281313210817}
+    - target: {fileID: 5365814850542850578, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
+      propertyPath: _manualButton
+      value: 
+      objectReference: {fileID: 7285137764896822576}
     - target: {fileID: 5526514276419826425, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
       propertyPath: _deathSprite
       value: 
@@ -743,6 +751,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6127637904655564538, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
   m_PrefabInstance: {fileID: 3482346642164804309}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8801427850446944455 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5365814850542850578, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
+  m_PrefabInstance: {fileID: 3482346642164804309}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e7539ca067a68143a5925653704252c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5016891201631774543
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1021,6 +1040,18 @@ PrefabInstance:
       propertyPath: <TotalMoney>k__BackingField
       value: 150
       objectReference: {fileID: 0}
+    - target: {fileID: 6787532631304431192, guid: 011ad25c768e8264689086347a5789e5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8801427850446944455}
+    - target: {fileID: 6787532631304431192, guid: 011ad25c768e8264689086347a5789e5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ManualTargetting
+      objectReference: {fileID: 0}
+    - target: {fileID: 6787532631304431192, guid: 011ad25c768e8264689086347a5789e5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TeamManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     - target: {fileID: 7198764462049374882, guid: 011ad25c768e8264689086347a5789e5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1065,6 +1096,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: ToBattleButton
       objectReference: {fileID: 0}
+    - target: {fileID: 7612164822266176169, guid: 011ad25c768e8264689086347a5789e5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 8801427850446944455}
+    - target: {fileID: 7612164822266176169, guid: 011ad25c768e8264689086347a5789e5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: AutoTargetting
+      objectReference: {fileID: 0}
+    - target: {fileID: 7612164822266176169, guid: 011ad25c768e8264689086347a5789e5, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TeamManager, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1089,5 +1132,15 @@ Transform:
 --- !u!1 &3821685142821074779 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7403225595252623410, guid: 011ad25c768e8264689086347a5789e5, type: 3}
+  m_PrefabInstance: {fileID: 6031674601650536297}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5948126281313210817 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 89840276058074792, guid: 011ad25c768e8264689086347a5789e5, type: 3}
+  m_PrefabInstance: {fileID: 6031674601650536297}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7285137764896822576 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3940317781296507481, guid: 011ad25c768e8264689086347a5789e5, type: 3}
   m_PrefabInstance: {fileID: 6031674601650536297}
   m_PrefabAsset: {fileID: 0}

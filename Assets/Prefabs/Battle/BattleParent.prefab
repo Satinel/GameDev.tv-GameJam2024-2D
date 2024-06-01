@@ -576,7 +576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b9d4d65adf7254478422ad0ef5f391b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _totalTime: 480
+  _totalTime: 360
   _timerStarted: 0
   _timerText: {fileID: 4809320687777686702}
 --- !u!1 &4306848638763778937
