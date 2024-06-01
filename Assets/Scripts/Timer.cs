@@ -4,16 +4,27 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
+    public static event Action OnHalfTime;
     public static event Action OnTimerCompleted;
 
     [SerializeField] float _totalTime = 480f;
-    [SerializeField] bool _timerStarted;
     [SerializeField] TextMeshProUGUI _timerText;
+    [SerializeField] AudioClip _halfTimeAudioClip;
+
+    bool _timerStarted;
+    bool _halfTime;
 
     int _minutes;
     int _seconds;
     // int _milliseconds;
     float _currentTime;
+
+    AudioSource _audioSource;
+
+    void Awake()
+    {
+        _audioSource = GetComponent<AudioSource>();
+    }
 
     void Start()
     {
@@ -42,6 +53,17 @@ public class Timer : MonoBehaviour
             {
                 _currentTime = 0;
                 OnTimerCompleted?.Invoke();
+            }
+            if(!_halfTime && _currentTime < (_totalTime / 2))
+            {
+                _halfTime = true;
+                OnHalfTime?.Invoke();
+                _timerText.color = Color.red;
+                if(_audioSource && _halfTimeAudioClip)
+                {
+                    _audioSource.PlayOneShot(_halfTimeAudioClip);
+                }
+                // TODO (but maybe not here) a moon rises in the sky and/or the sky background changes
             }
             _timerText.text = FormatTime(_currentTime);
         }

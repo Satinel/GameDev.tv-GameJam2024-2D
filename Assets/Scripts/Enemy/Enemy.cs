@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour
 
     float _timeSinceLastAttack;
     bool _isFighting = false;
+    bool _isFrenzied = false;
 
     EnemyScriptableObject _currentEnemy;
     Unit _currentTarget;
@@ -62,6 +63,7 @@ public class Enemy : MonoBehaviour
         Battle.OnBattleStarted += Battle_OnBattleStarted;
         Battle.OnBattleEnded += Battle_OnBattleEnded;
         Unit.OnAnyUnitKilled += Unit_OnAnyUnitKilled;
+        Timer.OnHalfTime += Timer_OnHalfTime;
     }
 
     void OnDisable()
@@ -69,6 +71,7 @@ public class Enemy : MonoBehaviour
         Battle.OnBattleStarted -= Battle_OnBattleStarted;
         Battle.OnBattleEnded -= Battle_OnBattleEnded;
         Unit.OnAnyUnitKilled -= Unit_OnAnyUnitKilled;
+        Timer.OnHalfTime -= Timer_OnHalfTime;
     }
 
     void Update()
@@ -92,9 +95,18 @@ public class Enemy : MonoBehaviour
     public void SetUp(EnemyScriptableObject enemySpawn)
     {
         _currentEnemy = enemySpawn;
-        MaxHealth = _currentEnemy.MaxHealth;
-        Attack = _currentEnemy.Attack;
         _spriteRenderer.sprite = _currentEnemy.Sprite;
+
+        if(!_isFrenzied)
+        {
+            MaxHealth = _currentEnemy.MaxHealth;
+            Attack = _currentEnemy.Attack;
+        }
+        else
+        {
+            MaxHealth = _currentEnemy.MaxHealth * 2;
+            Attack = _currentEnemy.Attack * 2;
+        }
         _attackSpeed = _currentEnemy.AttackSpeed;
         CurrentHealth = MaxHealth;
         _healthText.text = CurrentHealth.ToString();
@@ -191,4 +203,13 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    void Timer_OnHalfTime()
+    {
+        _isFrenzied = true;
+        if(_currentEnemy)
+        {
+            Attack *= 2;
+            CurrentHealth += MaxHealth;
+        }
+    }
 }
