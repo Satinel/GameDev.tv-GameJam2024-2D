@@ -1032,6 +1032,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerWallet
       objectReference: {fileID: 0}
+    - target: {fileID: 3940317781296507481, guid: 011ad25c768e8264689086347a5789e5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5137057162774158866, guid: 011ad25c768e8264689086347a5789e5, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 3.2

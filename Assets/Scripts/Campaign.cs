@@ -9,6 +9,9 @@ using UnityEngine.UI;
 public class Campaign : MonoBehaviour
 {
     public static event Action OnReturnToTown;
+    public static event Action OnBattleLoaded;
+
+    // public static event Action OnTownLoaded; // Saving this here if it's needed
 
     public int Wins { get; private set; }
     [field:SerializeField] public int Losses { get; private set; } = 5;
@@ -18,7 +21,7 @@ public class Campaign : MonoBehaviour
     [SerializeField] GameObject _overlay, _victorySplash, _retreatSplash, _defeatSplash, _gameOverSplash, _toBattleButton, _quitButton, _lostGoldFloatingText;
     [SerializeField] List<Image> _lives = new();
     [SerializeField] SkillVFX _explosionVFX;
-
+    [SerializeField] Image _screenWipeImage;
     [SerializeField] AudioSource _audioSource;
     [SerializeField] TextMeshProUGUI _goldEarnedText, _goldLostText;
     [SerializeField] Wallet _wallet;
@@ -154,15 +157,55 @@ public class Campaign : MonoBehaviour
 
     public void GoToBattle()
     {
-        // TODO A nice transition effect
+        StartCoroutine(GoToBattleRoutine());
+    }
+
+    IEnumerator GoToBattleRoutine()
+    {
+        _screenWipeImage.fillOrigin = 1; // 1 is Right
+
+        while(_screenWipeImage.fillAmount < 1)
+        {
+            _screenWipeImage.fillAmount += Time.unscaledDeltaTime;
+            yield return null;
+        }
+        _screenWipeImage.fillAmount = 1;
+
         _toBattleButton.SetActive(false);
-        SceneManager.LoadScene("Battle");
+        
+        yield return SceneManager.LoadSceneAsync("Battle"); // TODO Multiple Battle scenes which are loaded based on Wins
+
+        _screenWipeImage.fillOrigin = 0; // 0 is Left
+
+        while(_screenWipeImage.fillAmount > 0)
+        {
+            _screenWipeImage.fillAmount -= Time.unscaledDeltaTime;
+            yield return null;
+        }
+        _screenWipeImage.fillAmount = 0;
+
+        OnBattleLoaded?.Invoke();
     }
 
     public void ReturnToTown()
     {
         Days++;
+
+        StartCoroutine(ReturnToTownRoutine());
         // TODO A nice transition effect which also hides the overlays getting disabled
+    }
+    
+    IEnumerator ReturnToTownRoutine()
+    {
+        _screenWipeImage.fillOrigin = 0; // 0 is Left
+
+        while(_screenWipeImage.fillAmount < 1)
+        {
+            _screenWipeImage.fillAmount += Time.unscaledDeltaTime;
+            yield return null;
+        }
+        _screenWipeImage.fillAmount = 1;
+
         _overlay.SetActive(false);
         _victorySplash.SetActive(false);
         _retreatSplash.SetActive(false);
@@ -170,8 +213,19 @@ public class Campaign : MonoBehaviour
         _toBattleButton.SetActive(true);
         _audioSource.Stop();
         _lostGoldFloatingText.SetActive(false);
+        
+        yield return SceneManager.LoadSceneAsync("Shop");
         OnReturnToTown?.Invoke();
-        SceneManager.LoadScene("Shop");
+
+        _screenWipeImage.fillOrigin = 1; // 1 is Right
+
+        while(_screenWipeImage.fillAmount > 0)
+        {
+            _screenWipeImage.fillAmount -= Time.unscaledDeltaTime;
+            yield return null;
+        }
+        _screenWipeImage.fillAmount = 0;
+        
     }
 
     public void ReturnToTitle()

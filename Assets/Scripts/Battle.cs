@@ -24,6 +24,7 @@ public class Battle : MonoBehaviour
 
     void OnEnable()
     {
+        Campaign.OnBattleLoaded += Campaign_OnBattleLoaded; // This is a dependency loop thing which is bad but it's 2am on Saturday
         OptionsMenu.OnOptionsOpened += Options_OnOptionsOpened;
         OptionsMenu.OnOptionsClosed += Options_OnOptionsClosed;
         Enemy.OnAnyEnemyKilled += Enemy_OnAnyEnemyKilled;
@@ -33,6 +34,7 @@ public class Battle : MonoBehaviour
 
     void OnDisable()
     {
+        Campaign.OnBattleLoaded -= Campaign_OnBattleLoaded;
         OptionsMenu.OnOptionsOpened -= Options_OnOptionsOpened;
         OptionsMenu.OnOptionsClosed -= Options_OnOptionsClosed;
         Enemy.OnAnyEnemyKilled -= Enemy_OnAnyEnemyKilled;
@@ -58,7 +60,10 @@ public class Battle : MonoBehaviour
         // _incomingRow1.SpriteFlipped = true ? _iRow1Sprite.flipX = true : _iRow1Sprite.flipX = false; // Gamejam forcing me to learn ternary!
         // _incomingRow2.SpriteFlipped = true ? _iRow2Sprite.flipX = true : _iRow2Sprite.flipX = false; // But I don't have time to figure out what's going on here
         // _incomingRow3.SpriteFlipped = true ? _iRow3Sprite.flipX = true : _iRow3Sprite.flipX = false;
+    }
 
+    void Campaign_OnBattleLoaded()
+    {
         OnBattleStarted?.Invoke();
     }
 
