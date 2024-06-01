@@ -17,6 +17,7 @@ public class Campaign : MonoBehaviour
     [field:SerializeField] public int Losses { get; private set; } = 5;
     public int Days { get; private set; }
 
+    [SerializeField] float _volume = 0.75f;
     [SerializeField] AudioClip _defeatSFX, _victorySFX, _gameOverSFX;
     [SerializeField] GameObject _overlay, _victorySplash, _retreatSplash, _defeatSplash, _gameOverSplash, _toBattleButton, _quitButton, _lostGoldFloatingText;
     [SerializeField] List<Image> _lives = new();
@@ -71,7 +72,7 @@ public class Campaign : MonoBehaviour
         _victorySplash.SetActive(true);
         if(_audioSource && _victorySFX)
         {
-            _audioSource.PlayOneShot(_victorySFX);
+            _audioSource.PlayOneShot(_victorySFX, _volume);
         }
     }
 
@@ -108,7 +109,7 @@ public class Campaign : MonoBehaviour
     {
         if (_audioSource && _gameOverSFX)
         {
-            _audioSource.PlayOneShot(_gameOverSFX);
+            _audioSource.PlayOneShot(_gameOverSFX, _volume);
         }
         _gameOverSplash.SetActive(true);
         if(Application.platform == RuntimePlatform.WebGLPlayer)
@@ -123,7 +124,7 @@ public class Campaign : MonoBehaviour
 
         if(_audioSource && _defeatSFX)
         {
-            _audioSource.PlayOneShot(_defeatSFX);
+            _audioSource.PlayOneShot(_defeatSFX, _volume);
         }
 
         yield return new WaitForSeconds(1f);

@@ -20,12 +20,6 @@ public class VolumeControl : MonoBehaviour
         _sfxVolumeSlider.value = PlayerPrefs.GetFloat("SFXVolume", 1);
     }
 
-    void OnEnable()
-    {
-        EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(_mainMenuButton);
-    }
-
     public void SetVolumeLevel(float sliderValue)
     {
         _audioMixer.SetFloat("MainVolume", Mathf.Log10(sliderValue) * 20);
@@ -76,13 +70,15 @@ public class VolumeControl : MonoBehaviour
 
     public void DisableAudioCanvas()
     {
-        _audioCanvas.gameObject.SetActive(false);
+        _audioCanvas.enabled = false;
         _optionsMenu.EnableOptionsCanvas();
     }
 
     public void EnableAudioCanvas()
     {
         _optionsMenu.DisableOptionsCanvas();
-        _audioCanvas.gameObject.SetActive(true);
+        _audioCanvas.enabled = true;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(_mainMenuButton);
     }
 }

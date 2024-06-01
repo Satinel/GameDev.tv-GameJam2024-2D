@@ -8,10 +8,12 @@ public class Wallet : MonoBehaviour
     public int GoldEarnedThisBattle {get; private set;} = 0;
 
     [SerializeField] TextMeshProUGUI _moneyText;
+    [SerializeField] Animator _animator;
     [SerializeField] AudioSource _audioSource;
     [SerializeField] AudioClip _spendMoneySFX, _tooPoorSFX;
     [SerializeField] float _spendVolume = 1, _poorVolume = 1;
 
+    static readonly int TOOPOOR_Hash = Animator.StringToHash("TooPoor");
 
     void Awake()
     {
@@ -50,7 +52,8 @@ public class Wallet : MonoBehaviour
             {
                 _audioSource.PlayOneShot(_tooPoorSFX, _poorVolume);
             }
-            return false; // TODO Message that player doesn't have enough money + add actual audioclip
+            _animator.SetTrigger(TOOPOOR_Hash);
+            return false;
         }
         else
         {
