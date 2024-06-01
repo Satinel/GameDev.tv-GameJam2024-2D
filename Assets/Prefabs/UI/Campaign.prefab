@@ -585,6 +585,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Losses>k__BackingField: 5
+  _volume: 1
   _defeatSFX: {fileID: 8300000, guid: feabca77594f2bf4ab9397c49a4633f2, type: 3}
   _victorySFX: {fileID: 8300000, guid: 7c3bc8b1942013c47924c8f37fbe3350, type: 3}
   _gameOverSFX: {fileID: 8300000, guid: 80fe09a9eeea9e942ba3a6735080e8d4, type: 3}

@@ -10,8 +10,8 @@ public class Wallet : MonoBehaviour
     [SerializeField] TextMeshProUGUI _moneyText;
     [SerializeField] Animator _animator;
     [SerializeField] AudioSource _audioSource;
-    [SerializeField] AudioClip _spendMoneySFX, _tooPoorSFX;
-    [SerializeField] float _spendVolume = 1, _poorVolume = 1;
+    [SerializeField] AudioClip _tooPoorSFX;
+    [SerializeField] float _poorVolume = 1;
 
     static readonly int TOOPOOR_Hash = Animator.StringToHash("TooPoor");
 
@@ -65,10 +65,6 @@ public class Wallet : MonoBehaviour
     void SpendMoney(int cost)
     {
         TotalMoney -= cost;
-        if(_audioSource && _spendMoneySFX)
-        {
-            _audioSource.PlayOneShot(_spendMoneySFX, _spendVolume);
-        }
         SetMoneyText();
     }
 

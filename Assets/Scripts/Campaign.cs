@@ -10,7 +10,7 @@ public class Campaign : MonoBehaviour
 {
     public static event Action OnReturnToTown;
     public static event Action OnBattleLoaded;
-
+    public static event Action OnSceneLoading;
     // public static event Action OnTownLoaded; // Saving this here if it's needed
 
     public int Wins { get; private set; }
@@ -173,6 +173,8 @@ public class Campaign : MonoBehaviour
         _screenWipeImage.fillAmount = 1;
 
         _toBattleButton.SetActive(false);
+
+        OnSceneLoading?.Invoke();
         
         yield return SceneManager.LoadSceneAsync("Battle"); // TODO Multiple Battle scenes which are loaded based on Wins
 
@@ -215,6 +217,7 @@ public class Campaign : MonoBehaviour
         _audioSource.Stop();
         _lostGoldFloatingText.SetActive(false);
         
+        OnSceneLoading?.Invoke();
         yield return SceneManager.LoadSceneAsync("Shop");
         OnReturnToTown?.Invoke();
 
@@ -236,6 +239,7 @@ public class Campaign : MonoBehaviour
         transform.SetParent(null, true);
         Destroy(player.gameObject);
         // TODO A nice transition effect?
+        OnSceneLoading?.Invoke();
         SceneManager.LoadScene(0);
         Destroy(gameObject);
     }

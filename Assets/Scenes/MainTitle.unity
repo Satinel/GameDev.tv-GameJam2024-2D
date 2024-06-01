@@ -288,6 +288,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2017619771496907475, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: <TotalMoney>k__BackingField
+      value: 15000
+      objectReference: {fileID: 0}
     - target: {fileID: 2418192191072856897, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

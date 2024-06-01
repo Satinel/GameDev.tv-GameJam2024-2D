@@ -94,7 +94,7 @@ public class Shop : MonoBehaviour
                 if(_selectedUnit.Main().Gear)
                 {
                     _unitEquipmentWindow.gameObject.SetActive(true);
-                    _unitEquipmentWindow.EquippedSetup(_selectedUnit.Main().Gear, _selectedUnit.Main().UpgradeLevel, _selectedUnit.Main().ItemSprite());
+                    _unitEquipmentWindow.EquippedSetup(_selectedUnit.Main().Gear, _selectedUnit.Main().UpgradeLevel, _selectedUnit.Main().ItemSprite(), _selectedUnit.Main().UpgradeName);
                     _buyText.text = "Trade?";
                 }
                 if(_selectedUnit.Main().Gear == _selectedShopItem.Gear)
@@ -109,7 +109,7 @@ public class Shop : MonoBehaviour
                 if(_selectedUnit.Offhand().Gear)
                 {
                     _unitEquipmentWindow.gameObject.SetActive(true);
-                    _unitEquipmentWindow.EquippedSetup(_selectedUnit.Offhand().Gear, _selectedUnit.Offhand().UpgradeLevel, _selectedUnit.Offhand().ItemSprite());
+                    _unitEquipmentWindow.EquippedSetup(_selectedUnit.Offhand().Gear, _selectedUnit.Offhand().UpgradeLevel, _selectedUnit.Offhand().ItemSprite(), _selectedUnit.Offhand().UpgradeName);
                     _buyText.text = "Trade?";
                 }
                 if(_selectedUnit.Offhand().Gear == _selectedShopItem.Gear)
@@ -124,7 +124,7 @@ public class Shop : MonoBehaviour
                 if(_selectedUnit.Headgear().Gear)
                 {
                     _unitEquipmentWindow.gameObject.SetActive(true);
-                    _unitEquipmentWindow.EquippedSetup(_selectedUnit.Headgear().Gear, _selectedUnit.Headgear().UpgradeLevel, _selectedUnit.Headgear().ItemSprite());
+                    _unitEquipmentWindow.EquippedSetup(_selectedUnit.Headgear().Gear, _selectedUnit.Headgear().UpgradeLevel, _selectedUnit.Headgear().ItemSprite(), _selectedUnit.Headgear().UpgradeName);
                     _buyText.text = "Trade?";
                 }
                 if(_selectedUnit.Headgear().Gear == _selectedShopItem.Gear)
@@ -149,6 +149,10 @@ public class Shop : MonoBehaviour
         if(!_wallet.AskToSpend(_rerollCost)) { return; }
 
         _rerollCost *= _rerollCostMultiplyer;
+        if(_rerollCost > 999)
+        {
+            _rerollCost = 999;
+        }
         _rerollText.text = _rerollCost.ToString();
 
         Reroll();

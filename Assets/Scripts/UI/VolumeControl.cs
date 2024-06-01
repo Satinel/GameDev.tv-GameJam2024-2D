@@ -15,9 +15,9 @@ public class VolumeControl : MonoBehaviour
 
     void Start()
     {
-        _masterVolumeSlider.value = PlayerPrefs.GetFloat("MainVolume", 1);
-        _musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 1);
-        _sfxVolumeSlider.value = PlayerPrefs.GetFloat("SFXVolume", 1);
+        _masterVolumeSlider.value = PlayerPrefs.GetFloat("MainVolume", 0.75f);
+        _musicVolumeSlider.value = PlayerPrefs.GetFloat("MusicVolume", 0.5f);
+        _sfxVolumeSlider.value = PlayerPrefs.GetFloat("SFXVolume", 0.75f);
     }
 
     public void SetVolumeLevel(float sliderValue)

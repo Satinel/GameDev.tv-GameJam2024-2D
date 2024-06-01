@@ -50,6 +50,7 @@ MonoBehaviour:
   _mainSong: {fileID: 8300000, guid: 83640f9dd55d9064ab58ebb6611b74dd, type: 3}
   _mainAudioSource: {fileID: -5654525967488865884}
   _introAudioSource: {fileID: 8504951968968016446}
+  _volume: 1
 --- !u!82 &-5654525967488865884
 AudioSource:
   m_ObjectHideFlags: 0

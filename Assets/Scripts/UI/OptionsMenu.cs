@@ -13,6 +13,15 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField] GameObject _quitPrompt;
     [SerializeField] GameObject _quitGameButton;
 
+    void OnEnable()
+    {
+        Campaign.OnSceneLoading += CloseOptions;
+    }
+
+    void OnDisable()
+    {
+        Campaign.OnSceneLoading -= CloseOptions;
+    }
 
     public void EnableOptionsCanvas()
     {

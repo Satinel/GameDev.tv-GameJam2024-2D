@@ -59,12 +59,12 @@ public class ShopItem : MonoBehaviour
         }
     }
 
-    public void EquippedSetup(EquipmentScriptableObject gear, int upgradeLevel, Sprite sprite)
+    public void EquippedSetup(EquipmentScriptableObject gear, int upgradeLevel, Sprite sprite, string upgradeName)
     {
         _gear = gear;
         if(upgradeLevel > 1)
         {
-            _itemName.text = $"{gear.Name} +{upgradeLevel - 1}";
+            _itemName.text = $"{upgradeName}";
         }
         else
         {

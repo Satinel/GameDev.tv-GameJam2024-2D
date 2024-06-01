@@ -232,7 +232,7 @@ MonoBehaviour:
   _moneyText: {fileID: 2194151237449382672}
   _animator: {fileID: 7461320368451912970}
   _audioSource: {fileID: 3214374797214624728}
-  _spendMoneySFX: {fileID: 0}
+  _spendMoneySFX: {fileID: 8300000, guid: 22efbfca9d784504dbc2ee75d7f4959d, type: 3}
   _tooPoorSFX: {fileID: 8300000, guid: 22cabd56bc665cc46b6cd5a60fb9e37a, type: 3}
   _spendVolume: 1
   _poorVolume: 1
