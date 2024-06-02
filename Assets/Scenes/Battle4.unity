@@ -368,52 +368,52 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.size
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 85d75b406316633429a562cd383c7c71, type: 2}
+      objectReference: {fileID: 11400000, guid: b7b158eaefdc1e647b5e59052b69ee93, type: 2}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: cd94e5a325c6fe946a40b0ce4f49fa04, type: 2}
+      objectReference: {fileID: 11400000, guid: 53fe1b66b25d8624ca0d11ff3d56b9b0, type: 2}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 609d11307bbc58e479cad465494ff458, type: 2}
+      objectReference: {fileID: 11400000, guid: af92aa6f1a1e5ae4ea16fbd36516cce8, type: 2}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: 807130d3ab7ff664690dd053498e0d9d, type: 2}
+      objectReference: {fileID: 11400000, guid: 2c1239bb1ac947047851d93eac7bc4b1, type: 2}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[4]
       value: 
-      objectReference: {fileID: 11400000, guid: 4b8323e575ebe4a40bccf0f12a2355f2, type: 2}
+      objectReference: {fileID: 11400000, guid: a333b3da5f53d534e88ad09c49e3fec9, type: 2}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[5]
       value: 
-      objectReference: {fileID: 11400000, guid: 467630800bff9724f92e498f5301a668, type: 2}
+      objectReference: {fileID: 11400000, guid: aeb2d04eeecb9254ab575adc5f1c825a, type: 2}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[6]
       value: 
-      objectReference: {fileID: 11400000, guid: 71d07c50cb030584ebde324150101e67, type: 2}
+      objectReference: {fileID: 11400000, guid: d5b09a9efe97afb4291e3b2eb67250b0, type: 2}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[7]
       value: 
-      objectReference: {fileID: 11400000, guid: 9ba11f1bbc1d3624abe32c4b270102f9, type: 2}
+      objectReference: {fileID: 11400000, guid: 9e3e8eb52fd46ff4fa1b2d6d4408a7f7, type: 2}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[8]
       value: 
-      objectReference: {fileID: 11400000, guid: c2bdc9d1d4c59d44d8414a679f750822, type: 2}
+      objectReference: {fileID: 11400000, guid: 55dfeaabe28d02c4bbd2b65fbcd62d62, type: 2}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[9]
       value: 
-      objectReference: {fileID: 11400000, guid: d8146eb5486306047ad455279f8cc944, type: 2}
+      objectReference: {fileID: 11400000, guid: 5f58e4cbdddaf194f85e432da37a0755, type: 2}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[10]
       value: 
-      objectReference: {fileID: 11400000, guid: 6ee8408ebbf66364e993eed64794920b, type: 2}
+      objectReference: {fileID: 11400000, guid: 5f58e4cbdddaf194f85e432da37a0755, type: 2}
     - target: {fileID: 4348184521488530627, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: m_Sprite
       value: 

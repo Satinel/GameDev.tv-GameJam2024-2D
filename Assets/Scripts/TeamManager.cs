@@ -10,6 +10,8 @@ public class TeamManager : MonoBehaviour
     [field:SerializeField] public List<Unit> Team { get; private set; } = new();
     [field:SerializeField] public GameObject ManualButton { get; private set; }
     [field:SerializeField] public GameObject AutoButton { get; private set; }
+    
+    [SerializeField] List<Unit> _lockedUnits = new();
 
     bool _isAuto = true;
     bool _isTutorial = false;
@@ -21,6 +23,7 @@ public class TeamManager : MonoBehaviour
         Campaign.OnTutorialLoading += Campaign_OnTutorialLoading;
         Unit.OnAnyUnitKilled += Unit_OnAnyUnitKilled;
         Tutorial.OnTargetingTutorialOver += Tutorial_OnTutorialOver;
+        Portal.OnUnitSummoned += Portal_OnUnitSummoned;
     }
 
     void OnDisable()
@@ -30,6 +33,7 @@ public class TeamManager : MonoBehaviour
         Campaign.OnTutorialLoading -= Campaign_OnTutorialLoading;
         Unit.OnAnyUnitKilled -= Unit_OnAnyUnitKilled;
         Tutorial.OnTargetingTutorialOver += Tutorial_OnTutorialOver;
+        Portal.OnUnitSummoned -= Portal_OnUnitSummoned;
     }
 
     void Unit_OnAnyUnitKilled(object sender, Unit unit)
@@ -76,6 +80,11 @@ public class TeamManager : MonoBehaviour
         _isTutorial = false;
     }
 
+    void Portal_OnUnitSummoned(object sender, int index)
+    {
+        _lockedUnits[index].gameObject.SetActive(true);
+    }
+
     public void AddUnit(Unit unit)
     {
         Team.Insert(Team.Count, unit);
@@ -95,7 +104,7 @@ public class TeamManager : MonoBehaviour
         {
             OnManualPressed?.Invoke();
         }
-
+        
         foreach(Unit unit in GetComponentsInChildren<Unit>(true))
         {
             unit.SetManual(true);

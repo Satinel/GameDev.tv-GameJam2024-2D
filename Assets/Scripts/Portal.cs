@@ -4,7 +4,7 @@ using System;
 public class Portal : MonoBehaviour
 {
     public static event Action OnShopOpened;
-
+    public static event EventHandler<int> OnUnitSummoned;
 
     [SerializeField] Animator _animator;
     [SerializeField] GameObject _shopParent, _portalParent, _shopMusic, _portalMusic, _shopButton;
@@ -43,18 +43,28 @@ public class Portal : MonoBehaviour
                 break;
             case 2:
                 _animator.SetTrigger(DAY2_HASH); // Dog -> Chase Cat
+                OnUnitSummoned?.Invoke(this, day);
+                OpenShop();
                 break;
             case 3:
                 _animator.SetTrigger(DAY3_HASH); // Bun -> Bounce around
+                OnUnitSummoned?.Invoke(this, day);
+                OpenShop();
                 break;
             case 4:
                 _animator.SetTrigger(DAY4_HASH); // Bird -> Everyone confused because it looks bad
+                OnUnitSummoned?.Invoke(this, day);
+                OpenShop();
                 break;
             case 5:
                 _animator.SetTrigger(DAY5_HASH); // Fox -> Portal explodes???
+                OnUnitSummoned?.Invoke(this, day);
+                OpenShop();
                 break;
             default:
                 _shopButton.SetActive(true);
+                OnUnitSummoned?.Invoke(this, day);
+                OpenShop();
                 break;
         }
     }

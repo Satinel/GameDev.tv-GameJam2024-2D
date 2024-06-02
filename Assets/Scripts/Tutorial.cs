@@ -282,7 +282,7 @@ public class Tutorial : MonoBehaviour
     {
         _battle.PauseBattle();
         _textBox.SetActive(true);
-        _text.text = "Halfway through the night, monsters will enter a Frenzied state. ";
+        _text.text = "Halfway through the night, monsters will enter a <color=#ff0000>Frenzied</color> state. ";
         _text.text += "They'll be twice as strong and twice as tough!";
         _button7.gameObject.SetActive(true);
     }
