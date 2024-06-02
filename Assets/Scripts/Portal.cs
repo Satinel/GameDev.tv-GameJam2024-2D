@@ -7,7 +7,7 @@ public class Portal : MonoBehaviour
 
 
     [SerializeField] Animator _animator;
-    [SerializeField] GameObject _shopParent, _portalParent, _shopMusic, _portalMusic;
+    [SerializeField] GameObject _shopParent, _portalParent, _shopMusic, _portalMusic, _shopButton;
 
     static readonly int DAY1_HASH = Animator.StringToHash("Day1");
     static readonly int DAY2_HASH = Animator.StringToHash("Day2");
@@ -28,7 +28,7 @@ public class Portal : MonoBehaviour
     public void OpenShop()
     {
         _portalMusic.SetActive(false);
-        _shopParent.SetActive(true); // Transition?
+        _shopParent.SetActive(true);
         _shopMusic.SetActive(true);
         _portalParent.SetActive(false);
         OnShopOpened?.Invoke();
@@ -54,6 +54,7 @@ public class Portal : MonoBehaviour
                 _animator.SetTrigger(DAY5_HASH); // Fox -> Portal explodes???
                 break;
             default:
+                _shopButton.SetActive(true);
                 break;
         }
     }

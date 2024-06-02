@@ -24,12 +24,16 @@ public class Wallet : MonoBehaviour
     {
         Battle.OnBattleStarted += Battle_OnBattleStarted;
         Enemy.OnAnyEnemyKilled += Enemy_OnAnyEnemyKilled;
+        Campaign.OnReturnToTown += Campaign_OnReturnToTown;
+        Portal.OnShopOpened += Portal_OnShopOpened;
     }
 
     void OnDisable()
     {
         Battle.OnBattleStarted -= Battle_OnBattleStarted;
         Enemy.OnAnyEnemyKilled -= Enemy_OnAnyEnemyKilled;
+        Campaign.OnReturnToTown -= Campaign_OnReturnToTown;
+        Portal.OnShopOpened += Portal_OnShopOpened;
     }
 
     public void GainMoney(int gains)
@@ -83,5 +87,15 @@ public class Wallet : MonoBehaviour
     {
         GoldEarnedThisBattle += enemy.GoldValue;
         GainMoney(enemy.GoldValue);
+    }
+
+    void Campaign_OnReturnToTown()
+    {
+        _canvas.enabled = false;
+    }
+
+    void Portal_OnShopOpened()
+    {
+        _canvas.enabled = true;
     }
 }
