@@ -11,6 +11,7 @@ public class Campaign : MonoBehaviour
     public static event Action OnReturnToTown;
     public static event Action OnBattleLoaded;
     public static event Action OnSceneLoading;
+    public static event Action OnTutorialLoading;
     // public static event Action OnTownLoaded; // Saving this here if it's needed
 
     public int Wins { get; private set; }
@@ -19,13 +20,16 @@ public class Campaign : MonoBehaviour
 
     [SerializeField] float _volume = 0.75f;
     [SerializeField] AudioClip _defeatSFX, _victorySFX, _gameOverSFX;
-    [SerializeField] GameObject _overlay, _victorySplash, _retreatSplash, _defeatSplash, _gameOverSplash, _toBattleButton, _quitButton, _lostGoldFloatingText;
+    [SerializeField] GameObject _tutorialButton, _overlay, _victorySplash, _retreatSplash, _defeatSplash, _gameOverSplash, _toBattleButton, _quitButton, _lostGoldFloatingText;
     [SerializeField] List<Image> _lives = new();
+    [SerializeField] Image _tutorialLife;
     [SerializeField] SkillVFX _explosionVFX;
     [SerializeField] Image _screenWipeImage;
     [SerializeField] AudioSource _audioSource;
     [SerializeField] TextMeshProUGUI _goldEarnedText, _goldLostText;
     [SerializeField] Wallet _wallet;
+
+    bool _isTransitioning;
 
     void Awake()
     {
@@ -158,11 +162,15 @@ public class Campaign : MonoBehaviour
 
     public void GoToBattle()
     {
+        if(_isTransitioning) { return; }
+
+        _tutorialButton.SetActive(false);
         StartCoroutine(GoToBattleRoutine());
     }
 
     IEnumerator GoToBattleRoutine()
     {
+        _isTransitioning = true;
         _screenWipeImage.fillOrigin = 1; // 1 is Right
 
         while(_screenWipeImage.fillAmount < 1)
@@ -188,10 +196,55 @@ public class Campaign : MonoBehaviour
         _screenWipeImage.fillAmount = 0;
 
         OnBattleLoaded?.Invoke();
+        _isTransitioning = false;
+    }
+
+    public void GoToTutorial()
+    {
+        if(_isTransitioning) { return; }
+
+        _tutorialButton.SetActive(false);
+        OnTutorialLoading?.Invoke();
+        StartCoroutine(GoToTutorialRoutine());
+    }
+
+    IEnumerator GoToTutorialRoutine()
+    {
+        _isTransitioning = true;
+        Losses++;
+        _tutorialLife.gameObject.SetActive(true);
+        _lives.Insert(_lives.Count, _tutorialLife);
+        _screenWipeImage.fillOrigin = 1; // 1 is Right
+
+        while(_screenWipeImage.fillAmount < 1)
+        {
+            _screenWipeImage.fillAmount += Time.unscaledDeltaTime;
+            yield return null;
+        }
+        _screenWipeImage.fillAmount = 1;
+
+        _toBattleButton.SetActive(false);
+
+        OnSceneLoading?.Invoke();
+        
+        yield return SceneManager.LoadSceneAsync("Tutorial"); // TODO Multiple Battle scenes which are loaded based on Wins
+
+        _screenWipeImage.fillOrigin = 0; // 0 is Left
+
+        while(_screenWipeImage.fillAmount > 0)
+        {
+            _screenWipeImage.fillAmount -= Time.unscaledDeltaTime;
+            yield return null;
+        }
+        _screenWipeImage.fillAmount = 0;
+
+        OnBattleLoaded?.Invoke();
+        _isTransitioning = false;
     }
 
     public void ReturnToTown()
     {
+        if(_isTransitioning) { return; }
         Days++;
 
         StartCoroutine(ReturnToTownRoutine());
@@ -200,6 +253,7 @@ public class Campaign : MonoBehaviour
     
     IEnumerator ReturnToTownRoutine()
     {
+        _isTransitioning = true;
         _screenWipeImage.fillOrigin = 0; // 0 is Left
 
         while(_screenWipeImage.fillAmount < 1)
@@ -229,11 +283,12 @@ public class Campaign : MonoBehaviour
             yield return null;
         }
         _screenWipeImage.fillAmount = 0;
-        
+        _isTransitioning = false;
     }
 
     public void ReturnToTitle()
     {
+        _isTransitioning = true;
         _audioSource.Stop();
         Player player = GetComponentInParent<Player>();  // TODO A less messy alternative if possible
         transform.SetParent(null, true);

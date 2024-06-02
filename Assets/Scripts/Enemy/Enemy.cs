@@ -209,7 +209,9 @@ public class Enemy : MonoBehaviour
         if(_currentEnemy)
         {
             Attack *= 2;
+            _attackText.text = Attack.ToString();
             CurrentHealth += MaxHealth;
+            _healthText.text = CurrentHealth.ToString();
         }
     }
 }

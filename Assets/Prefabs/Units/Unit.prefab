@@ -1259,8 +1259,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef148bf02ebe630409e63ca6526b5f45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <HeroName>k__BackingField: 
   <Attack>k__BackingField: 1
-  <MaxHealth>k__BackingField: 50
+  <MaxHealth>k__BackingField: 100
   _attackText: {fileID: 3754220281688019854}
   _healthText: {fileID: 4903395061056751241}
   _equipMain: {fileID: 4984920565899661152}

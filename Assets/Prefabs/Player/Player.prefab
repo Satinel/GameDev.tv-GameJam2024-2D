@@ -677,6 +677,14 @@ PrefabInstance:
       propertyPath: _manualButton
       value: 
       objectReference: {fileID: 7285137764896822576}
+    - target: {fileID: 5365814850542850578, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
+      propertyPath: <_autoButton>k__BackingField
+      value: 
+      objectReference: {fileID: 5948126281313210817}
+    - target: {fileID: 5365814850542850578, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
+      propertyPath: <_manualButton>k__BackingField
+      value: 
+      objectReference: {fileID: 7285137764896822576}
     - target: {fileID: 5526514276419826425, guid: ccf3e8d065aec8247917d57fbcfc6c94, type: 3}
       propertyPath: _deathSprite
       value: 
@@ -776,6 +784,10 @@ PrefabInstance:
       objectReference: {fileID: 2017619771496907475}
     - target: {fileID: 2154373519966760305, guid: 748a9a13b3660c44f8e642801c94f4a7, type: 3}
       propertyPath: _toBattleButton
+      value: 
+      objectReference: {fileID: 6568902138281261609}
+    - target: {fileID: 2154373519966760305, guid: 748a9a13b3660c44f8e642801c94f4a7, type: 3}
+      propertyPath: _tutorialButton
       value: 
       objectReference: {fileID: 3821685142821074779}
     - target: {fileID: 2656507710871774568, guid: 748a9a13b3660c44f8e642801c94f4a7, type: 3}
@@ -1040,10 +1052,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 3.2
       objectReference: {fileID: 0}
-    - target: {fileID: 5743451174950993338, guid: 011ad25c768e8264689086347a5789e5, type: 3}
-      propertyPath: <TotalMoney>k__BackingField
-      value: 150
-      objectReference: {fileID: 0}
     - target: {fileID: 6787532631304431192, guid: 011ad25c768e8264689086347a5789e5, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1141,6 +1149,11 @@ GameObject:
 --- !u!1 &5948126281313210817 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 89840276058074792, guid: 011ad25c768e8264689086347a5789e5, type: 3}
+  m_PrefabInstance: {fileID: 6031674601650536297}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6568902138281261609 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 620860849219618112, guid: 011ad25c768e8264689086347a5789e5, type: 3}
   m_PrefabInstance: {fileID: 6031674601650536297}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7285137764896822576 stripped

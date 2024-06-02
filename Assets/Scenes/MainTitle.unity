@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &758119686 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4189531555918449805, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+  m_PrefabInstance: {fileID: 7532600239989325099}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef148bf02ebe630409e63ca6526b5f45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &810955848
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,6 +226,16 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1890687291 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7285137764896822576, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+  m_PrefabInstance: {fileID: 7532600239989325099}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2105510159 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5948126281313210817, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+  m_PrefabInstance: {fileID: 7532600239989325099}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3660114495624266498
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -288,9 +309,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2017619771496907475, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
-      propertyPath: <TotalMoney>k__BackingField
-      value: 15000
+    - target: {fileID: 498948895684226946, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 3.2
       objectReference: {fileID: 0}
     - target: {fileID: 2418192191072856897, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
       propertyPath: m_LocalPosition.x
@@ -340,16 +361,44 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3726050716341401128, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7532600239989325100}
+    - target: {fileID: 3726050716341401128, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoToBattle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3821685142821074779, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: m_Name
+      value: TutorialButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 3834827111954159422, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4184505804312320690, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4189531555918449805, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: <HeroName>k__BackingField
+      value: Peanut
+      objectReference: {fileID: 0}
     - target: {fileID: 4515118773670106881, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4515118773670106881, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4636684533030575539, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5532024617947192268, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5571382571317489177, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
@@ -360,11 +409,50 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6568902138281261609, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6743472702401313626, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoToTutorial
+      objectReference: {fileID: 0}
+    - target: {fileID: 7905697714028507444, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801427850446944455, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: <AutoButton>k__BackingField
+      value: 
+      objectReference: {fileID: 2105510159}
+    - target: {fileID: 8801427850446944455, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: <ManualButton>k__BackingField
+      value: 
+      objectReference: {fileID: 1890687291}
+    - target: {fileID: 8801427850446944455, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: <Team>k__BackingField.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801427850446944455, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: <Team>k__BackingField.Array.data[0]
+      value: 
+      objectReference: {fileID: 758119686}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+--- !u!114 &7532600239989325100 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6375492587686136382, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+  m_PrefabInstance: {fileID: 7532600239989325099}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b68570764706e4d8073e6d497db26e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

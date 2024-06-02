@@ -8,7 +8,7 @@ public class Unit : MonoBehaviour
     public static event EventHandler<Unit> OnAnyUnitClicked;
     public static event EventHandler<Unit> OnAnyUnitKilled;
 
-
+    [field:SerializeField] public string HeroName { get; private set;}
     [field:SerializeField] public int Attack { get; private set; }
     [field:SerializeField] public int MaxHealth { get; private set; }
     public bool IsDead { get; private set; } = false;
@@ -155,9 +155,17 @@ public class Unit : MonoBehaviour
         _targetIndicator.position = enemy.transform.position;
     }
 
+    public void SetTutorialTarget(Enemy enemy)
+    {
+        SetTarget(enemy);
+    }
+
     public void SetManual(bool setting)
     {
         _isManual = setting;
+        
+        if(!gameObject.activeSelf) { return; }
+
         if(!_isManual && !EnemyTarget)
         {
             SetTarget(_enemyList[UnityEngine.Random.Range(0, _enemyList.Count)]);

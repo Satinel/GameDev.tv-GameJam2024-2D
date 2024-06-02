@@ -577,7 +577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b9d4d65adf7254478422ad0ef5f391b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _totalTime: 360
+  _totalTime: 240
   _timerText: {fileID: 4809320687777686702}
   _halfTimeAudioClip: {fileID: 8300000, guid: 77d4bc5d7b2678a45aaba3a79ea30f6b, type: 3}
 --- !u!82 &2922095245699393908

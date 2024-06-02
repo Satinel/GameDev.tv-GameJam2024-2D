@@ -5,25 +5,31 @@ using UnityEngine;
 public class TeamManager : MonoBehaviour
 {
     public static event Action OnPartyWipe;
+    public static event Action OnManualPressed;
 
     [field:SerializeField] public List<Unit> Team { get; private set; } = new();
-
-    [SerializeField] GameObject _manualButton, _autoButton;
+    [field:SerializeField] public GameObject ManualButton { get; private set; }
+    [field:SerializeField] public GameObject AutoButton { get; private set; }
 
     bool _isAuto = true;
+    bool _isTutorial = false;
 
     void OnEnable()
     {
         Battle.OnBattleStarted += Battle_OnBattleStarted;
         Campaign.OnReturnToTown += Campaign_OnReturnToTown;
+        Campaign.OnTutorialLoading += Campaign_OnTutorialLoading;
         Unit.OnAnyUnitKilled += Unit_OnAnyUnitKilled;
+        Tutorial.OnTargetingTutorialOver += Tutorial_OnTutorialOver;
     }
 
     void OnDisable()
     {
         Battle.OnBattleStarted -= Battle_OnBattleStarted;
         Campaign.OnReturnToTown -= Campaign_OnReturnToTown;
+        Campaign.OnTutorialLoading -= Campaign_OnTutorialLoading;
         Unit.OnAnyUnitKilled -= Unit_OnAnyUnitKilled;
+        Tutorial.OnTargetingTutorialOver += Tutorial_OnTutorialOver;
     }
 
     void Unit_OnAnyUnitKilled(object sender, Unit unit)
@@ -36,14 +42,16 @@ public class TeamManager : MonoBehaviour
     }
 
     void Battle_OnBattleStarted()
-    {        
+    {
+        if(_isTutorial) { return; }
+
         if(_isAuto)
         {
-            _manualButton.SetActive(true);
+            ManualButton.SetActive(true);
         }
         else
         {
-            _autoButton.SetActive(true);
+            AutoButton.SetActive(true);
         }
         
         Team.Clear();
@@ -59,8 +67,13 @@ public class TeamManager : MonoBehaviour
 
     void Campaign_OnReturnToTown()
     {
-        _manualButton.SetActive(false);
-        _autoButton.SetActive(false);
+        ManualButton.SetActive(false);
+        AutoButton.SetActive(false);
+    }
+
+    void Tutorial_OnTutorialOver()
+    {
+        _isTutorial = false;
     }
 
     public void AddUnit(Unit unit)
@@ -78,12 +91,17 @@ public class TeamManager : MonoBehaviour
 
     public void ManualTargetting()
     {
+        if(_isTutorial)
+        {
+            OnManualPressed?.Invoke();
+        }
+
         foreach(Unit unit in GetComponentsInChildren<Unit>(true))
         {
             unit.SetManual(true);
         }
-        _manualButton.SetActive(false);
-        _autoButton.SetActive(true);
+        ManualButton.SetActive(false);
+        AutoButton.SetActive(true);
         _isAuto = false;
     }
 
@@ -93,9 +111,14 @@ public class TeamManager : MonoBehaviour
         {
             unit.SetManual(false);
         }
-        _manualButton.SetActive(true);
-        _autoButton.SetActive(false);
+        ManualButton.SetActive(true);
+        AutoButton.SetActive(false);
         _isAuto = true;
+    }
+
+    public void Campaign_OnTutorialLoading()
+    {
+        _isTutorial = true;
     }
 
     // void Update() // Doesn't quite work and not worth tinkering with during jam

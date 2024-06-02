@@ -115,7 +115,6 @@ public class Battle : MonoBehaviour
         StopAllCoroutines();
         OnBattleEnded?.Invoke();
         OnRetreated?.Invoke();
-        // TODO Show Gold earned
     }
 
     public void CancelRetreat()
@@ -129,7 +128,6 @@ public class Battle : MonoBehaviour
         StopAllCoroutines();
         OnBattleEnded?.Invoke();
         OnBattleWon?.Invoke();
-        // TODO Show Gold earned
     }
 
     public void SetNormalSpeed()

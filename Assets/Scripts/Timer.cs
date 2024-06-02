@@ -7,7 +7,7 @@ public class Timer : MonoBehaviour
     public static event Action OnHalfTime;
     public static event Action OnTimerCompleted;
 
-    [SerializeField] float _totalTime = 480f;
+    [SerializeField] float _totalTime = 240f;
     [SerializeField] TextMeshProUGUI _timerText;
     [SerializeField] AudioClip _halfTimeAudioClip;
 
