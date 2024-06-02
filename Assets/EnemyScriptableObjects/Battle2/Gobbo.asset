@@ -10,18 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4b8ae6f83650c940b24ca4d1a1f28a9, type: 3}
-  m_Name: HornedSlime
+  m_Name: Gobbo
   m_EditorClassIdentifier: 
-  Name: Horned Slime
-  Sprite: {fileID: 21300000, guid: 52d6248360c9f17478ca27a380f9a72b, type: 3}
-  HasOffset: 0
-  SpriteOffset: {x: 0, y: 0, z: 0}
-  SpriteScale: {x: 1, y: 1, z: 1}
-  SpriteFlipped: 0
-  Attack: 3
-  MaxHealth: 5
-  AttackSpeed: 20
-  GoldValue: 4
+  Name: Grobblin
+  Sprite: {fileID: 21300000, guid: bca97990f6ab4404cb13c5629f48a621, type: 3}
+  Attack: 8
+  ASpeed: 20
+  MaxHealth: 16
   AttackSFX: {fileID: 8300000, guid: 924c26c575557e54aa77e0e4920535b8, type: 3}
   SkillVFX: {fileID: 7764922303510143599, guid: 4f24455a86b6c5247a3cf124e17a1744, type: 3}
   ClipVolume: 1

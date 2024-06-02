@@ -107,7 +107,7 @@ public class Enemy : MonoBehaviour
             MaxHealth = _currentEnemy.MaxHealth * 2;
             Attack = _currentEnemy.Attack * 2;
         }
-        _attackSpeed = _currentEnemy.AttackSpeed;
+        _attackSpeed = _currentEnemy.ASpeed;
         CurrentHealth = MaxHealth;
         _healthText.text = CurrentHealth.ToString();
         _attackText.text = Attack.ToString();
@@ -115,7 +115,7 @@ public class Enemy : MonoBehaviour
         _animator.SetTrigger(SPAWN_HASH);
         _currentTarget = null;
         _earnedGoldGameObject.SetActive(false);
-        GoldValue = Mathf.CeilToInt(((float)_currentEnemy.Attack / _currentEnemy.AttackSpeed) + ((float)_currentEnemy.MaxHealth / 4));
+        GoldValue = Mathf.CeilToInt(((float)_currentEnemy.Attack / _currentEnemy.ASpeed) + ((float)_currentEnemy.MaxHealth / 4f));
         _goldText.text = $"+{GoldValue} GOLD";
     }
 

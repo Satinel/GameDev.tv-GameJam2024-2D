@@ -226,11 +226,11 @@ PrefabInstance:
     - target: {fileID: 1629448765884913132, guid: 95733b89416f494478260365bbf331b4, type: 3}
       propertyPath: _mainSong
       value: 
-      objectReference: {fileID: 8300000, guid: 634d090f52ebe06418bede3b42f8c481, type: 3}
+      objectReference: {fileID: 8300000, guid: 7a89a65455f89a84f90770e1bcd5d6c8, type: 3}
     - target: {fileID: 1629448765884913132, guid: 95733b89416f494478260365bbf331b4, type: 3}
       propertyPath: _introClip
       value: 
-      objectReference: {fileID: 8300000, guid: 5ac4c202647bdf14dbc694aa9e08eda7, type: 3}
+      objectReference: {fileID: 8300000, guid: c8a89df01cf7bd3409d182f425abaed7, type: 3}
     - target: {fileID: 6283697976374133196, guid: 95733b89416f494478260365bbf331b4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -295,47 +295,55 @@ PrefabInstance:
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 27114e2f29dfbba4182efe91542715de, type: 2}
+      objectReference: {fileID: 11400000, guid: 6ee8408ebbf66364e993eed64794920b, type: 2}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[1]
       value: 
-      objectReference: {fileID: 11400000, guid: f65a14865472c52498b447c4a35549ea, type: 2}
+      objectReference: {fileID: 11400000, guid: 0cbc72df86d90554aaafa90fde6e45f1, type: 2}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[2]
       value: 
-      objectReference: {fileID: 11400000, guid: 811007ebe19457641a946cbd142fed1f, type: 2}
+      objectReference: {fileID: 11400000, guid: 7970cb561ce3248428f814e12f7ce59a, type: 2}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[3]
       value: 
-      objectReference: {fileID: 11400000, guid: 731a259f07402c24aaaabb88bd0b407a, type: 2}
+      objectReference: {fileID: 11400000, guid: fbf0ade59b3b0594ab4a4bdc0ea50d90, type: 2}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[4]
       value: 
-      objectReference: {fileID: 11400000, guid: 58542c27945ae884c83a2e4e8fb862af, type: 2}
+      objectReference: {fileID: 11400000, guid: 1c9ba9fc1927efe44a756f20d738d500, type: 2}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[5]
       value: 
-      objectReference: {fileID: 11400000, guid: 745a02248451abc44b8cd07bcad81541, type: 2}
+      objectReference: {fileID: 11400000, guid: 2fde183d35ba89e4a81a00527169c227, type: 2}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[6]
       value: 
-      objectReference: {fileID: 11400000, guid: ad107e0a196501747b3a660ef16aabe7, type: 2}
+      objectReference: {fileID: 11400000, guid: 58a4f267a625248488fb0c756376ed12, type: 2}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[7]
       value: 
-      objectReference: {fileID: 11400000, guid: 2c2a18bbf1f7ec0498ed7eabd02d0a9f, type: 2}
+      objectReference: {fileID: 11400000, guid: b2766feb3b87e8d4fae5171f74968c04, type: 2}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[8]
       value: 
-      objectReference: {fileID: 11400000, guid: 848850bba3fc90d44b5020ce3c25a683, type: 2}
+      objectReference: {fileID: 11400000, guid: f052ba0ff05f492459c7508d39c38448, type: 2}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[9]
       value: 
-      objectReference: {fileID: 11400000, guid: 3b3d4f2b19cc12045a0258c9569980c1, type: 2}
+      objectReference: {fileID: 11400000, guid: 62767b91e8ee6bf45a44d82f0de1d06e, type: 2}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[10]
       value: 
-      objectReference: {fileID: 11400000, guid: 58542c27945ae884c83a2e4e8fb862af, type: 2}
+      objectReference: {fileID: 11400000, guid: 3b3d4f2b19cc12045a0258c9569980c1, type: 2}
+    - target: {fileID: 4348184521488530627, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b7cb6887b915ee5499ff7c98783f7a68, type: 3}
+    - target: {fileID: 5190047550255647530, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 13de1b30f235db44cb4e8c65367674df, type: 3}
     - target: {fileID: 5524441833986992115, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -379,6 +387,10 @@ PrefabInstance:
     - target: {fileID: 8636917102486105928, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: m_Name
       value: BattleParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 8644558312293725149, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.57
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

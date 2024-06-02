@@ -10,18 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4b8ae6f83650c940b24ca4d1a1f28a9, type: 3}
-  m_Name: HeadbandSlime
+  m_Name: HatSlime
   m_EditorClassIdentifier: 
-  Name: Kungfu Slime
-  Sprite: {fileID: 21300000, guid: 6d050f6941ce56440a26ea499641890b, type: 3}
-  HasOffset: 0
-  SpriteOffset: {x: 0, y: 0, z: 0}
-  SpriteScale: {x: 1, y: 1, z: 1}
-  SpriteFlipped: 0
-  Attack: 3
+  Name: Hat Slime
+  Sprite: {fileID: 21300000, guid: c92e6633fee8e1648a95446a9fbb013b, type: 3}
+  Attack: 6
+  ASpeed: 15
   MaxHealth: 3
-  AttackSpeed: 18
-  GoldValue: 3
   AttackSFX: {fileID: 8300000, guid: 924c26c575557e54aa77e0e4920535b8, type: 3}
   SkillVFX: {fileID: 7764922303510143599, guid: 4f24455a86b6c5247a3cf124e17a1744, type: 3}
   ClipVolume: 1

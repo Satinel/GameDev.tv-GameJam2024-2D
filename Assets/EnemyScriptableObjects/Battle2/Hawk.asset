@@ -10,18 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4b8ae6f83650c940b24ca4d1a1f28a9, type: 3}
-  m_Name: IceMimic
+  m_Name: Hawk
   m_EditorClassIdentifier: 
-  Name: Ice Mimic
-  Sprite: {fileID: 21300000, guid: fdbea6b6e71ff884c9083be3b19426fb, type: 3}
-  HasOffset: 0
-  SpriteOffset: {x: 0, y: 0, z: 0}
-  SpriteScale: {x: 1, y: 1, z: 1}
-  SpriteFlipped: 0
-  Attack: 24
-  MaxHealth: 40
-  AttackSpeed: 6
-  GoldValue: 50
+  Name: Hawk
+  Sprite: {fileID: 21300000, guid: 30f6ebebfe4e0dd4ca9bfa9b3392ce26, type: 3}
+  Attack: 7
+  ASpeed: 17.5
+  MaxHealth: 3
   AttackSFX: {fileID: 8300000, guid: 924c26c575557e54aa77e0e4920535b8, type: 3}
   SkillVFX: {fileID: 7764922303510143599, guid: 4f24455a86b6c5247a3cf124e17a1744, type: 3}
   ClipVolume: 1

@@ -15,8 +15,8 @@ MonoBehaviour:
   Name: Blood Slime
   Sprite: {fileID: 21300000, guid: cbbd9f1315309cd449dba9174f76b5a2, type: 3}
   Attack: 3
-  MaxHealth: 5
-  AttackSpeed: 25
+  ASpeed: 25
+  MaxHealth: 15
   AttackSFX: {fileID: 8300000, guid: 924c26c575557e54aa77e0e4920535b8, type: 3}
   SkillVFX: {fileID: 7764922303510143599, guid: 4f24455a86b6c5247a3cf124e17a1744, type: 3}
   ClipVolume: 1

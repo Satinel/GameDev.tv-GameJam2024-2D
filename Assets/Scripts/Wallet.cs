@@ -91,11 +91,15 @@ public class Wallet : MonoBehaviour
 
     void Campaign_OnReturnToTown()
     {
+        if(!_canvas) { return; }
+
         _canvas.enabled = false;
     }
 
     void Portal_OnShopOpened()
     {
+        if(!_canvas) { return; }
+        
         _canvas.enabled = true;
     }
 }

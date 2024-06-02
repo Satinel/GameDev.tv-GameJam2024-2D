@@ -15,7 +15,7 @@ public class Campaign : MonoBehaviour
     public static event EventHandler<int> OnTownLoaded;
     public static event EventHandler<List<EquipmentScriptableObject>> OnSetLockedItems;
 
-    public int Wins { get; private set; }
+    [field:SerializeField] public int Wins { get; private set; }
     [field:SerializeField] public int Losses { get; private set; } = 5;
     public int Days { get; private set; }
     public List<EquipmentScriptableObject> LockedItems { get; private set; } = new();
@@ -69,7 +69,7 @@ public class Campaign : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             _tutorialStarted = true;
-            StartCoroutine(GoToTutorialRoutine());
+            GoToTutorial();
         }
     }
 
@@ -216,16 +216,16 @@ public class Campaign : MonoBehaviour
 
         OnSceneLoading?.Invoke();
         
-        yield return SceneManager.LoadSceneAsync("Battle"); // TODO Multiple Battle scenes which are loaded based on Wins IT'S DOWN BELOW JUST MAKE THE SCENES
+        // yield return SceneManager.LoadSceneAsync("Battle"); // TODO Multiple Battle scenes which are loaded based on Wins IT'S DOWN BELOW JUST MAKE THE SCENES
         
-        // if(Wins > 5) // THIS!
-        // {
-        //     yield return SceneManager.LoadSceneAsync(8);
-        // }
-        // else
-        // {
-        //     yield return SceneManager.LoadSceneAsync(3+Wins);
-        // }
+        if(Wins > 5) // THIS!
+        {
+            yield return SceneManager.LoadSceneAsync(8);
+        }
+        else
+        {
+            yield return SceneManager.LoadSceneAsync(3+Wins);
+        }
 
         _screenWipeImage.fillOrigin = 0; // 0 is Left
 

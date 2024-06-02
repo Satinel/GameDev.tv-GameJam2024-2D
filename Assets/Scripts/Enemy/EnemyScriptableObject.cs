@@ -7,8 +7,8 @@ public class EnemyScriptableObject : ScriptableObject
     public string Name;
     public Sprite Sprite;
     public int Attack = 2;
+    public float ASpeed = 10;
     public int MaxHealth = 1;
-    public int AttackSpeed = 10;
     public AudioClip AttackSFX;
     public SkillVFX SkillVFX;
     public float ClipVolume = 1f;
