@@ -81,7 +81,6 @@ public class Tutorial : MonoBehaviour
         _pointer.SetActive(true);
         _pointer.transform.position = _unit.EnemyTarget.transform.position;
         _text.text = $"When battle starts {_unit.HeroName} will automatically pick an enemy and start fighting. ";
-        _text.text += "You can see their target by the pointer above them. ";
         _text.text += "When the enemy is defeated a new target will be picked at random.";
         
         _button3.gameObject.SetActive(true);
@@ -187,7 +186,7 @@ public class Tutorial : MonoBehaviour
     {
         _button4.gameObject.SetActive(false);
         _button5.gameObject.SetActive(true);
-        _text.text = "You can switch between Auto and Manual targeting at any time. ";
+        _text.text = "You can switch between Auto and Manual targeting at any time.\n";
         _text.text += "<color=#000000>But enough talk, it's time to battle!";
         _manualButton.gameObject.SetActive(false);
         _autoButton.gameObject.SetActive(true);
@@ -224,8 +223,8 @@ public class Tutorial : MonoBehaviour
     public void Buton5b()
     {
         _button5b.gameObject.SetActive(false);
-        _text.text = "If your team is defeated (like in this scripted loss) you'll lose half the gold you earned this battle, ";
-        _text.text += "and the castle you're protecting will take damage.";
+        _text.text = "If your team is defeated (like in this scripted loss) ";
+        _text.text += "you'll lose half the gold you earned this battle, and the castle you're protecting will take damage.";
         _button6.gameObject.SetActive(true);
     }
 
@@ -235,8 +234,8 @@ public class Tutorial : MonoBehaviour
         _fastForwardButton.gameObject.SetActive(true);
         _pointer.SetActive(true);
         _pointer.transform.position = _fastForwardButton.transform.position;
-        _text.text = "Your goal is to survive four hours.\n";
-        _text.text += "For every hour which passes in battle, <i>one minute passes in the real world.</i>\n";
+        _text.text = "Your goal is to survive four hours. ";
+        _text.text += "For every hour which passes in battle, <i>one minute passes in the real world.</i> ";
         _text.text += "But you hold the power to manipulate time itself!";
     }
 

@@ -20,7 +20,7 @@ public class Campaign : MonoBehaviour
 
     [SerializeField] float _volume = 0.75f;
     [SerializeField] AudioClip _defeatSFX, _victorySFX, _gameOverSFX;
-    [SerializeField] GameObject _tutorialButton, _overlay, _victorySplash, _retreatSplash, _defeatSplash, _gameOverSplash, _toBattleButton, _quitButton, _lostGoldFloatingText;
+    [SerializeField] GameObject _overlay, _victorySplash, _retreatSplash, _defeatSplash, _gameOverSplash, _toBattleButton, _quitButton, _lostGoldFloatingText;
     [SerializeField] List<Image> _lives = new();
     [SerializeField] Image _tutorialLife;
     [SerializeField] SkillVFX _explosionVFX;
@@ -164,7 +164,6 @@ public class Campaign : MonoBehaviour
     {
         if(_isTransitioning) { return; }
 
-        _tutorialButton.SetActive(false);
         StartCoroutine(GoToBattleRoutine());
     }
 
@@ -203,7 +202,6 @@ public class Campaign : MonoBehaviour
     {
         if(_isTransitioning) { return; }
 
-        _tutorialButton.SetActive(false);
         OnTutorialLoading?.Invoke();
         StartCoroutine(GoToTutorialRoutine());
     }
@@ -290,6 +288,7 @@ public class Campaign : MonoBehaviour
     {
         _isTransitioning = true;
         _audioSource.Stop();
+        _screenWipeImage.fillAmount = 1;
         Player player = GetComponentInParent<Player>();  // TODO A less messy alternative if possible
         transform.SetParent(null, true);
         Destroy(player.gameObject);

@@ -783,13 +783,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2017619771496907475}
     - target: {fileID: 2154373519966760305, guid: 748a9a13b3660c44f8e642801c94f4a7, type: 3}
+      propertyPath: _teamManager
+      value: 
+      objectReference: {fileID: 8801427850446944455}
+    - target: {fileID: 2154373519966760305, guid: 748a9a13b3660c44f8e642801c94f4a7, type: 3}
       propertyPath: _toBattleButton
       value: 
       objectReference: {fileID: 6568902138281261609}
     - target: {fileID: 2154373519966760305, guid: 748a9a13b3660c44f8e642801c94f4a7, type: 3}
       propertyPath: _tutorialButton
       value: 
-      objectReference: {fileID: 3821685142821074779}
+      objectReference: {fileID: 0}
     - target: {fileID: 2656507710871774568, guid: 748a9a13b3660c44f8e642801c94f4a7, type: 3}
       propertyPath: m_Name
       value: Campaign
@@ -1139,11 +1143,6 @@ MonoBehaviour:
 --- !u!4 &3482397643945577931 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7198764462049374882, guid: 011ad25c768e8264689086347a5789e5, type: 3}
-  m_PrefabInstance: {fileID: 6031674601650536297}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3821685142821074779 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7403225595252623410, guid: 011ad25c768e8264689086347a5789e5, type: 3}
   m_PrefabInstance: {fileID: 6031674601650536297}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &5948126281313210817 stripped

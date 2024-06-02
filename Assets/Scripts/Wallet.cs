@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 
@@ -12,6 +11,7 @@ public class Wallet : MonoBehaviour
     [SerializeField] AudioSource _audioSource;
     [SerializeField] AudioClip _tooPoorSFX;
     [SerializeField] float _poorVolume = 1;
+    [SerializeField] Canvas _canvas;
 
     static readonly int TOOPOOR_Hash = Animator.StringToHash("TooPoor");
 
@@ -75,6 +75,7 @@ public class Wallet : MonoBehaviour
 
     void Battle_OnBattleStarted()
     {
+        _canvas.enabled = true;
         GoldEarnedThisBattle = 0;
     }
 
