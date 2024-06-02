@@ -31,17 +31,14 @@ public class Shop : MonoBehaviour
     {
         ShopItem.OnAnyShopItemClicked += ShopItem_OnAnyShopItemClicked;
         Unit.OnAnyUnitClicked += Unit_OnAnyUnitClicked;
+        Campaign.OnSetLockedItems += Campaign_OnSetLockedItems;
     }
 
     void OnDisable()
     {
         ShopItem.OnAnyShopItemClicked -= ShopItem_OnAnyShopItemClicked;
         Unit.OnAnyUnitClicked -= Unit_OnAnyUnitClicked;
-    }
-
-    void Start()
-    {
-        Reroll();
+        Campaign.OnSetLockedItems -= Campaign_OnSetLockedItems;
     }
 
     void ShopItem_OnAnyShopItemClicked(object sender, ShopItem shopItem)
@@ -70,6 +67,16 @@ public class Shop : MonoBehaviour
             _selectedUnit = unit;
         }
         CheckBuyButton();
+    }
+
+    void Campaign_OnSetLockedItems(object sender, List<EquipmentScriptableObject> lockedItems)
+    {
+        for(int i = 0; i < lockedItems.Count; i++)
+        {
+            _shopItems[i].Setup(lockedItems[i]);
+            _shopItems[i].LockNoCallback();
+        }
+        Reroll();
     }
 
     void CheckBuyButton()

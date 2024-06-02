@@ -17,10 +17,10 @@ public class Battle : MonoBehaviour
     [SerializeField] EnemyScriptableObject _incomingRow1, _incomingRow2, _incomingRow3;
     [SerializeField] SpriteRenderer _iRow1Sprite, _iRow2Sprite, _iRow3Sprite;
     [SerializeField] List<EnemyScriptableObject> _bestiary = new();
-    [SerializeField] GameObject _retreatPrompt;
+    [SerializeField] GameObject _retreatPrompt, _noRetreatPrompt, _lastStandMessage;
 
     float _currentTimeSpeed = 1;
-    bool _wasPaused;
+    bool _wasPaused, _noRetreat;
 
     void OnEnable()
     {
@@ -62,8 +62,16 @@ public class Battle : MonoBehaviour
         // _incomingRow3.SpriteFlipped = true ? _iRow3Sprite.flipX = true : _iRow3Sprite.flipX = false;
     }
 
-    void Campaign_OnBattleLoaded()
+    void Campaign_OnBattleLoaded(object sender, int losses)
     {
+        if(losses <= 0)
+        {
+            _noRetreat = true;
+            if(_lastStandMessage)
+            {
+                _lastStandMessage.SetActive(true);
+            }
+        }
         OnBattleStarted?.Invoke();
     }
 
@@ -107,7 +115,15 @@ public class Battle : MonoBehaviour
     public void PromptRetreat()
     {
         PauseBattle();
-        _retreatPrompt.SetActive(true);
+
+        if(!_noRetreat)
+        {
+            _retreatPrompt.SetActive(true);
+        }
+        else
+        {
+            _noRetreatPrompt.SetActive(true);
+        }
     }
 
     public void ConfirmRetreat()
@@ -120,6 +136,7 @@ public class Battle : MonoBehaviour
     public void CancelRetreat()
     {
         _retreatPrompt.SetActive(false);
+        _noRetreatPrompt.SetActive(false);
         UnpauseBattle();
     }
 

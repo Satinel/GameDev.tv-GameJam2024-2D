@@ -9,14 +9,16 @@ using UnityEngine.UI;
 public class Campaign : MonoBehaviour
 {
     public static event Action OnReturnToTown;
-    public static event Action OnBattleLoaded;
+    public static event EventHandler<int> OnBattleLoaded;
     public static event Action OnSceneLoading;
     public static event Action OnTutorialLoading;
-    public static event EventHandler<int> OnTownLoaded; // Saving this here if it's needed
+    public static event EventHandler<int> OnTownLoaded;
+    public static event EventHandler<List<EquipmentScriptableObject>> OnSetLockedItems;
 
     public int Wins { get; private set; }
     [field:SerializeField] public int Losses { get; private set; } = 5;
     public int Days { get; private set; }
+    public List<EquipmentScriptableObject> LockedItems { get; private set; } = new();
 
     [SerializeField] float _volume = 0.75f;
     [SerializeField] AudioClip _defeatSFX, _victorySFX, _gameOverSFX;
@@ -47,6 +49,7 @@ public class Campaign : MonoBehaviour
         Battle.OnRetreated += Battle_OnRetreated;
         Battle.OnBattleLost += Battle_OnBattleLost;
         Portal.OnShopOpened += Portal_OnShopOpened;
+        ShopItem.OnShopItemLocked += ShopItem_OnShopItemLocked;
     }
 
     void OnDisable()
@@ -56,6 +59,7 @@ public class Campaign : MonoBehaviour
         Battle.OnRetreated -= Battle_OnRetreated;
         Battle.OnBattleLost -= Battle_OnBattleLost;
         Portal.OnShopOpened -= Portal_OnShopOpened;
+        ShopItem.OnShopItemLocked -= ShopItem_OnShopItemLocked;
     }
 
     void Update()
@@ -131,6 +135,24 @@ public class Campaign : MonoBehaviour
     void Portal_OnShopOpened()
     {
         _toBattleButton.SetActive(true);
+        OnSetLockedItems?.Invoke(this, LockedItems);
+    }
+
+    void ShopItem_OnShopItemLocked(object sender, bool isLocked)
+    {
+        ShopItem shopItem = (ShopItem)sender;
+
+        if(isLocked)
+        {
+            LockedItems.Add(shopItem.Gear);
+        }
+        else
+        {
+            if(LockedItems.Contains(shopItem.Gear))
+            {
+                LockedItems.Remove(shopItem.Gear);
+            }
+        }
     }
 
     IEnumerator LoseLifeRoutine()
@@ -214,7 +236,7 @@ public class Campaign : MonoBehaviour
         }
         _screenWipeImage.fillAmount = 0;
 
-        OnBattleLoaded?.Invoke();
+        OnBattleLoaded?.Invoke(this, Losses);
         _isTransitioning = false;
     }
 
@@ -256,7 +278,7 @@ public class Campaign : MonoBehaviour
         }
         _screenWipeImage.fillAmount = 0;
 
-        OnBattleLoaded?.Invoke();
+        OnBattleLoaded?.Invoke(this, Losses);
         _isTransitioning = false;
     }
 
@@ -312,6 +334,7 @@ public class Campaign : MonoBehaviour
         Player player = GetComponentInParent<Player>();  // TODO A less messy alternative if possible
         transform.SetParent(null, true);
         Destroy(player.gameObject);
+        Time.timeScale = 1;
         // TODO A nice transition effect?
         OnSceneLoading?.Invoke();
         SceneManager.LoadScene(0);

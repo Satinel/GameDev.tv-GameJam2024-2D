@@ -27,11 +27,11 @@ public class Portal : MonoBehaviour
 
     public void OpenShop()
     {
-        OnShopOpened?.Invoke();
         _portalMusic.SetActive(false);
         _shopParent.SetActive(true); // Transition?
         _shopMusic.SetActive(true);
         _portalParent.SetActive(false);
+        OnShopOpened?.Invoke();
     }
 
     void Campaign_OnTownLoaded(object sender, int day)

@@ -907,6 +907,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2418192191072856897}
     m_Modifications:
+    - target: {fileID: 902751651257027701, guid: e7ff938e3657c6b4fa454cf65151deb3, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2494297115531908663, guid: e7ff938e3657c6b4fa454cf65151deb3, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1002,6 +1006,18 @@ PrefabInstance:
     - target: {fileID: 2550175235279397380, guid: e7ff938e3657c6b4fa454cf65151deb3, type: 3}
       propertyPath: m_Name
       value: Options Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 7735299751885109195, guid: e7ff938e3657c6b4fa454cf65151deb3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 6375492587686136382}
+    - target: {fileID: 7735299751885109195, guid: e7ff938e3657c6b4fa454cf65151deb3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReturnToTitle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7735299751885109195, guid: e7ff938e3657c6b4fa454cf65151deb3, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Campaign, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8360236142444842425, guid: e7ff938e3657c6b4fa454cf65151deb3, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

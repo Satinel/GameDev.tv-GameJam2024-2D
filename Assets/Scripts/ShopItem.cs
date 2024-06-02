@@ -6,6 +6,7 @@ using System;
 public class ShopItem : MonoBehaviour
 {
     public static event EventHandler<ShopItem> OnAnyShopItemClicked;
+    public static event EventHandler<bool> OnShopItemLocked;
 
     [SerializeField] TextMeshProUGUI _itemName, _cooldownText, _attackText, _healthText, _priceText;
     [SerializeField] Image _imageRenderer, _borderImage, _priceImage;
@@ -13,6 +14,7 @@ public class ShopItem : MonoBehaviour
     [SerializeField] GameObject _lock;
 
     public bool IsLocked {get; private set;}
+
     public EquipmentScriptableObject Gear => _gear;
 
     void OnEnable()
@@ -104,12 +106,20 @@ public class ShopItem : MonoBehaviour
     {
         IsLocked = true;
         _lock.SetActive(true);
+        OnShopItemLocked?.Invoke(this, IsLocked);
+    }
+
+    public void LockNoCallback()
+    {
+        IsLocked = true;
+        _lock.SetActive(true);
     }
 
     public void UnLock()
     {
         _lock.SetActive(false);
         IsLocked = false;
+        OnShopItemLocked?.Invoke(this, IsLocked);
     }
 
     internal void ResetBorder()
