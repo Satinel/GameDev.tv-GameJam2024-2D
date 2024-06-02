@@ -7942,6 +7942,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2851886078643670129}
   - component: {fileID: 6532349975612349878}
+  - component: {fileID: 6532349975612349879}
   m_Layer: 0
   m_Name: SkyBackground
   m_TagString: Untagged
@@ -9996,9 +9997,11 @@ MonoBehaviour:
   _iRow2Sprite: {fileID: 4583462551761806941}
   _iRow3Sprite: {fileID: 5716652210988316939}
   _bestiary:
+  - {fileID: 11400000, guid: 27114e2f29dfbba4182efe91542715de, type: 2}
+  - {fileID: 11400000, guid: f65a14865472c52498b447c4a35549ea, type: 2}
+  - {fileID: 11400000, guid: 811007ebe19457641a946cbd142fed1f, type: 2}
   - {fileID: 11400000, guid: 731a259f07402c24aaaabb88bd0b407a, type: 2}
   - {fileID: 11400000, guid: 58542c27945ae884c83a2e4e8fb862af, type: 2}
-  - {fileID: 11400000, guid: 27114e2f29dfbba4182efe91542715de, type: 2}
   _retreatPrompt: {fileID: 9222706739135819251}
 --- !u!4 &5957538761636224582
 Transform:
@@ -11051,6 +11054,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6532349975612349879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4379415110399159335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e29e148382299840b16cb80c96d0af0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1
+  _spriteRenderer: {fileID: 0}
 --- !u!1 &6535601313717815147
 GameObject:
   m_ObjectHideFlags: 0

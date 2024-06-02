@@ -12,7 +12,7 @@ public class Campaign : MonoBehaviour
     public static event Action OnBattleLoaded;
     public static event Action OnSceneLoading;
     public static event Action OnTutorialLoading;
-    // public static event Action OnTownLoaded; // Saving this here if it's needed
+    public static event EventHandler<int> OnTownLoaded; // Saving this here if it's needed
 
     public int Wins { get; private set; }
     [field:SerializeField] public int Losses { get; private set; } = 5;
@@ -30,6 +30,7 @@ public class Campaign : MonoBehaviour
     [SerializeField] Wallet _wallet;
 
     bool _isTransitioning;
+    bool _tutorialStarted;
 
     void Awake()
     {
@@ -45,6 +46,7 @@ public class Campaign : MonoBehaviour
         Battle.OnBattleWon += Battle_OnBattleWon;
         Battle.OnRetreated += Battle_OnRetreated;
         Battle.OnBattleLost += Battle_OnBattleLost;
+        Portal.OnShopOpened += Portal_OnShopOpened;
     }
 
     void OnDisable()
@@ -53,15 +55,19 @@ public class Campaign : MonoBehaviour
         Battle.OnBattleWon -= Battle_OnBattleWon;
         Battle.OnRetreated -= Battle_OnRetreated;
         Battle.OnBattleLost -= Battle_OnBattleLost;
+        Portal.OnShopOpened -= Portal_OnShopOpened;
     }
 
-    // void Update() {
-    //     if(Input.GetKeyDown(KeyCode.Space))
-    //     {
-    //         Losses--;
-    //         StartCoroutine(LoseLifeRoutine());
-    //     }
-    // }
+    void Update()
+    {
+        if(_tutorialStarted) { return; }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            _tutorialStarted = true;
+            StartCoroutine(GoToTutorialRoutine());
+        }
+    }
 
     void Battle_OnBattleEnded()
     {
@@ -120,6 +126,11 @@ public class Campaign : MonoBehaviour
         {
             _quitButton.SetActive(false);
         }
+    }
+
+    void Portal_OnShopOpened()
+    {
+        _toBattleButton.SetActive(true);
     }
 
     IEnumerator LoseLifeRoutine()
@@ -183,7 +194,16 @@ public class Campaign : MonoBehaviour
 
         OnSceneLoading?.Invoke();
         
-        yield return SceneManager.LoadSceneAsync("Battle"); // TODO Multiple Battle scenes which are loaded based on Wins
+        yield return SceneManager.LoadSceneAsync("Battle"); // TODO Multiple Battle scenes which are loaded based on Wins IT'S DOWN BELOW JUST MAKE THE SCENES
+        
+        // if(Wins > 5) // THIS!
+        // {
+        //     yield return SceneManager.LoadSceneAsync(8);
+        // }
+        // else
+        // {
+        //     yield return SceneManager.LoadSceneAsync(3+Wins);
+        // }
 
         _screenWipeImage.fillOrigin = 0; // 0 is Left
 
@@ -265,7 +285,6 @@ public class Campaign : MonoBehaviour
         _victorySplash.SetActive(false);
         _retreatSplash.SetActive(false);
         _defeatSplash.SetActive(false);
-        _toBattleButton.SetActive(true);
         _audioSource.Stop();
         _lostGoldFloatingText.SetActive(false);
         
@@ -281,6 +300,7 @@ public class Campaign : MonoBehaviour
             yield return null;
         }
         _screenWipeImage.fillAmount = 0;
+        OnTownLoaded?.Invoke(this, Days);
         _isTransitioning = false;
     }
 

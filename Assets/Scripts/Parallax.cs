@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class Parallax : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] float speed = 1;
+    [SerializeField] SpriteRenderer _spriteRenderer;
+
+    void Awake()
     {
-        
+        if(!_spriteRenderer)
+        {
+            _spriteRenderer = GetComponent<SpriteRenderer>();
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if(_spriteRenderer)
+        {
+            _spriteRenderer.size += new Vector2 (Time.deltaTime * speed, 0);
+        }
     }
 }

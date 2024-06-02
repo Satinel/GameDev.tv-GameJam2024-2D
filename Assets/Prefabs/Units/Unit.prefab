@@ -1396,7 +1396,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <HeroName>k__BackingField: 
   <Attack>k__BackingField: 1
-  <MaxHealth>k__BackingField: 250
+  <MaxHealth>k__BackingField: 150
   _attackText: {fileID: 3754220281688019854}
   _healthText: {fileID: 4903395061056751241}
   _equipMain: {fileID: 4984920565899661152}

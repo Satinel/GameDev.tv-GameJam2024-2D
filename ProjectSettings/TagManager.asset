@@ -47,6 +47,9 @@ TagManager:
   - name: Shop
     uniqueID: 743488233
     locked: 0
+  - name: Portal
+    uniqueID: 682901475
+    locked: 0
   - name: Character
     uniqueID: 3648208235
     locked: 0
