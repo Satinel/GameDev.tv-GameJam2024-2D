@@ -11,7 +11,7 @@ public class FloatingText : MonoBehaviour
     {
         if(_displayedNumber == _totalAmount) { return; }
 
-        _displayedNumber++; // TODO If we only use small numbers for the whole game, increment this slower
+        _displayedNumber++;
 
         if(_displayedNumber >= _totalAmount)
         {

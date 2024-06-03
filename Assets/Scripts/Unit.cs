@@ -74,14 +74,6 @@ public class Unit : MonoBehaviour
         _normalSprite = _unitSpriteRenderer.sprite;
     }
 
-    void Update()
-    {
-        if(Input.GetKeyUp(KeyCode.J)) // TODO DELETE!!!
-        {
-            TakeDamage(100);
-        }
-    }
-
     public void OnUnitClicked()
     {
         OnAnyUnitClicked?.Invoke(this, this);

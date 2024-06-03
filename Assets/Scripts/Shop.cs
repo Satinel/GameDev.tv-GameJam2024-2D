@@ -162,8 +162,6 @@ public class Shop : MonoBehaviour
 
     public void Leave()
     {
-        // TODO Implement a switch to a 'main' town area OR just switch to the only other relevant town area (portal/recovery room)
-            // Screen Wipe effect animation and Change music basically! (Plus enable the _otherParent GameObject)
         _shopParent.SetActive(false);
     }
 
@@ -202,10 +200,10 @@ public class Shop : MonoBehaviour
                         shopItem.Setup(_tier2Equipment[Random.Range(0, _tier2Equipment.Count)]);
                         break;
                     case 3:
-                        shopItem.Setup(_tier2Equipment[Random.Range(0, _tier3Equipment.Count)]);
+                        shopItem.Setup(_tier3Equipment[Random.Range(0, _tier3Equipment.Count)]);
                         break;
                     case >3:
-                        shopItem.Setup(_tier2Equipment[Random.Range(0, _tier4Equipment.Count)]);
+                        shopItem.Setup(_tier4Equipment[Random.Range(0, _tier4Equipment.Count)]);
                         break;
                     default:
                         shopItem.Setup(_tier1Equipment[Random.Range(0, _tier1Equipment.Count)]);
@@ -335,7 +333,5 @@ public class Shop : MonoBehaviour
     void TradeIn(EquipmentScriptableObject currentItem, int upgradeLevel)
     {
         _selectedUnit.SellGear(currentItem, upgradeLevel);
-        // TODO Message to player informing them that currentItem sold for Mathf.RoundToInt(currentItem.Price * upgradeLevel / 3)
-        // Debug.Log(currentItem.Name + " sold for " + Mathf.RoundToInt(currentItem.Price * upgradeLevel / 3));
     }
 }

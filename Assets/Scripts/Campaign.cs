@@ -216,7 +216,7 @@ public class Campaign : MonoBehaviour
 
         OnSceneLoading?.Invoke();
         
-        // yield return SceneManager.LoadSceneAsync("Battle"); // TODO Multiple Battle scenes which are loaded based on Wins IT'S DOWN BELOW JUST MAKE THE SCENES
+        
         
         if(Wins > 5) // THIS!
         {
@@ -267,7 +267,7 @@ public class Campaign : MonoBehaviour
 
         OnSceneLoading?.Invoke();
         
-        yield return SceneManager.LoadSceneAsync("Tutorial"); // TODO Multiple Battle scenes which are loaded based on Wins
+        yield return SceneManager.LoadSceneAsync("Tutorial");
 
         _screenWipeImage.fillOrigin = 0; // 0 is Left
 
@@ -288,7 +288,7 @@ public class Campaign : MonoBehaviour
         Days++;
 
         StartCoroutine(ReturnToTownRoutine());
-        // TODO A nice transition effect which also hides the overlays getting disabled
+        
     }
     
     IEnumerator ReturnToTownRoutine()

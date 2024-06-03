@@ -50,13 +50,13 @@ public class Battle : MonoBehaviour
     {
         foreach (Enemy enemy in _enemies)
         {
-            enemy.SetUp(_bestiary[UnityEngine.Random.Range(0, _bestiary.Count)]); // TODO Tiers for enemies same as items based on number of player wins
+            enemy.SetUp(_bestiary[UnityEngine.Random.Range(0, _bestiary.Count)]);
         }
         OnEnemyListCreated?.Invoke(this, _enemies);
 
-        _incomingRow1 = _bestiary[UnityEngine.Random.Range(0, _bestiary.Count)]; // TODO Tiers for enemies same as items based on number of player wins
-        _incomingRow2 = _bestiary[UnityEngine.Random.Range(0, _bestiary.Count)]; // TODO Tiers for enemies same as items based on number of player wins
-        _incomingRow3 = _bestiary[UnityEngine.Random.Range(0, _bestiary.Count)]; // TODO Tiers for enemies same as items based on number of player wins
+        _incomingRow1 = _bestiary[UnityEngine.Random.Range(0, _bestiary.Count)];
+        _incomingRow2 = _bestiary[UnityEngine.Random.Range(0, _bestiary.Count)];
+        _incomingRow3 = _bestiary[UnityEngine.Random.Range(0, _bestiary.Count)];
         _iRow1Sprite.sprite = _incomingRow1.Sprite;
         _iRow2Sprite.sprite = _incomingRow2.Sprite;
         _iRow3Sprite.sprite = _incomingRow3.Sprite;
@@ -212,18 +212,18 @@ public class Battle : MonoBehaviour
         {
             case 1:
                 enemy.SetUp(_incomingRow1);
-                _incomingRow1 = _bestiary[UnityEngine.Random.Range(0, _bestiary.Count)]; // TODO Tiers for enemies same as items based on number of player wins
+                _incomingRow1 = _bestiary[UnityEngine.Random.Range(0, _bestiary.Count)]; 
                 _iRow1Sprite.sprite = _incomingRow1.Sprite;
                 // _incomingRow1.SpriteFlipped = true ? _iRow1Sprite.flipX = true : _iRow1Sprite.flipX = false; // This is switching the wrong sprites
                 break;
             case 2:
                 enemy.SetUp(_incomingRow2);
-                _incomingRow2 = _bestiary[UnityEngine.Random.Range(0, _bestiary.Count)]; // TODO Tiers for enemies same as items based on number of player wins
+                _incomingRow2 = _bestiary[UnityEngine.Random.Range(0, _bestiary.Count)]; 
                 _iRow2Sprite.sprite = _incomingRow2.Sprite;
                 break;
             case 3:
                 enemy.SetUp(_incomingRow3);
-                _incomingRow3 = _bestiary[UnityEngine.Random.Range(0, _bestiary.Count)]; // TODO Tiers for enemies same as items based on number of player wins
+                _incomingRow3 = _bestiary[UnityEngine.Random.Range(0, _bestiary.Count)]; 
                 _iRow3Sprite.sprite = _incomingRow3.Sprite;
                 break;
             default:
