@@ -32,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Battle6.unity
     guid: a7310707eba787f4d88c759658e90383
+  - enabled: 1
+    path: Assets/Scenes/ShopNoPortal.unity
+    guid: 08b88ab594bc6da449b3725c820b1eb9
   m_configObjects: {}

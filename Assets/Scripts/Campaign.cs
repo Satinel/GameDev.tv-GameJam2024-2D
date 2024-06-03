@@ -311,7 +311,14 @@ public class Campaign : MonoBehaviour
         _lostGoldFloatingText.SetActive(false);
         
         OnSceneLoading?.Invoke();
-        yield return SceneManager.LoadSceneAsync("Shop");
+        if(Days > 5)
+        {
+            yield return SceneManager.LoadSceneAsync(9);
+        }
+        else
+        {
+            yield return SceneManager.LoadSceneAsync("Shop");
+        }
         OnReturnToTown?.Invoke();
 
         _screenWipeImage.fillOrigin = 1; // 1 is Right
