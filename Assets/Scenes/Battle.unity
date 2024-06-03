@@ -376,6 +376,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8538465642441554228, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8636917102486105928, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: m_Name
       value: BattleParent

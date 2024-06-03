@@ -82,12 +82,12 @@ public class ShopItem : MonoBehaviour
         if(gear.Slot == EquipmentType.Offhand)
         {
             _imageRenderer.transform.localScale = new Vector3(-1f, 1f, 1f);
-            _imageRenderer.rectTransform.anchoredPosition = new Vector3(1.1f, -0.1f, 0f);
+            _imageRenderer.rectTransform.anchoredPosition = new Vector3(1.1f, -0.5f, 0f);
         }
         else
         {
             _imageRenderer.transform.localScale = new Vector3(1f, 1f, 1f);
-            _imageRenderer.rectTransform.anchoredPosition = new Vector3(0.1f, -0.1f, 0f);
+            _imageRenderer.rectTransform.anchoredPosition = new Vector3(0.1f, -0.5f, 0f);
         }
     }
 

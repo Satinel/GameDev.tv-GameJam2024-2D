@@ -15,6 +15,8 @@ public class Portal : MonoBehaviour
     static readonly int DAY4_HASH = Animator.StringToHash("Day4");
     static readonly int DAY5_HASH = Animator.StringToHash("Day5");
 
+    int _unitIndex = 0;
+
     void OnEnable()
     {
         Campaign.OnTownLoaded += Campaign_OnTownLoaded; // Another circular dependency oh well!
@@ -34,8 +36,15 @@ public class Portal : MonoBehaviour
         OnShopOpened?.Invoke();
     }
 
+    public void SummonUnit()
+    {
+        OnUnitSummoned?.Invoke(this, _unitIndex);
+    }
+
     void Campaign_OnTownLoaded(object sender, int day)
     {
+        _unitIndex = day - 2;
+
         switch(day)
         {
             case 1:
@@ -43,27 +52,24 @@ public class Portal : MonoBehaviour
                 break;
             case 2:
                 _animator.SetTrigger(DAY2_HASH); // Dog -> Chase Cat
-                OnUnitSummoned?.Invoke(this, day);
-                OpenShop();
                 break;
             case 3:
                 _animator.SetTrigger(DAY3_HASH); // Bun -> Bounce around
-                OnUnitSummoned?.Invoke(this, day);
+                OnUnitSummoned?.Invoke(this, day - 2);
                 OpenShop();
                 break;
             case 4:
                 _animator.SetTrigger(DAY4_HASH); // Bird -> Everyone confused because it looks bad
-                OnUnitSummoned?.Invoke(this, day);
+                OnUnitSummoned?.Invoke(this, day - 2);
                 OpenShop();
                 break;
             case 5:
                 _animator.SetTrigger(DAY5_HASH); // Fox -> Portal explodes???
-                OnUnitSummoned?.Invoke(this, day);
+                OnUnitSummoned?.Invoke(this, day - 2);
                 OpenShop();
                 break;
             default:
                 _shopButton.SetActive(true);
-                OnUnitSummoned?.Invoke(this, day);
                 OpenShop();
                 break;
         }
