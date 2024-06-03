@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Spike Slime
   Sprite: {fileID: 1205917079, guid: bfceafbcea1a4944c93d7c3f26a7816d, type: 3}
-  Attack: 128
+  Attack: 64
   ASpeed: 32
   MaxHealth: 720
   AttackSFX: {fileID: 8300000, guid: 924c26c575557e54aa77e0e4920535b8, type: 3}

@@ -17,7 +17,7 @@ public class Campaign : MonoBehaviour
 
     [field:SerializeField] public int Wins { get; private set; }
     [field:SerializeField] public int Losses { get; private set; } = 5;
-    public int Days { get; private set; }
+    [field:SerializeField] public int Days { get; private set; }
     public List<EquipmentScriptableObject> LockedItems { get; private set; } = new();
 
     [SerializeField] float _volume = 0.75f;

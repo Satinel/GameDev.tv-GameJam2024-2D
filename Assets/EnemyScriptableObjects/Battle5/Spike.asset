@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Spike
   Sprite: {fileID: 1052488956, guid: 105d0df74d5f86b409f111f69b7fb1a4, type: 3}
-  Attack: 384
-  ASpeed: 8
+  Attack: 16
+  ASpeed: 2
   MaxHealth: 7200
   AttackSFX: {fileID: 8300000, guid: 924c26c575557e54aa77e0e4920535b8, type: 3}
   SkillVFX: {fileID: 7764922303510143599, guid: 4f24455a86b6c5247a3cf124e17a1744, type: 3}

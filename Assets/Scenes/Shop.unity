@@ -256,7 +256,7 @@ PrefabInstance:
     - target: {fileID: 1629448765884913132, guid: 95733b89416f494478260365bbf331b4, type: 3}
       propertyPath: _introClip
       value: 
-      objectReference: {fileID: 8300000, guid: 5a83909c6339a364397a82e08cefdf8d, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 6283697976374133196, guid: 95733b89416f494478260365bbf331b4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -55,21 +55,15 @@ public class Portal : MonoBehaviour
                 break;
             case 3:
                 _animator.SetTrigger(DAY3_HASH); // Bun -> Bounce around
-                OnUnitSummoned?.Invoke(this, day - 2);
-                OpenShop();
                 break;
             case 4:
                 _animator.SetTrigger(DAY4_HASH); // Bird -> Everyone confused because it looks bad
-                OnUnitSummoned?.Invoke(this, day - 2);
-                OpenShop();
                 break;
             case 5:
                 _animator.SetTrigger(DAY5_HASH); // Fox -> Portal explodes???
-                OnUnitSummoned?.Invoke(this, day - 2);
-                OpenShop();
                 break;
             default:
-                _shopButton.SetActive(true);
+                OpenShop();
                 break;
         }
     }

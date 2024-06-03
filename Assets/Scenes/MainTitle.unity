@@ -1329,6 +1329,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &839702028 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6742668874256036564, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+  m_PrefabInstance: {fileID: 7532600239989325099}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef148bf02ebe630409e63ca6526b5f45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &848743367
 GameObject:
   m_ObjectHideFlags: 0
@@ -1606,6 +1617,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1113927853 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8105559821941579347, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+  m_PrefabInstance: {fileID: 7532600239989325099}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef148bf02ebe630409e63ca6526b5f45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1147210112
 GameObject:
   m_ObjectHideFlags: 0
@@ -1714,6 +1736,17 @@ Canvas:
   m_SortingLayerID: -308790427
   m_SortingOrder: 100
   m_TargetDisplay: 0
+--- !u!114 &1176854403 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 368276207734936798, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+  m_PrefabInstance: {fileID: 7532600239989325099}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef148bf02ebe630409e63ca6526b5f45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1390589164
 GameObject:
   m_ObjectHideFlags: 0
@@ -2530,6 +2563,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 2
   m_SpriteSortPoint: 0
+--- !u!114 &1888231492 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8998711738931157036, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+  m_PrefabInstance: {fileID: 7532600239989325099}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef148bf02ebe630409e63ca6526b5f45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1890687291 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7285137764896822576, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
@@ -3075,6 +3119,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Pistachio
       objectReference: {fileID: 0}
+    - target: {fileID: 934504563963634931, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: m_fontSize
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 2418192191072856897, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -3191,6 +3239,10 @@ PrefabInstance:
       propertyPath: m_text
       value: Almond
       objectReference: {fileID: 0}
+    - target: {fileID: 6086230259207848697, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: m_fontSize
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 6742668874256036564, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
       propertyPath: <HeroName>k__BackingField
       value: Almond
@@ -3215,9 +3267,17 @@ PrefabInstance:
       propertyPath: m_text
       value: Cashew
       objectReference: {fileID: 0}
+    - target: {fileID: 8432355984544720897, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: m_fontSize
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 8761995001326333566, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
       propertyPath: m_text
       value: Acorn
+      objectReference: {fileID: 0}
+    - target: {fileID: 8761995001326333566, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: m_fontSize
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 8801427850446944455, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
       propertyPath: _lockedUnits.Array.data[4]
@@ -3239,6 +3299,22 @@ PrefabInstance:
       propertyPath: <Team>k__BackingField.Array.data[0]
       value: 
       objectReference: {fileID: 758119686}
+    - target: {fileID: 8801427850446944455, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: <Team>k__BackingField.Array.data[1]
+      value: 
+      objectReference: {fileID: 1113927853}
+    - target: {fileID: 8801427850446944455, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: <Team>k__BackingField.Array.data[2]
+      value: 
+      objectReference: {fileID: 1888231492}
+    - target: {fileID: 8801427850446944455, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: <Team>k__BackingField.Array.data[3]
+      value: 
+      objectReference: {fileID: 1176854403}
+    - target: {fileID: 8801427850446944455, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: <Team>k__BackingField.Array.data[4]
+      value: 
+      objectReference: {fileID: 839702028}
     - target: {fileID: 8998711738931157036, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
       propertyPath: <HeroName>k__BackingField
       value: Cashew

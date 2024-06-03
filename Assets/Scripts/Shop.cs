@@ -14,7 +14,7 @@ public class Shop : MonoBehaviour
     [SerializeField] Wallet _wallet;
     [SerializeField] Button _lockButton, _buyButton;
     [SerializeField] TextMeshProUGUI _lockText, _buyText, _rerollText;
-    [SerializeField] GameObject _shopParent;
+    [SerializeField] GameObject _shopParent, _clickUnitMessage;
 
     ShopItem _selectedShopItem;
     Unit _selectedUnit;
@@ -82,9 +82,18 @@ public class Shop : MonoBehaviour
     void CheckBuyButton()
     {
         _unitEquipmentWindow.gameObject.SetActive(false);
+        _clickUnitMessage.SetActive(false);
 
-        if(!_selectedShopItem || !_selectedUnit)
+        if(!_selectedShopItem)
         {
+            _buyButton.interactable = false;
+            _buyText.text = "Buy";
+            return;
+        }
+
+        if(!_selectedUnit)
+        {
+            _clickUnitMessage.SetActive(true);
             _buyButton.interactable = false;
             _buyText.text = "Buy";
             return;

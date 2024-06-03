@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Goblin
   Sprite: {fileID: 765626003, guid: 55a1c7ff426c8c24b88b58a9a10eef67, type: 3}
-  Attack: 960
-  ASpeed: 14
+  Attack: 28
+  ASpeed: 7
   MaxHealth: 9750
   AttackSFX: {fileID: 8300000, guid: 924c26c575557e54aa77e0e4920535b8, type: 3}
   SkillVFX: {fileID: 7764922303510143599, guid: 4f24455a86b6c5247a3cf124e17a1744, type: 3}

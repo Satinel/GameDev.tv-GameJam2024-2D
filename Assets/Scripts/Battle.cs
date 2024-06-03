@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Battle : MonoBehaviour
 {
@@ -17,7 +18,8 @@ public class Battle : MonoBehaviour
     [SerializeField] EnemyScriptableObject _incomingRow1, _incomingRow2, _incomingRow3;
     [SerializeField] SpriteRenderer _iRow1Sprite, _iRow2Sprite, _iRow3Sprite;
     [SerializeField] List<EnemyScriptableObject> _bestiary = new();
-    [SerializeField] GameObject _retreatPrompt, _noRetreatPrompt, _lastStandMessage;
+    [SerializeField] GameObject _retreatPrompt, _noRetreatPrompt, _lastStandMessage, _unitKilledMessage;
+    [SerializeField] TextMeshProUGUI _lifeCountText, _unitKilledText;
 
     float _currentTimeSpeed = 1;
     bool _wasPaused, _noRetreat;
@@ -30,6 +32,7 @@ public class Battle : MonoBehaviour
         Enemy.OnAnyEnemyKilled += Enemy_OnAnyEnemyKilled;
         TeamManager.OnPartyWipe += TeamManager_OnPartyWipe;
         Timer.OnTimerCompleted += Timer_OnTimerCompleted;
+        Unit.OnAnyUnitKilled += Unit_OnAnyUnitKilled;
     }
 
     void OnDisable()
@@ -40,6 +43,7 @@ public class Battle : MonoBehaviour
         Enemy.OnAnyEnemyKilled -= Enemy_OnAnyEnemyKilled;
         TeamManager.OnPartyWipe -= TeamManager_OnPartyWipe;
         Timer.OnTimerCompleted -= Timer_OnTimerCompleted;
+        Unit.OnAnyUnitKilled -= Unit_OnAnyUnitKilled;
     }
 
     void Start()
@@ -64,6 +68,10 @@ public class Battle : MonoBehaviour
 
     void Campaign_OnBattleLoaded(object sender, int losses)
     {
+        if(_lifeCountText)
+        {
+            _lifeCountText.text = $"x{losses}";
+        }
         if(losses <= 0)
         {
             _noRetreat = true;
@@ -178,6 +186,22 @@ public class Battle : MonoBehaviour
     void Enemy_OnAnyEnemyKilled(object sender, Enemy enemy)
     {
         StartCoroutine(SpawnEnemy(enemy, enemy.Row));
+    }
+
+    void Unit_OnAnyUnitKilled(object sender, Unit unit)
+    {
+        StopCoroutine(RemoveUnitKilledMessageRoutine());
+
+        _unitKilledMessage.SetActive(true);
+        _unitKilledText.text = $"{unit.HeroName} has fainted!";
+        StartCoroutine(RemoveUnitKilledMessageRoutine());
+    }
+
+    IEnumerator RemoveUnitKilledMessageRoutine()
+    {
+        yield return new WaitForSecondsRealtime(10f);
+
+        _unitKilledMessage.SetActive(false);
     }
 
     IEnumerator SpawnEnemy(Enemy enemy, int row)

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Fancy Grape
   Sprite: {fileID: -2127419660, guid: bd4dcb91118b1214db34a83f97ca963a, type: 3}
-  Attack: 76
+  Attack: 38
   ASpeed: 19
   MaxHealth: 560
   AttackSFX: {fileID: 8300000, guid: 924c26c575557e54aa77e0e4920535b8, type: 3}

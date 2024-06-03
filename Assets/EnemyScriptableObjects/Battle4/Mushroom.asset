@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Mushroom
   Sprite: {fileID: -1049387702, guid: 4793911677ec8ac498e7522ab07cbc27, type: 3}
-  Attack: 72
+  Attack: 36
   ASpeed: 18
   MaxHealth: 300
   AttackSFX: {fileID: 8300000, guid: 924c26c575557e54aa77e0e4920535b8, type: 3}

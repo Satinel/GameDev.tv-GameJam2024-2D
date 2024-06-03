@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Pink Eyeball
   Sprite: {fileID: 394033273, guid: e1af9e26251e7684d89ffedc5879c195, type: 3}
-  Attack: 1440
-  ASpeed: 30
+  Attack: 60
+  ASpeed: 15
   MaxHealth: 8700
   AttackSFX: {fileID: 8300000, guid: 924c26c575557e54aa77e0e4920535b8, type: 3}
   SkillVFX: {fileID: 7764922303510143599, guid: 4f24455a86b6c5247a3cf124e17a1744, type: 3}

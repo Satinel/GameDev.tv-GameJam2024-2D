@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Skeleton
   Sprite: {fileID: -1892056554, guid: 8c6c683fa00e2bb4ab500fe45624b02a, type: 3}
-  Attack: 900
-  ASpeed: 15
+  Attack: 30
+  ASpeed: 7.5
   MaxHealth: 3600
   AttackSFX: {fileID: 8300000, guid: 924c26c575557e54aa77e0e4920535b8, type: 3}
   SkillVFX: {fileID: 7764922303510143599, guid: 4f24455a86b6c5247a3cf124e17a1744, type: 3}
