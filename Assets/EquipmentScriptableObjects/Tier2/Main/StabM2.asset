@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f86f0e575a772274fad942e2dbbc8bcb, type: 3}
   m_Name: StabM2
   m_EditorClassIdentifier: 
-  Name: Trident
+  Name: Pike
   Slot: 0
-  Sprite: {fileID: 436462426, guid: 3536e8b12ea3b3b44ac96602e2b0192c, type: 3}
-  RareSprite: {fileID: -1364114890, guid: 6956e2feebab5314d9497cc7eb66c5d9, type: 3}
-  EpicSprite: {fileID: -54550568, guid: 61f45a7f10d211e4bad604b1375bf486, type: 3}
-  LegendarySprite: {fileID: 1508426402, guid: 7d76a3991f692fe4ba56ee5e16d829a4, type: 3}
+  Sprite: {fileID: -727095314, guid: 3536e8b12ea3b3b44ac96602e2b0192c, type: 3}
+  RareSprite: {fileID: 1550239318, guid: 6956e2feebab5314d9497cc7eb66c5d9, type: 3}
+  EpicSprite: {fileID: 1236906346, guid: 61f45a7f10d211e4bad604b1375bf486, type: 3}
+  LegendarySprite: {fileID: -1054958246, guid: 7d76a3991f692fe4ba56ee5e16d829a4, type: 3}
   HasOffset: 0
   SpriteOffset: {x: 0, y: 0, z: 0}
   SpriteScale: {x: 1, y: 1, z: 1}
   SpriteFlipped: 0
-  AttackIncrease: 3
-  HealthIncrease: 1
-  Price: 3
+  AttackIncrease: 9
+  HealthIncrease: 3
+  Price: 9
   Skill: {fileID: 5926601248323093078, guid: 232d0158d1f2d0246beac0a7bffc6f48, type: 3}
