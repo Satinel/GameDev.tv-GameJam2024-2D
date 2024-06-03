@@ -70,7 +70,6 @@ public class Portal : MonoBehaviour
                 break;
             default:
                 _shopButton.SetActive(true);
-                OpenShop();
                 break;
         }
     }
