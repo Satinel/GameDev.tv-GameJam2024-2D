@@ -8,7 +8,10 @@ public class Shop : MonoBehaviour
     [SerializeField] int _rerollCost = 1;
     [SerializeField] int _rerollCostMultiplyer = 3;
 
-    [SerializeField] List<EquipmentScriptableObject> _allItems = new();
+    [SerializeField] List<EquipmentScriptableObject> _tier1Equipment = new();
+    [SerializeField] List<EquipmentScriptableObject> _tier2Equipment = new();
+    [SerializeField] List<EquipmentScriptableObject> _tier3Equipment = new();
+    [SerializeField] List<EquipmentScriptableObject> _tier4Equipment = new();
     [SerializeField] List<ShopItem> _shopItems = new();
     [SerializeField] ShopItem _unitEquipmentWindow;
     [SerializeField] Wallet _wallet;
@@ -18,6 +21,7 @@ public class Shop : MonoBehaviour
 
     ShopItem _selectedShopItem;
     Unit _selectedUnit;
+    int _wins;
 
     void Awake()
     {
@@ -71,6 +75,9 @@ public class Shop : MonoBehaviour
 
     void Campaign_OnSetLockedItems(object sender, List<EquipmentScriptableObject> lockedItems)
     {
+        Campaign campaign= (Campaign)sender;
+        _wins = campaign.Wins;
+
         for(int i = 0; i < lockedItems.Count; i++)
         {
             _shopItems[i].Setup(lockedItems[i]);
@@ -182,9 +189,29 @@ public class Shop : MonoBehaviour
             shopItem.gameObject.SetActive(true);
             shopItem.ResetBorder();
 
-            if (!shopItem.IsLocked)
+            if(!shopItem.IsLocked)
             {
-                shopItem.Setup(_allItems[Random.Range(0, _allItems.Count)]); // TODO Split items into tiers and unlock later tiers over time
+                int tier = Random.Range(1, _wins + 1); // 0 wins: 1 to 1 = 1 // 1 win: 1 to 2 = 1 // 2 wins: 1 to 3 = 1-2 // 3 wins: 1 to 4 = 1-3 // 4 wins: 1 to 5 = 1-4 //
+
+                switch(tier)
+                {
+                    case 1:
+                        shopItem.Setup(_tier1Equipment[Random.Range(0, _tier1Equipment.Count)]);
+                        break;
+                    case 2:
+                        shopItem.Setup(_tier2Equipment[Random.Range(0, _tier2Equipment.Count)]);
+                        break;
+                    case 3:
+                        shopItem.Setup(_tier2Equipment[Random.Range(0, _tier3Equipment.Count)]);
+                        break;
+                    case >3:
+                        shopItem.Setup(_tier2Equipment[Random.Range(0, _tier4Equipment.Count)]);
+                        break;
+                    default:
+                        shopItem.Setup(_tier1Equipment[Random.Range(0, _tier1Equipment.Count)]);
+                        break;
+                }
+                
             }
         }
         CheckBuyButton();

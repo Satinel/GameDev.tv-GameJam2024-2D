@@ -531,10 +531,6 @@ PrefabInstance:
       value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4011845831625711601, guid: b932141b019653840bc0a5a4cf0b8a8a, type: 3}
-      propertyPath: _shopItems.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 4011845831625711601, guid: b932141b019653840bc0a5a4cf0b8a8a, type: 3}
       propertyPath: _allItems.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 822cc51eab51af147b1540d4b2f45ca2, type: 2}

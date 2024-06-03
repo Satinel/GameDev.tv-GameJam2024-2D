@@ -837,8 +837,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rerollCost: 1
   _rerollCostMultiplyer: 3
-  _allItems: []
-  _shopItems: []
+  _tier1Equipment:
+  - {fileID: 11400000, guid: 992658297c629db4b9c8f683a2b51ab2, type: 2}
+  - {fileID: 11400000, guid: d8fec5d0ec66345469a845719d5d06b9, type: 2}
+  - {fileID: 11400000, guid: 8357a4fbb629d4248b637f75aa1efa3e, type: 2}
+  - {fileID: 11400000, guid: 822cc51eab51af147b1540d4b2f45ca2, type: 2}
+  - {fileID: 11400000, guid: 8c543db12f0aaec4687109b178d3cf08, type: 2}
+  - {fileID: 11400000, guid: 293d3c776b9b9544a89071d8ab431e16, type: 2}
+  - {fileID: 11400000, guid: 1b0d7f010f7281347aae089915cc8e26, type: 2}
+  - {fileID: 11400000, guid: ca5af55c30faa384bb391dbfcfef7f80, type: 2}
+  - {fileID: 11400000, guid: 82c884b4172aefb47be035b53588550c, type: 2}
+  - {fileID: 11400000, guid: d16d0a701d97bb84b926344518e6e09a, type: 2}
+  - {fileID: 11400000, guid: 8db9f88410c83b64ba3d9ac1c2649dc1, type: 2}
+  - {fileID: 11400000, guid: 905b25fce1e6dc34c904a4ad72c7cc85, type: 2}
+  - {fileID: 11400000, guid: ce6f224918eac7a4b8a97827eb0cc6ed, type: 2}
+  _tier2Equipment:
+  - {fileID: 11400000, guid: f6121ce6d52789b41b1b654c15861729, type: 2}
+  - {fileID: 11400000, guid: 86b807e6d8eb8ae46bb3beb973579ee8, type: 2}
+  - {fileID: 11400000, guid: 3aae71c6aad3461468d49ecc89c4d81a, type: 2}
+  - {fileID: 11400000, guid: 986c0263c86b6cc409ee5afb4b2aa75c, type: 2}
+  - {fileID: 11400000, guid: fd64da8d1e769e943b1459bd9dcea10f, type: 2}
+  - {fileID: 11400000, guid: d47cee828dbf7274692db582fe560cff, type: 2}
+  - {fileID: 11400000, guid: 798b3e390d661ec4da246603359f104a, type: 2}
+  - {fileID: 11400000, guid: 4b0b0e8ee9c3ef149a262fa2bb090640, type: 2}
+  - {fileID: 11400000, guid: d56bacf59b6eb8e45961ac73288445ba, type: 2}
+  - {fileID: 11400000, guid: 69ee669d7bf27fe4f98e0f1706298bae, type: 2}
+  - {fileID: 11400000, guid: 8b3fb1a5166d7814e96bd562c19c294e, type: 2}
+  - {fileID: 11400000, guid: e25d86a7b351f2e4b80994fa38b280c4, type: 2}
+  _tier3Equipment:
+  - {fileID: 11400000, guid: 9fb54f78b1c951245816142c1418400f, type: 2}
+  - {fileID: 11400000, guid: 648684399f3a0894ab88fec73b961187, type: 2}
+  - {fileID: 11400000, guid: 4ee8aaba40d1fb64aa08422fd539be12, type: 2}
+  - {fileID: 11400000, guid: a8edb6943954a78439608baebf00f9a5, type: 2}
+  - {fileID: 11400000, guid: c1af9846a8d6bf4449df580b61bcaf3d, type: 2}
+  - {fileID: 11400000, guid: 77b01e12aa35d7545b41f604dac399f4, type: 2}
+  - {fileID: 11400000, guid: ec2846e16d4e42d438a4076329c8055c, type: 2}
+  - {fileID: 11400000, guid: 5ca50fc64f8a6b844bf39143af471d60, type: 2}
+  - {fileID: 11400000, guid: d28bb65f7f2f12346bc518b5e1a04993, type: 2}
+  - {fileID: 11400000, guid: 97c9f4cfebc604f4dad63946489a3ad6, type: 2}
+  - {fileID: 11400000, guid: 36e77dd4b702fb441b95264cd209f33b, type: 2}
+  - {fileID: 11400000, guid: 0c5de527a9147da458adc090b4561a01, type: 2}
+  _tier4Equipment:
+  - {fileID: 11400000, guid: b5d97ddb79451eb48aa3950744512ed7, type: 2}
+  - {fileID: 11400000, guid: b2f1990cd6ccc9d4fa77110224f73d0d, type: 2}
+  - {fileID: 11400000, guid: b2506903a16f8b84c990ea6f7395dbfa, type: 2}
+  - {fileID: 11400000, guid: 0871be41b3c0fb640a332830f1145ca2, type: 2}
+  - {fileID: 11400000, guid: 19b542599714fd148bbe410d6b5bf7cb, type: 2}
+  - {fileID: 11400000, guid: 2e6c000683f790744b58835c0fb025e5, type: 2}
+  - {fileID: 11400000, guid: 192dc0c1bc2fb7745935ee6e91fe6d68, type: 2}
+  - {fileID: 11400000, guid: 1d872a2527c826d4bb76f999ea643008, type: 2}
+  - {fileID: 11400000, guid: 918cc2d3274d3c9409b37349801b1a28, type: 2}
+  - {fileID: 11400000, guid: d8e7c624a923d094fb5971a75cec4c6e, type: 2}
+  - {fileID: 11400000, guid: 3b53e31df8b2b434db3d2de0f8795f71, type: 2}
+  - {fileID: 11400000, guid: 2b81a01b0f237ba4499cd7951131f7c2, type: 2}
+  _shopItems:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   _unitEquipmentWindow: {fileID: 9102490411812182124}
   _wallet: {fileID: 0}
   _lockButton: {fileID: 3939352653268435080}
