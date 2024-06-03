@@ -55,7 +55,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: d48577988f650414ebce12010d8e6a3c, type: 3}
   _audioSource: {fileID: 8481916518067668773}
   _audioVolume: 1
-  _cooldown: 5
+  _cooldown: 6
 --- !u!82 &8481916518067668773
 AudioSource:
   m_ObjectHideFlags: 0

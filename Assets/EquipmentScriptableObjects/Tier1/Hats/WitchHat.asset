@@ -22,7 +22,7 @@ MonoBehaviour:
   SpriteOffset: {x: -0.166, y: 0.47, z: 0}
   SpriteScale: {x: 1.15, y: 1.15, z: 1.15}
   SpriteFlipped: 1
-  AttackIncrease: 3
-  HealthIncrease: 1
+  AttackIncrease: 1
+  HealthIncrease: 3
   Price: 3
   Skill: {fileID: 3737678289451914987, guid: 425c1bba66100a245a0b19a8889bf0c3, type: 3}

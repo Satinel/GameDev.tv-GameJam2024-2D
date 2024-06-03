@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f86f0e575a772274fad942e2dbbc8bcb, type: 3}
-  m_Name: Dagger
+  m_Name: SwingO1
   m_EditorClassIdentifier: 
   Name: Dagger
   Slot: 1
@@ -22,7 +22,7 @@ MonoBehaviour:
   SpriteOffset: {x: 0, y: 0, z: 0}
   SpriteScale: {x: 1, y: 1, z: 1}
   SpriteFlipped: 1
-  AttackIncrease: 2
+  AttackIncrease: 6
   HealthIncrease: 0
-  Price: 3
+  Price: 9
   Skill: {fileID: 1386096591735808426, guid: 7c4a504d4659c0243b09abbf668a693f, type: 3}

@@ -43,7 +43,14 @@ public class ShopItem : MonoBehaviour
     {
         _gear = gear;
         _itemName.text = gear.Name;
-        _cooldownText.text = gear.Skill.Cooldown.ToString();
+        if(gear.Skill.Cooldown > 0)
+        {
+            _cooldownText.text = gear.Skill.Cooldown.ToString();
+        }
+        else
+        {
+            _cooldownText.text = "N/A";
+        }
         _attackText.text = gear.AttackIncrease.ToString();
         _healthText.text = gear.HealthIncrease.ToString();
         _priceText.text = gear.Price.ToString();
@@ -72,7 +79,14 @@ public class ShopItem : MonoBehaviour
         {
             _itemName.text = $"{gear.Name}";
         }
-        _cooldownText.text = gear.Skill.Cooldown.ToString();
+        if(gear.Skill.Cooldown > 0)
+        {
+            _cooldownText.text = gear.Skill.Cooldown.ToString();
+        }
+        else
+        {
+            _cooldownText.text = "N/A";
+        }
         _attackText.text = (gear.AttackIncrease * upgradeLevel).ToString();
         _healthText.text = (gear.HealthIncrease * upgradeLevel).ToString();
         _priceImage.enabled = true;

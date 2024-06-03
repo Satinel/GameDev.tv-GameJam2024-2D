@@ -45,7 +45,7 @@ public class BaseSkill : MonoBehaviour
 
     void Update()
     {
-        if(_unit.IsDead || !_isFighting) { return; }
+        if(_unit.IsDead || !_isFighting || _cooldown <= 0) { return; }
 
 
         _timeSinceLastAttack += Time.deltaTime;

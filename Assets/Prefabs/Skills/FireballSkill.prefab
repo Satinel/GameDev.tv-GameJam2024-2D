@@ -46,11 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <SkillName>k__BackingField: Fireball
-  _audioClip: {fileID: 0}
+  <VisualEffect>k__BackingField: {fileID: 0}
+  _audioClips: []
   _audioSource: {fileID: 569823337045306664}
-  _unitAnimator: {fileID: 0}
   _audioVolume: 1
-  _cooldown: 10
+  _cooldown: -1
 --- !u!82 &569823337045306664
 AudioSource:
   m_ObjectHideFlags: 0
@@ -61,7 +61,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 3619767544925984969, guid: 5e1c0a38a4db87d4f970a1af46a46770, type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: ecece34934ecd434abdde78e3bd66028, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
