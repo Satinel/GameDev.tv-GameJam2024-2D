@@ -8,7 +8,7 @@ public class ShopItem : MonoBehaviour
     public static event EventHandler<ShopItem> OnAnyShopItemClicked;
     public static event EventHandler<bool> OnShopItemLocked;
 
-    [SerializeField] TextMeshProUGUI _itemName, _cooldownText, _attackText, _healthText, _priceText;
+    [SerializeField] TextMeshProUGUI _itemName, _slotText, _cooldownText, _attackText, _healthText, _priceText;
     [SerializeField] Image _imageRenderer, _borderImage, _priceImage;
     [SerializeField] EquipmentScriptableObject _gear;
     [SerializeField] GameObject _lock, _upgradeIndicator;
@@ -44,6 +44,7 @@ public class ShopItem : MonoBehaviour
         _upgradeIndicator.SetActive(false);
         _gear = gear;
         _itemName.text = gear.Name;
+        _slotText.text = gear.Slot.ToString();
         if(gear.Skill.Cooldown > 0)
         {
             _cooldownText.text = gear.Skill.Cooldown.ToString();
@@ -80,6 +81,9 @@ public class ShopItem : MonoBehaviour
         {
             _itemName.text = $"{gear.Name}";
         }
+
+        _slotText.text = gear.Slot.ToString();
+
         if(gear.Skill.Cooldown > 0)
         {
             _cooldownText.text = gear.Skill.Cooldown.ToString();
@@ -97,12 +101,12 @@ public class ShopItem : MonoBehaviour
         if(gear.Slot == EquipmentType.Offhand)
         {
             _imageRenderer.transform.localScale = new Vector3(-1f, 1f, 1f);
-            _imageRenderer.rectTransform.anchoredPosition = new Vector3(1.1f, -0.5f, 0f);
+            _imageRenderer.rectTransform.anchoredPosition = new Vector3(1.1f, -0.7f, 0f);
         }
         else
         {
             _imageRenderer.transform.localScale = new Vector3(1f, 1f, 1f);
-            _imageRenderer.rectTransform.anchoredPosition = new Vector3(0.1f, -0.5f, 0f);
+            _imageRenderer.rectTransform.anchoredPosition = new Vector3(0.1f, -0.7f, 0f);
         }
     }
 

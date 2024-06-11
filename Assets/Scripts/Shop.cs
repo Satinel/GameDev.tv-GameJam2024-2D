@@ -16,8 +16,8 @@ public class Shop : MonoBehaviour
     [SerializeField] ShopItem _unitEquipmentWindow;
     [SerializeField] Wallet _wallet;
     [SerializeField] Button _lockButton, _buyButton;
-    [SerializeField] TextMeshProUGUI _lockText, _buyText, _rerollText;
-    [SerializeField] GameObject _shopParent, _clickUnitMessage, _autoUpgradeButton, _manualUpgradeButton;
+    [SerializeField] TextMeshProUGUI _lockText, _buyText, _rerollText, _tradePromptText;
+    [SerializeField] GameObject _shopParent, _clickUnitMessage, _autoUpgradeButton, _manualUpgradeButton, _tradePrompt;
 
     ShopItem _selectedShopItem;
     Unit _selectedUnit;
@@ -129,6 +129,7 @@ public class Shop : MonoBehaviour
             case EquipmentType.Main:
                 if(_selectedUnit.Main().Gear)
                 {
+                    _unitEquipmentWindow.IndicateUpgrade(false);
                     _unitEquipmentWindow.gameObject.SetActive(true);
                     _unitEquipmentWindow.EquippedSetup(_selectedUnit.Main().Gear, _selectedUnit.Main().UpgradeLevel, _selectedUnit.Main().ItemSprite(), _selectedUnit.Main().UpgradeName);
                     _buyText.text = "Trade?";
@@ -137,6 +138,7 @@ public class Shop : MonoBehaviour
                 {
                     _buyText.text = "Upgrade!!";
                     _unitEquipmentWindow.HideSellPrice();
+                    _unitEquipmentWindow.IndicateUpgrade(true);
                     return;
                 }
             break;
@@ -144,6 +146,7 @@ public class Shop : MonoBehaviour
             case EquipmentType.Offhand:
                 if(_selectedUnit.Offhand().Gear)
                 {
+                    _unitEquipmentWindow.IndicateUpgrade(false);
                     _unitEquipmentWindow.gameObject.SetActive(true);
                     _unitEquipmentWindow.EquippedSetup(_selectedUnit.Offhand().Gear, _selectedUnit.Offhand().UpgradeLevel, _selectedUnit.Offhand().ItemSprite(), _selectedUnit.Offhand().UpgradeName);
                     _buyText.text = "Trade?";
@@ -152,6 +155,7 @@ public class Shop : MonoBehaviour
                 {
                     _buyText.text = "Upgrade!!";
                     _unitEquipmentWindow.HideSellPrice();
+                    _unitEquipmentWindow.IndicateUpgrade(true);
                     return;
                 }
             break;
@@ -159,6 +163,7 @@ public class Shop : MonoBehaviour
             case EquipmentType.Headgear:
                 if(_selectedUnit.Headgear().Gear)
                 {
+                    _unitEquipmentWindow.IndicateUpgrade(false);
                     _unitEquipmentWindow.gameObject.SetActive(true);
                     _unitEquipmentWindow.EquippedSetup(_selectedUnit.Headgear().Gear, _selectedUnit.Headgear().UpgradeLevel, _selectedUnit.Headgear().ItemSprite(), _selectedUnit.Headgear().UpgradeName);
                     _buyText.text = "Trade?";
@@ -167,6 +172,7 @@ public class Shop : MonoBehaviour
                 {
                     _buyText.text = "Upgrade!!";
                     _unitEquipmentWindow.HideSellPrice();
+                    _unitEquipmentWindow.IndicateUpgrade(true);
                     return;
                 }
             break;
@@ -251,6 +257,7 @@ public class Shop : MonoBehaviour
 
         foreach(Unit unit in _activeUnits)
         {
+            unit.ShowUpgradeIndicator(false);
             foreach(ShopItem shopItem in _shopItems)
             {
                 if(!shopItem.gameObject.activeSelf) { continue; }
@@ -269,19 +276,20 @@ public class Shop : MonoBehaviour
                                     if(!_wallet.AskToSpend(shopItem.Gear.Price))
                                     {
                                         shopItem.IndicateUpgrade(true);
+                                        unit.ShowUpgradeIndicator(true);
                                         break;
                                     }
                                     
                                     unit.Main().UpgradeItem(shopItem.Gear);
                                     unit.BuyGear(shopItem.Gear);
-                                    // TODO A message in floating text raising up saying essentially what's in the Debug.Log below
-                                    Debug.Log($"Upgraded {unit.HeroName}'s {type} with {shopItem.Gear.Name}");
+                                    unit.UpgradeFloatingText($"{unit.Main().UpgradeName} Upgraded!");
                                     CompletePurchase(shopItem);
                                     break;
                                 }
                                 else
                                 {
                                     shopItem.IndicateUpgrade(true);
+                                    unit.ShowUpgradeIndicator(true);
                                     break;
                                 }
                             }
@@ -297,19 +305,20 @@ public class Shop : MonoBehaviour
                                     if(!_wallet.AskToSpend(shopItem.Gear.Price))
                                     {
                                         shopItem.IndicateUpgrade(true);
+                                        unit.ShowUpgradeIndicator(true);
                                         break;
                                     }
                                     
                                     unit.Offhand().UpgradeItem(shopItem.Gear);
                                     unit.BuyGear(shopItem.Gear);
-                                    // TODO A message in floating text raising up saying essentially what's in the Debug.Log below
-                                    Debug.Log($"Upgraded {unit.HeroName}'s {type} with {shopItem.Gear.Name}");
+                                    unit.UpgradeFloatingText($"{unit.Offhand().UpgradeName} Upgraded!");
                                     CompletePurchase(shopItem);
                                     break;
                                 }
                                 else
                                 {
                                     shopItem.IndicateUpgrade(true);
+                                    unit.ShowUpgradeIndicator(true);
                                     break;
                                 }
                             }
@@ -325,19 +334,20 @@ public class Shop : MonoBehaviour
                                     if(!_wallet.AskToSpend(shopItem.Gear.Price))
                                     {
                                         shopItem.IndicateUpgrade(true);
+                                        unit.ShowUpgradeIndicator(true);
                                         break;
                                     }
                                     
                                     unit.Headgear().UpgradeItem(shopItem.Gear);
                                     unit.BuyGear(shopItem.Gear);
-                                    // TODO A message in floating text raising up saying essentially what's in the Debug.Log below
-                                    Debug.Log($"Upgraded {unit.HeroName}'s {type} with {shopItem.Gear.Name}");
+                                    unit.UpgradeFloatingText($"{unit.Headgear().UpgradeName} Upgraded!");
                                     CompletePurchase(shopItem);
                                     break;
                                 }
                                 else
                                 {
                                     shopItem.IndicateUpgrade(true);
+                                    unit.ShowUpgradeIndicator(true);
                                     break;
                                 }
                             }
@@ -389,14 +399,13 @@ public class Shop : MonoBehaviour
                     {
                         if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price)) { return; }
                         _selectedUnit.Main().UpgradeItem(_selectedShopItem.Gear);
+                        _selectedUnit.UpgradeFloatingText($"{_selectedUnit.Main().UpgradeName} Upgraded!");
                         break;
                     }
                     else
                     {
-                        if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price - Mathf.RoundToInt(_selectedUnit.Main().Gear.Price * _selectedUnit.Main().UpgradeLevel) / 3)) { return; }
-                        TradeIn(_selectedUnit.Main().Gear, _selectedUnit.Main().UpgradeLevel);
-                        _selectedUnit.Main().EquipItem(_selectedShopItem.Gear);
-                        break;
+                        PromptTrade($"Trade\n{_selectedUnit.Main().UpgradeName}\nfor\n{_selectedShopItem.Gear.Name}?");
+                        return;
                     }
                 }
 
@@ -411,14 +420,13 @@ public class Shop : MonoBehaviour
                     {
                         if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price)) { return; }
                         _selectedUnit.Offhand().UpgradeItem(_selectedShopItem.Gear);
+                        _selectedUnit.UpgradeFloatingText($"{_selectedUnit.Offhand().UpgradeName} Upgraded!");
                         break;
                     }
                     else
                     {
-                        if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price - Mathf.RoundToInt(_selectedUnit.Offhand().Gear.Price * _selectedUnit.Offhand().UpgradeLevel) / 3)) { return; }
-                        TradeIn(_selectedUnit.Offhand().Gear, _selectedUnit.Offhand().UpgradeLevel);
-                        _selectedUnit.Offhand().EquipItem(_selectedShopItem.Gear);
-                        break;
+                        PromptTrade($"Trade\n{_selectedUnit.Offhand().UpgradeName}\nfor\n{_selectedShopItem.Gear.Name}?");
+                        return;
                     }
                 }
 
@@ -433,14 +441,13 @@ public class Shop : MonoBehaviour
                     {
                         if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price)) { return; }
                         _selectedUnit.Headgear().UpgradeItem(_selectedShopItem.Gear);
+                        _selectedUnit.UpgradeFloatingText($"{_selectedUnit.Headgear().UpgradeName} Upgraded!");
                         break;
                     }
                     else
                     {
-                        if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price - Mathf.RoundToInt(_selectedUnit.Headgear().Gear.Price * _selectedUnit.Headgear().UpgradeLevel) / 3)) { return; }
-                        TradeIn(_selectedUnit.Headgear().Gear, _selectedUnit.Headgear().UpgradeLevel);
-                        _selectedUnit.Headgear().EquipItem(_selectedShopItem.Gear);
-                        break;
+                        PromptTrade($"Trade\n{_selectedUnit.Headgear().UpgradeName}\nfor\n{_selectedShopItem.Gear.Name}?");
+                        return;
                     }
                 }
 
@@ -465,6 +472,47 @@ public class Shop : MonoBehaviour
         shopItem.gameObject.SetActive(false);
         _selectedShopItem = null;
         CheckBuyButton();
+    }
+
+    void PromptTrade(string tradeText)
+    {
+        _tradePromptText.text = tradeText;
+        _tradePrompt.SetActive(true);
+    }
+
+    public void CancelTrade()
+    {
+        _tradePrompt.SetActive(false);
+        _tradePromptText.text = string.Empty;
+    }
+
+    public void ConfirmTrade()
+    {
+        _tradePrompt.SetActive(false);
+
+        EquipmentType type = _selectedShopItem.Gear.Slot;
+
+        switch(type)
+        {
+            case EquipmentType.Main:
+                if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price - Mathf.RoundToInt(_selectedUnit.Main().Gear.Price * _selectedUnit.Main().UpgradeLevel) / 3)) { return; }
+                TradeIn(_selectedUnit.Main().Gear, _selectedUnit.Main().UpgradeLevel);
+                _selectedUnit.Main().EquipItem(_selectedShopItem.Gear);
+                break;
+            case EquipmentType.Offhand:
+                if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price - Mathf.RoundToInt(_selectedUnit.Offhand().Gear.Price * _selectedUnit.Offhand().UpgradeLevel) / 3)) { return; }
+                TradeIn(_selectedUnit.Offhand().Gear, _selectedUnit.Offhand().UpgradeLevel);
+                _selectedUnit.Offhand().EquipItem(_selectedShopItem.Gear);
+                break;
+            case EquipmentType.Headgear:
+                if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price - Mathf.RoundToInt(_selectedUnit.Headgear().Gear.Price * _selectedUnit.Headgear().UpgradeLevel) / 3)) { return; }
+                TradeIn(_selectedUnit.Headgear().Gear, _selectedUnit.Headgear().UpgradeLevel);
+                _selectedUnit.Headgear().EquipItem(_selectedShopItem.Gear);
+                break;
+        }
+        _selectedUnit.BuyGear(_selectedShopItem.Gear);
+        CompletePurchase(_selectedShopItem);
+        CheckForUpgrades();
     }
 
     void TradeIn(EquipmentScriptableObject currentItem, int upgradeLevel)

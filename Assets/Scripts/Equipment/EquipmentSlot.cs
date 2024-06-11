@@ -31,6 +31,7 @@ public class EquipmentSlot : MonoBehaviour
         }
         UpgradeLevel = 1; // Resets for new items
         Gear = gear;
+        UpgradeName = gear.Name;
         _spriteRenderer.sprite = gear.Sprite;
         if(gear.HasOffset)
         {

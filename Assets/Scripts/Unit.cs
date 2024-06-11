@@ -18,8 +18,9 @@ public class Unit : MonoBehaviour
     
     [SerializeField] TextMeshProUGUI _attackText;
     [SerializeField] TextMeshProUGUI _healthText;
+    [SerializeField] TextMeshProUGUI _risingText;
     [SerializeField] EquipmentSlot _equipMain, _equipOffhand, _equipHeadgear;
-    [SerializeField] GameObject _highlight;
+    [SerializeField] GameObject _highlight, _upgradeIcon, _upgradeRisingText;
     [SerializeField] Transform _targetIndicator;
     [SerializeField] Animator _animator;
     [SerializeField] SpriteRenderer _unitSpriteRenderer;
@@ -257,6 +258,24 @@ public class Unit : MonoBehaviour
     {
         ChangeMaxHealth(-gear.HealthIncrease * upgradeLevel);
         ChangeAttack(-gear.AttackIncrease * upgradeLevel);
+    }
+
+    public void ShowUpgradeIndicator(bool isUpgradeable)
+    {
+        if(_upgradeIcon)
+        {
+            _upgradeIcon.SetActive(isUpgradeable);
+        }
+    }
+
+    public void UpgradeFloatingText(string upgradeText)
+    {
+        if(_floatingText)
+        {
+            _upgradeRisingText.SetActive(false);
+            _risingText.text = upgradeText;
+            _upgradeRisingText.SetActive(true);
+        }
     }
 
     void ChangeMaxHealth(int? healthChange)
