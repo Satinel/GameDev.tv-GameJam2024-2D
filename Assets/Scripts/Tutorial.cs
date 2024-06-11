@@ -250,6 +250,8 @@ public class Tutorial : MonoBehaviour
 
     void TimeManipulation()
     {
+        if(_speedChanged) { return; }
+
         _playButton.gameObject.SetActive(true);
         _pauseButton.gameObject.SetActive(true);
         _fastForwardButton.interactable = false;

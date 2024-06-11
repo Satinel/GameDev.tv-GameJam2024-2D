@@ -19,6 +19,7 @@ public class Campaign : MonoBehaviour
     [field:SerializeField] public int Losses { get; private set; } = 5;
     [field:SerializeField] public int Days { get; private set; }
     public List<EquipmentScriptableObject> LockedItems { get; private set; } = new();
+    public bool AutoUpgrades { get; private set; } = false;
 
     [SerializeField] float _volume = 0.75f;
     [SerializeField] AudioClip _defeatSFX, _victorySFX, _gameOverSFX;
@@ -351,5 +352,10 @@ public class Campaign : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void SetAutoUpgrades(bool autoUpgrades)
+    {
+        AutoUpgrades = autoUpgrades;
     }
 }

@@ -6,6 +6,7 @@ public class TeamManager : MonoBehaviour
 {
     public static event Action OnPartyWipe;
     public static event Action OnManualPressed;
+    public static event EventHandler<List<Unit>> OnActiveUnitsRequested;
 
     [field:SerializeField] public List<Unit> Team { get; private set; } = new();
     [field:SerializeField] public GameObject ManualButton { get; private set; }
@@ -24,6 +25,7 @@ public class TeamManager : MonoBehaviour
         Unit.OnAnyUnitKilled += Unit_OnAnyUnitKilled;
         Tutorial.OnTargetingTutorialOver += Tutorial_OnTutorialOver;
         Portal.OnUnitSummoned += Portal_OnUnitSummoned;
+        Portal.OnShopOpened += Portal_OnShopOpened;
     }
 
     void OnDisable()
@@ -34,6 +36,7 @@ public class TeamManager : MonoBehaviour
         Unit.OnAnyUnitKilled -= Unit_OnAnyUnitKilled;
         Tutorial.OnTargetingTutorialOver += Tutorial_OnTutorialOver;
         Portal.OnUnitSummoned -= Portal_OnUnitSummoned;
+        Portal.OnShopOpened -= Portal_OnShopOpened;
     }
 
     void Unit_OnAnyUnitKilled(object sender, Unit unit)
@@ -83,6 +86,18 @@ public class TeamManager : MonoBehaviour
     void Portal_OnUnitSummoned(object sender, int index)
     {
         _lockedUnits[index].gameObject.SetActive(true);
+    }
+
+    void Portal_OnShopOpened()
+    {
+        List<Unit> activeUnits = new();
+        
+        foreach(Unit unit in GetComponentsInChildren<Unit>(false))
+        {
+            activeUnits.Add(unit);
+        }
+
+        OnActiveUnitsRequested?.Invoke(this, activeUnits);
     }
 
     public void AddUnit(Unit unit)

@@ -11,7 +11,7 @@ public class ShopItem : MonoBehaviour
     [SerializeField] TextMeshProUGUI _itemName, _cooldownText, _attackText, _healthText, _priceText;
     [SerializeField] Image _imageRenderer, _borderImage, _priceImage;
     [SerializeField] EquipmentScriptableObject _gear;
-    [SerializeField] GameObject _lock;
+    [SerializeField] GameObject _lock, _upgradeIndicator;
 
     public bool IsLocked {get; private set;}
 
@@ -27,7 +27,7 @@ public class ShopItem : MonoBehaviour
         OnAnyShopItemClicked -= HighlightBorder;
     }
 
-    private void HighlightBorder(object sender, ShopItem e)
+    void HighlightBorder(object sender, ShopItem e)
     {
         if(e == this)
         {
@@ -41,6 +41,7 @@ public class ShopItem : MonoBehaviour
 
     public void Setup(EquipmentScriptableObject gear)
     {
+        _upgradeIndicator.SetActive(false);
         _gear = gear;
         _itemName.text = gear.Name;
         if(gear.Skill.Cooldown > 0)
@@ -136,7 +137,12 @@ public class ShopItem : MonoBehaviour
         OnShopItemLocked?.Invoke(this, IsLocked);
     }
 
-    internal void ResetBorder()
+    public void IndicateUpgrade(bool isUpgradeable)
+    {
+        _upgradeIndicator.SetActive(isUpgradeable);
+    }
+
+    public void ResetBorder()
     {
         _borderImage.color = Color.white;
     }

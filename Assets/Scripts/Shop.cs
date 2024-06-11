@@ -17,11 +17,14 @@ public class Shop : MonoBehaviour
     [SerializeField] Wallet _wallet;
     [SerializeField] Button _lockButton, _buyButton;
     [SerializeField] TextMeshProUGUI _lockText, _buyText, _rerollText;
-    [SerializeField] GameObject _shopParent, _clickUnitMessage;
+    [SerializeField] GameObject _shopParent, _clickUnitMessage, _autoUpgradeButton, _manualUpgradeButton;
 
     ShopItem _selectedShopItem;
     Unit _selectedUnit;
+    List<Unit> _activeUnits = new();
     int _wins;
+    bool _autoUpgradeEnabled = false;
+    Campaign _campaign = null;
 
     void Awake()
     {
@@ -36,6 +39,7 @@ public class Shop : MonoBehaviour
         ShopItem.OnAnyShopItemClicked += ShopItem_OnAnyShopItemClicked;
         Unit.OnAnyUnitClicked += Unit_OnAnyUnitClicked;
         Campaign.OnSetLockedItems += Campaign_OnSetLockedItems;
+        TeamManager.OnActiveUnitsRequested += TeamManager_OnActiveUnitsRequested;
     }
 
     void OnDisable()
@@ -43,6 +47,7 @@ public class Shop : MonoBehaviour
         ShopItem.OnAnyShopItemClicked -= ShopItem_OnAnyShopItemClicked;
         Unit.OnAnyUnitClicked -= Unit_OnAnyUnitClicked;
         Campaign.OnSetLockedItems -= Campaign_OnSetLockedItems;
+        TeamManager.OnActiveUnitsRequested -= TeamManager_OnActiveUnitsRequested;
     }
 
     void ShopItem_OnAnyShopItemClicked(object sender, ShopItem shopItem)
@@ -75,8 +80,9 @@ public class Shop : MonoBehaviour
 
     void Campaign_OnSetLockedItems(object sender, List<EquipmentScriptableObject> lockedItems)
     {
-        Campaign campaign= (Campaign)sender;
-        _wins = campaign.Wins;
+        _campaign = (Campaign)sender;
+        _wins = _campaign.Wins;
+        EnableAutoUpgrades(_campaign.AutoUpgrades);
 
         for(int i = 0; i < lockedItems.Count; i++)
         {
@@ -84,6 +90,13 @@ public class Shop : MonoBehaviour
             _shopItems[i].LockNoCallback();
         }
         Reroll();
+    }
+
+    void TeamManager_OnActiveUnitsRequested(object sender, List<Unit> activeUnits)
+    {
+        _activeUnits.Clear();
+
+        _activeUnits = activeUnits;
     }
 
     void CheckBuyButton()
@@ -165,14 +178,26 @@ public class Shop : MonoBehaviour
         _shopParent.SetActive(false);
     }
 
+    public void EnableAutoUpgrades(bool isEnabled)
+    {
+        _autoUpgradeEnabled = isEnabled;
+        _autoUpgradeButton.SetActive(isEnabled);
+        _manualUpgradeButton.SetActive(!isEnabled);
+
+        if(_campaign)
+        {
+            _campaign.SetAutoUpgrades(isEnabled);
+        }
+    }
+
     public void BuyReroll()
     {
         if(!_wallet.AskToSpend(_rerollCost)) { return; }
 
         _rerollCost *= _rerollCostMultiplyer;
-        if(_rerollCost > 999)
+        if(_rerollCost > 9999)
         {
-            _rerollCost = 999;
+            _rerollCost = 9999;
         }
         _rerollText.text = _rerollCost.ToString();
 
@@ -181,7 +206,7 @@ public class Shop : MonoBehaviour
 
     void Reroll()
     {
-        foreach (ShopItem shopItem in _shopItems)
+        foreach(ShopItem shopItem in _shopItems)
         {
             _selectedShopItem = null;
             shopItem.gameObject.SetActive(true);
@@ -208,12 +233,123 @@ public class Shop : MonoBehaviour
                     default:
                         shopItem.Setup(_tier1Equipment[Random.Range(0, _tier1Equipment.Count)]);
                         break;
-                }
-                
+                }                
             }
         }
+        CheckForUpgrades();
         CheckBuyButton();
     }
+
+    void CheckForUpgrades()
+    {
+        if(_activeUnits.Count <= 0) { return; }
+
+        foreach(ShopItem shopItem in _shopItems)
+        {
+            shopItem.IndicateUpgrade(false);
+        }
+
+        foreach(Unit unit in _activeUnits)
+        {
+            foreach(ShopItem shopItem in _shopItems)
+            {
+                if(!shopItem.gameObject.activeSelf) { continue; }
+
+                EquipmentType type = shopItem.Gear.Slot;
+
+                switch(type)
+                {
+                    case EquipmentType.Main:
+                        if(unit.Main().Gear)
+                        {
+                            if(unit.Main().Gear == shopItem.Gear)
+                            {
+                                if(_autoUpgradeEnabled)
+                                {
+                                    if(!_wallet.AskToSpend(shopItem.Gear.Price))
+                                    {
+                                        shopItem.IndicateUpgrade(true);
+                                        break;
+                                    }
+                                    
+                                    unit.Main().UpgradeItem(shopItem.Gear);
+                                    unit.BuyGear(shopItem.Gear);
+                                    // TODO A message in floating text raising up saying essentially what's in the Debug.Log below
+                                    Debug.Log($"Upgraded {unit.HeroName}'s {type} with {shopItem.Gear.Name}");
+                                    CompletePurchase(shopItem);
+                                    break;
+                                }
+                                else
+                                {
+                                    shopItem.IndicateUpgrade(true);
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    case EquipmentType.Offhand:
+                        if(unit.Offhand().Gear)
+                        {
+                            if(unit.Offhand().Gear == shopItem.Gear)
+                            {
+                                if(_autoUpgradeEnabled)
+                                {
+                                    if(!_wallet.AskToSpend(shopItem.Gear.Price))
+                                    {
+                                        shopItem.IndicateUpgrade(true);
+                                        break;
+                                    }
+                                    
+                                    unit.Offhand().UpgradeItem(shopItem.Gear);
+                                    unit.BuyGear(shopItem.Gear);
+                                    // TODO A message in floating text raising up saying essentially what's in the Debug.Log below
+                                    Debug.Log($"Upgraded {unit.HeroName}'s {type} with {shopItem.Gear.Name}");
+                                    CompletePurchase(shopItem);
+                                    break;
+                                }
+                                else
+                                {
+                                    shopItem.IndicateUpgrade(true);
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    case EquipmentType.Headgear:
+                        if(unit.Headgear().Gear)
+                        {
+                            if(unit.Headgear().Gear == shopItem.Gear)
+                            {
+                                if(_autoUpgradeEnabled)
+                                {
+                                    if(!_wallet.AskToSpend(shopItem.Gear.Price))
+                                    {
+                                        shopItem.IndicateUpgrade(true);
+                                        break;
+                                    }
+                                    
+                                    unit.Headgear().UpgradeItem(shopItem.Gear);
+                                    unit.BuyGear(shopItem.Gear);
+                                    // TODO A message in floating text raising up saying essentially what's in the Debug.Log below
+                                    Debug.Log($"Upgraded {unit.HeroName}'s {type} with {shopItem.Gear.Name}");
+                                    CompletePurchase(shopItem);
+                                    break;
+                                }
+                                else
+                                {
+                                    shopItem.IndicateUpgrade(true);
+                                    break;
+                                }
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+
 
     public void Lock()
     {
@@ -244,7 +380,7 @@ public class Shop : MonoBehaviour
 
         EquipmentType type = _selectedShopItem.Gear.Slot;
 
-        switch (type)
+        switch(type)
         {
             case EquipmentType.Main:
                 if(_selectedUnit.Main().Gear)
@@ -318,14 +454,15 @@ public class Shop : MonoBehaviour
         }
 
         _selectedUnit.BuyGear(_selectedShopItem.Gear);
-        CompletePurchase();
+        CompletePurchase(_selectedShopItem);
+        CheckForUpgrades();
     }
 
-    void CompletePurchase()
+    void CompletePurchase(ShopItem shopItem)
     {
-        _selectedShopItem.UnLock();
-        _selectedShopItem.ResetBorder();
-        _selectedShopItem.gameObject.SetActive(false);
+        shopItem.UnLock();
+        shopItem.ResetBorder();
+        shopItem.gameObject.SetActive(false);
         _selectedShopItem = null;
         CheckBuyButton();
     }
