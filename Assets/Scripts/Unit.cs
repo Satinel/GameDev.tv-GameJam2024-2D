@@ -26,6 +26,9 @@ public class Unit : MonoBehaviour
     [SerializeField] SpriteRenderer _unitSpriteRenderer;
     [SerializeField] FloatingText _floatingText;
     [SerializeField] Sprite _normalSprite, _deathSprite;
+    [SerializeField] AudioSource _audioSource;
+    [SerializeField] AudioClip _faintSFX;
+    [SerializeField] float _faintVolume;
 
     int _currentHealth;
     bool _isSelected = false;
@@ -240,6 +243,10 @@ public class Unit : MonoBehaviour
 
     void Die()
     {
+        if(_audioSource && _faintSFX)
+        {
+            _audioSource.PlayOneShot(_faintSFX, _faintVolume);
+        }
         _unitSpriteRenderer.sprite = _deathSprite;
         OnAnyUnitKilled?.Invoke(this, this);
         IsDead = true;

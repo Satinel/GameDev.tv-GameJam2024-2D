@@ -8,9 +8,6 @@ public class EquipmentSlot : MonoBehaviour
     public BaseSkill Skill {get; private set;}
 
     [SerializeField] SpriteRenderer _spriteRenderer;
-    [SerializeField] AudioSource _audioSource;
-    [SerializeField] AudioClip _buySFX, _upgradeSFX;
-    [SerializeField] float _spendVolume, _upgradeVolume;
 
     public Sprite ItemSprite() => _spriteRenderer.sprite;
 
@@ -25,10 +22,6 @@ public class EquipmentSlot : MonoBehaviour
 
     public void EquipItem(EquipmentScriptableObject gear)
     {
-        if(_audioSource && _buySFX)
-        {
-            _audioSource.PlayOneShot(_buySFX, _spendVolume);
-        }
         UpgradeLevel = 1; // Resets for new items
         Gear = gear;
         UpgradeName = gear.Name;
@@ -49,10 +42,6 @@ public class EquipmentSlot : MonoBehaviour
 
     public void UpgradeItem(EquipmentScriptableObject gear)
     {
-        if(_audioSource && _upgradeSFX)
-        {
-            _audioSource.PlayOneShot(_upgradeSFX, _upgradeVolume);
-        }
         UpgradeLevel++;
 
         switch(UpgradeLevel)

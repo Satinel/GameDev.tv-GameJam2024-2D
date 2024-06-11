@@ -233,7 +233,11 @@ MonoBehaviour:
   _animator: {fileID: 7461320368451912970}
   _audioSource: {fileID: 3214374797214624728}
   _tooPoorSFX: {fileID: 8300000, guid: 22cabd56bc665cc46b6cd5a60fb9e37a, type: 3}
+  _buySFX: {fileID: 8300000, guid: 22efbfca9d784504dbc2ee75d7f4959d, type: 3}
+  _upgradeSFX: {fileID: 8300000, guid: 2e113dd8799c8714bb2818b4d9a7e3a6, type: 3}
   _poorVolume: 1
+  _buyVolume: 0.8
+  _upgradeVolume: 0.9
   _canvas: {fileID: 1981286469750666462}
 --- !u!82 &3214374797214624728
 AudioSource:

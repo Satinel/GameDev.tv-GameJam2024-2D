@@ -9,8 +9,8 @@ public class Wallet : MonoBehaviour
     [SerializeField] TextMeshProUGUI _moneyText;
     [SerializeField] Animator _animator;
     [SerializeField] AudioSource _audioSource;
-    [SerializeField] AudioClip _tooPoorSFX;
-    [SerializeField] float _poorVolume = 1;
+    [SerializeField] AudioClip _tooPoorSFX, _buySFX, _upgradeSFX;
+    [SerializeField] float _poorVolume = 1f, _buyVolume = 1f, _upgradeVolume = 1f;
     [SerializeField] Canvas _canvas;
 
     static readonly int TOOPOOR_Hash = Animator.StringToHash("TooPoor");
@@ -101,5 +101,21 @@ public class Wallet : MonoBehaviour
         if(!_canvas) { return; }
         
         _canvas.enabled = true;
+    }
+
+    public void PlayBuySFX()
+    {
+        if(_audioSource && _buySFX)
+        {
+            _audioSource.PlayOneShot(_buySFX, _buyVolume);
+        }
+    }
+
+    public void PlayUpgradeSFX()
+    {
+        if(_audioSource && _upgradeSFX)
+        {
+            _audioSource.PlayOneShot(_upgradeSFX, _upgradeVolume);
+        }
     }
 }

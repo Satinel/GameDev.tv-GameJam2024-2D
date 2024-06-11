@@ -491,11 +491,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Gear>k__BackingField: {fileID: 0}
   _spriteRenderer: {fileID: 2448113114261741379}
-  _audioSource: {fileID: 2406818659226136570}
-  _buySFX: {fileID: 8300000, guid: 22efbfca9d784504dbc2ee75d7f4959d, type: 3}
-  _upgradeSFX: {fileID: 8300000, guid: 2e113dd8799c8714bb2818b4d9a7e3a6, type: 3}
-  _spendVolume: 0.8
-  _upgradeVolume: 0.9
 --- !u!1 &1176247148518637271
 GameObject:
   m_ObjectHideFlags: 0
@@ -1452,11 +1447,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Gear>k__BackingField: {fileID: 0}
   _spriteRenderer: {fileID: 5191231138918434314}
-  _audioSource: {fileID: 2406818659226136570}
-  _buySFX: {fileID: 8300000, guid: 22efbfca9d784504dbc2ee75d7f4959d, type: 3}
-  _upgradeSFX: {fileID: 8300000, guid: 2e113dd8799c8714bb2818b4d9a7e3a6, type: 3}
-  _spendVolume: 0.8
-  _upgradeVolume: 0.9
 --- !u!1 &6853301490810010098
 GameObject:
   m_ObjectHideFlags: 0
@@ -1672,6 +1662,9 @@ MonoBehaviour:
   _floatingText: {fileID: 4702419758329665534, guid: ee656e085c3ac6b4d81c6830989cc7d8, type: 3}
   _normalSprite: {fileID: 0}
   _deathSprite: {fileID: 0}
+  _audioSource: {fileID: 2406818659226136570}
+  _faintSFX: {fileID: 8300000, guid: e078f773aaca0dd4681890bf4b7809b1, type: 3}
+  _faintVolume: 1
 --- !u!95 &8647161984636256011
 Animator:
   serializedVersion: 5
@@ -1963,11 +1956,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Gear>k__BackingField: {fileID: 0}
   _spriteRenderer: {fileID: 3149813780152174012}
-  _audioSource: {fileID: 2406818659226136570}
-  _buySFX: {fileID: 8300000, guid: 22efbfca9d784504dbc2ee75d7f4959d, type: 3}
-  _upgradeSFX: {fileID: 8300000, guid: 2e113dd8799c8714bb2818b4d9a7e3a6, type: 3}
-  _spendVolume: 0.8
-  _upgradeVolume: 0.9
 --- !u!1 &8303647729935434554
 GameObject:
   m_ObjectHideFlags: 0

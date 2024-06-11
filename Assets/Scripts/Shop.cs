@@ -23,7 +23,7 @@ public class Shop : MonoBehaviour
     Unit _selectedUnit;
     List<Unit> _activeUnits = new();
     int _wins;
-    bool _autoUpgradeEnabled = false;
+    bool _autoUpgradeEnabled = false, _playUpgradeSFX = false;
     Campaign _campaign = null;
 
     void Awake()
@@ -248,6 +248,8 @@ public class Shop : MonoBehaviour
 
     void CheckForUpgrades()
     {
+        _playUpgradeSFX = false;
+
         if(_activeUnits.Count <= 0) { return; }
 
         foreach(ShopItem shopItem in _shopItems)
@@ -284,6 +286,7 @@ public class Shop : MonoBehaviour
                                     unit.BuyGear(shopItem.Gear);
                                     unit.UpgradeFloatingText($"{unit.Main().UpgradeName} Upgraded!");
                                     CompletePurchase(shopItem);
+                                    _playUpgradeSFX = true;
                                     break;
                                 }
                                 else
@@ -313,6 +316,7 @@ public class Shop : MonoBehaviour
                                     unit.BuyGear(shopItem.Gear);
                                     unit.UpgradeFloatingText($"{unit.Offhand().UpgradeName} Upgraded!");
                                     CompletePurchase(shopItem);
+                                    _playUpgradeSFX = true;
                                     break;
                                 }
                                 else
@@ -342,6 +346,7 @@ public class Shop : MonoBehaviour
                                     unit.BuyGear(shopItem.Gear);
                                     unit.UpgradeFloatingText($"{unit.Headgear().UpgradeName} Upgraded!");
                                     CompletePurchase(shopItem);
+                                    _playUpgradeSFX = true;
                                     break;
                                 }
                                 else
@@ -357,6 +362,11 @@ public class Shop : MonoBehaviour
                         break;
                 }
             }
+        }
+
+        if(_playUpgradeSFX)
+        {
+            _wallet.PlayUpgradeSFX();
         }
     }
 
@@ -385,6 +395,8 @@ public class Shop : MonoBehaviour
 
     public void Buy()
     {
+        _playUpgradeSFX = false;
+
         if(!_selectedShopItem) { return; }
         if(!_selectedUnit) { return; }
 
@@ -400,6 +412,7 @@ public class Shop : MonoBehaviour
                         if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price)) { return; }
                         _selectedUnit.Main().UpgradeItem(_selectedShopItem.Gear);
                         _selectedUnit.UpgradeFloatingText($"{_selectedUnit.Main().UpgradeName} Upgraded!");
+                        _playUpgradeSFX = true;
                         break;
                     }
                     else
@@ -421,6 +434,7 @@ public class Shop : MonoBehaviour
                         if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price)) { return; }
                         _selectedUnit.Offhand().UpgradeItem(_selectedShopItem.Gear);
                         _selectedUnit.UpgradeFloatingText($"{_selectedUnit.Offhand().UpgradeName} Upgraded!");
+                        _playUpgradeSFX = true;
                         break;
                     }
                     else
@@ -442,6 +456,7 @@ public class Shop : MonoBehaviour
                         if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price)) { return; }
                         _selectedUnit.Headgear().UpgradeItem(_selectedShopItem.Gear);
                         _selectedUnit.UpgradeFloatingText($"{_selectedUnit.Headgear().UpgradeName} Upgraded!");
+                        _playUpgradeSFX = true;
                         break;
                     }
                     else
@@ -461,6 +476,16 @@ public class Shop : MonoBehaviour
         }
 
         _selectedUnit.BuyGear(_selectedShopItem.Gear);
+        
+        if(_playUpgradeSFX)
+        {
+            _wallet.PlayUpgradeSFX();
+        }
+        else
+        {
+            _wallet.PlayBuySFX();
+        }
+
         CompletePurchase(_selectedShopItem);
         CheckForUpgrades();
     }
@@ -511,6 +536,7 @@ public class Shop : MonoBehaviour
                 break;
         }
         _selectedUnit.BuyGear(_selectedShopItem.Gear);
+        _wallet.PlayBuySFX();
         CompletePurchase(_selectedShopItem);
         CheckForUpgrades();
     }
