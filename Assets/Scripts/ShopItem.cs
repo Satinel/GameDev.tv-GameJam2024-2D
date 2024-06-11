@@ -70,52 +70,6 @@ public class ShopItem : MonoBehaviour
         }
     }
 
-    public void EquippedSetup(EquipmentScriptableObject gear, int upgradeLevel, Sprite sprite, string upgradeName)
-    {
-        _gear = gear;
-        if(upgradeLevel > 1)
-        {
-            _itemName.text = $"{upgradeName}";
-        }
-        else
-        {
-            _itemName.text = $"{gear.Name}";
-        }
-
-        _slotText.text = gear.Slot.ToString();
-
-        if(gear.Skill.Cooldown > 0)
-        {
-            _cooldownText.text = gear.Skill.Cooldown.ToString();
-        }
-        else
-        {
-            _cooldownText.text = "N/A";
-        }
-        _attackText.text = (gear.AttackIncrease * upgradeLevel).ToString();
-        _healthText.text = (gear.HealthIncrease * upgradeLevel).ToString();
-        _priceImage.enabled = true;
-        _priceText.text = $"Trade in: {gear.Price * upgradeLevel / 3}";
-        _imageRenderer.sprite = sprite;
-
-        if(gear.Slot == EquipmentType.Offhand)
-        {
-            _imageRenderer.transform.localScale = new Vector3(-1f, 1f, 1f);
-            _imageRenderer.rectTransform.anchoredPosition = new Vector3(1.1f, -0.7f, 0f);
-        }
-        else
-        {
-            _imageRenderer.transform.localScale = new Vector3(1f, 1f, 1f);
-            _imageRenderer.rectTransform.anchoredPosition = new Vector3(0.1f, -0.7f, 0f);
-        }
-    }
-
-    public void HideSellPrice()
-    {
-        _priceText.text = $" ";
-        _priceImage.enabled = false;
-    }
-
     public void OnButtonClick()
     {
         OnAnyShopItemClicked?.Invoke(this, this);

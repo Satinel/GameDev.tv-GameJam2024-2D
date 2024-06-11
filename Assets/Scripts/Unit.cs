@@ -38,6 +38,7 @@ public class Unit : MonoBehaviour
     public EquipmentSlot Main() => _equipMain;
     public EquipmentSlot Offhand() => _equipOffhand;
     public EquipmentSlot Headgear() => _equipHeadgear;
+    public bool IsSelected() => _isSelected;
 
     void Awake()
     {
@@ -304,5 +305,4 @@ public class Unit : MonoBehaviour
         if(Attack < 0) Attack = 1;
         _attackText.text = Attack.ToString();
     }
-
 }

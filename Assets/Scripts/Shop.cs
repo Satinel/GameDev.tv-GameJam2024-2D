@@ -13,7 +13,7 @@ public class Shop : MonoBehaviour
     [SerializeField] List<EquipmentScriptableObject> _tier3Equipment = new();
     [SerializeField] List<EquipmentScriptableObject> _tier4Equipment = new();
     [SerializeField] List<ShopItem> _shopItems = new();
-    [SerializeField] ShopItem _unitEquipmentWindow;
+    [SerializeField] ShopEquipped _unitEquipmentWindow;
     [SerializeField] Wallet _wallet;
     [SerializeField] Button _lockButton, _buyButton;
     [SerializeField] TextMeshProUGUI _lockText, _buyText, _rerollText, _tradePromptText;
@@ -67,13 +67,16 @@ public class Shop : MonoBehaviour
 
     void Unit_OnAnyUnitClicked(object sender, Unit unit)
     {
-        if(_selectedUnit == unit)
+        if(!unit.IsSelected())
         {
             _selectedUnit = null;
+            _unitEquipmentWindow.gameObject.SetActive(false);
         }
         else
         {
             _selectedUnit = unit;
+            _unitEquipmentWindow.gameObject.SetActive(true);
+            _unitEquipmentWindow.EquippedSetup(unit);
         }
         CheckBuyButton();
     }
@@ -101,19 +104,25 @@ public class Shop : MonoBehaviour
 
     void CheckBuyButton()
     {
-        _unitEquipmentWindow.gameObject.SetActive(false);
         _clickUnitMessage.SetActive(false);
 
-        if(!_selectedShopItem)
+        if(!_selectedUnit)
         {
+            _unitEquipmentWindow.gameObject.SetActive(false);
+            _clickUnitMessage.SetActive(true);
             _buyButton.interactable = false;
             _buyText.text = "Buy";
             return;
         }
 
-        if(!_selectedUnit)
+        _unitEquipmentWindow.gameObject.SetActive(true);
+        _unitEquipmentWindow.EquippedSetup(_selectedUnit);
+        _unitEquipmentWindow.MainIndicateUpgrade(false);
+        _unitEquipmentWindow.OffIndicateUpgrade(false);
+        _unitEquipmentWindow.HeadIndicateUpgrade(false);
+
+        if(!_selectedShopItem)
         {
-            _clickUnitMessage.SetActive(true);
             _buyButton.interactable = false;
             _buyText.text = "Buy";
             return;
@@ -127,53 +136,39 @@ public class Shop : MonoBehaviour
         switch (type)
         {
             case EquipmentType.Main:
+
                 if(_selectedUnit.Main().Gear)
                 {
-                    _unitEquipmentWindow.IndicateUpgrade(false);
-                    _unitEquipmentWindow.gameObject.SetActive(true);
-                    _unitEquipmentWindow.EquippedSetup(_selectedUnit.Main().Gear, _selectedUnit.Main().UpgradeLevel, _selectedUnit.Main().ItemSprite(), _selectedUnit.Main().UpgradeName);
                     _buyText.text = "Trade?";
                 }
                 if(_selectedUnit.Main().Gear == _selectedShopItem.Gear)
                 {
                     _buyText.text = "Upgrade!!";
-                    _unitEquipmentWindow.HideSellPrice();
-                    _unitEquipmentWindow.IndicateUpgrade(true);
-                    return;
+                    _unitEquipmentWindow.MainIndicateUpgrade(true);
                 }
             break;
 
             case EquipmentType.Offhand:
                 if(_selectedUnit.Offhand().Gear)
                 {
-                    _unitEquipmentWindow.IndicateUpgrade(false);
-                    _unitEquipmentWindow.gameObject.SetActive(true);
-                    _unitEquipmentWindow.EquippedSetup(_selectedUnit.Offhand().Gear, _selectedUnit.Offhand().UpgradeLevel, _selectedUnit.Offhand().ItemSprite(), _selectedUnit.Offhand().UpgradeName);
                     _buyText.text = "Trade?";
                 }
                 if(_selectedUnit.Offhand().Gear == _selectedShopItem.Gear)
                 {
                     _buyText.text = "Upgrade!!";
-                    _unitEquipmentWindow.HideSellPrice();
-                    _unitEquipmentWindow.IndicateUpgrade(true);
-                    return;
+                    _unitEquipmentWindow.OffIndicateUpgrade(true);
                 }
             break;
             
             case EquipmentType.Headgear:
                 if(_selectedUnit.Headgear().Gear)
                 {
-                    _unitEquipmentWindow.IndicateUpgrade(false);
-                    _unitEquipmentWindow.gameObject.SetActive(true);
-                    _unitEquipmentWindow.EquippedSetup(_selectedUnit.Headgear().Gear, _selectedUnit.Headgear().UpgradeLevel, _selectedUnit.Headgear().ItemSprite(), _selectedUnit.Headgear().UpgradeName);
                     _buyText.text = "Trade?";
                 }
                 if(_selectedUnit.Headgear().Gear == _selectedShopItem.Gear)
                 {
                     _buyText.text = "Upgrade!!";
-                    _unitEquipmentWindow.HideSellPrice();
-                    _unitEquipmentWindow.IndicateUpgrade(true);
-                    return;
+                    _unitEquipmentWindow.HeadIndicateUpgrade(true);
                 }
             break;
         }
