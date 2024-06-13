@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System;
+using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
@@ -22,12 +23,14 @@ public class Enemy : MonoBehaviour
     [SerializeField] AudioSource _audioSource;
     [SerializeField] SpriteRenderer _spriteRenderer;
     [SerializeField] FloatingText _floatingText;
+    [SerializeField] Image _attackTimerImage;
 
     [SerializeField] float _attackSpeed;
 
     float _timeSinceLastAttack;
     bool _isFighting = false;
     bool _isFrenzied = false;
+    bool _isAttacking = false;
 
     EnemyScriptableObject _currentEnemy;
     Unit _currentTarget;
@@ -76,13 +79,19 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        if(!_currentEnemy || !_isFighting) { return; }
+        if(!_currentEnemy || !_isFighting || _isAttacking) { return; }
 
         _timeSinceLastAttack += Time.deltaTime;
+
+        if(_timeSinceLastAttack > 0)
+        {
+            _attackTimerImage.fillAmount = _timeSinceLastAttack / _attackSpeed;
+        }
 
         if(_timeSinceLastAttack >= _attackSpeed)
         {
             _timeSinceLastAttack = 0;
+            _isAttacking = true;
             Fight();
         }
     }
@@ -112,6 +121,7 @@ public class Enemy : MonoBehaviour
         _healthText.text = CurrentHealth.ToString();
         _attackText.text = Attack.ToString();
         _timeSinceLastAttack = UnityEngine.Random.Range(-2f, 0); // Sets an initiative so every like enemy has variance in time of attack
+        _attackTimerImage.fillAmount = 0;
         _animator.SetTrigger(SPAWN_HASH);
         _currentTarget = null;
         _earnedGoldGameObject.SetActive(false);
@@ -169,6 +179,8 @@ public class Enemy : MonoBehaviour
             Instantiate(_currentEnemy.SkillVFX, _currentTarget.transform);
         }
         _currentTarget.TakeDamage(Attack);
+        _attackTimerImage.fillAmount = 0;
+        _isAttacking = false;
     }
 
     void SetIsFightingAnimationEvent()
@@ -182,6 +194,7 @@ public class Enemy : MonoBehaviour
         _earnedGoldGameObject.SetActive(true);
         _animator.SetTrigger(DIE_HASH);
         OnAnyEnemyKilled?.Invoke(this, this);
+        _attackTimerImage.fillAmount = 0;
         _isFighting = false;
     }
 

@@ -282,6 +282,10 @@ public class Tutorial : MonoBehaviour
 
     void Timer_OnHalfTime()
     {
+        _fastForwardButton.interactable = false;
+        _playButton.interactable = false;
+        _pauseButton.interactable = false;
+        _doubleFastButton.interactable = false;
         _battle.PauseBattle();
         _textBox.SetActive(true);
         _text.text = "Halfway through the night, monsters will enter a <color=#ff0000>Frenzied</color> state. ";
@@ -291,6 +295,10 @@ public class Tutorial : MonoBehaviour
 
     public void Button7()
     {
+        _fastForwardButton.interactable = true;
+        _playButton.interactable = true;
+        _pauseButton.interactable = true;
+        _doubleFastButton.interactable = true;
         _button7.gameObject.SetActive(false);
         _button8.gameObject.SetActive(true);
         _retreatButton.gameObject.SetActive(true);

@@ -57,6 +57,7 @@ public class Unit : MonoBehaviour
         Battle.OnEnemyListCreated += Battle_OnEnemyListCreated;
         Battle.OnBattleEnded += Battle_OnBattleEnded;
         Campaign.OnReturnToTown += Campaign_OnReturnToTown;
+        Campaign.OnSceneLoading += Campaign_OnSceneLoading;
     }
 
     void OnDisable()
@@ -68,6 +69,7 @@ public class Unit : MonoBehaviour
         Battle.OnEnemyListCreated -= Battle_OnEnemyListCreated;
         Battle.OnBattleEnded -= Battle_OnBattleEnded;
         Campaign.OnReturnToTown -= Campaign_OnReturnToTown;
+        Campaign.OnSceneLoading -= Campaign_OnSceneLoading;
     }
 
     void Start()
@@ -149,6 +151,11 @@ public class Unit : MonoBehaviour
         _healthText.text = _currentHealth.ToString();
         _unitSpriteRenderer.sprite = _normalSprite;
         IsDead = false;
+    }
+
+    void Campaign_OnSceneLoading()
+    {
+        ShowUpgradeIndicator(false);
     }
 
     void SetTarget(Enemy enemy)
