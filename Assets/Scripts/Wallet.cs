@@ -118,4 +118,15 @@ public class Wallet : MonoBehaviour
             _audioSource.PlayOneShot(_upgradeSFX, _upgradeVolume);
         }
     }
+
+    public int SaveMoney()
+    {
+        return TotalMoney;
+    }
+
+    public void LoadMoney(int loadedValue)
+    {
+        TotalMoney = loadedValue;
+        SetMoneyText();
+    }
 }
