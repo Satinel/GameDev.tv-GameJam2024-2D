@@ -242,6 +242,7 @@ public class Campaign : MonoBehaviour
     {
         if(_isTransitioning) { return; }
 
+        _wallet.LoadMoney(0);
         OnTutorialLoading?.Invoke();
         StartCoroutine(GoToTutorialRoutine());
     }

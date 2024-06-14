@@ -4096,6 +4096,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkipButton
       objectReference: {fileID: 0}
+    - target: {fileID: 1634920795106486033, guid: d18d6c6270b69344ba602bef9d4d263d, type: 3}
+      propertyPath: m_text
+      value: Click Here or Press Space to Skip
+      objectReference: {fileID: 0}
+    - target: {fileID: 1842376182026752876, guid: d18d6c6270b69344ba602bef9d4d263d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3295677989707087962, guid: d18d6c6270b69344ba602bef9d4d263d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4122,7 +4130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3295677989707087962, guid: d18d6c6270b69344ba602bef9d4d263d, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 4.1415
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3295677989707087962, guid: d18d6c6270b69344ba602bef9d4d263d, type: 3}
       propertyPath: m_SizeDelta.y
@@ -4158,7 +4166,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3295677989707087962, guid: d18d6c6270b69344ba602bef9d4d263d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -6.1977973
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 3295677989707087962, guid: d18d6c6270b69344ba602bef9d4d263d, type: 3}
       propertyPath: m_AnchoredPosition.y

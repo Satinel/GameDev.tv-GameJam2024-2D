@@ -6,6 +6,16 @@ public class SaveSystem : MonoBehaviour
     [SerializeField] Wallet _wallet; // TODO Rather than getting reference to Wallet etc. we make an interface for things we want to have save data
     string _path;
 
+    void OnEnable()
+    {
+        Campaign.OnReturnToTown += Save;
+    }
+
+    void OnDisable()
+    {
+        Campaign.OnReturnToTown -= Save;
+    }
+
     public void Save() // TODO Prompt about overwriting save data
     {
         
