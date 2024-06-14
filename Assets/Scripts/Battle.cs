@@ -12,6 +12,7 @@ public class Battle : MonoBehaviour
     public static event Action OnRetreated;
     public static event Action OnBattleLost;
     public static event EventHandler<List<Enemy>> OnEnemyListCreated;
+    public static event EventHandler<float> OnSpeedChanged;
 
     [SerializeField] float _respawnTime;
     [SerializeField] List<Enemy> _enemies = new();
@@ -85,7 +86,7 @@ public class Battle : MonoBehaviour
 
     void Options_OnOptionsOpened()
     {
-        if(Time.timeScale > 0)
+        if(Time.timeScale > 0f)
         {   
             PauseBattle();
             _wasPaused = false;
@@ -157,25 +158,28 @@ public class Battle : MonoBehaviour
 
     public void SetNormalSpeed()
     {
-        _currentTimeSpeed = 1;
+        _currentTimeSpeed = 1f;
         UnpauseBattle();
+        OnSpeedChanged?.Invoke(this, _currentTimeSpeed);
     }
 
     public void SetDoubleSpeed()
     {
-        _currentTimeSpeed = 2;
+        _currentTimeSpeed = 2f;
         UnpauseBattle();
+        OnSpeedChanged?.Invoke(this, _currentTimeSpeed);
     }
 
     public void SetQuadSpeed()
     {
-        _currentTimeSpeed = 4;
+        _currentTimeSpeed = 4f;
         UnpauseBattle();
+        OnSpeedChanged?.Invoke(this, _currentTimeSpeed);
     }
 
     public void PauseBattle()
     {
-        Time.timeScale = 0;
+        Time.timeScale = 0f;
     }
 
     public void UnpauseBattle()

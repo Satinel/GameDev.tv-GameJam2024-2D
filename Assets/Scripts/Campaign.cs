@@ -33,7 +33,7 @@ public class Campaign : MonoBehaviour
     [SerializeField] Wallet _wallet;
 
     bool _isTransitioning;
-    bool _tutorialStarted;
+    float _savedBattleSpeed = 1f;
 
     void Awake()
     {
@@ -49,6 +49,7 @@ public class Campaign : MonoBehaviour
         Battle.OnBattleWon += Battle_OnBattleWon;
         Battle.OnRetreated += Battle_OnRetreated;
         Battle.OnBattleLost += Battle_OnBattleLost;
+        Battle.OnSpeedChanged += Battle_OnSpeedChanged;
         Portal.OnShopOpened += Portal_OnShopOpened;
         ShopItem.OnShopItemLocked += ShopItem_OnShopItemLocked;
     }
@@ -59,19 +60,9 @@ public class Campaign : MonoBehaviour
         Battle.OnBattleWon -= Battle_OnBattleWon;
         Battle.OnRetreated -= Battle_OnRetreated;
         Battle.OnBattleLost -= Battle_OnBattleLost;
+        Battle.OnSpeedChanged -= Battle_OnSpeedChanged;
         Portal.OnShopOpened -= Portal_OnShopOpened;
         ShopItem.OnShopItemLocked -= ShopItem_OnShopItemLocked;
-    }
-
-    void Update()
-    {
-        if(_tutorialStarted) { return; }
-
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            _tutorialStarted = true;
-            GoToTutorial();
-        }
     }
 
     void Battle_OnBattleEnded()
@@ -118,6 +109,11 @@ public class Campaign : MonoBehaviour
         {
             HandleGameOver();
         }
+    }
+
+    void Battle_OnSpeedChanged(object sender, float battleSpeed)
+    {
+        _savedBattleSpeed = battleSpeed;
     }
 
     void HandleGameOver()
@@ -239,6 +235,7 @@ public class Campaign : MonoBehaviour
 
         OnBattleLoaded?.Invoke(this, Losses);
         _isTransitioning = false;
+        Time.timeScale = _savedBattleSpeed;
     }
 
     public void GoToTutorial()

@@ -16,7 +16,9 @@ public class Shop : MonoBehaviour
     [SerializeField] ShopEquipped _unitEquipmentWindow;
     [SerializeField] Wallet _wallet;
     [SerializeField] Button _lockButton, _buyButton;
-    [SerializeField] TextMeshProUGUI _lockText, _buyText, _rerollText, _tradePromptText;
+    [SerializeField] TextMeshProUGUI _lockText, _buyText, _rerollText, _tradeEquippedAttackText, _tradeEquippedHealthText, _tradeShopAttackText, _tradeShopHealthText;
+    [SerializeField] TextMeshProUGUI _tradeEquippedCooldownText, _tradeShopCooldownText, _tradeEquippedNameText, _tradeShopNameText;
+    [SerializeField] Image _tradeEquippedSprite, _tradeShopSprite;
     [SerializeField] GameObject _shopParent, _clickUnitMessage, _autoUpgradeButton, _manualUpgradeButton, _tradePrompt;
 
     ShopItem _selectedShopItem;
@@ -188,6 +190,10 @@ public class Shop : MonoBehaviour
         if(_campaign)
         {
             _campaign.SetAutoUpgrades(isEnabled);
+        }
+        if(_autoUpgradeEnabled)
+        {
+            CheckForUpgrades();
         }
     }
 
@@ -412,7 +418,7 @@ public class Shop : MonoBehaviour
                     }
                     else
                     {
-                        PromptTrade($"Trade\n{_selectedUnit.Main().UpgradeName}\nfor\n{_selectedShopItem.Gear.Name}?");
+                        PromptTrade(_selectedUnit.Main());
                         return;
                     }
                 }
@@ -434,7 +440,7 @@ public class Shop : MonoBehaviour
                     }
                     else
                     {
-                        PromptTrade($"Trade\n{_selectedUnit.Offhand().UpgradeName}\nfor\n{_selectedShopItem.Gear.Name}?");
+                        PromptTrade(_selectedUnit.Offhand());
                         return;
                     }
                 }
@@ -456,7 +462,7 @@ public class Shop : MonoBehaviour
                     }
                     else
                     {
-                        PromptTrade($"Trade\n{_selectedUnit.Headgear().UpgradeName}\nfor\n{_selectedShopItem.Gear.Name}?");
+                        PromptTrade(_selectedUnit.Headgear());
                         return;
                     }
                 }
@@ -494,16 +500,24 @@ public class Shop : MonoBehaviour
         CheckBuyButton();
     }
 
-    void PromptTrade(string tradeText)
+    void PromptTrade(EquipmentSlot equipmentSlot)
     {
-        _tradePromptText.text = tradeText;
+        _tradeEquippedNameText.text = equipmentSlot.UpgradeName;
+        _tradeEquippedAttackText.text = (equipmentSlot.Gear.AttackIncrease * equipmentSlot.UpgradeLevel).ToString();
+        _tradeEquippedHealthText.text = (equipmentSlot.Gear.HealthIncrease * equipmentSlot.UpgradeLevel).ToString();
+        _tradeEquippedCooldownText.text = equipmentSlot.Gear.Skill.Cooldown.ToString();
+        _tradeShopNameText.text = _selectedShopItem.Gear.Name;
+        _tradeShopAttackText.text = _selectedShopItem.Gear.AttackIncrease.ToString();
+        _tradeShopHealthText.text = _selectedShopItem.Gear.HealthIncrease.ToString();
+        _tradeShopCooldownText.text = _selectedShopItem.Gear.Skill.Cooldown.ToString();
+        _tradeEquippedSprite.sprite = equipmentSlot.Gear.Sprite;
+        _tradeShopSprite.sprite = _selectedShopItem.Gear.Sprite;
         _tradePrompt.SetActive(true);
     }
 
     public void CancelTrade()
     {
         _tradePrompt.SetActive(false);
-        _tradePromptText.text = string.Empty;
     }
 
     public void ConfirmTrade()

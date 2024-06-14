@@ -16,6 +16,7 @@ public class Portal : MonoBehaviour
     static readonly int DAY5_HASH = Animator.StringToHash("Day5");
 
     int _unitIndex = 0;
+    bool _cutsceneSkipped;
 
     void OnEnable()
     {
@@ -27,8 +28,26 @@ public class Portal : MonoBehaviour
         Campaign.OnTownLoaded -= Campaign_OnTownLoaded;
     }
 
+    void Update()
+    {
+        if(_cutsceneSkipped) { return; }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            SkipCutscene();
+        }
+    }
+
+    public void SkipCutscene()
+    {
+        _cutsceneSkipped = true;
+        Time.timeScale = 10f;
+    }
+
     public void OpenShop()
     {
+        _cutsceneSkipped = true;
+        Time.timeScale = 1f;
         _portalMusic.SetActive(false);
         _shopParent.SetActive(true);
         _shopMusic.SetActive(true);
