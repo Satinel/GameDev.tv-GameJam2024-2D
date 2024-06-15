@@ -18,14 +18,18 @@ public class SaveSystem : MonoBehaviour
 
     public void Save() // TODO Prompt about overwriting save data
     {
+// #if UNITY_EDITOR
+// {
+//         return;
+// }
         
 #if UNITY_WEBGL
 {
         _path = "/idbfs/MangoKamenLastStand" + "/save.txt";
-        // if(!Directory.Exists(_path))
-        // {
-        //     Directory.CreateDirectory("/idbfs/MangoKamenLastStand");
-        // }
+        if(!Directory.Exists(_path))
+        {
+            Directory.CreateDirectory("/idbfs/MangoKamenLastStand");
+        }
 }
 #else
 {

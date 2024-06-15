@@ -25,6 +25,7 @@ public class Campaign : MonoBehaviour
     [SerializeField] AudioClip _defeatSFX, _victorySFX, _gameOverSFX;
     [SerializeField] GameObject _overlay, _victorySplash, _retreatSplash, _defeatSplash, _gameOverSplash, _toBattleButton, _quitButton, _lostGoldFloatingText;
     [SerializeField] List<Image> _lives = new();
+    [SerializeField] List<GameObject> _wins = new();
     [SerializeField] Image _tutorialLife;
     [SerializeField] SkillVFX _explosionVFX;
     [SerializeField] Image _screenWipeImage;
@@ -79,6 +80,11 @@ public class Campaign : MonoBehaviour
         if(_audioSource && _victorySFX)
         {
             _audioSource.PlayOneShot(_victorySFX, _volume);
+        }
+        if(_wins.Count >= Wins)
+        {
+            _wins[Wins - 1].SetActive(true);
+            _wins[Wins - 1].GetComponent<Animator>().SetTrigger("Win");
         }
     }
 

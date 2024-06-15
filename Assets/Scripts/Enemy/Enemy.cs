@@ -127,6 +127,7 @@ public class Enemy : MonoBehaviour
         _earnedGoldGameObject.SetActive(false);
         GoldValue = Mathf.CeilToInt(((float)_currentEnemy.Attack / _currentEnemy.ASpeed) + ((float)_currentEnemy.MaxHealth / 4f));
         _goldText.text = $"+{GoldValue} GOLD";
+        _isAttacking = false;
     }
 
 
@@ -163,6 +164,8 @@ public class Enemy : MonoBehaviour
 
     void DealDamageAnimationEvent()
     {
+        if(!_isFighting) { return; }
+
         if(!_currentTarget)
         {
             if(_teamManager.Team.Count <= 0) { return; }

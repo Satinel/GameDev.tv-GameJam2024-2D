@@ -87,7 +87,6 @@ public class Shop : MonoBehaviour
     {
         _campaign = (Campaign)sender;
         _wins = _campaign.Wins;
-        EnableAutoUpgrades(_campaign.AutoUpgrades);
 
         for(int i = 0; i < lockedItems.Count; i++)
         {
@@ -95,6 +94,7 @@ public class Shop : MonoBehaviour
             _shopItems[i].LockNoCallback();
         }
         Reroll();
+        EnableAutoUpgrades(_campaign.AutoUpgrades);
     }
 
     void TeamManager_OnActiveUnitsRequested(object sender, List<Unit> activeUnits)
