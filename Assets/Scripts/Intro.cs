@@ -76,4 +76,14 @@ public class Intro : MonoBehaviour
     {
         _nameConfirm.SetActive(false);
     }
+
+    public void TextInputButton()
+    {
+        ConfirmNamePrompt(_nameInputText);
+    }
+    
+    public void OnValueChanged(string value)
+    {
+        _nameInputText = value;
+    }
 }
