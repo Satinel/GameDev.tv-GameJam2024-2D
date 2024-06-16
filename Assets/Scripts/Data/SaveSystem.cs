@@ -17,15 +17,10 @@ public class SaveSystem : MonoBehaviour
     }
 
     public void Save() // TODO Prompt about overwriting save data
-    {
-// #if UNITY_EDITOR
-// {
-//         return;
-// }
-        
+    {        
 #if UNITY_WEBGL
 {
-        _path = "/idbfs/MangoKamenLastStand" + "/save.txt";
+        _path = "/idbfs/MangoKamenLastStand" + "/save.txt"; // Note that if the Unity Editor is set to WebGL build this will create a folder in the root of the drive it is on
         if(!Directory.Exists(_path))
         {
             Directory.CreateDirectory("/idbfs/MangoKamenLastStand");

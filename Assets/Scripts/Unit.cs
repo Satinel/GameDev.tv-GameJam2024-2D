@@ -19,6 +19,7 @@ public class Unit : MonoBehaviour
     [SerializeField] TextMeshProUGUI _attackText;
     [SerializeField] TextMeshProUGUI _healthText;
     [SerializeField] TextMeshProUGUI _risingText;
+    [SerializeField] TextMeshProUGUI _heroNameText;
     [SerializeField] EquipmentSlot _equipMain, _equipOffhand, _equipHeadgear;
     [SerializeField] GameObject _highlight, _upgradeIcon, _upgradeRisingText;
     [SerializeField] Transform _targetIndicator;
@@ -79,6 +80,7 @@ public class Unit : MonoBehaviour
         _attackText.text = Attack.ToString();
         _equipMain.SetSkill();
         _normalSprite = _unitSpriteRenderer.sprite;
+        _heroNameText.text = HeroName;
     }
 
     public void OnUnitClicked()
@@ -311,5 +313,11 @@ public class Unit : MonoBehaviour
         Attack += (int)attackChange;
         if(Attack < 0) Attack = 1;
         _attackText.text = Attack.ToString();
+    }
+
+    public void SetHeroName(string name)
+    {
+        HeroName = name;
+        _heroNameText.text = HeroName;
     }
 }
