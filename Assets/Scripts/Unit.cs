@@ -146,6 +146,7 @@ public class Unit : MonoBehaviour
         _targetIndicator.gameObject.SetActive(false);
         _highlight.SetActive(false);
         _isSelected = false;
+        _allSelected = false;
     }
 
     void Campaign_OnReturnToTown()
@@ -246,7 +247,7 @@ public class Unit : MonoBehaviour
             if(_isSelected && !_allSelected)
             {
                 _highlight.SetActive(false);
-                _isSelected = false; // TODO Test this!
+                _isSelected = false;
             }
             else
             {

@@ -27,7 +27,7 @@ public class TeamManager : MonoBehaviour
         Campaign.OnReturnToTown += Campaign_OnReturnToTown;
         Campaign.OnTutorialLoading += Campaign_OnTutorialLoading;
         Unit.OnAnyUnitKilled += Unit_OnAnyUnitKilled;
-        Tutorial.OnTargetingTutorialOver += Tutorial_OnTutorialOver;
+        Tutorial.OnTargetingTutorialOver += Tutorial_OnTargetingTutorialOver;
         Portal.OnUnitSummoned += Portal_OnUnitSummoned;
         Portal.OnShopOpened += Portal_OnShopOpened;
     }
@@ -39,7 +39,7 @@ public class TeamManager : MonoBehaviour
         Campaign.OnReturnToTown -= Campaign_OnReturnToTown;
         Campaign.OnTutorialLoading -= Campaign_OnTutorialLoading;
         Unit.OnAnyUnitKilled -= Unit_OnAnyUnitKilled;
-        Tutorial.OnTargetingTutorialOver += Tutorial_OnTutorialOver;
+        Tutorial.OnTargetingTutorialOver += Tutorial_OnTargetingTutorialOver;
         Portal.OnUnitSummoned -= Portal_OnUnitSummoned;
         Portal.OnShopOpened -= Portal_OnShopOpened;
     }
@@ -82,7 +82,7 @@ public class TeamManager : MonoBehaviour
 
     void Battle_OnBattleEnded()
     {
-        _goingToShop = true; // TODO Test this!
+        _goingToShop = true;
     }
 
     void Campaign_OnReturnToTown()
@@ -92,9 +92,10 @@ public class TeamManager : MonoBehaviour
         SelectAllButton.SetActive(false);
     }
 
-    void Tutorial_OnTutorialOver()
+    void Tutorial_OnTargetingTutorialOver()
     {
         _isTutorial = false;
+        SelectAllButton.SetActive(true);
     }
 
     void Portal_OnUnitSummoned(object sender, int index)
@@ -165,14 +166,15 @@ public class TeamManager : MonoBehaviour
         }
     }
 
-    public void Campaign_OnTutorialLoading()
+    void Campaign_OnTutorialLoading()
     {
         _isTutorial = true;
+        SelectAllButton.SetActive(false);
     }
 
     void Update()
     {
-        if(_activeUnits.Count <= 0 || _goingToShop) { return; }
+        if(_activeUnits.Count <= 0 || _goingToShop || _isTutorial) { return; }
 
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
