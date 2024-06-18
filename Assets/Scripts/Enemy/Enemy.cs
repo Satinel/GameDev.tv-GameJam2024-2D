@@ -104,6 +104,8 @@ public class Enemy : MonoBehaviour
 
     public void SetUp(EnemyScriptableObject enemySpawn)
     {
+        if(!gameObject.activeSelf) { return; }
+        
         _currentEnemy = enemySpawn;
         _spriteRenderer.sprite = _currentEnemy.Sprite;
 

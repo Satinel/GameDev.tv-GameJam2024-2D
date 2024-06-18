@@ -14,7 +14,6 @@ public class Shop : MonoBehaviour
     [SerializeField] List<EquipmentScriptableObject> _tier4Equipment = new();
     [SerializeField] List<ShopItem> _shopItems = new();
     [SerializeField] ShopEquipped _unitEquipmentWindow;
-    [SerializeField] Wallet _wallet;
     [SerializeField] Button _lockButton, _buyButton;
     [SerializeField] TextMeshProUGUI _lockText, _buyText, _rerollText, _tradeEquippedAttackText, _tradeEquippedHealthText, _tradeShopAttackText, _tradeShopHealthText;
     [SerializeField] TextMeshProUGUI _tradeEquippedCooldownText, _tradeShopCooldownText, _tradeEquippedNameText, _tradeShopNameText;
@@ -22,6 +21,8 @@ public class Shop : MonoBehaviour
     [SerializeField] GameObject _shopParent, _clickUnitMessage, _autoUpgradeButton, _manualUpgradeButton, _tradePrompt;
 
     ShopItem _selectedShopItem;
+    Wallet _wallet;
+    TeamManager _teamManager;
     Unit _selectedUnit;
     List<Unit> _activeUnits = new();
     int _wins;
@@ -41,7 +42,7 @@ public class Shop : MonoBehaviour
         ShopItem.OnAnyShopItemClicked += ShopItem_OnAnyShopItemClicked;
         Unit.OnAnyUnitClicked += Unit_OnAnyUnitClicked;
         Campaign.OnSetLockedItems += Campaign_OnSetLockedItems;
-        TeamManager.OnActiveUnitsRequested += TeamManager_OnActiveUnitsRequested;
+        // TeamManager.OnActiveUnitsRequested += TeamManager_OnActiveUnitsRequested;
     }
 
     void OnDisable()
@@ -49,7 +50,7 @@ public class Shop : MonoBehaviour
         ShopItem.OnAnyShopItemClicked -= ShopItem_OnAnyShopItemClicked;
         Unit.OnAnyUnitClicked -= Unit_OnAnyUnitClicked;
         Campaign.OnSetLockedItems -= Campaign_OnSetLockedItems;
-        TeamManager.OnActiveUnitsRequested -= TeamManager_OnActiveUnitsRequested;
+        // TeamManager.OnActiveUnitsRequested -= TeamManager_OnActiveUnitsRequested;
     }
 
     void ShopItem_OnAnyShopItemClicked(object sender, ShopItem shopItem)
@@ -93,15 +94,16 @@ public class Shop : MonoBehaviour
             _shopItems[i].Setup(lockedItems[i]);
             _shopItems[i].LockNoCallback();
         }
+
+        if(!_teamManager)
+        {
+            _teamManager = FindFirstObjectByType<TeamManager>();
+        }
+
+        _activeUnits = _teamManager.GetActiveUnits();
+        
         Reroll();
         EnableAutoUpgrades(_campaign.AutoUpgrades);
-    }
-
-    void TeamManager_OnActiveUnitsRequested(object sender, List<Unit> activeUnits)
-    {
-        _activeUnits.Clear();
-
-        _activeUnits = activeUnits;
     }
 
     void CheckBuyButton()
@@ -257,7 +259,6 @@ public class Shop : MonoBehaviour
         {
             shopItem.IndicateUpgrade(false);
         }
-
         foreach(Unit unit in _activeUnits)
         {
             unit.ShowUpgradeIndicator(false);
@@ -364,7 +365,6 @@ public class Shop : MonoBehaviour
                 }
             }
         }
-
         if(_playUpgradeSFX)
         {
             _wallet.PlayUpgradeSFX();

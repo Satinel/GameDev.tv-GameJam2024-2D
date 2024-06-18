@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b8ae6f83650c940b24ca4d1a1f28a9, type: 3}
   m_Name: MinionShield
   m_EditorClassIdentifier: 
-  Name: Demon Lord
-  Sprite: {fileID: -1919187687, guid: 2e491c32345d23b4f89668828219455f, type: 3}
+  Name: Shield Minion
+  Sprite: {fileID: -2137664024, guid: 3536e8b12ea3b3b44ac96602e2b0192c, type: 3}
   Attack: 2000
   ASpeed: 10
   MaxHealth: 288000

@@ -6,7 +6,7 @@ public class TeamManager : MonoBehaviour
 {
     public static event Action OnPartyWipe;
     public static event Action OnManualPressed;
-    public static event EventHandler<List<Unit>> OnActiveUnitsRequested;
+    // public static event EventHandler<List<Unit>> OnActiveUnitsRequested;
 
     [field:SerializeField] public List<Unit> Team { get; private set; } = new();
     [field:SerializeField] public GameObject ManualButton { get; private set; }
@@ -106,14 +106,7 @@ public class TeamManager : MonoBehaviour
 
     void Portal_OnShopOpened()
     {
-        List<Unit> activeUnits = new();
-        
-        foreach(Unit unit in GetComponentsInChildren<Unit>(false))
-        {
-            activeUnits.Add(unit);
-        }
-
-        OnActiveUnitsRequested?.Invoke(this, activeUnits);
+        // OnActiveUnitsRequested?.Invoke(this, _activeUnits);
         _inShop = true;
         _goingToShop = false;
     }
@@ -164,6 +157,11 @@ public class TeamManager : MonoBehaviour
         {
             unit.SelectAllUnits();
         }
+    }
+
+    public List<Unit> GetActiveUnits()
+    {
+        return _activeUnits;
     }
 
     void Campaign_OnTutorialLoading()

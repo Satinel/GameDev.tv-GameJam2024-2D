@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b8ae6f83650c940b24ca4d1a1f28a9, type: 3}
   m_Name: MinionBomb
   m_EditorClassIdentifier: 
-  Name: Demon Lord
-  Sprite: {fileID: -1919187687, guid: 2e491c32345d23b4f89668828219455f, type: 3}
+  Name: Bomb Minion
+  Sprite: {fileID: 299919557, guid: f6d98ae6c625a9f4a8fbded8858cbeab, type: 3}
   Attack: 2000
   ASpeed: 10
   MaxHealth: 288000

@@ -52,6 +52,9 @@ MonoBehaviour:
   <Team>k__BackingField: []
   <ManualButton>k__BackingField: {fileID: 0}
   <AutoButton>k__BackingField: {fileID: 0}
+  <SelectAllButton>k__BackingField: {fileID: 0}
+  _activeUnits:
+  - {fileID: 754338724913800792}
   _lockedUnits:
   - {fileID: 4625052113880249478}
   - {fileID: 5526514276419826425}
@@ -485,6 +488,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 53291c28ba03c3c48a9a318e894fdc00, type: 3}
+--- !u!114 &754338724913800792 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6634878946718123163, guid: 53291c28ba03c3c48a9a318e894fdc00, type: 3}
+  m_PrefabInstance: {fileID: 6225135964190466755}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef148bf02ebe630409e63ca6526b5f45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &887612376333483390 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6500188419233947581, guid: 53291c28ba03c3c48a9a318e894fdc00, type: 3}
