@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Wizbang
   Sprite: {fileID: -216444934, guid: 57d331f997228534fa3826086ae6d296, type: 3}
-  Attack: 7296
+  Attack: 730
   ASpeed: 19
   MaxHealth: 16800
   AttackSFX: {fileID: 8300000, guid: 924c26c575557e54aa77e0e4920535b8, type: 3}

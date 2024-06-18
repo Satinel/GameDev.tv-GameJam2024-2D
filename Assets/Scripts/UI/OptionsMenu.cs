@@ -1,7 +1,6 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 
 public class OptionsMenu : MonoBehaviour
 {
@@ -46,11 +45,6 @@ public class OptionsMenu : MonoBehaviour
     {
         _optionsCanvas.gameObject.SetActive(false);
         OnOptionsClosed?.Invoke();
-    }
-
-    public void ReloadScene()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void PromptQuit()

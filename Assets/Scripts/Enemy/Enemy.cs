@@ -15,6 +15,7 @@ public class Enemy : MonoBehaviour
     public int GoldValue {get; private set;}
     
     [field:SerializeField] public int Row {get; private set;}
+    [field:SerializeField] public bool IsBoss {get; private set;}
     public bool IsDead() => !_isFighting;
 
     [SerializeField] TextMeshProUGUI _attackText, _healthText, _goldText;
@@ -118,14 +119,21 @@ public class Enemy : MonoBehaviour
         }
         _attackSpeed = _currentEnemy.ASpeed;
         CurrentHealth = MaxHealth;
-        _healthText.text = CurrentHealth.ToString();
+        if(IsBoss)
+        {
+            _healthText.text = "???";
+        }
+        else
+        {
+            _healthText.text = CurrentHealth.ToString();
+        }
         _attackText.text = Attack.ToString();
         _timeSinceLastAttack = UnityEngine.Random.Range(-2f, 0); // Sets an initiative so every like enemy has variance in time of attack
         _attackTimerImage.fillAmount = 0;
         _animator.SetTrigger(SPAWN_HASH);
         _currentTarget = null;
         _earnedGoldGameObject.SetActive(false);
-        GoldValue = Mathf.CeilToInt(((float)_currentEnemy.Attack / _currentEnemy.ASpeed) + ((float)_currentEnemy.MaxHealth / 4f));
+        GoldValue = Mathf.CeilToInt((_currentEnemy.Attack / _currentEnemy.ASpeed) + (_currentEnemy.MaxHealth / 4f));
         _goldText.text = $"+{GoldValue} GOLD";
         _isAttacking = false;
     }
@@ -141,11 +149,14 @@ public class Enemy : MonoBehaviour
             floatingText.Setup(damage);
         }
         CurrentHealth -= damage;
-        _healthText.text = CurrentHealth.ToString();
-        if(CurrentHealth <= 0)
+        if(!IsBoss)
         {
             _healthText.text = CurrentHealth.ToString();
+        }
+        if(CurrentHealth <= 0)
+        {
             CurrentHealth = 0;
+            _healthText.text = CurrentHealth.ToString();
             Die();
         }
     }
@@ -222,6 +233,7 @@ public class Enemy : MonoBehaviour
     void Timer_OnHalfTime()
     {
         _isFrenzied = true;
+        if(IsBoss) { return; } // TODO Handle boss frenzy in BossBattle script
         if(_currentEnemy)
         {
             Attack *= 2;

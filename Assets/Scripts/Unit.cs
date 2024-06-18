@@ -34,6 +34,7 @@ public class Unit : MonoBehaviour
     int _currentHealth;
     bool _isSelected = false;
     bool _isManual = false;
+    bool _allSelected;
     List<Enemy> _enemyList = new();
 
     public EquipmentSlot Main() => _equipMain;
@@ -227,27 +228,38 @@ public class Unit : MonoBehaviour
         }
     }
 
+    public void SelectAllUnits()
+    {
+        if(IsDead) { return; }
+
+        _highlight.SetActive(true);
+        _isSelected = true;
+        _allSelected = true;
+    }
+
     void SelectUnit(object sender, Unit e)
     {
         if(IsDead) { return; }
 
         if(e == this)
         {
-            if(_isSelected)
+            if(_isSelected && !_allSelected)
             {
                 _highlight.SetActive(false);
-                _isSelected = false;
+                _isSelected = false; // TODO Test this!
             }
             else
             {
                 _highlight.SetActive(true);
                 _isSelected = true;
+                _allSelected = false;
             }
         }
         else
         {
             _highlight.SetActive(false);
             _isSelected = false;
+            _allSelected = false;
         }
     }
 

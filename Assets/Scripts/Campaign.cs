@@ -122,7 +122,7 @@ public class Campaign : MonoBehaviour
         _savedBattleSpeed = battleSpeed;
     }
 
-    void HandleGameOver()
+    void HandleGameOver() // TODO Make this less abrupt
     {
         if (_audioSource && _gameOverSFX)
         {
@@ -221,13 +221,13 @@ public class Campaign : MonoBehaviour
         
         
         
-        if(Wins > 5) // THIS!
+        if(Wins > 6)
         {
-            yield return SceneManager.LoadSceneAsync(8);
+            yield return SceneManager.LoadSceneAsync("BattleBoss");
         }
         else
         {
-            yield return SceneManager.LoadSceneAsync(3+Wins);
+            yield return SceneManager.LoadSceneAsync(4+Wins);
         }
 
         _screenWipeImage.fillOrigin = 0; // 0 is Left
@@ -318,7 +318,7 @@ public class Campaign : MonoBehaviour
         OnSceneLoading?.Invoke();
         if(Days > 5)
         {
-            yield return SceneManager.LoadSceneAsync(9);
+            yield return SceneManager.LoadSceneAsync("ShopNoPortal");
         }
         else
         {

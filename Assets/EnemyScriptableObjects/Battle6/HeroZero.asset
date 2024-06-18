@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Hero Zero
   Sprite: {fileID: -1554672095, guid: 19327785cb9150741ad98b7db6bd3f4c, type: 3}
-  Attack: 11520
+  Attack: 1150
   ASpeed: 30
   MaxHealth: 17400
   AttackSFX: {fileID: 8300000, guid: 924c26c575557e54aa77e0e4920535b8, type: 3}

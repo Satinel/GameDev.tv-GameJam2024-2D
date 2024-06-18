@@ -58,13 +58,9 @@ public class Battle : MonoBehaviour
         _incomingRow1 = _bestiary[UnityEngine.Random.Range(0, _bestiary.Count)];
         _incomingRow2 = _bestiary[UnityEngine.Random.Range(0, _bestiary.Count)];
         _incomingRow3 = _bestiary[UnityEngine.Random.Range(0, _bestiary.Count)];
-        _iRow1Sprite.sprite = _incomingRow1.Sprite;
-        _iRow2Sprite.sprite = _incomingRow2.Sprite;
-        _iRow3Sprite.sprite = _incomingRow3.Sprite;
-
-        // _incomingRow1.SpriteFlipped = true ? _iRow1Sprite.flipX = true : _iRow1Sprite.flipX = false; // Gamejam forcing me to learn ternary!
-        // _incomingRow2.SpriteFlipped = true ? _iRow2Sprite.flipX = true : _iRow2Sprite.flipX = false; // But I don't have time to figure out what's going on here
-        // _incomingRow3.SpriteFlipped = true ? _iRow3Sprite.flipX = true : _iRow3Sprite.flipX = false;
+        if(_iRow1Sprite.enabled) _iRow1Sprite.sprite = _incomingRow1.Sprite;
+        if(_iRow2Sprite.enabled) _iRow2Sprite.sprite = _incomingRow2.Sprite;
+        if(_iRow3Sprite.enabled) _iRow3Sprite.sprite = _incomingRow3.Sprite;
     }
 
     void Campaign_OnBattleLoaded(object sender, int losses)
@@ -189,7 +185,14 @@ public class Battle : MonoBehaviour
 
     void Enemy_OnAnyEnemyKilled(object sender, Enemy enemy)
     {
-        StartCoroutine(SpawnEnemy(enemy, enemy.Row));
+        if(!enemy.IsBoss)
+        {
+            StartCoroutine(SpawnEnemy(enemy, enemy.Row));
+        }
+        // else
+        // {
+            // TODO Logic to handle boss battle ending in victory OR an entirely new BossBattle script to handle everything unique to bosses makes more sense
+        // }
     }
 
     void Unit_OnAnyUnitKilled(object sender, Unit unit)
@@ -218,7 +221,6 @@ public class Battle : MonoBehaviour
                 enemy.SetUp(_incomingRow1);
                 _incomingRow1 = _bestiary[UnityEngine.Random.Range(0, _bestiary.Count)]; 
                 _iRow1Sprite.sprite = _incomingRow1.Sprite;
-                // _incomingRow1.SpriteFlipped = true ? _iRow1Sprite.flipX = true : _iRow1Sprite.flipX = false; // This is switching the wrong sprites
                 break;
             case 2:
                 enemy.SetUp(_incomingRow2);

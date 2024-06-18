@@ -3134,6 +3134,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195714041}
   m_CullTransparentMesh: 1
+--- !u!1 &1292755079 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1727540119518810832, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+  m_PrefabInstance: {fileID: 7532600239989325099}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1390589165 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3295677989707087962, guid: d18d6c6270b69344ba602bef9d4d263d, type: 3}
@@ -5572,6 +5577,14 @@ PrefabInstance:
       value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 8801427850446944455, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: _activeUnits.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8801427850446944455, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: _activeUnits.Array.data[0]
+      value: 
+      objectReference: {fileID: 758119686}
+    - target: {fileID: 8801427850446944455, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
       propertyPath: _lockedUnits.Array.data[4]
       value: 
       objectReference: {fileID: 758119686}
@@ -5583,6 +5596,10 @@ PrefabInstance:
       propertyPath: <ManualButton>k__BackingField
       value: 
       objectReference: {fileID: 1890687291}
+    - target: {fileID: 8801427850446944455, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: <SelectAllButton>k__BackingField
+      value: 
+      objectReference: {fileID: 1292755079}
     - target: {fileID: 8801427850446944455, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
       propertyPath: <Team>k__BackingField.Array.size
       value: 1
@@ -5610,6 +5627,18 @@ PrefabInstance:
     - target: {fileID: 8998711738931157036, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
       propertyPath: <HeroName>k__BackingField
       value: Cashew
+      objectReference: {fileID: 0}
+    - target: {fileID: 9179899853494755025, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7532600239989325104}
+    - target: {fileID: 9179899853494755025, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SelectAll
+      objectReference: {fileID: 0}
+    - target: {fileID: 9179899853494755025, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: TeamManager, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5659,6 +5688,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _wallet: {fileID: 7532600239989325101}
+--- !u!114 &7532600239989325104 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8801427850446944455, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+  m_PrefabInstance: {fileID: 7532600239989325099}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e7539ca067a68143a5925653704252c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

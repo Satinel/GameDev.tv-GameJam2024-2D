@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Apex Chicken
   Sprite: {fileID: -1967869553, guid: 2de0297edb7cba240b884752ba7fd20a, type: 3}
-  Attack: 12288
+  Attack: 1228
   ASpeed: 32
   MaxHealth: 21600
   AttackSFX: {fileID: 8300000, guid: 924c26c575557e54aa77e0e4920535b8, type: 3}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Fire Worm
   Sprite: {fileID: -1153214086, guid: 39ce7cb53acab014ba3f75c4231b4670, type: 3}
-  Attack: 10752
+  Attack: 750
   ASpeed: 20
   MaxHealth: 24000
   AttackSFX: {fileID: 8300000, guid: 924c26c575557e54aa77e0e4920535b8, type: 3}

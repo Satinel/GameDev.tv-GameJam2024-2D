@@ -11,15 +11,19 @@ public class TeamManager : MonoBehaviour
     [field:SerializeField] public List<Unit> Team { get; private set; } = new();
     [field:SerializeField] public GameObject ManualButton { get; private set; }
     [field:SerializeField] public GameObject AutoButton { get; private set; }
+    [field:SerializeField] public GameObject SelectAllButton { get; private set; }
     
+    [SerializeField] List<Unit> _activeUnits = new();
     [SerializeField] List<Unit> _lockedUnits = new();
 
     bool _isAuto = true;
     bool _isTutorial = false;
+    bool _inShop = false, _goingToShop = false;
 
     void OnEnable()
     {
         Battle.OnBattleStarted += Battle_OnBattleStarted;
+        Battle.OnBattleEnded += Battle_OnBattleEnded;
         Campaign.OnReturnToTown += Campaign_OnReturnToTown;
         Campaign.OnTutorialLoading += Campaign_OnTutorialLoading;
         Unit.OnAnyUnitKilled += Unit_OnAnyUnitKilled;
@@ -31,6 +35,7 @@ public class TeamManager : MonoBehaviour
     void OnDisable()
     {
         Battle.OnBattleStarted -= Battle_OnBattleStarted;
+        Battle.OnBattleEnded -= Battle_OnBattleEnded;
         Campaign.OnReturnToTown -= Campaign_OnReturnToTown;
         Campaign.OnTutorialLoading -= Campaign_OnTutorialLoading;
         Unit.OnAnyUnitKilled -= Unit_OnAnyUnitKilled;
@@ -70,12 +75,21 @@ public class TeamManager : MonoBehaviour
                 AddUnit(unit);
             }
         }
+
+        SelectAllButton.SetActive(true);
+        _inShop = false;
+    }
+
+    void Battle_OnBattleEnded()
+    {
+        _goingToShop = true; // TODO Test this!
     }
 
     void Campaign_OnReturnToTown()
     {
         ManualButton.SetActive(false);
         AutoButton.SetActive(false);
+        SelectAllButton.SetActive(false);
     }
 
     void Tutorial_OnTutorialOver()
@@ -86,6 +100,7 @@ public class TeamManager : MonoBehaviour
     void Portal_OnUnitSummoned(object sender, int index)
     {
         _lockedUnits[index].gameObject.SetActive(true);
+        _activeUnits.Insert(_activeUnits.Count, _lockedUnits[index]);
     }
 
     void Portal_OnShopOpened()
@@ -98,6 +113,8 @@ public class TeamManager : MonoBehaviour
         }
 
         OnActiveUnitsRequested?.Invoke(this, activeUnits);
+        _inShop = true;
+        _goingToShop = false;
     }
 
     public void AddUnit(Unit unit)
@@ -140,49 +157,58 @@ public class TeamManager : MonoBehaviour
         _isAuto = true;
     }
 
+    public void SelectAll()
+    {
+        foreach(Unit unit in Team)
+        {
+            unit.SelectAllUnits();
+        }
+    }
+
     public void Campaign_OnTutorialLoading()
     {
         _isTutorial = true;
     }
 
-    // void Update() // Doesn't quite work and not worth tinkering with during jam
-    // {
-    //     if(Team.Count <= 0) { return; }
+    void Update()
+    {
+        if(_activeUnits.Count <= 0 || _goingToShop) { return; }
 
-    //     if(Input.GetKeyDown(KeyCode.Alpha1))
-    //     {
-    //         if(Team[0])
-    //         {
-    //             Team[0].OnUnitClicked();
-    //         }
-    //     }
-    //     if(Input.GetKeyDown(KeyCode.Alpha2))
-    //     {
-    //         if(Team[1])
-    //         {
-    //             Team[1].OnUnitClicked();
-    //         }
-    //     }
-    //     if(Input.GetKeyDown(KeyCode.Alpha3))
-    //     {
-    //         if(Team[2])
-    //         {
-    //             Team[2].OnUnitClicked();
-    //         }
-    //     }
-    //     if(Input.GetKeyDown(KeyCode.Alpha4))
-    //     {
-    //         if(Team[3])
-    //         {
-    //             Team[3].OnUnitClicked();
-    //         }
-    //     }
-    //     if(Input.GetKeyDown(KeyCode.Alpha5))
-    //     {
-    //         if(Team[4])
-    //         {
-    //             Team[4].OnUnitClicked();
-    //         }
-    //     }
-    // }
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            _activeUnits[0].OnUnitClicked();
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if(_activeUnits.Count > 1)
+            {
+                _activeUnits[1].OnUnitClicked();
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            if(_activeUnits.Count > 2)
+            {
+                _activeUnits[2].OnUnitClicked();
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            if(_activeUnits.Count > 3)
+            {
+                _activeUnits[3].OnUnitClicked();
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            if(_activeUnits.Count > 4)
+            {
+                _activeUnits[4].OnUnitClicked();
+            }
+        }
+        if(Input.GetKeyDown(KeyCode.Alpha6) && !_inShop)
+        {
+            SelectAll();
+        }
+    }
 }

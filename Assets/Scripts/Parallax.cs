@@ -1,10 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Parallax : MonoBehaviour
 {
-    [SerializeField] float speed = 1;
+    [SerializeField] float speed = 1; // Overlooked the usual _ variable convention here but I don't want to break anything by changing it now
+    [SerializeField] float _vSpeed = 1;
+    [SerializeField] bool _changeVertical = false;
     [SerializeField] SpriteRenderer _spriteRenderer;
 
     void Awake()
@@ -19,7 +19,14 @@ public class Parallax : MonoBehaviour
     {
         if(_spriteRenderer)
         {
-            _spriteRenderer.size += new Vector2 (Time.deltaTime * speed, 0);
+            if(_changeVertical)
+            {
+                _spriteRenderer.size += new Vector2 (Time.deltaTime * speed, Time.deltaTime * _vSpeed);
+            }
+            else
+            {
+                _spriteRenderer.size += new Vector2 (Time.deltaTime * speed, 0);
+            }
         }
     }
 }

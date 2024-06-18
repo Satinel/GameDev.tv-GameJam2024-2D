@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Wizard III
   Sprite: {fileID: -1810818311, guid: 4c4daab22309c2b4fb31e01e6eb7ae0c, type: 3}
-  Attack: 8064
+  Attack: 864
   ASpeed: 21
   MaxHealth: 12000
   AttackSFX: {fileID: 8300000, guid: 924c26c575557e54aa77e0e4920535b8, type: 3}
