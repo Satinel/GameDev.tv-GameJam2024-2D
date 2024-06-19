@@ -11,6 +11,7 @@ public class Unit : MonoBehaviour
     [field:SerializeField] public string HeroName { get; private set;}
     [field:SerializeField] public int Attack { get; private set; }
     [field:SerializeField] public int MaxHealth { get; private set; }
+    public int Heat { get; private set; } = 0;
     public bool IsDead { get; private set; } = false;
     public Enemy EnemyTarget { get; private set; }
     public Unit FriendlyTarget { get; private set; } // TODO Figure out how to target friendly units with healing/etc.
@@ -155,6 +156,7 @@ public class Unit : MonoBehaviour
         _healthText.text = _currentHealth.ToString();
         _unitSpriteRenderer.sprite = _normalSprite;
         IsDead = false;
+        Heat = 0;
     }
 
     void Campaign_OnSceneLoading()
@@ -220,13 +222,34 @@ public class Unit : MonoBehaviour
             floatingText.Setup(damage);
         }
         _currentHealth -= damage;
-        _healthText.text = _currentHealth.ToString();
+        _healthText.text = _currentHealth.ToString(); // TODO? Change color of text based on _currentHealth/MaxHealth
         if(_currentHealth <= 0)
         {
             _currentHealth = 0;
             _healthText.text = _currentHealth.ToString();
             Die();
         }
+    }
+
+    public void GainHealth(int gainedHealth)
+    {
+        if(IsDead) { return; }
+
+        if(_upgradeRisingText)
+        {
+            _upgradeRisingText.SetActive(false);
+            _risingText.text = gainedHealth.ToString();
+            _risingText.color = Color.green;
+            _upgradeRisingText.SetActive(true);
+        }
+        _currentHealth = Mathf.Clamp(_currentHealth + gainedHealth, 0, MaxHealth);
+
+        _healthText.text = _currentHealth.ToString();
+    }
+
+    public void ChangeHeat(int heatChange)
+    {
+        Heat = Mathf.Clamp(Heat + heatChange, 0, 100);
     }
 
     public void SelectAllUnits()
@@ -276,6 +299,7 @@ public class Unit : MonoBehaviour
         _targetIndicator.gameObject.SetActive(false);
         _highlight.SetActive(false);
         _isSelected = false;
+        Heat = 0;
     }
 
     public void BuyGear(EquipmentScriptableObject gear)
@@ -300,10 +324,11 @@ public class Unit : MonoBehaviour
 
     public void UpgradeFloatingText(string upgradeText)
     {
-        if(_floatingText)
+        if(_upgradeRisingText)
         {
             _upgradeRisingText.SetActive(false);
             _risingText.text = upgradeText;
+            _risingText.color = Color.white;
             _upgradeRisingText.SetActive(true);
         }
     }

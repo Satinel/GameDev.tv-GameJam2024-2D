@@ -36,5 +36,4 @@ public class FloatingText : MonoBehaviour
     {
         _totalAmount = amount;
     }
-
 }

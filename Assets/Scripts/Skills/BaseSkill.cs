@@ -10,6 +10,7 @@ public class BaseSkill : MonoBehaviour
     [SerializeField] protected AudioSource _audioSource;
     [SerializeField] protected float _audioVolume;
     [SerializeField] protected float _cooldown;
+    [SerializeField] protected bool _requiresEnemy = true;
     protected bool _isFighting;
     protected Unit _unit;
     protected Animator _unitAnimator;
@@ -23,6 +24,7 @@ public class BaseSkill : MonoBehaviour
     protected readonly int MSTAB_HASH = Animator.StringToHash("MainStab");
     protected readonly int OSWING_HASH = Animator.StringToHash("OffSwing");
     protected readonly int OSTAB_HASH = Animator.StringToHash("OffStab");
+    protected readonly int SHIELD_HASH = Animator.StringToHash("Shield");
 
     protected void Awake()
     {
@@ -52,7 +54,7 @@ public class BaseSkill : MonoBehaviour
 
         if(_timeSinceLastAttack >= _cooldown)
         {
-            if(!_unit.EnemyTarget)
+            if(_requiresEnemy && !_unit.EnemyTarget)
             {
                 return;
             }

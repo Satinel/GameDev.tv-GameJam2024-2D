@@ -846,6 +846,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Row>k__BackingField: 0
+  <IsBoss>k__BackingField: 0
   _attackText: {fileID: 6188735343667128624}
   _healthText: {fileID: 232017250938340815}
   _goldText: {fileID: 7367035269162958404}

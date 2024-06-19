@@ -379,6 +379,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8db9f88410c83b64ba3d9ac1c2649dc1, type: 2}
   - {fileID: 11400000, guid: 905b25fce1e6dc34c904a4ad72c7cc85, type: 2}
   - {fileID: 11400000, guid: ce6f224918eac7a4b8a97827eb0cc6ed, type: 2}
+  - {fileID: 11400000, guid: caaae811f5b4f8049a1d29e354bae19d, type: 2}
   _tier2Equipment:
   - {fileID: 11400000, guid: f6121ce6d52789b41b1b654c15861729, type: 2}
   - {fileID: 11400000, guid: 86b807e6d8eb8ae46bb3beb973579ee8, type: 2}
@@ -426,13 +427,21 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   _unitEquipmentWindow: {fileID: 4303948893739026797}
-  _wallet: {fileID: 0}
   _lockButton: {fileID: 3939352653268435080}
   _buyButton: {fileID: 3782119530329309352}
   _lockText: {fileID: 3813164761610629458}
   _buyText: {fileID: 3908201799563145586}
   _rerollText: {fileID: 6692714932322299587}
-  _tradePromptText: {fileID: 0}
+  _tradeEquippedAttackText: {fileID: 0}
+  _tradeEquippedHealthText: {fileID: 0}
+  _tradeShopAttackText: {fileID: 0}
+  _tradeShopHealthText: {fileID: 0}
+  _tradeEquippedCooldownText: {fileID: 0}
+  _tradeShopCooldownText: {fileID: 0}
+  _tradeEquippedNameText: {fileID: 0}
+  _tradeShopNameText: {fileID: 0}
+  _tradeEquippedSprite: {fileID: 0}
+  _tradeShopSprite: {fileID: 0}
   _shopParent: {fileID: 0}
   _clickUnitMessage: {fileID: 2371671947534241001}
   _autoUpgradeButton: {fileID: 1522842937584131633}

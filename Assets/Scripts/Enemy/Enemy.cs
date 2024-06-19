@@ -167,9 +167,7 @@ public class Enemy : MonoBehaviour
     {
         if(!_currentTarget)
         {
-            if(_teamManager.Team.Count <= 0) { return; }
-
-            _currentTarget = _teamManager.Team[UnityEngine.Random.Range(0, _teamManager.Team.Count)]; // TODO Target based on 'Heat' or similar rather than random (ALSO check if Unit is alive)
+            SetCurrentTarget();
         }
 
         _animator.SetTrigger(ATTACK_HASH);
@@ -181,9 +179,7 @@ public class Enemy : MonoBehaviour
 
         if(!_currentTarget)
         {
-            if(_teamManager.Team.Count <= 0) { return; }
-
-            _currentTarget = _teamManager.Team[UnityEngine.Random.Range(0, _teamManager.Team.Count)]; // TODO Target based on 'Heat' or similar rather than random (ALSO check if Unit is alive)
+            SetCurrentTarget();
         }
 
         if(_currentEnemy.AttackSFX)
@@ -197,6 +193,29 @@ public class Enemy : MonoBehaviour
         _currentTarget.TakeDamage(Attack);
         _attackTimerImage.fillAmount = 0;
         _isAttacking = false;
+    }
+
+    void SetCurrentTarget()
+    {
+        if(_teamManager.Team.Count <= 0) { return; }
+
+        int targetValue = 0;
+
+        foreach(Unit unit in _teamManager.Team)
+        {
+            int heatCheck = UnityEngine.Random.Range(0, unit.Heat + 1);
+
+            if(heatCheck > targetValue)
+            {
+                targetValue = heatCheck;
+                _currentTarget = unit;
+            }
+        }
+
+        if(!_currentTarget)
+        {
+            _currentTarget = _teamManager.Team[UnityEngine.Random.Range(0, _teamManager.Team.Count)];
+        }
     }
 
     void SetIsFightingAnimationEvent()

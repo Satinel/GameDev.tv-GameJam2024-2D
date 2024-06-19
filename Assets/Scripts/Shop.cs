@@ -42,7 +42,6 @@ public class Shop : MonoBehaviour
         ShopItem.OnAnyShopItemClicked += ShopItem_OnAnyShopItemClicked;
         Unit.OnAnyUnitClicked += Unit_OnAnyUnitClicked;
         Campaign.OnSetLockedItems += Campaign_OnSetLockedItems;
-        // TeamManager.OnActiveUnitsRequested += TeamManager_OnActiveUnitsRequested;
     }
 
     void OnDisable()
@@ -50,7 +49,6 @@ public class Shop : MonoBehaviour
         ShopItem.OnAnyShopItemClicked -= ShopItem_OnAnyShopItemClicked;
         Unit.OnAnyUnitClicked -= Unit_OnAnyUnitClicked;
         Campaign.OnSetLockedItems -= Campaign_OnSetLockedItems;
-        // TeamManager.OnActiveUnitsRequested -= TeamManager_OnActiveUnitsRequested;
     }
 
     void ShopItem_OnAnyShopItemClicked(object sender, ShopItem shopItem)

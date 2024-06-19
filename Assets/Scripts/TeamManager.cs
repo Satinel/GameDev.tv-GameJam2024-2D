@@ -6,7 +6,6 @@ public class TeamManager : MonoBehaviour
 {
     public static event Action OnPartyWipe;
     public static event Action OnManualPressed;
-    // public static event EventHandler<List<Unit>> OnActiveUnitsRequested;
 
     [field:SerializeField] public List<Unit> Team { get; private set; } = new();
     [field:SerializeField] public GameObject ManualButton { get; private set; }
@@ -106,7 +105,6 @@ public class TeamManager : MonoBehaviour
 
     void Portal_OnShopOpened()
     {
-        // OnActiveUnitsRequested?.Invoke(this, _activeUnits);
         _inShop = true;
         _goingToShop = false;
     }
