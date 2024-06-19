@@ -10,19 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f86f0e575a772274fad942e2dbbc8bcb, type: 3}
-  m_Name: T1Shield
+  m_Name: T2Shield
   m_EditorClassIdentifier: 
-  Name: Buckler
+  Name: Kite Shield
   Slot: 1
-  Sprite: {fileID: -305540583, guid: 0b4f5883f41c49244b176a525f426b95, type: 3}
-  RareSprite: {fileID: 269958991, guid: 0b4f5883f41c49244b176a525f426b95, type: 3}
-  EpicSprite: {fileID: 214021885, guid: 0b4f5883f41c49244b176a525f426b95, type: 3}
-  LegendarySprite: {fileID: 1539164786, guid: 0b4f5883f41c49244b176a525f426b95, type: 3}
+  Sprite: {fileID: 229880498, guid: 0b4f5883f41c49244b176a525f426b95, type: 3}
+  RareSprite: {fileID: -1564041777, guid: 0b4f5883f41c49244b176a525f426b95, type: 3}
+  EpicSprite: {fileID: 1069465683, guid: 0b4f5883f41c49244b176a525f426b95, type: 3}
+  LegendarySprite: {fileID: 1614220925, guid: 0b4f5883f41c49244b176a525f426b95, type: 3}
   HasOffset: 0
   SpriteOffset: {x: 0, y: 0, z: 0}
   SpriteScale: {x: 1, y: 1, z: 1}
   SpriteFlipped: 1
   AttackIncrease: 0
-  HealthIncrease: 10
-  Price: 3
+  HealthIncrease: 30
+  Price: 9
   Skill: {fileID: 8091382639158868057, guid: 58c7b974e1870ca4f9c592da8500cdbb, type: 3}
