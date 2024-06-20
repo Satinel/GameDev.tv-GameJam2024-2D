@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Wizzle
   Sprite: {fileID: 1697113318, guid: 0458041fda469b14d80ea486c7c09642, type: 3}
-  Attack: 375
-  ASpeed: 8
+  Attack: 750
+  ASpeed: 16
   MaxHealth: 14400
   AttackSFX: {fileID: 8300000, guid: 924c26c575557e54aa77e0e4920535b8, type: 3}
   SkillVFX: {fileID: 7764922303510143599, guid: 4f24455a86b6c5247a3cf124e17a1744, type: 3}

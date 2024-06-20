@@ -48,7 +48,7 @@ MonoBehaviour:
   <SkillName>k__BackingField: Shield
   <VisualEffect>k__BackingField: {fileID: 480921929387271824, guid: 8aaf3029ef26cbb42aa9135d23ae2064, type: 3}
   _audioClips:
-  - {fileID: 8300000, guid: 22efbfca9d784504dbc2ee75d7f4959d, type: 3}
+  - {fileID: 8300000, guid: 0d9b156480802e74c93f2ab0d56e5554, type: 3}
   _audioSource: {fileID: 569823337045306664}
   _audioVolume: 1
   _cooldown: 12

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Flying Eye
   Sprite: {fileID: 1693705526, guid: 3f27857e28e6df14e9a15c255be1171d, type: 3}
-  Attack: 42
-  ASpeed: 10.5
+  Attack: 50
+  ASpeed: 12.5
   MaxHealth: 3000
   AttackSFX: {fileID: 8300000, guid: 924c26c575557e54aa77e0e4920535b8, type: 3}
   SkillVFX: {fileID: 7764922303510143599, guid: 4f24455a86b6c5247a3cf124e17a1744, type: 3}

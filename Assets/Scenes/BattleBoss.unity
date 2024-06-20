@@ -771,6 +771,14 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: b7cb6887b915ee5499ff7c98783f7a68, type: 3}
+    - target: {fileID: 4842006535366520938, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4842006535366520938, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5190047550255647530, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -850,6 +858,10 @@ PrefabInstance:
       propertyPath: <IsBoss>k__BackingField
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7971688631037299797, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8070439900896008689, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -872,7 +884,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8938330691308821279, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.25
+      value: 3.75
       objectReference: {fileID: 0}
     - target: {fileID: 8938330691308821279, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: m_LocalPosition.y

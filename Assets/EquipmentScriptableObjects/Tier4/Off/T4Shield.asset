@@ -23,6 +23,6 @@ MonoBehaviour:
   SpriteScale: {x: 1, y: 1, z: 1}
   SpriteFlipped: 1
   AttackIncrease: 0
-  HealthIncrease: 600
+  HealthIncrease: 1000
   Price: 500
   Skill: {fileID: 8091382639158868057, guid: 58c7b974e1870ca4f9c592da8500cdbb, type: 3}

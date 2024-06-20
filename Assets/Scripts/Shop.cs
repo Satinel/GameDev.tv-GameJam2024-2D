@@ -202,6 +202,11 @@ public class Shop : MonoBehaviour
         if(!_wallet.AskToSpend(_rerollCost)) { return; }
 
         _rerollCost *= _rerollCostMultiplyer;
+        if(_rerollCost > 999 && _rerollCostMultiplyer == 3)
+        {
+            _rerollCost = 999;
+            _rerollCostMultiplyer = 2;
+        }
         if(_rerollCost > 9999)
         {
             _rerollCost = 9999;

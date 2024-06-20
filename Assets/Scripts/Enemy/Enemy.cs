@@ -136,6 +136,10 @@ public class Enemy : MonoBehaviour
         _currentTarget = null;
         _earnedGoldGameObject.SetActive(false);
         GoldValue = Mathf.CeilToInt((_currentEnemy.Attack / _currentEnemy.ASpeed) + (_currentEnemy.MaxHealth / 4f));
+        if(_isFrenzied)
+        {
+            GoldValue *= 2;
+        }
         _goldText.text = $"+{GoldValue} GOLD";
         _isAttacking = false;
     }

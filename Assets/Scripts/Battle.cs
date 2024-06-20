@@ -49,11 +49,18 @@ public class Battle : MonoBehaviour
 
     void Start()
     {
+        List<Enemy> activeEnemies = new();
+
         foreach (Enemy enemy in _enemies)
         {
-            enemy.SetUp(_bestiary[UnityEngine.Random.Range(0, _bestiary.Count)]);
+            if(enemy.gameObject.activeSelf)
+            {
+                enemy.SetUp(_bestiary[UnityEngine.Random.Range(0, _bestiary.Count)]);
+                activeEnemies.Add(enemy);
+            }
         }
-        OnEnemyListCreated?.Invoke(this, _enemies);
+
+        OnEnemyListCreated?.Invoke(this, activeEnemies);
 
         _incomingRow1 = _bestiary[UnityEngine.Random.Range(0, _bestiary.Count)];
         _incomingRow2 = _bestiary[UnityEngine.Random.Range(0, _bestiary.Count)];
