@@ -186,7 +186,7 @@ public class Tutorial : MonoBehaviour
     {
         _button4.gameObject.SetActive(false);
         _button5.gameObject.SetActive(true);
-        _text.text = "The 1-6 number keys can also be used to select your party members.\nSwitch targeting modes at any time.\n\n";
+        _text.text = "The number keys 1-6 can also be used to select your party members.\nSwitch targeting modes at any time.\n\n";
         _text.text += "But enough talk! It's time to battle!";
         _manualButton.gameObject.SetActive(false);
         _autoButton.gameObject.SetActive(true);

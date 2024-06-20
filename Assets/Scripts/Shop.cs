@@ -14,11 +14,11 @@ public class Shop : MonoBehaviour
     [SerializeField] List<EquipmentScriptableObject> _tier4Equipment = new();
     [SerializeField] List<ShopItem> _shopItems = new();
     [SerializeField] ShopEquipped _unitEquipmentWindow;
-    [SerializeField] Button _lockButton, _buyButton;
+    [SerializeField] Button _lockButton, _buyButton, _rerollButton, _equipmentShopButton, _hatShopButton;
     [SerializeField] TextMeshProUGUI _lockText, _buyText, _rerollText, _tradeEquippedAttackText, _tradeEquippedHealthText, _tradeShopAttackText, _tradeShopHealthText;
     [SerializeField] TextMeshProUGUI _tradeEquippedCooldownText, _tradeShopCooldownText, _tradeEquippedNameText, _tradeShopNameText;
     [SerializeField] Image _tradeEquippedSprite, _tradeShopSprite;
-    [SerializeField] GameObject _shopParent, _clickUnitMessage, _autoUpgradeButton, _manualUpgradeButton, _tradePrompt;
+    [SerializeField] GameObject _shopParent, _clickUnitMessage, _autoUpgradeButton, _manualUpgradeButton, _tradePrompt, _equipmentShopItems, _hatShopItems;
 
     ShopItem _selectedShopItem;
     Wallet _wallet;
@@ -231,7 +231,14 @@ public class Shop : MonoBehaviour
                 switch(tier)
                 {
                     case 1:
-                        shopItem.Setup(_tier1Equipment[Random.Range(0, _tier1Equipment.Count)]);
+                        if(_wins > 3)
+                        {
+                            shopItem.Setup(_tier4Equipment[Random.Range(0, _tier1Equipment.Count)]);
+                        }
+                        else
+                        {
+                            shopItem.Setup(_tier1Equipment[Random.Range(0, _tier1Equipment.Count)]);
+                        }
                         break;
                     case 2:
                         shopItem.Setup(_tier2Equipment[Random.Range(0, _tier2Equipment.Count)]);
@@ -551,6 +558,28 @@ public class Shop : MonoBehaviour
         _wallet.PlayBuySFX();
         CompletePurchase(_selectedShopItem);
         CheckForUpgrades();
+    }
+
+    public void ChangeToHats()
+    {
+        _selectedShopItem = null;
+        _equipmentShopItems.SetActive(false);
+        _lockButton.gameObject.SetActive(false);
+        _rerollButton.gameObject.SetActive(false);
+        _hatShopButton.gameObject.SetActive(false);
+        _hatShopItems.SetActive(true);
+        _equipmentShopButton.gameObject.SetActive(true);
+    }
+
+    public void ChangeToEquipment()
+    {
+        _selectedShopItem = null;
+        _hatShopItems.SetActive(false);
+        _equipmentShopButton.gameObject.SetActive(false);
+        _equipmentShopItems.SetActive(true);
+        _lockButton.gameObject.SetActive(true);
+        _rerollButton.gameObject.SetActive(true);
+        _hatShopButton.gameObject.SetActive(true);
     }
 
     void TradeIn(EquipmentScriptableObject currentItem, int upgradeLevel)
