@@ -285,7 +285,7 @@ public class Shop : MonoBehaviour
                         {
                             if(unit.Main().Gear == shopItem.Gear)
                             {
-                                if(_autoUpgradeEnabled)
+                                if(_autoUpgradeEnabled && _equipmentShopItems.activeSelf)
                                 {
                                     if(!_wallet.AskToSpend(shopItem.Gear.Price))
                                     {
@@ -315,7 +315,7 @@ public class Shop : MonoBehaviour
                         {
                             if(unit.Offhand().Gear == shopItem.Gear)
                             {
-                                if(_autoUpgradeEnabled)
+                                if(_autoUpgradeEnabled && _equipmentShopItems.activeSelf)
                                 {
                                     if(!_wallet.AskToSpend(shopItem.Gear.Price))
                                     {
@@ -345,7 +345,7 @@ public class Shop : MonoBehaviour
                         {
                             if(unit.Headgear().Gear == shopItem.Gear)
                             {
-                                if(_autoUpgradeEnabled)
+                                if(_autoUpgradeEnabled && _equipmentShopItems.activeSelf)
                                 {
                                     if(!_wallet.AskToSpend(shopItem.Gear.Price))
                                     {
@@ -562,24 +562,38 @@ public class Shop : MonoBehaviour
 
     public void ChangeToHats()
     {
-        _selectedShopItem = null;
+        if(_selectedShopItem != null)
+        {
+            _selectedShopItem.RemoveHighlight();
+            _selectedShopItem = null;
+        }
         _equipmentShopItems.SetActive(false);
         _lockButton.gameObject.SetActive(false);
         _rerollButton.gameObject.SetActive(false);
         _hatShopButton.gameObject.SetActive(false);
         _hatShopItems.SetActive(true);
         _equipmentShopButton.gameObject.SetActive(true);
+        foreach(ShopItem shopItem in _hatShopItems.GetComponentsInChildren<ShopItem>())
+        {
+            shopItem.SetupHat(shopItem.Gear);
+        }
+        CheckBuyButton();
     }
 
     public void ChangeToEquipment()
     {
-        _selectedShopItem = null;
+        if(_selectedShopItem != null)
+        {
+            _selectedShopItem.RemoveHighlight();
+            _selectedShopItem = null;
+        }
         _hatShopItems.SetActive(false);
         _equipmentShopButton.gameObject.SetActive(false);
         _equipmentShopItems.SetActive(true);
         _lockButton.gameObject.SetActive(true);
         _rerollButton.gameObject.SetActive(true);
         _hatShopButton.gameObject.SetActive(true);
+        CheckBuyButton();
     }
 
     void TradeIn(EquipmentScriptableObject currentItem, int upgradeLevel)

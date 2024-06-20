@@ -264,6 +264,7 @@ public class Enemy : MonoBehaviour
             Attack *= 2;
             _attackText.text = Attack.ToString();
             CurrentHealth += MaxHealth;
+            MaxHealth *= 2; // Necesesary for the proper gold reward once Frenzied
             _healthText.text = CurrentHealth.ToString();
         }
     }

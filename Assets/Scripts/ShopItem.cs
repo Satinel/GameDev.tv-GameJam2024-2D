@@ -15,6 +15,8 @@ public class ShopItem : MonoBehaviour
 
     public bool IsLocked {get; private set;}
 
+    bool _isSetUp = false;
+
     public EquipmentScriptableObject Gear => _gear;
 
     void OnEnable()
@@ -39,6 +41,11 @@ public class ShopItem : MonoBehaviour
         }
     }
 
+    public void RemoveHighlight()
+    {
+        _borderImage.color = Color.white;
+    }
+
     public void Setup(EquipmentScriptableObject gear)
     {
         _upgradeIndicator.SetActive(false);
@@ -58,6 +65,8 @@ public class ShopItem : MonoBehaviour
         _priceText.text = gear.Price.ToString();
         _imageRenderer.sprite = gear.Sprite;
 
+        if(gear.Slot == EquipmentType.Headgear) { return; }
+
         if(gear.Slot == EquipmentType.Offhand)
         {
             _imageRenderer.transform.localScale = new Vector3(-1f, 1f, 1f);
@@ -68,6 +77,15 @@ public class ShopItem : MonoBehaviour
             _imageRenderer.transform.localScale = new Vector3(1f, 1f, 1f);
             _imageRenderer.rectTransform.anchoredPosition = new Vector3(0.1f, -0.1f, 0f);
         }
+    }
+
+    public void SetupHat(EquipmentScriptableObject hat)
+    {
+        if(_isSetUp) { return; }
+
+        Setup(hat);
+        // TODO Set SkillText.text based on hat.Gear.Skill.SkillDescription or something like that!
+        _isSetUp = true;
     }
 
     public void OnButtonClick()
