@@ -10,8 +10,8 @@ public class TeamManager : MonoBehaviour
     [field:SerializeField] public List<Unit> Team { get; private set; } = new();
     [field:SerializeField] public GameObject ManualButton { get; private set; }
     [field:SerializeField] public GameObject AutoButton { get; private set; }
-    [field:SerializeField] public GameObject SelectAllButton { get; private set; }
     
+    [SerializeField] GameObject _selectAllButton;
     [SerializeField] List<Unit> _activeUnits = new();
     [SerializeField] List<Unit> _lockedUnits = new();
 
@@ -58,11 +58,17 @@ public class TeamManager : MonoBehaviour
 
         if(_isAuto)
         {
-            ManualButton.SetActive(true);
+            if(ManualButton)
+            {
+                ManualButton.SetActive(true);
+            }
         }
         else
         {
-            AutoButton.SetActive(true);
+            if(AutoButton)
+            {
+                AutoButton.SetActive(true);
+            }
         }
         
         Team.Clear();
@@ -75,7 +81,7 @@ public class TeamManager : MonoBehaviour
             }
         }
 
-        SelectAllButton.SetActive(true);
+        _selectAllButton.SetActive(true);
         _inShop = false;
     }
 
@@ -88,13 +94,17 @@ public class TeamManager : MonoBehaviour
     {
         ManualButton.SetActive(false);
         AutoButton.SetActive(false);
-        SelectAllButton.SetActive(false);
+        _selectAllButton.SetActive(false);
+        _isTutorial = false;
     }
 
     void Tutorial_OnTargetingTutorialOver()
     {
         _isTutorial = false;
-        SelectAllButton.SetActive(true);
+        if(_selectAllButton)
+        {
+            _selectAllButton.SetActive(true);
+        }
     }
 
     void Portal_OnUnitSummoned(object sender, int index)
@@ -165,7 +175,7 @@ public class TeamManager : MonoBehaviour
     void Campaign_OnTutorialLoading()
     {
         _isTutorial = true;
-        SelectAllButton.SetActive(false);
+        _selectAllButton.SetActive(false);
     }
 
     void Update()

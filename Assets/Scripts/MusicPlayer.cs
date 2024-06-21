@@ -7,7 +7,7 @@ public class MusicPlayer : MonoBehaviour
     [SerializeField] AudioSource _mainAudioSource, _introAudioSource;
     [SerializeField] float _volume = 0.75f;
 
-    bool _isBattleOver = false;
+    bool _isSceneOver = false;
     
     bool _isTiming = false;
     float _timer = 0;
@@ -24,11 +24,13 @@ public class MusicPlayer : MonoBehaviour
     void OnEnable()
     {
         Battle.OnBattleEnded += Battle_OnBattleEnded;
+        Campaign.OnSceneLoading += Campaign_OnSceneLoading;
     }
 
     void OnDisable()
     {
         Battle.OnBattleEnded -= Battle_OnBattleEnded;
+        Campaign.OnSceneLoading -= Campaign_OnSceneLoading;
     }
 
     void Start()
@@ -57,14 +59,13 @@ public class MusicPlayer : MonoBehaviour
 
     void SyncIntro()
     {
-        if (_introClip && _introAudioSource)
+        if(_introClip && _introAudioSource)
         {
             _introAudioSource.PlayOneShot(_introClip, _volume);
-            // Invoke(nameof(PlayMainSong), _introClip.length); // This doesn't work properly if Time.timeScale changes
             StartTimer(_introClip.length); // This works by ignoring Time.timeScale in Update()
 
         }
-        else if (_mainSong && _mainAudioSource)
+        else if(_mainSong && _mainAudioSource)
         {
             _mainAudioSource.clip = _mainSong;
             _mainAudioSource.loop = true;
@@ -81,7 +82,21 @@ public class MusicPlayer : MonoBehaviour
 
     void Battle_OnBattleEnded()
     {
-        _isBattleOver = true;
+        _isSceneOver = true;
+        _isTiming = false;
+        if(_mainAudioSource)
+        {
+            _mainAudioSource.Stop();
+        }
+        if(_introAudioSource)
+        {
+            _introAudioSource.Stop();
+        }
+    }
+
+    void Campaign_OnSceneLoading()
+    {
+        _isSceneOver = true;
         _isTiming = false;
         if(_mainAudioSource)
         {
@@ -95,7 +110,7 @@ public class MusicPlayer : MonoBehaviour
 
     void PlayMainSong()
     {
-        if(_isBattleOver) { return; }
+        if(_isSceneOver) { return; }
 
         _mainAudioSource.UnPause();
     }
