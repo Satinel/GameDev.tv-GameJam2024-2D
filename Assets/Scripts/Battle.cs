@@ -188,6 +188,8 @@ public class Battle : MonoBehaviour
     public void UnpauseBattle()
     {
         Time.timeScale = _currentTimeSpeed;
+        _retreatPrompt.SetActive(false);
+        _noRetreatPrompt.SetActive(false);
     }
 
     void Enemy_OnAnyEnemyKilled(object sender, Enemy enemy)

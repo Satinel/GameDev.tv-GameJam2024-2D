@@ -2028,7 +2028,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7248141167257559245, guid: a617a09c0ac23d647aca1a92072c8b25, type: 3}
       propertyPath: m_Name
-      value: HatShopItem
+      value: HatShopItem Witch Hat
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2743,8 +2743,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7248141167257559245, guid: a617a09c0ac23d647aca1a92072c8b25, type: 3}
       propertyPath: m_Name
-      value: HatShopItem (2)
+      value: HatShopItem Top Hat
       objectReference: {fileID: 0}
+    - target: {fileID: 8759559281780541156, guid: a617a09c0ac23d647aca1a92072c8b25, type: 3}
+      propertyPath: m_text
+      value: Gain 10% bonus gold for every enemy defeated.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9041194018976951112, guid: a617a09c0ac23d647aca1a92072c8b25, type: 3}
+      propertyPath: _gear
+      value: 
+      objectReference: {fileID: 11400000, guid: 283888dd26f908a40a29ea09d975f844, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3006,8 +3014,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7248141167257559245, guid: a617a09c0ac23d647aca1a92072c8b25, type: 3}
       propertyPath: m_Name
-      value: HatShopItem (3)
+      value: HatShopItem Adventurer
       objectReference: {fileID: 0}
+    - target: {fileID: 8759559281780541156, guid: a617a09c0ac23d647aca1a92072c8b25, type: 3}
+      propertyPath: m_text
+      value: Dodge the first attack each battle.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9041194018976951112, guid: a617a09c0ac23d647aca1a92072c8b25, type: 3}
+      propertyPath: _gear
+      value: 
+      objectReference: {fileID: 11400000, guid: fde73b686118dbc4f80c279f7c90f864, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3203,8 +3219,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7248141167257559245, guid: a617a09c0ac23d647aca1a92072c8b25, type: 3}
       propertyPath: m_Name
-      value: HatShopItem (1)
+      value: HatShopItem Helmet
       objectReference: {fileID: 0}
+    - target: {fileID: 8759559281780541156, guid: a617a09c0ac23d647aca1a92072c8b25, type: 3}
+      propertyPath: m_text
+      value: Enemies are more likely to target the wearer of this hat.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9041194018976951112, guid: a617a09c0ac23d647aca1a92072c8b25, type: 3}
+      propertyPath: _gear
+      value: 
+      objectReference: {fileID: 11400000, guid: 1c1bf1f15887f134cb0ddb505959bda2, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3472,8 +3496,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7248141167257559245, guid: a617a09c0ac23d647aca1a92072c8b25, type: 3}
       propertyPath: m_Name
-      value: HatShopItem (4)
+      value: HatShopItem Crown
       objectReference: {fileID: 0}
+    - target: {fileID: 8759559281780541156, guid: a617a09c0ac23d647aca1a92072c8b25, type: 3}
+      propertyPath: m_text
+      value: Retreating while Enemies are in Frenzy mode does not damage the castle.
+      objectReference: {fileID: 0}
+    - target: {fileID: 9041194018976951112, guid: a617a09c0ac23d647aca1a92072c8b25, type: 3}
+      propertyPath: _gear
+      value: 
+      objectReference: {fileID: 11400000, guid: b0c5a4e44bd82cd42804cd9ae314be44, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

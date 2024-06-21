@@ -5492,6 +5492,18 @@ PrefabInstance:
       propertyPath: <HeroName>k__BackingField
       value: Peanut
       objectReference: {fileID: 0}
+    - target: {fileID: 4277545306960186334, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: m_Size.x
+      value: 1.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277545306960186334, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: m_Size.y
+      value: 1.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 4277545306960186334, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4515118773670106881, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -5616,6 +5628,18 @@ PrefabInstance:
       propertyPath: <Team>k__BackingField.Array.data[4]
       value: 
       objectReference: {fileID: 839702028}
+    - target: {fileID: 8819558753724494454, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: m_Size.x
+      value: 1.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 8819558753724494454, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: m_Size.y
+      value: 1.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 8819558753724494454, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8998711738931157036, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
       propertyPath: <HeroName>k__BackingField
       value: Cashew

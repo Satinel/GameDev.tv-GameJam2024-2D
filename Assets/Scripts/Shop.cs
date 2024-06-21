@@ -515,11 +515,25 @@ public class Shop : MonoBehaviour
         _tradeEquippedNameText.text = equipmentSlot.UpgradeName;
         _tradeEquippedAttackText.text = (equipmentSlot.Gear.AttackIncrease * equipmentSlot.UpgradeLevel).ToString();
         _tradeEquippedHealthText.text = (equipmentSlot.Gear.HealthIncrease * equipmentSlot.UpgradeLevel).ToString();
-        _tradeEquippedCooldownText.text = equipmentSlot.Gear.Skill.Cooldown.ToString();
+        if(equipmentSlot.Gear.Skill.Cooldown < 0)
+        {
+            _tradeEquippedCooldownText.text = "N/A";
+        }
+        else
+        {
+            _tradeEquippedCooldownText.text = equipmentSlot.Gear.Skill.Cooldown.ToString();
+        }
         _tradeShopNameText.text = _selectedShopItem.Gear.Name;
         _tradeShopAttackText.text = _selectedShopItem.Gear.AttackIncrease.ToString();
         _tradeShopHealthText.text = _selectedShopItem.Gear.HealthIncrease.ToString();
-        _tradeShopCooldownText.text = _selectedShopItem.Gear.Skill.Cooldown.ToString();
+        if(_selectedShopItem.Gear.Skill.Cooldown < 0)
+        {
+            _tradeShopCooldownText.text = "N/A";
+        }
+        else
+        {
+            _tradeShopCooldownText.text = _selectedShopItem.Gear.Skill.Cooldown.ToString();
+        }
         _tradeEquippedSprite.sprite = equipmentSlot.Gear.Sprite;
         _tradeShopSprite.sprite = _selectedShopItem.Gear.Sprite;
         _tradePrompt.SetActive(true);

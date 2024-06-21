@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class ShieldSkill : BaseSkill
 {
-    [SerializeField] int _heatGenerated; // TODO? Move this to BaseSkill and have all skills generate (possibly negative) Heat on use
-
     protected override void UseSkill()
     {
         _unitAnimator.SetTrigger(SHIELD_HASH);        

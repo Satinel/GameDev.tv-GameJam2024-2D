@@ -5,6 +5,7 @@ public class Wallet : MonoBehaviour
 {
     [field:SerializeField] public int TotalMoney {get; private set;}
     public int GoldEarnedThisBattle {get; private set;} = 0;
+    public int BonusGoldEarnedThisBattle {get; private set;} = 0;
 
     [SerializeField] TextMeshProUGUI _moneyText;
     [SerializeField] Animator _animator;
@@ -12,6 +13,7 @@ public class Wallet : MonoBehaviour
     [SerializeField] AudioClip _tooPoorSFX, _buySFX, _upgradeSFX;
     [SerializeField] float _poorVolume = 1f, _buyVolume = 1f, _upgradeVolume = 1f;
     [SerializeField] Canvas _canvas;
+    [SerializeField] float _bonusMoney;
 
     static readonly int TOOPOOR_Hash = Animator.StringToHash("TooPoor");
 
@@ -81,12 +83,19 @@ public class Wallet : MonoBehaviour
     {
         _canvas.enabled = true;
         GoldEarnedThisBattle = 0;
+        BonusGoldEarnedThisBattle = 0;
     }
 
     void Enemy_OnAnyEnemyKilled(object sender, Enemy enemy)
     {
         GoldEarnedThisBattle += enemy.GoldValue;
         GainMoney(enemy.GoldValue);
+        if(_bonusMoney > 0)
+        {
+            int bonusMoney = Mathf.CeilToInt(enemy.GoldValue * _bonusMoney);
+            BonusGoldEarnedThisBattle += bonusMoney;
+            GainMoney(bonusMoney);
+        }
     }
 
     void Campaign_OnReturnToTown()
@@ -94,6 +103,7 @@ public class Wallet : MonoBehaviour
         if(!_canvas) { return; }
 
         _canvas.enabled = false;
+        _bonusMoney = 0f;
     }
 
     void Portal_OnShopOpened()
@@ -128,5 +138,10 @@ public class Wallet : MonoBehaviour
     {
         TotalMoney = loadedValue;
         SetMoneyText();
+    }
+
+    public void SetBonusMoney(float bonus)
+    {
+        _bonusMoney += bonus;
     }
 }

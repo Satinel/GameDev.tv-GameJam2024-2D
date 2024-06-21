@@ -35,6 +35,7 @@ public class Campaign : MonoBehaviour
 
     bool _isTransitioning;
     float _savedBattleSpeed = 1f;
+    bool _hasCrown = false, _wasFrenzied = false;
 
     void Awake()
     {
@@ -51,6 +52,7 @@ public class Campaign : MonoBehaviour
         Battle.OnRetreated += Battle_OnRetreated;
         Battle.OnBattleLost += Battle_OnBattleLost;
         Battle.OnSpeedChanged += Battle_OnSpeedChanged;
+        Timer.OnHalfTime += Timer_OnHalfTime;
         Portal.OnShopOpened += Portal_OnShopOpened;
         ShopItem.OnShopItemLocked += ShopItem_OnShopItemLocked;
     }
@@ -62,6 +64,7 @@ public class Campaign : MonoBehaviour
         Battle.OnRetreated -= Battle_OnRetreated;
         Battle.OnBattleLost -= Battle_OnBattleLost;
         Battle.OnSpeedChanged -= Battle_OnSpeedChanged;
+        Timer.OnHalfTime -= Timer_OnHalfTime;
         Portal.OnShopOpened -= Portal_OnShopOpened;
         ShopItem.OnShopItemLocked -= ShopItem_OnShopItemLocked;
     }
@@ -69,6 +72,10 @@ public class Campaign : MonoBehaviour
     void Battle_OnBattleEnded()
     {
         _goldEarnedText.text = $"Gold Earned: {_wallet.GoldEarnedThisBattle}";
+        if(_wallet.BonusGoldEarnedThisBattle > 0)
+        {
+            _goldEarnedText.text += $" + {_wallet.BonusGoldEarnedThisBattle} Bonus";
+        }
         _overlay.SetActive(true);
         Time.timeScale = 1;
     }
@@ -90,6 +97,12 @@ public class Campaign : MonoBehaviour
 
     void Battle_OnRetreated()
     {
+        if(_hasCrown && _wasFrenzied)
+        {
+            _retreatSplash.SetActive(true);
+            return;
+        }
+
         Losses--;
         if(Losses >= 0)
         {
@@ -120,6 +133,11 @@ public class Campaign : MonoBehaviour
     void Battle_OnSpeedChanged(object sender, float battleSpeed)
     {
         _savedBattleSpeed = battleSpeed;
+    }
+
+    void Timer_OnHalfTime()
+    {
+        _wasFrenzied = true;
     }
 
     void HandleGameOver() // TODO Make this less abrupt
@@ -192,6 +210,10 @@ public class Campaign : MonoBehaviour
         {
             goldEarned--; // This is going to be far too slow for large sums of lost money but I'd need to figure out maths to do a percentage reduction!
             _goldEarnedText.text = $"Gold Earned: {goldEarned}";
+            if(_wallet.BonusGoldEarnedThisBattle > 0)
+            {
+                _goldEarnedText.text += $" + {_wallet.BonusGoldEarnedThisBattle} Bonus";
+            }
             yield return null;
         }
     }
@@ -291,6 +313,8 @@ public class Campaign : MonoBehaviour
     {
         if(_isTransitioning) { return; }
         Days++;
+        _hasCrown = false;
+        _wasFrenzied = false;
 
         StartCoroutine(ReturnToTownRoutine());
         
@@ -361,5 +385,10 @@ public class Campaign : MonoBehaviour
     public void SetAutoUpgrades(bool autoUpgrades)
     {
         AutoUpgrades = autoUpgrades;
+    }
+
+    public void SetHasCrown()
+    {
+        _hasCrown = true;
     }
 }

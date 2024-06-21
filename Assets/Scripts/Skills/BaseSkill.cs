@@ -11,6 +11,7 @@ public class BaseSkill : MonoBehaviour
     [SerializeField] protected float _audioVolume;
     [SerializeField] protected float _cooldown;
     [SerializeField] protected bool _requiresEnemy = true;
+    [SerializeField] protected int _heatGenerated = 0;
     protected bool _isFighting;
     protected Unit _unit;
     protected Animator _unitAnimator;
@@ -66,7 +67,7 @@ public class BaseSkill : MonoBehaviour
 
     protected virtual void UseSkill() { }
 
-    protected void Battle_OnBattleStarted()
+    protected virtual void Battle_OnBattleStarted()
     {
         _isFighting = true;
         _timeSinceLastAttack = 0;

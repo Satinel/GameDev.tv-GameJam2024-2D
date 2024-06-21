@@ -22,20 +22,21 @@ public class Unit : MonoBehaviour
     [SerializeField] TextMeshProUGUI _risingText;
     [SerializeField] TextMeshProUGUI _heroNameText;
     [SerializeField] EquipmentSlot _equipMain, _equipOffhand, _equipHeadgear;
-    [SerializeField] GameObject _highlight, _upgradeIcon, _upgradeRisingText;
+    [SerializeField] GameObject _highlight, _upgradeIcon, _upgradeRisingText, _afterImage;
     [SerializeField] Transform _targetIndicator;
     [SerializeField] Animator _animator;
     [SerializeField] SpriteRenderer _unitSpriteRenderer;
     [SerializeField] FloatingText _floatingText;
     [SerializeField] Sprite _normalSprite, _deathSprite;
     [SerializeField] AudioSource _audioSource;
-    [SerializeField] AudioClip _faintSFX;
-    [SerializeField] float _faintVolume;
+    [SerializeField] AudioClip _faintSFX, _dodgeSFX;
+    [SerializeField] float _faintVolume, _dodgeVolume;
 
     int _currentHealth;
     bool _isSelected = false;
     bool _isManual = false;
     bool _allSelected;
+    bool _hasDodge = false;
     List<Enemy> _enemyList = new();
 
     public EquipmentSlot Main() => _equipMain;
@@ -82,6 +83,10 @@ public class Unit : MonoBehaviour
         _attackText.text = Attack.ToString();
         _equipMain.SetSkill();
         _normalSprite = _unitSpriteRenderer.sprite;
+        foreach(SpriteRenderer spriteRenderer in _afterImage.GetComponentsInChildren<SpriteRenderer>(true))
+        {
+            spriteRenderer.sprite = _normalSprite;
+        }
         _heroNameText.text = HeroName;
     }
 
@@ -157,6 +162,8 @@ public class Unit : MonoBehaviour
         _unitSpriteRenderer.sprite = _normalSprite;
         IsDead = false;
         Heat = 0;
+        _hasDodge = false;
+        _afterImage.SetActive(false);
     }
 
     void Campaign_OnSceneLoading()
@@ -216,6 +223,12 @@ public class Unit : MonoBehaviour
     {
         if(IsDead) { return; }
 
+        if(_hasDodge)
+        {
+            Dodge();
+            return;
+        }
+
         if(_floatingText)
         {
             FloatingText floatingText = Instantiate(_floatingText, transform);
@@ -229,6 +242,23 @@ public class Unit : MonoBehaviour
             _healthText.text = _currentHealth.ToString();
             Die();
         }
+    }
+
+    void Dodge()
+    {
+        if(_upgradeRisingText)
+        {
+            _upgradeRisingText.SetActive(false);
+            _risingText.text = "DODGE!";
+            _risingText.color = Color.white;
+            _upgradeRisingText.SetActive(true);
+        }
+        if(_audioSource)
+        {
+            _audioSource.PlayOneShot(_dodgeSFX, _dodgeVolume);
+        }
+        _hasDodge = false;
+        _afterImage.SetActive(false);
     }
 
     public void GainHealth(int gainedHealth)
@@ -357,5 +387,11 @@ public class Unit : MonoBehaviour
     {
         HeroName = name;
         _heroNameText.text = HeroName;
+    }
+
+    public void GainDodge()
+    {
+        _hasDodge = true;
+        _afterImage.SetActive(true);
     }
 }
