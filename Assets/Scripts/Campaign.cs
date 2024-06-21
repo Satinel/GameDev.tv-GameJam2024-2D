@@ -254,7 +254,7 @@ public class Campaign : MonoBehaviour
         // {
         //     yield return SceneManager.LoadSceneAsync("BattleBoss");
         // }
-        if(Wins > 6)
+        if(Wins > 5)
         {
             yield return SceneManager.LoadSceneAsync(9); // TODO use the commented out section above once Boss Battle is ready
         }

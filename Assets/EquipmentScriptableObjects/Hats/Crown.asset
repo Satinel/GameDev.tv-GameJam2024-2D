@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Crown
   Slot: 2
-  Sprite: {fileID: 21300000, guid: f15bd7a1b8b1fb84cb69b82de18fb352, type: 3}
-  RareSprite: {fileID: 21300000, guid: f15bd7a1b8b1fb84cb69b82de18fb352, type: 3}
-  EpicSprite: {fileID: 21300000, guid: f15bd7a1b8b1fb84cb69b82de18fb352, type: 3}
-  LegendarySprite: {fileID: 21300000, guid: f15bd7a1b8b1fb84cb69b82de18fb352, type: 3}
+  Sprite: {fileID: 21300000, guid: b29622563db08bb478bfe488574ba9ff, type: 3}
+  RareSprite: {fileID: 21300000, guid: 63fee771416b07540b7c373d49a9c794, type: 3}
+  EpicSprite: {fileID: 21300000, guid: 8b1a69c4d268b5c4a98d233af131cf11, type: 3}
+  LegendarySprite: {fileID: 21300000, guid: 15156ab4b1b701f4b855847fe7ba74b6, type: 3}
   HasOffset: 1
   SpriteOffset: {x: -0.166, y: 0.47, z: 0}
   SpriteScale: {x: 1.15, y: 1.15, z: 1.15}
