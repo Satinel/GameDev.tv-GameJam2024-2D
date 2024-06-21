@@ -24,5 +24,5 @@ MonoBehaviour:
   SpriteFlipped: 1
   AttackIncrease: 0
   HealthIncrease: 150
-  Price: 5000
+  Price: 2000
   Skill: {fileID: -8767055512979849553, guid: 0c0075b076ba79f4a9ceffdb3aa3d211, type: 3}

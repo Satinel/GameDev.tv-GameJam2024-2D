@@ -233,7 +233,7 @@ public class Shop : MonoBehaviour
                     case 1:
                         if(_wins > 3)
                         {
-                            shopItem.Setup(_tier4Equipment[Random.Range(0, _tier1Equipment.Count)]);
+                            shopItem.Setup(_tier4Equipment[Random.Range(0, _tier4Equipment.Count)]);
                         }
                         else
                         {
@@ -241,7 +241,14 @@ public class Shop : MonoBehaviour
                         }
                         break;
                     case 2:
-                        shopItem.Setup(_tier2Equipment[Random.Range(0, _tier2Equipment.Count)]);
+                        if(_wins > 4)
+                        {
+                            shopItem.Setup(_tier3Equipment[Random.Range(0, _tier3Equipment.Count)]);
+                        }
+                        else
+                        {
+                            shopItem.Setup(_tier2Equipment[Random.Range(0, _tier2Equipment.Count)]);
+                        }
                         break;
                     case 3:
                         shopItem.Setup(_tier3Equipment[Random.Range(0, _tier3Equipment.Count)]);
@@ -608,6 +615,7 @@ public class Shop : MonoBehaviour
         _rerollButton.gameObject.SetActive(true);
         _hatShopButton.gameObject.SetActive(true);
         CheckBuyButton();
+        CheckForUpgrades();
     }
 
     void TradeIn(EquipmentScriptableObject currentItem, int upgradeLevel)

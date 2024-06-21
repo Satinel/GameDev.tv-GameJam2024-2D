@@ -14,6 +14,7 @@ public class Campaign : MonoBehaviour
     public static event Action OnTutorialLoading;
     public static event EventHandler<int> OnTownLoaded;
     public static event EventHandler<List<EquipmentScriptableObject>> OnSetLockedItems;
+    public static event Action OnCanEscape;
 
     [field:SerializeField] public int Wins { get; private set; }
     [field:SerializeField] public int Losses { get; private set; } = 5;
@@ -22,7 +23,7 @@ public class Campaign : MonoBehaviour
     public bool AutoUpgrades { get; private set; } = false;
 
     [SerializeField] float _volume = 0.75f;
-    [SerializeField] AudioClip _defeatSFX, _victorySFX, _gameOverSFX;
+    [SerializeField] AudioClip _defeatSFX, _victorySFX, _gameOverSFX, _escapeSFX;
     [SerializeField] GameObject _overlay, _victorySplash, _retreatSplash, _defeatSplash, _gameOverSplash, _toBattleButton, _quitButton, _lostGoldFloatingText;
     [SerializeField] List<Image> _lives = new();
     [SerializeField] List<GameObject> _wins = new();
@@ -100,6 +101,10 @@ public class Campaign : MonoBehaviour
         if(_hasCrown && _wasFrenzied)
         {
             _retreatSplash.SetActive(true);
+            if(_audioSource && _escapeSFX)
+            {
+                _audioSource.PlayOneShot(_escapeSFX, _volume);
+            }
             return;
         }
 
@@ -138,6 +143,10 @@ public class Campaign : MonoBehaviour
     void Timer_OnHalfTime()
     {
         _wasFrenzied = true;
+        if(_hasCrown)
+        {
+            OnCanEscape?.Invoke();
+        }
     }
 
     void HandleGameOver() // TODO Make this less abrupt
@@ -241,11 +250,13 @@ public class Campaign : MonoBehaviour
 
         OnSceneLoading?.Invoke();
         
-        
-        
+        // if(Wins > 6)
+        // {
+        //     yield return SceneManager.LoadSceneAsync("BattleBoss");
+        // }
         if(Wins > 6)
         {
-            yield return SceneManager.LoadSceneAsync("BattleBoss");
+            yield return SceneManager.LoadSceneAsync(9); // TODO use the commented out section above once Boss Battle is ready
         }
         else
         {

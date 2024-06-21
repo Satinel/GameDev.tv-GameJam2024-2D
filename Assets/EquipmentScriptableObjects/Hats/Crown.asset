@@ -12,17 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f86f0e575a772274fad942e2dbbc8bcb, type: 3}
   m_Name: Crown
   m_EditorClassIdentifier: 
-  Name: Witch Hat
+  Name: Crown
   Slot: 2
-  Sprite: {fileID: 21300000, guid: f92dab247c753284db02104b901bc42e, type: 3}
-  RareSprite: {fileID: 21300000, guid: f92dab247c753284db02104b901bc42e, type: 3}
-  EpicSprite: {fileID: 21300000, guid: f92dab247c753284db02104b901bc42e, type: 3}
-  LegendarySprite: {fileID: 21300000, guid: f92dab247c753284db02104b901bc42e, type: 3}
+  Sprite: {fileID: 21300000, guid: f15bd7a1b8b1fb84cb69b82de18fb352, type: 3}
+  RareSprite: {fileID: 21300000, guid: f15bd7a1b8b1fb84cb69b82de18fb352, type: 3}
+  EpicSprite: {fileID: 21300000, guid: f15bd7a1b8b1fb84cb69b82de18fb352, type: 3}
+  LegendarySprite: {fileID: 21300000, guid: f15bd7a1b8b1fb84cb69b82de18fb352, type: 3}
   HasOffset: 1
   SpriteOffset: {x: -0.166, y: 0.47, z: 0}
   SpriteScale: {x: 1.15, y: 1.15, z: 1.15}
   SpriteFlipped: 1
   AttackIncrease: 10
   HealthIncrease: 30
-  Price: 9999
-  Skill: {fileID: 3737678289451914987, guid: 425c1bba66100a245a0b19a8889bf0c3, type: 3}
+  Price: 99999
+  Skill: {fileID: -4137941813903767478, guid: 3e716b85548651947ba8f79685c90d23, type: 3}

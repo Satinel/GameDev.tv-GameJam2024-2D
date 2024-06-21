@@ -1304,6 +1304,7 @@ MonoBehaviour:
   _defeatSFX: {fileID: 8300000, guid: feabca77594f2bf4ab9397c49a4633f2, type: 3}
   _victorySFX: {fileID: 8300000, guid: 7c3bc8b1942013c47924c8f37fbe3350, type: 3}
   _gameOverSFX: {fileID: 8300000, guid: 80fe09a9eeea9e942ba3a6735080e8d4, type: 3}
+  _escapeSFX: {fileID: 8300000, guid: af3f4d41db2625a4eaa7a0b913937aed, type: 3}
   _overlay: {fileID: 5235715915541892355}
   _victorySplash: {fileID: 3364894327399386016}
   _retreatSplash: {fileID: 1260604816959097273}

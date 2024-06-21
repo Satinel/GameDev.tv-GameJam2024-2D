@@ -19,15 +19,16 @@ public class Battle : MonoBehaviour
     [SerializeField] EnemyScriptableObject _incomingRow1, _incomingRow2, _incomingRow3;
     [SerializeField] SpriteRenderer _iRow1Sprite, _iRow2Sprite, _iRow3Sprite;
     [SerializeField] List<EnemyScriptableObject> _bestiary = new();
-    [SerializeField] GameObject _retreatPrompt, _noRetreatPrompt, _lastStandMessage, _unitKilledMessage;
+    [SerializeField] GameObject _retreatPrompt, _noRetreatPrompt, _lastStandMessage, _unitKilledMessage, _escapePrompt;
     [SerializeField] TextMeshProUGUI _lifeCountText, _unitKilledText;
 
     float _currentTimeSpeed = 1;
-    bool _wasPaused, _noRetreat;
+    bool _wasPaused, _noRetreat, _canEscape = false;
 
     void OnEnable()
     {
         Campaign.OnBattleLoaded += Campaign_OnBattleLoaded; // This is a dependency loop thing which is bad but it's 2am on Saturday
+        Campaign.OnCanEscape += Campaign_OnCanEscape;
         OptionsMenu.OnOptionsOpened += Options_OnOptionsOpened;
         OptionsMenu.OnOptionsClosed += Options_OnOptionsClosed;
         Enemy.OnAnyEnemyKilled += Enemy_OnAnyEnemyKilled;
@@ -39,6 +40,7 @@ public class Battle : MonoBehaviour
     void OnDisable()
     {
         Campaign.OnBattleLoaded -= Campaign_OnBattleLoaded;
+        Campaign.OnCanEscape -= Campaign_OnCanEscape;
         OptionsMenu.OnOptionsOpened -= Options_OnOptionsOpened;
         OptionsMenu.OnOptionsClosed -= Options_OnOptionsClosed;
         Enemy.OnAnyEnemyKilled -= Enemy_OnAnyEnemyKilled;
@@ -87,6 +89,11 @@ public class Battle : MonoBehaviour
         OnBattleStarted?.Invoke();
     }
 
+    void Campaign_OnCanEscape()
+    {
+        _canEscape = true;
+    }
+
     void Options_OnOptionsOpened()
     {
         if(Time.timeScale > 0f)
@@ -130,7 +137,14 @@ public class Battle : MonoBehaviour
 
         if(!_noRetreat)
         {
-            _retreatPrompt.SetActive(true);
+            if(_canEscape)
+            {
+                _escapePrompt.SetActive(true);
+            }
+            else
+            {
+                _retreatPrompt.SetActive(true);
+            }
         }
         else
         {
