@@ -375,17 +375,13 @@ public class Campaign : MonoBehaviour
 
     public void ReturnToTitle()
     {
-        _isTransitioning = true;
         _audioSource.Stop();
         _screenWipeImage.fillAmount = 1;
-        Player player = GetComponentInParent<Player>();  // TODO A less messy alternative if possible
-        transform.SetParent(null, true);
-        Destroy(player.gameObject);
+        Player player = GetComponentInParent<Player>();
+        SceneManager.MoveGameObjectToScene(player.gameObject, SceneManager.GetActiveScene());
         Time.timeScale = 1;
-        // TODO A nice transition effect?
         OnSceneLoading?.Invoke();
         SceneManager.LoadScene(0);
-        Destroy(gameObject);
     }
 
     public void QuitGame()

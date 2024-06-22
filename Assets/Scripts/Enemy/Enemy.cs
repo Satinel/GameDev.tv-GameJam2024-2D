@@ -108,19 +108,22 @@ public class Enemy : MonoBehaviour
         
         _currentEnemy = enemySpawn;
         _spriteRenderer.sprite = _currentEnemy.Sprite;
-
-        if(!_isFrenzied)
-        {
-            MaxHealth = _currentEnemy.MaxHealth;
-            Attack = _currentEnemy.Attack;
-        }
-        else
-        {
-            MaxHealth = _currentEnemy.MaxHealth * 2;
-            Attack = _currentEnemy.Attack * 2;
-        }
+        
+        MaxHealth = _currentEnemy.MaxHealth;
+        Attack = _currentEnemy.Attack;
         _attackSpeed = _currentEnemy.ASpeed;
+        
+        if(_isFrenzied)
+        {
+            MaxHealth *= 2;
+            Attack *=  2;
+        }
+        
+        GoldValue = Mathf.CeilToInt((Attack / _attackSpeed) + (MaxHealth / 4f));
+        _goldText.text = $"+{GoldValue} GOLD";
+
         CurrentHealth = MaxHealth;
+        
         if(IsBoss)
         {
             _healthText.text = "???";
@@ -129,18 +132,13 @@ public class Enemy : MonoBehaviour
         {
             _healthText.text = CurrentHealth.ToString();
         }
+
         _attackText.text = Attack.ToString();
         _timeSinceLastAttack = UnityEngine.Random.Range(-2f, 0); // Sets an initiative so every like enemy has variance in time of attack
         _attackTimerImage.fillAmount = 0;
         _animator.SetTrigger(SPAWN_HASH);
         _currentTarget = null;
         _earnedGoldGameObject.SetActive(false);
-        GoldValue = Mathf.CeilToInt((_currentEnemy.Attack / _currentEnemy.ASpeed) + (_currentEnemy.MaxHealth / 4f));
-        if(_isFrenzied)
-        {
-            GoldValue *= 2;
-        }
-        _goldText.text = $"+{GoldValue} GOLD";
         _isAttacking = false;
     }
 
@@ -264,8 +262,9 @@ public class Enemy : MonoBehaviour
             Attack *= 2;
             _attackText.text = Attack.ToString();
             CurrentHealth += MaxHealth;
-            MaxHealth *= 2; // Necesesary for the proper gold reward once Frenzied
             _healthText.text = CurrentHealth.ToString();
+            GoldValue *= 2;
+            _goldText.text = $"+{GoldValue} GOLD";
         }
     }
 }

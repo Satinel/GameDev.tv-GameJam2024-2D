@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Battle6.unity
     guid: a7310707eba787f4d88c759658e90383
+  - enabled: 1
+    path: Assets/Scenes/BattleBoss.unity
+    guid: 7d0e4b0c7bf9d534eb15856a5466fc38
   m_configObjects: {}
