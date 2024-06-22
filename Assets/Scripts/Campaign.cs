@@ -187,6 +187,12 @@ public class Campaign : MonoBehaviour
 
     IEnumerator LoseLifeRoutine()
     {
+        if(_isTransitioning)
+        {
+            _lives[Losses].fillAmount = 0;
+            yield break; 
+        }
+
         yield return new WaitForSeconds(0.5f);
 
         if(_audioSource && _defeatSFX)
@@ -194,12 +200,27 @@ public class Campaign : MonoBehaviour
             _audioSource.PlayOneShot(_defeatSFX, _volume);
         }
 
+        if(_isTransitioning)
+        {
+            _lives[Losses].fillAmount = 0;
+            yield break; 
+        }
+
         yield return new WaitForSeconds(1f);
 
-        Instantiate(_explosionVFX.transform, _lives[Losses].transform);
+        Transform explosionVFX = Instantiate(_explosionVFX.transform, _lives[Losses].transform);
 
         while(_lives[Losses].fillAmount > 0)
         {
+            if(_isTransitioning)
+            {
+                if(explosionVFX)
+                {
+                    Destroy(explosionVFX.gameObject);
+                }
+                _lives[Losses].fillAmount = 0;
+                yield break;
+            }
             _lives[Losses].fillAmount -= Time.deltaTime;
             yield return null;
         }
@@ -217,6 +238,10 @@ public class Campaign : MonoBehaviour
         
         while(goldEarned > goldKept)
         {
+            if(_isTransitioning)
+            {
+                yield break;
+            }
             goldEarned--; // This is going to be far too slow for large sums of lost money but I'd need to figure out maths to do a percentage reduction!
             _goldEarnedText.text = $"Gold Earned: {goldEarned}";
             if(_wallet.BonusGoldEarnedThisBattle > 0)
