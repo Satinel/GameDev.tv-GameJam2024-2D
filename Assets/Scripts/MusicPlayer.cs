@@ -35,13 +35,23 @@ public class MusicPlayer : MonoBehaviour
 
     void Start()
     {
-        _mainAudioSource.volume = _volume;
-        _introAudioSource.volume = _volume;
-        _mainAudioSource.clip = _mainSong;
-        _mainAudioSource.loop = true;
-        _mainAudioSource.Play();
-        _mainAudioSource.Pause();
-        Invoke(nameof(SyncIntro), 0.25f);
+        if(_mainSong && _mainAudioSource)
+        {
+            _mainAudioSource.volume = 0;
+            _mainAudioSource.clip = _mainSong;
+            _mainAudioSource.loop = true;
+            _mainAudioSource.Play();
+            if(_introClip && _introAudioSource)
+            {
+                _mainAudioSource.Pause();
+                _introAudioSource.volume = _volume;
+                Invoke(nameof(SyncIntro), 0.25f);
+            }
+            else
+            {
+                _mainAudioSource.volume = _volume;
+            }
+        }
     }
 
     void Update()
@@ -59,18 +69,8 @@ public class MusicPlayer : MonoBehaviour
 
     void SyncIntro()
     {
-        if(_introClip && _introAudioSource)
-        {
-            _introAudioSource.PlayOneShot(_introClip, _volume);
-            StartTimer(_introClip.length); // This works by ignoring Time.timeScale in Update()
-
-        }
-        else if(_mainSong && _mainAudioSource)
-        {
-            _mainAudioSource.clip = _mainSong;
-            _mainAudioSource.loop = true;
-            _mainAudioSource.Play();
-        }
+        _introAudioSource.PlayOneShot(_introClip, _volume);
+        StartTimer(_introClip.length); // This works by ignoring Time.timeScale in Update()
     }
 
     void StartTimer(float introL)
@@ -112,6 +112,7 @@ public class MusicPlayer : MonoBehaviour
     {
         if(_isSceneOver) { return; }
 
+        _mainAudioSource.volume = _volume;
         _mainAudioSource.UnPause();
     }
 }

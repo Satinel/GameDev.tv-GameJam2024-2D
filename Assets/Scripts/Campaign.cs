@@ -275,13 +275,9 @@ public class Campaign : MonoBehaviour
 
         OnSceneLoading?.Invoke();
         
-        // if(Wins > 6)
-        // {
-        //     yield return SceneManager.LoadSceneAsync("BattleBoss");
-        // }
         if(Wins > 5)
         {
-            yield return SceneManager.LoadSceneAsync(9); // TODO use the commented out section above once Boss Battle is ready
+            yield return SceneManager.LoadSceneAsync("BattleBoss");
         }
         else
         {
@@ -376,7 +372,7 @@ public class Campaign : MonoBehaviour
         _lostGoldFloatingText.SetActive(false);
         
         OnSceneLoading?.Invoke();
-        if(Days > 5)
+        if(Wins > 5)
         {
             yield return SceneManager.LoadSceneAsync("ShopNoPortal");
         }
