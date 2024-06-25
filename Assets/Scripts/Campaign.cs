@@ -21,6 +21,7 @@ public class Campaign : MonoBehaviour
     [field:SerializeField] public int Days { get; private set; }
     public List<EquipmentScriptableObject> LockedItems { get; private set; } = new();
     public bool AutoUpgrades { get; private set; } = false;
+    public bool BossIntroDone { get; private set; } = false;
 
     [SerializeField] float _volume = 0.75f;
     [SerializeField] AudioClip _defeatSFX, _victorySFX, _gameOverSFX, _escapeSFX;
@@ -55,6 +56,7 @@ public class Campaign : MonoBehaviour
         Battle.OnSpeedChanged += Battle_OnSpeedChanged;
         Timer.OnHalfTime += Timer_OnHalfTime;
         Portal.OnShopOpened += Portal_OnShopOpened;
+        Portal.OnShop6Wins += Portal_OnShop6Wins;
         ShopItem.OnShopItemLocked += ShopItem_OnShopItemLocked;
     }
 
@@ -67,6 +69,7 @@ public class Campaign : MonoBehaviour
         Battle.OnSpeedChanged -= Battle_OnSpeedChanged;
         Timer.OnHalfTime -= Timer_OnHalfTime;
         Portal.OnShopOpened -= Portal_OnShopOpened;
+        Portal.OnShop6Wins -= Portal_OnShop6Wins;
         ShopItem.OnShopItemLocked -= ShopItem_OnShopItemLocked;
     }
 
@@ -166,6 +169,11 @@ public class Campaign : MonoBehaviour
     {
         _toBattleButton.SetActive(true);
         OnSetLockedItems?.Invoke(this, LockedItems);
+    }
+
+    void Portal_OnShop6Wins()
+    {
+        BossIntroDone = true;
     }
 
     void ShopItem_OnShopItemLocked(object sender, bool isLocked)

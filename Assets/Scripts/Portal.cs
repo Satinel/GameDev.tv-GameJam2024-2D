@@ -4,10 +4,11 @@ using System;
 public class Portal : MonoBehaviour
 {
     public static event Action OnShopOpened;
+    public static event Action OnShop6Wins;
     public static event EventHandler<int> OnUnitSummoned;
 
     [SerializeField] Animator _animator;
-    [SerializeField] GameObject _shopParent, _portalParent, _shopMusic, _portalMusic, _shopButton;
+    [SerializeField] GameObject _shopParent, _portalParent, _shopMusic, _portalMusic, _shopButton, _skipButton;
     [SerializeField] SpriteRenderer _backGroundAll;
 
     static readonly int DAY1_HASH = Animator.StringToHash("Day1");
@@ -42,6 +43,7 @@ public class Portal : MonoBehaviour
 
     public void SkipCutscene()
     {
+        _skipButton.SetActive(false);
         _cutsceneSkipped = true;
         Time.timeScale = 10f;
     }
@@ -58,10 +60,11 @@ public class Portal : MonoBehaviour
         OnShopOpened?.Invoke();
     }
 
-    void OpenShopNoMusicChange()
+    public void OpenShopNoMusicChange()
     {
         _cutsceneSkipped = true;
         Time.timeScale = 1f;
+        _portalMusic.SetActive(true);
         _shopParent.SetActive(true);
         _portalParent.SetActive(false);
         _backGroundAll.enabled = false;
@@ -96,14 +99,20 @@ public class Portal : MonoBehaviour
                 PlayPortalAnimation(DAY5_HASH); // Fox -> Portal explodes???
                 break;
             case >5:
-                if(campaign.Wins == 6)
+                if(campaign.Wins == 6 && !campaign.BossIntroDone)
                 {
                     PlayPortalAnimation(WINS6_HASH); // Congratulate + Final Boss
+                    OnShop6Wins?.Invoke();
+                    return;
+                }
+                else if(campaign.Wins >= 6)
+                {
                     OpenShopNoMusicChange();
+                    break;
                 }
                 else
                 {
-                    OpenShop();                    
+                    OpenShop();
                 }
                 break;
             default:
