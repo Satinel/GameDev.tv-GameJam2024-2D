@@ -2032,11 +2032,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8759559281780541156, guid: a617a09c0ac23d647aca1a92072c8b25, type: 3}
       propertyPath: m_text
-      value: Very<nobr> Fancy!</nobr>
+      value: See the health of The Final Boss.
       objectReference: {fileID: 0}
     - target: {fileID: 8759559281780541156, guid: a617a09c0ac23d647aca1a92072c8b25, type: 3}
       propertyPath: m_fontSize
-      value: 0.55
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

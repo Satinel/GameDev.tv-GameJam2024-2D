@@ -53,7 +53,7 @@ public class Battle : MonoBehaviour
     {
         List<Enemy> activeEnemies = new();
 
-        foreach (Enemy enemy in _enemies)
+        foreach(Enemy enemy in _enemies)
         {
             if(enemy.gameObject.activeSelf)
             {

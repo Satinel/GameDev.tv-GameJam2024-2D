@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: MinionShield
   m_EditorClassIdentifier: 
   Name: Shield Minion
-  Sprite: {fileID: -2137664024, guid: 3536e8b12ea3b3b44ac96602e2b0192c, type: 3}
-  Attack: 2000
+  Sprite: {fileID: 21300000, guid: b1c3e0bf6833c96479bc27824a0cf1b7, type: 3}
+  Attack: 200
   ASpeed: 10
-  MaxHealth: 288000
+  MaxHealth: 8640
   AttackSFX: {fileID: 8300000, guid: 439f0889a32d8334082920238020b6d5, type: 3}
   SkillVFX: {fileID: 7764922303510143599, guid: 4f24455a86b6c5247a3cf124e17a1744, type: 3}
   ClipVolume: 1

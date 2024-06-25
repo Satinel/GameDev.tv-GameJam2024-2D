@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4b8ae6f83650c940b24ca4d1a1f28a9, type: 3}
-  m_Name: MinionBomb
+  m_Name: MinionAttack
   m_EditorClassIdentifier: 
-  Name: Bomb Minion
-  Sprite: {fileID: 299919557, guid: f6d98ae6c625a9f4a8fbded8858cbeab, type: 3}
-  Attack: 8000
-  ASpeed: 30
-  MaxHealth: 72000
+  Name: Attack Minion
+  Sprite: {fileID: 21300000, guid: c212de46f04aa9d41be90c436ae895c4, type: 3}
+  Attack: 600
+  ASpeed: 10
+  MaxHealth: 3000
   AttackSFX: {fileID: 8300000, guid: 439f0889a32d8334082920238020b6d5, type: 3}
   SkillVFX: {fileID: 7764922303510143599, guid: 4f24455a86b6c5247a3cf124e17a1744, type: 3}
   ClipVolume: 1

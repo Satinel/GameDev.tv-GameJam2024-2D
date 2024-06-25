@@ -15,6 +15,7 @@ public class Campaign : MonoBehaviour
     public static event EventHandler<int> OnTownLoaded;
     public static event EventHandler<List<EquipmentScriptableObject>> OnSetLockedItems;
     public static event Action OnCanEscape;
+    public static event EventHandler<bool> OnWitchHatSet;
 
     [field:SerializeField] public int Wins { get; private set; }
     [field:SerializeField] public int Losses { get; private set; } = 5;
@@ -22,6 +23,7 @@ public class Campaign : MonoBehaviour
     public List<EquipmentScriptableObject> LockedItems { get; private set; } = new();
     public bool AutoUpgrades { get; private set; } = false;
     public bool BossIntroDone { get; private set; } = false;
+    public bool HasWitchHat { get; private set; } = false;
 
     [SerializeField] float _volume = 0.75f;
     [SerializeField] AudioClip _defeatSFX, _victorySFX, _gameOverSFX, _escapeSFX;
@@ -354,6 +356,7 @@ public class Campaign : MonoBehaviour
         if(_isTransitioning) { return; }
         Days++;
         _hasCrown = false;
+        HasWitchHat = false;
         _wasFrenzied = false;
 
         StartCoroutine(ReturnToTownRoutine());
@@ -426,5 +429,11 @@ public class Campaign : MonoBehaviour
     public void SetHasCrown()
     {
         _hasCrown = true;
+    }
+    
+    public void SetHasWitchHat()
+    {
+        HasWitchHat = true;
+        OnWitchHatSet?.Invoke(this, HasWitchHat);
     }
 }

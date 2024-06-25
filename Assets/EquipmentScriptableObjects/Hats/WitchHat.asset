@@ -25,4 +25,4 @@ MonoBehaviour:
   AttackIncrease: 1
   HealthIncrease: 3
   Price: 9
-  Skill: {fileID: 3737678289451914987, guid: 425c1bba66100a245a0b19a8889bf0c3, type: 3}
+  Skill: {fileID: -6847830512604173040, guid: fd3f84b84a7205344b02aaf40fae6ce0, type: 3}

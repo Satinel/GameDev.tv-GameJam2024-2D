@@ -283,9 +283,9 @@ MonoBehaviour:
   m_fontSize: 0.5
   m_fontSizeBase: 0.5
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 0.2
+  m_fontSizeMax: 1
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -727,7 +727,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 9
+  m_text: '9
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
   m_sharedMaterial: {fileID: 2140474, guid: 8a89fa14b10d46a99122fd4f73fca9a2, type: 2}
@@ -757,9 +759,9 @@ MonoBehaviour:
   m_fontSize: 0.5
   m_fontSizeBase: 0.5
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 0.2
+  m_fontSizeMax: 1
   m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
@@ -856,6 +858,7 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 4043727064354940124}
   _floatingText: {fileID: 4702419758329665534, guid: ee656e085c3ac6b4d81c6830989cc7d8, type: 3}
   _attackTimerImage: {fileID: 330817166433797845}
+  _minion: {fileID: 0}
   _attackSpeed: 0
 --- !u!95 &7693231854763021458
 Animator:
