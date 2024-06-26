@@ -299,6 +299,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42cea68ed938eda4382bbf6060d8f0f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <IsDamageable>k__BackingField: 1
+  _bossEnemy: {fileID: 5792839393812873136}
 --- !u!1 &229061007
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,6 +627,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7020627b21776b45b71bb4d3be2219d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <IsDamageable>k__BackingField: 0
+  _bossEnemy: {fileID: 5792839393812873136}
 --- !u!1001 &493622483
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1201,6 +1205,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
+      propertyPath: _enemies.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1248,6 +1256,18 @@ PrefabInstance:
       propertyPath: _bestiary.Array.data[10]
       value: 
       objectReference: {fileID: 11400000, guid: 6ee8408ebbf66364e993eed64794920b, type: 2}
+    - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
+      propertyPath: _setupEnemies.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
+      propertyPath: _setupEnemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 431699485}
+    - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
+      propertyPath: _setupEnemies.Array.data[1]
+      value: 
+      objectReference: {fileID: 36338504}
     - target: {fileID: 228399529179108989, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -1404,6 +1424,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7546075516187751859, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7591039356921110832, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}

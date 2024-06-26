@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     public static event EventHandler<Enemy> OnAnyEnemyClicked;
     public static event EventHandler<Enemy> OnAnyEnemyKilled;
     public static event EventHandler<Enemy> OnAnyEnemySpawned;
+    public static event EventHandler<int> OnBossDamaged;
 
     public int Attack {get; private set;}
     public int MaxHealth {get; private set;}
@@ -18,8 +19,8 @@ public class Enemy : MonoBehaviour
     [field:SerializeField] public bool IsBoss {get; private set;}
     public bool IsDead() => !_isFighting;
 
-    [SerializeField] TextMeshProUGUI _attackText, _healthText, _goldText;
-    [SerializeField] GameObject _earnedGoldGameObject;
+    [SerializeField] TextMeshProUGUI _attackText, _healthText, _goldText, _healingText;
+    [SerializeField] GameObject _earnedGoldGameObject, _risingTextGameObject;
     [SerializeField] Animator _animator;
     [SerializeField] AudioSource _audioSource;
     [SerializeField] SpriteRenderer _spriteRenderer;
@@ -141,16 +142,22 @@ public class Enemy : MonoBehaviour
     {
         if(!_isFighting) { return; }
 
-
         if(_floatingText)
         {
             FloatingText floatingText = Instantiate(_floatingText, transform);
             floatingText.Setup(damage);
         }
+        if(IsBoss)
+        {
+            OnBossDamaged?.Invoke(this, damage);
+        }
         if(_minion != null)
         {
             _minion.TakeDamage(damage);
-            return;
+            if(!_minion.IsDamageable)
+            {
+                return;
+            }
         }
         CurrentHealth -= damage;
 
@@ -271,5 +278,38 @@ public class Enemy : MonoBehaviour
             GoldValue *= 2;
             _goldText.text = $"+{GoldValue} GOLD";
         }
+    }
+
+    public void ChangeAttack(int attackChange)
+    {
+        Attack += attackChange;
+
+        if(Attack < 0)
+        {
+            Attack = 0;
+        }
+
+        _attackText.text = Attack.ToString();
+    }
+
+    public void ResetAttack()
+    {
+        Attack = _currentEnemy.Attack;
+        _attackText.text = Attack.ToString();
+    }
+
+    public void GainHealth(int gainedHealth)
+    {
+        if(!_isFighting) { return; }
+
+        if(_risingTextGameObject)
+        {
+            _risingTextGameObject.SetActive(false);
+            _healingText.text = gainedHealth.ToString();
+            _risingTextGameObject.SetActive(true);
+        }
+        CurrentHealth = Mathf.Clamp(CurrentHealth + gainedHealth, 0, MaxHealth);
+
+        _healthText.text = CurrentHealth.ToString();
     }
 }

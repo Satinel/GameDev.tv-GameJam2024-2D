@@ -16,6 +16,7 @@ public class Battle : MonoBehaviour
 
     [SerializeField] float _respawnTime;
     [SerializeField] List<Enemy> _enemies = new();
+    [SerializeField] List<Enemy> _setupEnemies = new();
     [SerializeField] EnemyScriptableObject _incomingRow1, _incomingRow2, _incomingRow3;
     [SerializeField] SpriteRenderer _iRow1Sprite, _iRow2Sprite, _iRow3Sprite;
     [SerializeField] List<EnemyScriptableObject> _bestiary = new();
@@ -60,6 +61,11 @@ public class Battle : MonoBehaviour
                 enemy.SetUp(_bestiary[UnityEngine.Random.Range(0, _bestiary.Count)]);
                 activeEnemies.Add(enemy);
             }
+        }
+
+        foreach(Enemy enemy in _setupEnemies)
+        {
+            activeEnemies.Add(enemy);
         }
 
         OnEnemyListCreated?.Invoke(this, activeEnemies);

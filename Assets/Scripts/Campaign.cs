@@ -20,10 +20,12 @@ public class Campaign : MonoBehaviour
     [field:SerializeField] public int Wins { get; private set; }
     [field:SerializeField] public int Losses { get; private set; } = 5;
     [field:SerializeField] public int Days { get; private set; }
+    public int BossDamage { get; private set; }
     public List<EquipmentScriptableObject> LockedItems { get; private set; } = new();
     public bool AutoUpgrades { get; private set; } = false;
     public bool BossIntroDone { get; private set; } = false;
     public bool HasWitchHat { get; private set; } = false;
+    public bool BossBattleStarted { get; private set; } = false;
 
     [SerializeField] float _volume = 0.75f;
     [SerializeField] AudioClip _defeatSFX, _victorySFX, _gameOverSFX, _escapeSFX;
@@ -60,6 +62,8 @@ public class Campaign : MonoBehaviour
         Portal.OnShopOpened += Portal_OnShopOpened;
         Portal.OnShop6Wins += Portal_OnShop6Wins;
         ShopItem.OnShopItemLocked += ShopItem_OnShopItemLocked;
+        Enemy.OnBossDamaged += Enemy_OnBossDamaged;
+        BossBattle.OnBossBattleStarted += BossBattle_OnBossBattleStarted;
     }
 
     void OnDisable()
@@ -73,6 +77,8 @@ public class Campaign : MonoBehaviour
         Portal.OnShopOpened -= Portal_OnShopOpened;
         Portal.OnShop6Wins -= Portal_OnShop6Wins;
         ShopItem.OnShopItemLocked -= ShopItem_OnShopItemLocked;
+        Enemy.OnBossDamaged -= Enemy_OnBossDamaged;
+        BossBattle.OnBossBattleStarted -= BossBattle_OnBossBattleStarted;
     }
 
     void Battle_OnBattleEnded()
@@ -435,5 +441,15 @@ public class Campaign : MonoBehaviour
     {
         HasWitchHat = true;
         OnWitchHatSet?.Invoke(this, HasWitchHat);
+    }
+
+    void Enemy_OnBossDamaged(object sender, int damage)
+    {
+        BossDamage += damage;
+    }
+
+    void BossBattle_OnBossBattleStarted()
+    {
+        BossBattleStarted = true;
     }
 }

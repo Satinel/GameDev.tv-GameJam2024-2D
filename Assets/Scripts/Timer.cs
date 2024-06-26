@@ -36,12 +36,16 @@ public class Timer : MonoBehaviour
     {
         Battle.OnBattleStarted += Battle_OnBattleStarted;
         Battle.OnBattleEnded += Battle_OnBattleEnded;
+        BossBattle.OnBossIntro += Battle_OnBossIntro;
+        BossBattle.OnBossBattleStarted += Battle_OnBattleStarted;
     }
 
     void OnDisable()
     {
         Battle.OnBattleStarted -= Battle_OnBattleStarted;
-        Battle.OnBattleEnded += Battle_OnBattleEnded;
+        Battle.OnBattleEnded -= Battle_OnBattleEnded;
+        BossBattle.OnBossIntro -= Battle_OnBossIntro;
+        BossBattle.OnBossBattleStarted -= Battle_OnBattleStarted;
     }
 
     void Update()
@@ -77,6 +81,13 @@ public class Timer : MonoBehaviour
     void Battle_OnBattleEnded()
     {
         _timerStarted = false;
+    }
+
+    void Battle_OnBossIntro()
+    {
+        _timerStarted = false;
+        _currentTime = _totalTime;
+        _timerText.text = FormatTime(_currentTime);
     }
 
     void StartTimer()

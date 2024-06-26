@@ -1,30 +1,54 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BossBattle : MonoBehaviour
 {
+    public static Action OnBossIntro;
+    public static Action OnBossBattleStarted;
+
     [SerializeField] Enemy _bossEnemy, _attackMinion, _heartMinion; // _timerMinion
     [SerializeField] GameObject _bossHealthText;
     [SerializeField] EnemyScriptableObject _attackESO, _heartESO; // _timerESO
     [SerializeField] Timer _timer;
 
+    int _bossDamage;
+    bool _bossBattleStarted;
+
     void OnEnable()
     {
+        Campaign.OnBattleLoaded += Campaign_OnBattleLoaded;
         Campaign.OnWitchHatSet += Campaign_OnWitchHatSet;
+        Battle.OnBattleStarted += Battle_OnBattleStarted;
         Timer.OnHalfTime += Timer_OnHalfTime;
     }
 
     void OnDisable()
     {
+        Campaign.OnBattleLoaded -= Campaign_OnBattleLoaded;
         Campaign.OnWitchHatSet -= Campaign_OnWitchHatSet;
+        Battle.OnBattleStarted -= Battle_OnBattleStarted;
         Timer.OnHalfTime -= Timer_OnHalfTime;
+    }
+
+    void Campaign_OnBattleLoaded(object sender, int e)
+    {
+        Campaign campaign = (Campaign)sender;
+        _bossDamage = campaign.BossDamage;
+        _bossBattleStarted = campaign.BossBattleStarted;
     }
 
     void Campaign_OnWitchHatSet(object sender, bool e)
     {
         _bossHealthText.SetActive(e);
+    }
+
+    void Battle_OnBattleStarted()
+    {
+        if(!_bossBattleStarted)
+        {
+            OnBossIntro?.Invoke();
+            // TODO Trigger Animation leading to SetUpMinionsAnimationEvent
+        }
     }
 
     void Timer_OnHalfTime()
@@ -37,5 +61,6 @@ public class BossBattle : MonoBehaviour
     {
         _attackMinion.SetUp(_attackESO);
         _heartMinion.SetUp(_heartESO);
+        OnBossBattleStarted?.Invoke();
     }
 }
