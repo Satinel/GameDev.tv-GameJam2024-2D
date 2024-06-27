@@ -8,6 +8,7 @@ public class EquipmentSlot : MonoBehaviour
     public BaseSkill Skill {get; private set;}
 
     [SerializeField] SpriteRenderer _spriteRenderer;
+    [SerializeField] GameObject _cooldownUI, _cooldownFillImage;
 
     public Sprite ItemSprite() => _spriteRenderer.sprite;
 
@@ -38,6 +39,7 @@ public class EquipmentSlot : MonoBehaviour
             Destroy(GetComponentInChildren<BaseSkill>().gameObject);
         }
         Skill = Instantiate(gear.Skill, transform);
+        Skill.SetUI(_cooldownUI, _cooldownFillImage);
     }
 
     public void UpgradeItem(EquipmentScriptableObject gear)
@@ -90,5 +92,6 @@ public class EquipmentSlot : MonoBehaviour
     public void SetSkill()
     {
         Skill = GetComponentInChildren<BaseSkill>();
+        Skill.SetUI(_cooldownUI, _cooldownFillImage);
     }
 }

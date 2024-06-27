@@ -418,6 +418,7 @@ MonoBehaviour:
   _attackMinion: {fileID: 431699485}
   _heartMinion: {fileID: 36338504}
   _bossHealthText: {fileID: 5792839393812873134}
+  _bossESO: {fileID: 11400000, guid: ad7dac70f2ad083458a8d28b57243c34, type: 2}
   _attackESO: {fileID: 11400000, guid: d1be7ef8965ab7c47bef5894358a6c58, type: 2}
   _heartESO: {fileID: 11400000, guid: deaa33a9c2357ca44895854408dba867, type: 2}
   _timer: {fileID: 5792839393812873137}
@@ -1206,7 +1207,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _enemies.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.size
@@ -1215,7 +1216,7 @@ PrefabInstance:
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: ad7dac70f2ad083458a8d28b57243c34, type: 2}
+      objectReference: {fileID: 11400000, guid: deaa33a9c2357ca44895854408dba867, type: 2}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _bestiary.Array.data[1]
       value: 
@@ -1258,14 +1259,18 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: 6ee8408ebbf66364e993eed64794920b, type: 2}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _setupEnemies.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _setupEnemies.Array.data[0]
       value: 
-      objectReference: {fileID: 431699485}
+      objectReference: {fileID: 5792839393812873136}
     - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
       propertyPath: _setupEnemies.Array.data[1]
+      value: 
+      objectReference: {fileID: 431699485}
+    - target: {fileID: 212502451730483271, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}
+      propertyPath: _setupEnemies.Array.data[2]
       value: 
       objectReference: {fileID: 36338504}
     - target: {fileID: 228399529179108989, guid: 3efd1de220456e04797065d318dd9fe5, type: 3}

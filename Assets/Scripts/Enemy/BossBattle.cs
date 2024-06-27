@@ -3,12 +3,12 @@ using UnityEngine;
 
 public class BossBattle : MonoBehaviour
 {
-    public static Action OnBossIntro;
-    public static Action OnBossBattleStarted;
+    public static event Action OnBossIntro;
+    public static event Action OnBossBattleStarted;
 
     [SerializeField] Enemy _bossEnemy, _attackMinion, _heartMinion; // _timerMinion
     [SerializeField] GameObject _bossHealthText;
-    [SerializeField] EnemyScriptableObject _attackESO, _heartESO; // _timerESO
+    [SerializeField] EnemyScriptableObject _bossESO, _attackESO, _heartESO; // _timerESO
     [SerializeField] Timer _timer;
 
     int _bossDamage;
@@ -28,6 +28,11 @@ public class BossBattle : MonoBehaviour
         Campaign.OnWitchHatSet -= Campaign_OnWitchHatSet;
         Battle.OnBattleStarted -= Battle_OnBattleStarted;
         Timer.OnHalfTime -= Timer_OnHalfTime;
+    }
+
+    void Start()
+    {
+        _bossEnemy.SetUp(_bossESO);
     }
 
     void Campaign_OnBattleLoaded(object sender, int e)

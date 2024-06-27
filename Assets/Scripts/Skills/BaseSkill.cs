@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BaseSkill : MonoBehaviour
 {
@@ -15,6 +17,9 @@ public class BaseSkill : MonoBehaviour
     protected bool _isFighting;
     protected Unit _unit;
     protected Animator _unitAnimator;
+    protected GameObject _cooldownParent;
+    protected Image _cooldownImage;
+    protected TextMeshProUGUI _cooldownText;
 
     public float Cooldown => _cooldown;
 
@@ -38,22 +43,26 @@ public class BaseSkill : MonoBehaviour
     {
         Battle.OnBattleStarted += Battle_OnBattleStarted;
         Battle.OnBattleEnded += Battle_OnBattleEnded;
+        BossBattle.OnBossIntro += Battle_OnBossIntro;
+        BossBattle.OnBossBattleStarted += Battle_OnBattleStarted;
     }
 
     protected void OnDisable()
     {
         Battle.OnBattleStarted -= Battle_OnBattleStarted;
         Battle.OnBattleEnded -= Battle_OnBattleEnded;
+        BossBattle.OnBossIntro -= Battle_OnBossIntro;
+        BossBattle.OnBossBattleStarted -= Battle_OnBattleStarted;
     }
 
     void Update()
     {
         if(_unit.IsDead || !_isFighting || _cooldown <= 0) { return; }
 
-
         _timeSinceLastAttack += Time.deltaTime;
+        UpdateCooldownUI();
 
-        if(_timeSinceLastAttack >= _cooldown)
+        if (_timeSinceLastAttack >= _cooldown)
         {
             if(_requiresEnemy && !_unit.EnemyTarget)
             {
@@ -61,7 +70,23 @@ public class BaseSkill : MonoBehaviour
             }
 
             _timeSinceLastAttack = 0;
+            _cooldownImage.fillAmount = 0;
+            _cooldownText.text = $"{_cooldown}";
             UseSkill();
+        }
+    }
+
+    protected void UpdateCooldownUI()
+    {
+        if(_timeSinceLastAttack < _cooldown)
+        {
+            _cooldownImage.fillAmount = _timeSinceLastAttack / _cooldown;
+            _cooldownText.text = (_cooldown - _timeSinceLastAttack).ToString("N1");
+        }
+        else
+        {
+            _cooldownImage.fillAmount = 1;
+            _cooldownText.text = "0.0";
         }
     }
 
@@ -71,11 +96,27 @@ public class BaseSkill : MonoBehaviour
     {
         _isFighting = true;
         _timeSinceLastAttack = 0;
+        if(_cooldown <= 0)
+        {
+            _cooldownParent.SetActive(false);
+        }
+        else
+        {
+            _cooldownParent.SetActive(true);
+            UpdateCooldownUI();
+        }
+    }
+
+    protected virtual void Battle_OnBossIntro()
+    {
+        _isFighting = false;
+        _timeSinceLastAttack = 0;
     }
 
     protected void Battle_OnBattleEnded()
     {
         _isFighting = false;
+        _cooldownParent.SetActive(false);
     }
 
     public virtual void SkillEffect()
@@ -88,4 +129,10 @@ public class BaseSkill : MonoBehaviour
         }
     }
 
+    public void SetUI(GameObject cooldownParent, GameObject cooldownFillImage)
+    {
+        _cooldownParent = cooldownParent;
+        _cooldownImage = cooldownFillImage.GetComponent<Image>();
+        _cooldownText = _cooldownParent.GetComponentInChildren<TextMeshProUGUI>(true);
+    }
 }
