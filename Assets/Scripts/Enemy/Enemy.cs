@@ -1,7 +1,7 @@
 using UnityEngine;
-using TMPro;
 using System;
 using UnityEngine.UI;
+using TMPro;
 
 public class Enemy : MonoBehaviour
 {
@@ -36,8 +36,9 @@ public class Enemy : MonoBehaviour
     bool _isAttacking = false;
 
     EnemyScriptableObject _currentEnemy;
+    public EnemyScriptableObject CurrentEnemy => _currentEnemy;
+    
     Unit _currentTarget;
-
     TeamManager _teamManager;
 
     protected readonly int DIE_HASH = Animator.StringToHash("Die");
@@ -183,13 +184,15 @@ public class Enemy : MonoBehaviour
 
     void DealDamageAnimationEvent()
     {
+        if(!_isFighting) { return; }
+
         if(_minion != null)
         {
             _minion.MinionAction();
+            _attackTimerImage.fillAmount = 0;
+            _isAttacking = false;
             return;
         }
-
-        if(!_isFighting) { return; }
 
         if(!_currentTarget)
         {
@@ -311,5 +314,38 @@ public class Enemy : MonoBehaviour
         CurrentHealth = Mathf.Clamp(CurrentHealth + gainedHealth, 0, MaxHealth);
 
         _healthText.text = CurrentHealth.ToString();
+    }
+
+    public void ChangeAttackSpeed(float change)
+    {
+        _attackSpeed += change;
+
+        if(_risingTextGameObject)
+        {
+            if(change > 0)
+            {
+                _risingTextGameObject.SetActive(false);
+                _healingText.text = $"Speed Up: +{change}";
+                _risingTextGameObject.SetActive(true);
+            }
+            if(change < 0)
+            {
+                _risingTextGameObject.SetActive(false);
+                _healingText.text = $"Speed Down: {change}";
+                _risingTextGameObject.SetActive(true);
+            }
+        }
+
+        if(_attackSpeed < 1f)
+        {
+            _attackSpeed = 1f;
+        }
+    }
+
+    public void ResetAttackSpeed()
+    {
+        if(_attackSpeed == _currentEnemy.ASpeed) { return; }
+
+        ChangeAttackSpeed(_currentEnemy.ASpeed - _attackSpeed);
     }
 }

@@ -11,6 +11,7 @@ public class Battle : MonoBehaviour
     public static event Action OnBattleWon;
     public static event Action OnRetreated;
     public static event Action OnBattleLost;
+    public static event Action OnBossBattleWon;
     public static event EventHandler<List<Enemy>> OnEnemyListCreated;
     public static event EventHandler<float> OnSpeedChanged;
 
@@ -218,10 +219,11 @@ public class Battle : MonoBehaviour
         {
             StartCoroutine(SpawnEnemy(enemy, enemy.Row));
         }
-        // else
-        // {
-            // TODO Logic to handle boss battle ending in victory OR an entirely new BossBattle script to handle everything unique to bosses makes more sense
-        // }
+        else
+        {
+            OnBossBattleWon?.Invoke(); // TODO Campaign will probably want to subscribe to this?
+            OnBattleEnded?.Invoke();
+        }
     }
 
     void Unit_OnAnyUnitKilled(object sender, Unit unit)
