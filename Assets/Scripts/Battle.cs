@@ -221,7 +221,7 @@ public class Battle : MonoBehaviour
         }
         else
         {
-            OnBossBattleWon?.Invoke(); // TODO Campaign will probably want to subscribe to this?
+            OnBossBattleWon?.Invoke();
             OnBattleEnded?.Invoke();
         }
     }

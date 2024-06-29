@@ -44,6 +44,7 @@ public class Enemy : MonoBehaviour
     protected readonly int DIE_HASH = Animator.StringToHash("Die");
     protected readonly int SPAWN_HASH = Animator.StringToHash("Spawn");
     protected readonly int ATTACK_HASH = Animator.StringToHash("Attack");
+    protected readonly int MINION_HASH = Animator.StringToHash("Minion");
 
     void Awake()
     {
@@ -179,7 +180,14 @@ public class Enemy : MonoBehaviour
             SetCurrentTarget();
         }
 
-        _animator.SetTrigger(ATTACK_HASH);
+        if(_minion != null)
+        {
+            _animator.SetTrigger(MINION_HASH);
+        }
+        else
+        {
+            _animator.SetTrigger(ATTACK_HASH);
+        }
     }
 
     void DealDamageAnimationEvent()
@@ -308,6 +316,7 @@ public class Enemy : MonoBehaviour
         if(_risingTextGameObject)
         {
             _risingTextGameObject.SetActive(false);
+            _healingText.color = Color.green;
             _healingText.text = gainedHealth.ToString();
             _risingTextGameObject.SetActive(true);
         }
@@ -325,12 +334,14 @@ public class Enemy : MonoBehaviour
             if(change > 0)
             {
                 _risingTextGameObject.SetActive(false);
+                _healingText.color = Color.blue;
                 _healingText.text = $"Speed Up: +{change}";
                 _risingTextGameObject.SetActive(true);
             }
             if(change < 0)
             {
                 _risingTextGameObject.SetActive(false);
+                _healingText.color = Color.red;
                 _healingText.text = $"Speed Down: {change}";
                 _risingTextGameObject.SetActive(true);
             }

@@ -41,7 +41,7 @@ public class Campaign : MonoBehaviour
 
     bool _isTransitioning;
     float _savedBattleSpeed = 1f;
-    bool _hasCrown = false, _wasFrenzied = false;
+    bool _hasCrown = false, _wasFrenzied = false, _bossDefeated = false;
 
     void Awake()
     {
@@ -57,6 +57,7 @@ public class Campaign : MonoBehaviour
         Battle.OnBattleWon += Battle_OnBattleWon;
         Battle.OnRetreated += Battle_OnRetreated;
         Battle.OnBattleLost += Battle_OnBattleLost;
+        Battle.OnBossBattleWon += Battle_OnBossBattleWon;
         Battle.OnSpeedChanged += Battle_OnSpeedChanged;
         Timer.OnHalfTime += Timer_OnHalfTime;
         Portal.OnShopOpened += Portal_OnShopOpened;
@@ -72,6 +73,7 @@ public class Campaign : MonoBehaviour
         Battle.OnBattleWon -= Battle_OnBattleWon;
         Battle.OnRetreated -= Battle_OnRetreated;
         Battle.OnBattleLost -= Battle_OnBattleLost;
+        Battle.OnBossBattleWon -= Battle_OnBossBattleWon;
         Battle.OnSpeedChanged -= Battle_OnSpeedChanged;
         Timer.OnHalfTime -= Timer_OnHalfTime;
         Portal.OnShopOpened -= Portal_OnShopOpened;
@@ -83,6 +85,8 @@ public class Campaign : MonoBehaviour
 
     void Battle_OnBattleEnded()
     {
+        if(_bossDefeated) { return; }
+
         _goldEarnedText.text = $"Gold Earned: {_wallet.GoldEarnedThisBattle}";
         if(_wallet.BonusGoldEarnedThisBattle > 0)
         {
@@ -144,6 +148,12 @@ public class Campaign : MonoBehaviour
         {
             HandleGameOver();
         }
+    }
+
+    void Battle_OnBossBattleWon()
+    {
+        _bossDefeated = true;
+        _overlay.SetActive(false);
     }
 
     void Battle_OnSpeedChanged(object sender, float battleSpeed)

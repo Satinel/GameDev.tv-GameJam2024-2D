@@ -7,13 +7,18 @@ public class BossBattle : MonoBehaviour
     public static event Action OnBossBattleStarted;
 
     [SerializeField] Enemy _bossEnemy, _attackMinion, _heartMinion, _timerMinion;
-    [SerializeField] GameObject _bossHealthText;
+    [SerializeField] GameObject _bossHealthText, _bossHiddenHealth, _speedButtons;
     [SerializeField] EnemyScriptableObject _bossESO, _attackESO, _heartESO, _timerESO;
-    [SerializeField] Timer _timer;
     [SerializeField] Parallax _spaceBGParallax;
+    [SerializeField] Battle _battle;
+    [SerializeField] Animator _animator;
 
-    int _bossDamage;
+    int _bossDamage = 0;
     bool _bossBattleStarted;
+
+    protected readonly int INTRO_HASH = Animator.StringToHash("Intro");
+    protected readonly int TIMER_HASH = Animator.StringToHash("Timer");
+    protected readonly int BOSSDEATH_HASH = Animator.StringToHash("BossDeath");
 
     void OnEnable()
     {
@@ -48,29 +53,49 @@ public class BossBattle : MonoBehaviour
     void Campaign_OnWitchHatSet(object sender, bool e)
     {
         _bossHealthText.SetActive(e);
+        _bossHiddenHealth.SetActive(!e);
     }
 
     void Battle_OnBattleStarted()
     {
         if(!_bossBattleStarted)
         {
+            _battle.SetNormalSpeed();
+            SetSpeedButtonsActive(false);
             OnBossIntro?.Invoke();
-            // TODO Trigger Animation leading to SetUpMinionsAnimationEvent
+            _animator.SetTrigger(INTRO_HASH);
+        }
+        else
+        {
+            SetUpMinionsAnimationEvent();
+        }
+        if(_bossDamage > 0)
+        {
+            _bossEnemy.TakeDamage(_bossDamage);
+            // TODO Animation??
         }
     }
 
     void Timer_OnHalfTime()
     {
         // TODO Frenzy stuff?
-        // TODO _timerMinion
+        SetSpeedButtonsActive(false);
+        _battle.SetNormalSpeed();
+        _animator.SetTrigger(TIMER_HASH);
     }
 
     void Battle_OnBossBattleWon()
     {
-        // TODO Boss defeat animation with text and fading away-ness "I will always exist... as long as there is a desire to make numbers get bigger...!"
+        SetSpeedButtonsActive(false);
+        _battle.SetNormalSpeed();
+        _attackMinion.gameObject.SetActive(false);
+        _heartMinion.gameObject.SetActive(false);
+        _timerMinion.gameObject.SetActive(false);
+        _animator.SetTrigger(BOSSDEATH_HASH);
+        // TODO text "...I ...will ...always ...exist ...as ...long ...as ...there ...is ...a ...desire ...to ...make ...numbers ...get ...bigger ...!"
     }
 
-    public void SetUpMinionsAnimationEvent() // TODO Use an animation event to call this
+    public void SetUpMinionsAnimationEvent()
     {
         _attackMinion.SetUp(_attackESO);
         _heartMinion.SetUp(_heartESO);
@@ -79,5 +104,17 @@ public class BossBattle : MonoBehaviour
         _heartMinion.gameObject.SetActive(true);
         OnBossBattleStarted?.Invoke();
         _spaceBGParallax.enabled = true;
+        _speedButtons.SetActive(true);
+    }
+
+    public void TimerMinionAnimationEvent()
+    {
+        _bossEnemy.ChangeAttack(_bossESO.Attack);
+        SetSpeedButtonsActive(true);
+    }
+
+    void SetSpeedButtonsActive(bool active)
+    {
+        _speedButtons.SetActive(active);
     }
 }
