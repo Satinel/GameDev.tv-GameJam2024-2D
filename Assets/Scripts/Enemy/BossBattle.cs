@@ -10,6 +10,7 @@ public class BossBattle : MonoBehaviour
     [SerializeField] GameObject _bossHealthText, _bossHiddenHealth, _speedButtons;
     [SerializeField] EnemyScriptableObject _bossESO, _attackESO, _heartESO, _timerESO;
     [SerializeField] Parallax _spaceBGParallax;
+    [SerializeField] Sprite _parallaxSecondBG;
     [SerializeField] Battle _battle;
     [SerializeField] Animator _animator;
 
@@ -38,16 +39,20 @@ public class BossBattle : MonoBehaviour
         Battle.OnBossBattleWon -= Battle_OnBossBattleWon;
     }
 
-    void Start()
-    {
-        _bossEnemy.SetUp(_bossESO);
-    }
-
     void Campaign_OnBattleLoaded(object sender, int e)
     {
+        SetUpEnemies();
         Campaign campaign = (Campaign)sender;
         _bossDamage = campaign.BossDamage;
         _bossBattleStarted = campaign.BossBattleStarted;
+    }
+
+    private void SetUpEnemies()
+    {
+        _bossEnemy.SetUp(_bossESO);
+        _attackMinion.SetUp(_attackESO);
+        _heartMinion.SetUp(_heartESO);
+        _timerMinion.SetUp(_timerESO);
     }
 
     void Campaign_OnWitchHatSet(object sender, bool e)
@@ -67,10 +72,15 @@ public class BossBattle : MonoBehaviour
         }
         else
         {
+            ParallaxEnabledAnimationEvent();
             SetUpMinionsAnimationEvent();
         }
         if(_bossDamage > 0)
         {
+            if(_bossDamage >= _bossESO.MaxHealth)
+            {
+                _bossDamage = _bossESO.MaxHealth - 1;
+            }
             _bossEnemy.TakeDamage(_bossDamage);
             // TODO Animation??
         }
@@ -78,7 +88,6 @@ public class BossBattle : MonoBehaviour
 
     void Timer_OnHalfTime()
     {
-        // TODO Frenzy stuff?
         SetSpeedButtonsActive(false);
         _battle.SetNormalSpeed();
         _animator.SetTrigger(TIMER_HASH);
@@ -92,25 +101,31 @@ public class BossBattle : MonoBehaviour
         _heartMinion.gameObject.SetActive(false);
         _timerMinion.gameObject.SetActive(false);
         _animator.SetTrigger(BOSSDEATH_HASH);
-        // TODO text "...I ...will ...always ...exist ...as ...long ...as ...there ...is ...a ...desire ...to ...make ...numbers ...get ...bigger ...!"
     }
 
     public void SetUpMinionsAnimationEvent()
     {
-        _attackMinion.SetUp(_attackESO);
-        _heartMinion.SetUp(_heartESO);
-        _timerMinion.SetUp(_timerESO);
         _attackMinion.gameObject.SetActive(true);
         _heartMinion.gameObject.SetActive(true);
         OnBossBattleStarted?.Invoke();
-        _spaceBGParallax.enabled = true;
         _speedButtons.SetActive(true);
+    }
+
+    public void ParallaxEnabledAnimationEvent()
+    {
+        _spaceBGParallax.enabled = true;
     }
 
     public void TimerMinionAnimationEvent()
     {
         _bossEnemy.ChangeAttack(_bossESO.Attack);
+        _spaceBGParallax.ChangeSprite(_parallaxSecondBG);
         SetSpeedButtonsActive(true);
+    }
+
+    public void BossDeathAnimationEvent()
+    {
+        // TODO Invoke something to END THE GAME
     }
 
     void SetSpeedButtonsActive(bool active)

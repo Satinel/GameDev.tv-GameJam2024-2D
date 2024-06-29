@@ -38,4 +38,9 @@ public class Parallax : MonoBehaviour
             }
         }
     }
+
+    public void ChangeSprite(Sprite newSprite)
+    {
+        _spriteRenderer.sprite = newSprite;
+    }
 }
