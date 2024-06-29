@@ -17,6 +17,6 @@ MonoBehaviour:
   Attack: 200
   ASpeed: 10
   MaxHealth: 10000
-  AttackSFX: {fileID: 8300000, guid: 439f0889a32d8334082920238020b6d5, type: 3}
-  SkillVFX: {fileID: 7764922303510143599, guid: 4f24455a86b6c5247a3cf124e17a1744, type: 3}
+  AttackSFX: {fileID: 8300000, guid: 0d9b156480802e74c93f2ab0d56e5554, type: 3}
+  SkillVFX: {fileID: 7764922303510143599, guid: 8aaf3029ef26cbb42aa9135d23ae2064, type: 3}
   ClipVolume: 1

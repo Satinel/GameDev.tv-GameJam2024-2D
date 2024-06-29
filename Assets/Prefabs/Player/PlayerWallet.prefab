@@ -172,7 +172,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b8fb70fb6051ca94982f59e08691cd95, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 88597d57e64b4ef41bc45521af726290, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -240,6 +240,7 @@ MonoBehaviour:
   _buyVolume: 0.8
   _upgradeVolume: 0.9
   _canvas: {fileID: 1981286469750666462}
+  _bonusMoney: 0
 --- !u!82 &3214374797214624728
 AudioSource:
   m_ObjectHideFlags: 0
@@ -431,7 +432,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 939524095
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -558,7 +559,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 48d8d1d2abade2845b3cf45dd79123f5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2c88c884dd9108642890df59b1f3ce85, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
