@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Demon Lord
   Sprite: {fileID: -1919187687, guid: 2e491c32345d23b4f89668828219455f, type: 3}
-  Attack: 2000
+  Attack: 2500
   ASpeed: 10
-  MaxHealth: 288000
+  MaxHealth: 8888000
   AttackSFX: {fileID: 8300000, guid: 439f0889a32d8334082920238020b6d5, type: 3}
   SkillVFX: {fileID: 7764922303510143599, guid: 4f24455a86b6c5247a3cf124e17a1744, type: 3}
   ClipVolume: 1

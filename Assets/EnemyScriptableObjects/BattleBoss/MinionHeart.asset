@@ -16,7 +16,7 @@ MonoBehaviour:
   Sprite: {fileID: 21300000, guid: c70e3eb4023b92a4b896154714c580a1, type: 3}
   Attack: 200
   ASpeed: 15.75
-  MaxHealth: 20000
+  MaxHealth: 500000
   AttackSFX: {fileID: 8300000, guid: 0d9b156480802e74c93f2ab0d56e5554, type: 3}
   SkillVFX: {fileID: 7764922303510143599, guid: b1638f453dfce2f43bb07b83b58d6e67, type: 3}
   ClipVolume: 1
