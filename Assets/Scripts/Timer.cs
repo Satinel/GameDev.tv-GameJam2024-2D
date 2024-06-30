@@ -13,6 +13,7 @@ public class Timer : MonoBehaviour
 
     bool _timerStarted;
     bool _halfTime;
+    bool _bossBattle;
 
     int _minutes;
     int _seconds;
@@ -67,6 +68,10 @@ public class Timer : MonoBehaviour
                 {
                     _audioSource.PlayOneShot(_halfTimeAudioClip);
                 }
+                if(_bossBattle)
+                {
+                    _currentTime = 240f;
+                }
                 // TODO (but maybe not here) a moon rises in the sky and/or the sky background changes
             }
             _timerText.text = FormatTime(_currentTime);
@@ -85,6 +90,7 @@ public class Timer : MonoBehaviour
 
     void Battle_OnBossIntro()
     {
+        _bossBattle = true;
         _timerStarted = false;
         _currentTime = _totalTime;
         _timerText.text = FormatTime(_currentTime);

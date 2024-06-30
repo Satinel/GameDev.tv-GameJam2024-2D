@@ -4,7 +4,7 @@ public class Parallax : MonoBehaviour
 {
     [SerializeField] float speed = 1; // Overlooked the usual _ variable convention here but I don't want to break anything by changing it now
     [SerializeField] float _vSpeed = 1;
-    [SerializeField] float _fadeSpeed = 1f;
+    [SerializeField] float _fadeSpeed = 0.1f;
     [SerializeField] bool _changeVertical = false;
     [SerializeField] SpriteRenderer _spriteRenderer;
 

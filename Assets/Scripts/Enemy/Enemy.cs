@@ -107,9 +107,7 @@ public class Enemy : MonoBehaviour
     }
 
     public void SetUp(EnemyScriptableObject enemySpawn)
-    {
-        if(!gameObject.activeSelf) { return; }
-        
+    {        
         _currentEnemy = enemySpawn;
         _spriteRenderer.sprite = _currentEnemy.Sprite;
         
@@ -133,7 +131,10 @@ public class Enemy : MonoBehaviour
         _attackText.text = Attack.ToString();
         _timeSinceLastAttack = UnityEngine.Random.Range(-2f, 0); // Sets an initiative so every like enemy has variance in time of attack
         _attackTimerImage.fillAmount = 0;
-        _animator.SetTrigger(SPAWN_HASH);
+        if(!_minion && !IsBoss)
+        {
+            _animator.SetTrigger(SPAWN_HASH);
+        }
         _currentTarget = null;
         _earnedGoldGameObject.SetActive(false);
         _isAttacking = false;
@@ -331,18 +332,18 @@ public class Enemy : MonoBehaviour
 
         if(_risingTextGameObject)
         {
-            if(change > 0)
-            {
-                _risingTextGameObject.SetActive(false);
-                _healingText.color = Color.blue;
-                _healingText.text = $"Speed Up: +{change}";
-                _risingTextGameObject.SetActive(true);
-            }
             if(change < 0)
             {
                 _risingTextGameObject.SetActive(false);
+                _healingText.color = Color.blue;
+                _healingText.text = $"Speed Up: +{Mathf.Abs(change)}";
+                _risingTextGameObject.SetActive(true);
+            }
+            if(change > 0)
+            {
+                _risingTextGameObject.SetActive(false);
                 _healingText.color = Color.red;
-                _healingText.text = $"Speed Down: {change}";
+                _healingText.text = $"Speed Down: -{change}";
                 _risingTextGameObject.SetActive(true);
             }
         }
@@ -358,5 +359,10 @@ public class Enemy : MonoBehaviour
         if(_attackSpeed == _currentEnemy.ASpeed) { return; }
 
         ChangeAttackSpeed(_currentEnemy.ASpeed - _attackSpeed);
+    }
+
+    public void SetIsFighting()
+    {
+        _isFighting = true;
     }
 }

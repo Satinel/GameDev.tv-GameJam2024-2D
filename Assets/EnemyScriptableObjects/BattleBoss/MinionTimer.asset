@@ -15,8 +15,8 @@ MonoBehaviour:
   Name: Timer Minion
   Sprite: {fileID: 21300000, guid: ae2fc260c31b1614bb5b192ecb64047e, type: 3}
   Attack: 1000
-  ASpeed: 25
-  MaxHealth: 300000
+  ASpeed: 10.1
+  MaxHealth: 50000
   AttackSFX: {fileID: 8300000, guid: ac3840c1b1fe0514681502cbc8fb9961, type: 3}
   SkillVFX: {fileID: 7764922303510143599, guid: 024b56325b7546144831d95b2e677f22, type: 3}
   ClipVolume: 1

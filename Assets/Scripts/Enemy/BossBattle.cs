@@ -50,6 +50,7 @@ public class BossBattle : MonoBehaviour
     private void SetUpEnemies()
     {
         _bossEnemy.SetUp(_bossESO);
+        _bossEnemy.SetIsFighting();
         _attackMinion.SetUp(_attackESO);
         _heartMinion.SetUp(_heartESO);
         _timerMinion.SetUp(_timerESO);
@@ -107,6 +108,8 @@ public class BossBattle : MonoBehaviour
     {
         _attackMinion.gameObject.SetActive(true);
         _heartMinion.gameObject.SetActive(true);
+        _attackMinion.SetIsFighting();
+        _heartMinion.SetIsFighting();
         OnBossBattleStarted?.Invoke();
         _speedButtons.SetActive(true);
     }
@@ -120,6 +123,8 @@ public class BossBattle : MonoBehaviour
     {
         _bossEnemy.ChangeAttack(_bossESO.Attack);
         _spaceBGParallax.ChangeSprite(_parallaxSecondBG);
+        _timerMinion.gameObject.SetActive(true);
+        _timerMinion.SetIsFighting();
         SetSpeedButtonsActive(true);
     }
 

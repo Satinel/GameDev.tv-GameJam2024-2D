@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Attack Minion
   Sprite: {fileID: 21300000, guid: c212de46f04aa9d41be90c436ae895c4, type: 3}
-  Attack: 600
-  ASpeed: 10
+  Attack: 800
+  ASpeed: 13.33
   MaxHealth: 3000
-  AttackSFX: {fileID: 8300000, guid: cdad6c0d62fd7244b8c7290983bd16f9, type: 3}
+  AttackSFX: {fileID: 8300000, guid: 64b25c2cfc83ae34ca3282c8a7d46bfc, type: 3}
   SkillVFX: {fileID: 7764922303510143599, guid: 9edf4cbc6ab14fa458c2f5a423e31cb5, type: 3}
   ClipVolume: 1
