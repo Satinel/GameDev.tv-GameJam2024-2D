@@ -246,6 +246,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 7693231854763021458, guid: fed43af9938f10e439813e9671389cf7, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 92d4cd8b0f820c840a828ee417594271, type: 2}
     - target: {fileID: 7787285751609499076, guid: fed43af9938f10e439813e9671389cf7, type: 3}
       propertyPath: _minion
       value: 
@@ -1328,7 +1332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2836,6 +2840,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7693231854763021458, guid: fed43af9938f10e439813e9671389cf7, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 92d4cd8b0f820c840a828ee417594271, type: 2}
     - target: {fileID: 7787285751609499076, guid: fed43af9938f10e439813e9671389cf7, type: 3}
       propertyPath: _minion
       value: 

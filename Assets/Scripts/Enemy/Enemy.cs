@@ -131,7 +131,7 @@ public class Enemy : MonoBehaviour
         _attackText.text = Attack.ToString();
         _timeSinceLastAttack = UnityEngine.Random.Range(-2f, 0); // Sets an initiative so every like enemy has variance in time of attack
         _attackTimerImage.fillAmount = 0;
-        if(!_minion && !IsBoss)
+        if(!IsBoss)
         {
             _animator.SetTrigger(SPAWN_HASH);
         }

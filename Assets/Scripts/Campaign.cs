@@ -29,15 +29,17 @@ public class Campaign : MonoBehaviour
 
     [SerializeField] float _volume = 0.75f;
     [SerializeField] AudioClip _defeatSFX, _victorySFX, _gameOverSFX, _escapeSFX;
-    [SerializeField] GameObject _overlay, _victorySplash, _retreatSplash, _defeatSplash, _gameOverSplash, _toBattleButton, _quitButton, _lostGoldFloatingText;
+    [SerializeField] GameObject _overlay, _victorySplash, _retreatSplash, _defeatSplash, _gameOverSplash, _toBattleButton, _quitButton, _lostGoldFloatingText, _bossDamageUI;
     [SerializeField] List<Image> _lives = new();
     [SerializeField] List<GameObject> _wins = new();
+    [SerializeField] List<GameObject> _levelSelectButtons = new();
     [SerializeField] Image _tutorialLife;
     [SerializeField] SkillVFX _explosionVFX;
     [SerializeField] Image _screenWipeImage;
     [SerializeField] AudioSource _audioSource;
-    [SerializeField] TextMeshProUGUI _goldEarnedText, _goldLostText;
+    [SerializeField] TextMeshProUGUI _goldEarnedText, _goldLostText, _bossDamageUIText;
     [SerializeField] Wallet _wallet;
+    [SerializeField] GameObject _levelSelect;
 
     bool _isTransitioning;
     float _savedBattleSpeed = 1f;
@@ -98,16 +100,26 @@ public class Campaign : MonoBehaviour
 
     void Battle_OnBattleWon()
     {
-        Wins++;
         _victorySplash.SetActive(true);
         if(_audioSource && _victorySFX)
         {
             _audioSource.PlayOneShot(_victorySFX, _volume);
         }
-        if(_wins.Count >= Wins)
+
+        int nextLevelIndex = SceneManager.GetActiveScene().buildIndex - 3;
+
+        if(Wins < nextLevelIndex)
         {
-            _wins[Wins - 1].SetActive(true);
-            _wins[Wins - 1].GetComponent<Animator>().SetTrigger("Win");
+            Wins++;
+            if(_wins.Count >= Wins)
+            {
+                _wins[Wins - 1].SetActive(true);
+                _wins[Wins - 1].GetComponent<Animator>().SetTrigger("Win");
+            }
+
+            if(_levelSelectButtons.Count > nextLevelIndex)
+
+            _levelSelectButtons[nextLevelIndex].SetActive(true);
         }
     }
 
@@ -278,14 +290,26 @@ public class Campaign : MonoBehaviour
         }
     }
 
-    public void GoToBattle()
+    public void OpenLevelSelection()
+    {
+        _levelSelect.SetActive(true);
+    }
+
+    public void CloseLevelSelection()
+    {
+        _levelSelect.SetActive(false);
+    }
+
+    public void GoToBattle(int index)
     {
         if(_isTransitioning) { return; }
 
-        StartCoroutine(GoToBattleRoutine());
+        CloseLevelSelection();
+
+        StartCoroutine(GoToBattleRoutine(index));
     }
 
-    IEnumerator GoToBattleRoutine()
+    IEnumerator GoToBattleRoutine(int index)
     {
         _isTransitioning = true;
         _screenWipeImage.fillOrigin = 1; // 1 is Right
@@ -301,14 +325,8 @@ public class Campaign : MonoBehaviour
 
         OnSceneLoading?.Invoke();
         
-        if(Wins > 5)
-        {
-            yield return SceneManager.LoadSceneAsync("BattleBoss");
-        }
-        else
-        {
-            yield return SceneManager.LoadSceneAsync(4+Wins);
-        }
+        yield return SceneManager.LoadSceneAsync(index);
+
 
         _screenWipeImage.fillOrigin = 0; // 0 is Left
 
@@ -456,10 +474,12 @@ public class Campaign : MonoBehaviour
     void Enemy_OnBossDamaged(object sender, int damage)
     {
         BossDamage += damage;
+        _bossDamageUIText.text = $"Total Boss Damge: {BossDamage}";
     }
 
     void BossBattle_OnBossBattleStarted()
     {
         BossBattleStarted = true;
+        _bossDamageUI.SetActive(true);
     }
 }
