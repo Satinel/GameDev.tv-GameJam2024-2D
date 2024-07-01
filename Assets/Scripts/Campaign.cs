@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class Campaign : MonoBehaviour
 {
     public static event Action OnReturnToTown;
-    public static event EventHandler<int> OnBattleLoaded;
+    public static event EventHandler<bool> OnBattleLoaded;
     public static event Action OnSceneLoading;
     public static event Action OnTutorialLoading;
     public static event EventHandler<int> OnTownLoaded;
@@ -28,11 +28,11 @@ public class Campaign : MonoBehaviour
     public bool BossBattleStarted { get; private set; } = false;
 
     [SerializeField] float _volume = 0.75f;
-    [SerializeField] AudioClip _defeatSFX, _victorySFX, _gameOverSFX, _escapeSFX;
-    [SerializeField] GameObject _overlay, _victorySplash, _retreatSplash, _defeatSplash, _gameOverSplash, _toBattleButton, _quitButton, _lostGoldFloatingText, _bossDamageUI;
+    [SerializeField] AudioClip _defeatSFX, _victorySFX, _gameOverSFX, _escapeSFX, _bossDefeatedSFX;
+    [SerializeField] GameObject _overlay, _victorySplash, _retreatSplash, _defeatSplash, _gameOverSplash, _toBattleButton, _quitButton, _lostGoldFloatingText, _bossDamageUI, _totalVictorySplash, _continueButton;
     [SerializeField] List<Image> _lives = new();
     [SerializeField] List<GameObject> _wins = new();
-    [SerializeField] List<GameObject> _levelSelectButtons = new();
+    [SerializeField] List<LevelSelectButton> _levelSelectButtons = new();
     [SerializeField] Image _tutorialLife;
     [SerializeField] SkillVFX _explosionVFX;
     [SerializeField] Image _screenWipeImage;
@@ -67,6 +67,7 @@ public class Campaign : MonoBehaviour
         ShopItem.OnShopItemLocked += ShopItem_OnShopItemLocked;
         Enemy.OnBossDamaged += Enemy_OnBossDamaged;
         BossBattle.OnBossBattleStarted += BossBattle_OnBossBattleStarted;
+        BossBattle.OnBossDefeated += BossBattle_OnBossDefeated;
     }
 
     void OnDisable()
@@ -83,6 +84,7 @@ public class Campaign : MonoBehaviour
         ShopItem.OnShopItemLocked -= ShopItem_OnShopItemLocked;
         Enemy.OnBossDamaged -= Enemy_OnBossDamaged;
         BossBattle.OnBossBattleStarted -= BossBattle_OnBossBattleStarted;
+        BossBattle.OnBossDefeated -= BossBattle_OnBossDefeated;
     }
 
     void Battle_OnBattleEnded()
@@ -117,9 +119,20 @@ public class Campaign : MonoBehaviour
                 _wins[Wins - 1].GetComponent<Animator>().SetTrigger("Win");
             }
 
-            if(_levelSelectButtons.Count > nextLevelIndex)
+            if(_levelSelectButtons.Count >= nextLevelIndex - 1)
+            {
+                _levelSelectButtons[nextLevelIndex -1].SetCleared();
+            }
 
-            _levelSelectButtons[nextLevelIndex].SetActive(true);
+            if(_levelSelectButtons.Count > nextLevelIndex)
+            {
+                _levelSelectButtons[nextLevelIndex].Unlock();
+            }
+
+            if(_levelSelectButtons.Count > nextLevelIndex + 1)
+            {
+                _levelSelectButtons[nextLevelIndex + 1].gameObject.SetActive(true);
+            }
         }
     }
 
@@ -166,6 +179,17 @@ public class Campaign : MonoBehaviour
     {
         _bossDefeated = true;
         _overlay.SetActive(false);
+    }
+
+    void BossBattle_OnBossDefeated()
+    {
+        _overlay.SetActive(true);
+        _totalVictorySplash.SetActive(true);
+        _continueButton.SetActive(false);
+        if(_audioSource && _bossDefeatedSFX)
+        {
+            _audioSource.PlayOneShot(_bossDefeatedSFX, _volume);
+        }
     }
 
     void Battle_OnSpeedChanged(object sender, float battleSpeed)
@@ -306,10 +330,19 @@ public class Campaign : MonoBehaviour
 
         CloseLevelSelection();
 
-        StartCoroutine(GoToBattleRoutine(index));
+        StartCoroutine(GoToBattleRoutine(index, false));
     }
 
-    IEnumerator GoToBattleRoutine(int index)
+    public void GoToFrenzyBattle(int index)
+    {
+        if(_isTransitioning) { return; }
+
+        CloseLevelSelection();
+
+        StartCoroutine(GoToBattleRoutine(index, true));
+    }
+
+    IEnumerator GoToBattleRoutine(int index, bool frenzyMode)
     {
         _isTransitioning = true;
         _screenWipeImage.fillOrigin = 1; // 1 is Right
@@ -327,7 +360,6 @@ public class Campaign : MonoBehaviour
         
         yield return SceneManager.LoadSceneAsync(index);
 
-
         _screenWipeImage.fillOrigin = 0; // 0 is Left
 
         while(_screenWipeImage.fillAmount > 0)
@@ -336,8 +368,7 @@ public class Campaign : MonoBehaviour
             yield return null;
         }
         _screenWipeImage.fillAmount = 0;
-
-        OnBattleLoaded?.Invoke(this, Losses);
+        OnBattleLoaded?.Invoke(this, frenzyMode);
         _isTransitioning = false;
         Time.timeScale = _savedBattleSpeed;
     }
@@ -381,7 +412,7 @@ public class Campaign : MonoBehaviour
         }
         _screenWipeImage.fillAmount = 0;
 
-        OnBattleLoaded?.Invoke(this, Losses);
+        OnBattleLoaded?.Invoke(this, false);
         _isTransitioning = false;
     }
 
@@ -481,5 +512,11 @@ public class Campaign : MonoBehaviour
     {
         BossBattleStarted = true;
         _bossDamageUI.SetActive(true);
+    }
+
+    public void TheEndButton()
+    {
+        // TODO Credits or something!
+        SceneManager.LoadScene(0); // TODO REPLACE THIS!!!!!!!
     }
 }

@@ -107,7 +107,7 @@ public class Enemy : MonoBehaviour
     }
 
     public void SetUp(EnemyScriptableObject enemySpawn)
-    {        
+    {
         _currentEnemy = enemySpawn;
         _spriteRenderer.sprite = _currentEnemy.Sprite;
         
@@ -131,7 +131,7 @@ public class Enemy : MonoBehaviour
         _attackText.text = Attack.ToString();
         _timeSinceLastAttack = UnityEngine.Random.Range(-2f, 0); // Sets an initiative so every like enemy has variance in time of attack
         _attackTimerImage.fillAmount = 0;
-        if(!IsBoss)
+        if(!IsBoss && gameObject.activeSelf)
         {
             _animator.SetTrigger(SPAWN_HASH);
         }
@@ -267,6 +267,7 @@ public class Enemy : MonoBehaviour
     void Battle_OnBattleEnded()
     {
         _isFighting = false;
+        enabled = false;
     }
 
     void Unit_OnAnyUnitKilled(object sender, Unit unit)
@@ -280,14 +281,14 @@ public class Enemy : MonoBehaviour
     void Timer_OnHalfTime()
     {
         _isFrenzied = true;
-        if(IsBoss || _minion != null) { return; } // TODO Handle boss frenzy in BossBattle script
+        if(IsBoss || _minion != null) { return; }
         if(_currentEnemy)
         {
-            Attack *= 2;
+            Attack += Attack;
             _attackText.text = Attack.ToString();
             CurrentHealth += MaxHealth;
             _healthText.text = CurrentHealth.ToString();
-            GoldValue *= 2;
+            GoldValue += GoldValue;
             _goldText.text = $"+{GoldValue} GOLD";
         }
     }

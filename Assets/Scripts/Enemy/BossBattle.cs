@@ -5,6 +5,7 @@ public class BossBattle : MonoBehaviour
 {
     public static event Action OnBossIntro;
     public static event Action OnBossBattleStarted;
+    public static event Action OnBossDefeated;
 
     [SerializeField] Enemy _bossEnemy, _attackMinion, _heartMinion, _timerMinion;
     [SerializeField] GameObject _bossHealthText, _bossHiddenHealth, _speedButtons;
@@ -39,7 +40,7 @@ public class BossBattle : MonoBehaviour
         Battle.OnBossBattleWon -= Battle_OnBossBattleWon;
     }
 
-    void Campaign_OnBattleLoaded(object sender, int e)
+    void Campaign_OnBattleLoaded(object sender, bool e)
     {
         SetUpEnemies();
         Campaign campaign = (Campaign)sender;
@@ -130,7 +131,8 @@ public class BossBattle : MonoBehaviour
 
     public void BossDeathAnimationEvent()
     {
-        // TODO Invoke something to END THE GAME
+        // TODO Make this better someday
+        OnBossDefeated?.Invoke();
     }
 
     void SetSpeedButtonsActive(bool active)

@@ -79,13 +79,14 @@ public class Battle : MonoBehaviour
         if(_iRow3Sprite.enabled) _iRow3Sprite.sprite = _incomingRow3.Sprite;
     }
 
-    void Campaign_OnBattleLoaded(object sender, int losses)
+    void Campaign_OnBattleLoaded(object sender, bool frenzy)
     {
+        Campaign campaign = (Campaign)sender;
         if(_lifeCountText)
         {
-            _lifeCountText.text = $"x{losses}";
+            _lifeCountText.text = $"x{campaign.Losses}";
         }
-        if(losses <= 0)
+        if(campaign.Losses <= 0)
         {
             _noRetreat = true;
             if(_lastStandMessage)

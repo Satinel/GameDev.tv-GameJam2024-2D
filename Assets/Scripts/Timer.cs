@@ -39,6 +39,7 @@ public class Timer : MonoBehaviour
         Battle.OnBattleEnded += Battle_OnBattleEnded;
         BossBattle.OnBossIntro += Battle_OnBossIntro;
         BossBattle.OnBossBattleStarted += Battle_OnBattleStarted;
+        Campaign.OnBattleLoaded += Battle_OnBattleLoaded;
     }
 
     void OnDisable()
@@ -47,6 +48,7 @@ public class Timer : MonoBehaviour
         Battle.OnBattleEnded -= Battle_OnBattleEnded;
         BossBattle.OnBossIntro -= Battle_OnBossIntro;
         BossBattle.OnBossBattleStarted -= Battle_OnBattleStarted;
+        Campaign.OnBattleLoaded -= Battle_OnBattleLoaded;
     }
 
     void Update()
@@ -61,20 +63,25 @@ public class Timer : MonoBehaviour
             }
             if(!_halfTime && _currentTime < (_totalTime / 2))
             {
-                _halfTime = true;
-                OnHalfTime?.Invoke();
-                _timerText.color = Color.red;
-                if(_audioSource && _halfTimeAudioClip)
-                {
-                    _audioSource.PlayOneShot(_halfTimeAudioClip);
-                }
-                if(_bossBattle)
-                {
-                    _currentTime = 240f;
-                }
+                EnterFrenzyMode();
                 // TODO (but maybe not here) a moon rises in the sky and/or the sky background changes
             }
             _timerText.text = FormatTime(_currentTime);
+        }
+    }
+
+    void EnterFrenzyMode()
+    {
+        _halfTime = true;
+        OnHalfTime?.Invoke();
+        _timerText.color = Color.red;
+        if (_audioSource && _halfTimeAudioClip)
+        {
+            _audioSource.PlayOneShot(_halfTimeAudioClip);
+        }
+        if (_bossBattle)
+        {
+            _currentTime = 240f;
         }
     }
 
@@ -94,6 +101,14 @@ public class Timer : MonoBehaviour
         _timerStarted = false;
         _currentTime = _totalTime;
         _timerText.text = FormatTime(_currentTime);
+    }
+
+    void Battle_OnBattleLoaded(object sender, bool frenzyMode)
+    {
+        if(frenzyMode)
+        {
+            EnterFrenzyMode();
+        }
     }
 
     void StartTimer()
