@@ -4490,7 +4490,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Level Select
+  m_text: Battle Select
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
   m_sharedMaterial: {fileID: 2164040, guid: 5302535af1044152a457ed104f1f4b91, type: 2}
@@ -6304,7 +6304,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9039950303331113171, guid: d603cb118be911c41966f3ed3ac8daf9, type: 3}
       propertyPath: m_text
-      value: "Level 5\n Frenzy Mode"
+      value: 'Battle 5
+
+        Frenzy Mode'
       objectReference: {fileID: 0}
     - target: {fileID: 9039950303331113171, guid: d603cb118be911c41966f3ed3ac8daf9, type: 3}
       propertyPath: m_fontSize
@@ -6471,7 +6473,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9039950303331113171, guid: d603cb118be911c41966f3ed3ac8daf9, type: 3}
       propertyPath: m_text
-      value: 'Level 4
+      value: 'Battle 4
 
         Frenzy Mode'
       objectReference: {fileID: 0}
@@ -6640,7 +6642,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9039950303331113171, guid: d603cb118be911c41966f3ed3ac8daf9, type: 3}
       propertyPath: m_text
-      value: Level 4
+      value: Battle 4
       objectReference: {fileID: 0}
     - target: {fileID: 9039950303331113171, guid: d603cb118be911c41966f3ed3ac8daf9, type: 3}
       propertyPath: m_fontSize
@@ -6826,7 +6828,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9039950303331113171, guid: d603cb118be911c41966f3ed3ac8daf9, type: 3}
       propertyPath: m_text
-      value: 'Level 3
+      value: 'Battle 3
 
         Frenzy Mode'
       objectReference: {fileID: 0}
@@ -6995,7 +6997,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9039950303331113171, guid: d603cb118be911c41966f3ed3ac8daf9, type: 3}
       propertyPath: m_text
-      value: Level 3
+      value: Battle 3
       objectReference: {fileID: 0}
     - target: {fileID: 9039950303331113171, guid: d603cb118be911c41966f3ed3ac8daf9, type: 3}
       propertyPath: m_fontSize
@@ -7347,7 +7349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9039950303331113171, guid: d603cb118be911c41966f3ed3ac8daf9, type: 3}
       propertyPath: m_text
-      value: Level 2
+      value: Battle 2
       objectReference: {fileID: 0}
     - target: {fileID: 9039950303331113171, guid: d603cb118be911c41966f3ed3ac8daf9, type: 3}
       propertyPath: m_fontSize
@@ -7858,7 +7860,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9039950303331113171, guid: d603cb118be911c41966f3ed3ac8daf9, type: 3}
       propertyPath: m_text
-      value: Level 1
+      value: Battle 1
       objectReference: {fileID: 0}
     - target: {fileID: 9039950303331113171, guid: d603cb118be911c41966f3ed3ac8daf9, type: 3}
       propertyPath: m_fontSize
@@ -8040,7 +8042,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9039950303331113171, guid: d603cb118be911c41966f3ed3ac8daf9, type: 3}
       propertyPath: m_text
-      value: Level 6
+      value: Battle 6
       objectReference: {fileID: 0}
     - target: {fileID: 9039950303331113171, guid: d603cb118be911c41966f3ed3ac8daf9, type: 3}
       propertyPath: m_fontSize
@@ -8228,7 +8230,7 @@ PrefabInstance:
       propertyPath: m_text
       value: 'FINAL STAND
 
-        Frenzy Mode'
+        FRENZY MODE'
       objectReference: {fileID: 0}
     - target: {fileID: 9039950303331113171, guid: d603cb118be911c41966f3ed3ac8daf9, type: 3}
       propertyPath: m_fontSize
@@ -8395,7 +8397,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9039950303331113171, guid: d603cb118be911c41966f3ed3ac8daf9, type: 3}
       propertyPath: m_text
-      value: Level 5
+      value: Battle 5
       objectReference: {fileID: 0}
     - target: {fileID: 9039950303331113171, guid: d603cb118be911c41966f3ed3ac8daf9, type: 3}
       propertyPath: m_fontSize
@@ -8581,7 +8583,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9039950303331113171, guid: d603cb118be911c41966f3ed3ac8daf9, type: 3}
       propertyPath: m_text
-      value: 'Level 1
+      value: 'Battle 1
 
         Frenzy Mode'
       objectReference: {fileID: 0}
@@ -9257,7 +9259,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9039950303331113171, guid: d603cb118be911c41966f3ed3ac8daf9, type: 3}
       propertyPath: m_text
-      value: 'Level 2
+      value: 'Battle 2
 
         Frenzy Mode'
       objectReference: {fileID: 0}
@@ -9426,7 +9428,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9039950303331113171, guid: d603cb118be911c41966f3ed3ac8daf9, type: 3}
       propertyPath: m_text
-      value: 'Level 6
+      value: 'Battle 6
 
         Frenzy Mode'
       objectReference: {fileID: 0}
