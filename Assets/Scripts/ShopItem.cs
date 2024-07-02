@@ -14,6 +14,7 @@ public class ShopItem : MonoBehaviour
     [SerializeField] GameObject _lock, _upgradeIndicator;
 
     public bool IsLocked {get; private set;}
+    public int PriceMultiplyer {get; private set;} = 1;
 
     bool _isSetUp = false;
 
@@ -62,7 +63,7 @@ public class ShopItem : MonoBehaviour
         }
         _attackText.text = gear.AttackIncrease.ToString();
         _healthText.text = gear.HealthIncrease.ToString();
-        _priceText.text = gear.Price.ToString();
+        _priceText.text = (gear.Price * PriceMultiplyer).ToString();
         _imageRenderer.sprite = gear.Sprite;
 
         if(gear.Slot == EquipmentType.Headgear) { return; }
@@ -121,5 +122,11 @@ public class ShopItem : MonoBehaviour
     public void ResetBorder()
     {
         _borderImage.color = Color.white;
+    }
+
+    public void IncreasePrice()
+    {
+        PriceMultiplyer += PriceMultiplyer;
+        _priceText.text = (Gear.Price * PriceMultiplyer).ToString();
     }
 }

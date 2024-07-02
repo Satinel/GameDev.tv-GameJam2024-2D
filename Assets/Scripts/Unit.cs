@@ -394,4 +394,40 @@ public class Unit : MonoBehaviour
         _hasDodge = true;
         _afterImage.SetActive(true);
     }
+
+    public void LoadEquipmentMain(EquipmentScriptableObject gearMain, int upgradeMain)
+    {
+        ChangeMaxHealth(gearMain.HealthIncrease * upgradeMain);
+        ChangeAttack(gearMain.AttackIncrease * upgradeMain);
+
+        Main().EquipItem(gearMain);
+        for (int i = 1; i < upgradeMain; i++)
+        {
+            Main().UpgradeItem(gearMain);
+        }
+    }
+
+    public void LoadEquipmentOff(EquipmentScriptableObject gearOff, int upgradeOff)
+    {
+        ChangeMaxHealth(gearOff.HealthIncrease * upgradeOff);
+        ChangeAttack(gearOff.AttackIncrease * upgradeOff);
+
+        Offhand().EquipItem(gearOff);
+        for (int i = 1; i < upgradeOff; i++)
+        {
+            Offhand().UpgradeItem(gearOff);
+        }
+    }
+
+    public void LoadEquipmentHead(EquipmentScriptableObject gearHead, int upgradeHead)
+    {
+        ChangeMaxHealth(gearHead.HealthIncrease * upgradeHead);
+        ChangeAttack(gearHead.AttackIncrease * upgradeHead);
+
+        Headgear().EquipItem(gearHead);
+        for (int i = 1; i < upgradeHead; i++)
+        {
+            Headgear().UpgradeItem(gearHead);
+        }
+    }
 }

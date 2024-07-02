@@ -76,9 +76,16 @@ public class Portal : MonoBehaviour
         OnUnitSummoned?.Invoke(this, _unitIndex);
     }
 
-    void Campaign_OnTownLoaded(object sender, int day)
+    void Campaign_OnTownLoaded(object sender, bool playCutscene)
     {
+        if(!playCutscene)
+        {
+            OpenShop();
+            return;
+        }
+
         Campaign campaign = (Campaign)sender;
+        int day = campaign.Days;
         _unitIndex = day - 2;
 
         switch(day)

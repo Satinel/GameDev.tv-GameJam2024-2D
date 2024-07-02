@@ -13,9 +13,9 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-        _saveSystem.Load();
+        _saveSystem.LoadMoney();
         
-        if(_wallet.TotalMoney > 0)
+        if(_saveSystem.AutoSavedMoney > 0)
         {
             _newGamePlusButton.SetActive(true);
         }

@@ -8,6 +8,10 @@ public class Shop : MonoBehaviour
     [SerializeField] int _rerollCost = 1;
     [SerializeField] int _rerollCostMultiplyer = 3;
 
+    public int RerollCost => _rerollCost;
+    public int RerollMultiplyer => _rerollCostMultiplyer;
+    public List<ShopItem> ShopItems => _shopItems;
+
     [SerializeField] List<EquipmentScriptableObject> _tier1Equipment = new();
     [SerializeField] List<EquipmentScriptableObject> _tier2Equipment = new();
     [SerializeField] List<EquipmentScriptableObject> _tier3Equipment = new();
@@ -86,6 +90,7 @@ public class Shop : MonoBehaviour
     {
         _campaign = (Campaign)sender;
         _wins = _campaign.Wins;
+        int diff = _shopItems.Count - lockedItems.Count;
 
         for(int i = 0; i < lockedItems.Count; i++)
         {
@@ -97,11 +102,31 @@ public class Shop : MonoBehaviour
         {
             _teamManager = FindFirstObjectByType<TeamManager>();
         }
-
         _activeUnits = _teamManager.GetActiveUnits();
         
         Reroll();
         EnableAutoUpgrades(_campaign.AutoUpgrades);
+
+        if(_campaign.FreshLoad)
+        {
+            foreach(ShopItem shopItem in _shopItems)
+            {
+                shopItem.UnLock();
+            }            
+            
+            if(diff > 0)
+            {
+                for(int i = 0; i < diff; i++)
+                {
+                    _shopItems[_shopItems.Count - i - 1].gameObject.SetActive(false);
+                }
+            }
+            _rerollCost = _campaign.StoredRerollCost;
+            _rerollCostMultiplyer = _campaign.StoredRerollMultiplyer;
+            _rerollText.text = _rerollCost.ToString();
+            _campaign.SetUnfresh();
+            CheckForUpgrades();
+        }
     }
 
     void CheckBuyButton()
@@ -354,7 +379,7 @@ public class Shop : MonoBehaviour
                             {
                                 if(_autoUpgradeEnabled && _equipmentShopItems.activeSelf)
                                 {
-                                    if(!_wallet.AskToSpend(shopItem.Gear.Price))
+                                    if(!_wallet.AskToSpend(shopItem.Gear.Price * _selectedShopItem.PriceMultiplyer))
                                     {
                                         shopItem.IndicateUpgrade(true);
                                         unit.ShowUpgradeIndicator(true);
@@ -471,7 +496,7 @@ public class Shop : MonoBehaviour
                 {
                     if(_selectedUnit.Headgear().Gear == _selectedShopItem.Gear)
                     {
-                        if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price)) { return; }
+                        if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price * _selectedShopItem.PriceMultiplyer)) { return; }
                         _selectedUnit.Headgear().UpgradeItem(_selectedShopItem.Gear);
                         _selectedUnit.UpgradeFloatingText($"{_selectedUnit.Headgear().UpgradeName} Upgraded!");
                         _playUpgradeSFX = true;
@@ -484,7 +509,7 @@ public class Shop : MonoBehaviour
                     }
                 }
 
-                if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price)) { return; }
+                if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price * _selectedShopItem.PriceMultiplyer)) { return; }
                 _selectedUnit.Headgear().EquipItem(_selectedShopItem.Gear);
                 break;
 
@@ -511,9 +536,16 @@ public class Shop : MonoBehaviour
     void CompletePurchase(ShopItem shopItem)
     {
         shopItem.UnLock();
-        shopItem.ResetBorder();
-        shopItem.gameObject.SetActive(false);
-        _selectedShopItem = null;
+        if(shopItem.Gear.Slot != EquipmentType.Headgear)
+        {
+            shopItem.ResetBorder();
+            shopItem.gameObject.SetActive(false);
+            _selectedShopItem = null;
+        }
+        else
+        {
+            shopItem.IncreasePrice();
+        }
         CheckBuyButton();
     }
 
@@ -570,7 +602,10 @@ public class Shop : MonoBehaviour
                 _selectedUnit.Offhand().EquipItem(_selectedShopItem.Gear);
                 break;
             case EquipmentType.Headgear:
-                if(!_wallet.AskToSpend(_selectedShopItem.Gear.Price - Mathf.RoundToInt(_selectedUnit.Headgear().Gear.Price * _selectedUnit.Headgear().UpgradeLevel) / 3)) { return; }
+                if(!_wallet.AskToSpend((_selectedShopItem.Gear.Price * _selectedShopItem.PriceMultiplyer) - Mathf.RoundToInt(_selectedUnit.Headgear().Gear.Price * _selectedUnit.Headgear().UpgradeLevel) / 3))
+                { 
+                    return; 
+                }
                 TradeIn(_selectedUnit.Headgear().Gear, _selectedUnit.Headgear().UpgradeLevel);
                 _selectedUnit.Headgear().EquipItem(_selectedShopItem.Gear);
                 break;

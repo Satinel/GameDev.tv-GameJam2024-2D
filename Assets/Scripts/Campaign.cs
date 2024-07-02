@@ -12,7 +12,7 @@ public class Campaign : MonoBehaviour
     public static event EventHandler<bool> OnBattleLoaded;
     public static event Action OnSceneLoading;
     public static event Action OnTutorialLoading;
-    public static event EventHandler<int> OnTownLoaded;
+    public static event EventHandler<bool> OnTownLoaded;
     public static event EventHandler<List<EquipmentScriptableObject>> OnSetLockedItems;
     public static event Action OnCanEscape;
     public static event EventHandler<bool> OnWitchHatSet;
@@ -26,6 +26,9 @@ public class Campaign : MonoBehaviour
     public bool BossIntroDone { get; private set; } = false;
     public bool HasWitchHat { get; private set; } = false;
     public bool BossBattleStarted { get; private set; } = false;
+    public int StoredRerollCost { get; private set; }
+    public int StoredRerollMultiplyer { get; private set; }
+    public bool FreshLoad { get; private set; }
 
     [SerializeField] float _volume = 0.75f;
     [SerializeField] AudioClip _defeatSFX, _victorySFX, _gameOverSFX, _escapeSFX, _bossDefeatedSFX;
@@ -40,6 +43,7 @@ public class Campaign : MonoBehaviour
     [SerializeField] TextMeshProUGUI _goldEarnedText, _goldLostText, _bossDamageUIText;
     [SerializeField] Wallet _wallet;
     [SerializeField] GameObject _levelSelect;
+    [SerializeField] Button _saveButton;
 
     bool _isTransitioning;
     float _savedBattleSpeed = 1f;
@@ -121,7 +125,7 @@ public class Campaign : MonoBehaviour
 
             if(_levelSelectButtons.Count >= nextLevelIndex - 1)
             {
-                _levelSelectButtons[nextLevelIndex -1].SetCleared();
+                _levelSelectButtons[nextLevelIndex - 1].SetCleared();
             }
 
             if(_levelSelectButtons.Count > nextLevelIndex)
@@ -344,6 +348,8 @@ public class Campaign : MonoBehaviour
 
     IEnumerator GoToBattleRoutine(int index, bool frenzyMode)
     {
+        FreshLoad = false;
+        _saveButton.interactable = false;
         _isTransitioning = true;
         _screenWipeImage.fillOrigin = 1; // 1 is Right
 
@@ -424,11 +430,21 @@ public class Campaign : MonoBehaviour
         HasWitchHat = false;
         _wasFrenzied = false;
 
-        StartCoroutine(ReturnToTownRoutine());
-        
+        StartCoroutine(ReturnToTownRoutine(true));
+    }
+
+    public void NewGamePlus()
+    {
+        if(_isTransitioning) { return; }
+        Days++;
+        _hasCrown = false;
+        HasWitchHat = false;
+        _wasFrenzied = false;
+
+        StartCoroutine(ReturnToTownRoutine(false));
     }
     
-    IEnumerator ReturnToTownRoutine()
+    IEnumerator ReturnToTownRoutine(bool playCutscene)
     {
         _isTransitioning = true;
         _screenWipeImage.fillOrigin = 0; // 0 is Left
@@ -466,17 +482,18 @@ public class Campaign : MonoBehaviour
             yield return null;
         }
         _screenWipeImage.fillAmount = 0;
-        OnTownLoaded?.Invoke(this, Days);
+        OnTownLoaded?.Invoke(this, playCutscene);
+        _saveButton.interactable = true;
         _isTransitioning = false;
     }
 
     public void ReturnToTitle()
     {
+        Time.timeScale = 1;
         _audioSource.Stop();
         _screenWipeImage.fillAmount = 1;
         Player player = GetComponentInParent<Player>();
         SceneManager.MoveGameObjectToScene(player.gameObject, SceneManager.GetActiveScene());
-        Time.timeScale = 1;
         OnSceneLoading?.Invoke();
         SceneManager.LoadScene(0);
     }
@@ -518,5 +535,68 @@ public class Campaign : MonoBehaviour
     {
         // TODO Credits or something!
         SceneManager.LoadScene(0); // TODO REPLACE THIS!!!!!!!
+    }
+
+    public void LoadSavedData(int wins, int losses, int days, int bossDamage, string bossIntroDone, string bossBattleStarted)
+    {
+        for(int i = 0; i < wins; i++)
+        {
+            Wins++;
+            if(_wins.Count >= Wins)
+            {
+                _wins[Wins - 1].SetActive(true);
+            }
+
+            if(_levelSelectButtons.Count >= i)
+            {
+                _levelSelectButtons[i].SetCleared();
+            }
+
+            if(_levelSelectButtons.Count > i + 1)
+            {
+                _levelSelectButtons[i + 1].Unlock();
+            }
+
+            if(_levelSelectButtons.Count > i + 2)
+            {
+                _levelSelectButtons[i + 2].gameObject.SetActive(true);
+            }
+        }
+
+        for(int i = Losses; i > losses; i--)
+        {
+            Losses--;
+            _lives[Losses].fillAmount = 0;
+        }
+
+        Days = days;
+        BossDamage = bossDamage;
+        if(bossIntroDone == "True")
+        {
+            BossIntroDone = true;
+        }
+        if(bossBattleStarted == "True")
+        {
+            BossBattleStarted = true;
+        }
+    }
+
+    public void LoadShopItems(int rerollCost, int multiplyer, List<EquipmentScriptableObject> savedItems)
+    {
+        FreshLoad = true;
+        StoredRerollCost = rerollCost;
+        StoredRerollMultiplyer = multiplyer;
+        LockedItems.Clear();
+
+        LockedItems = savedItems;
+
+        if(_isTransitioning) { return; }
+
+        StartCoroutine(ReturnToTownRoutine(false));
+    }
+
+    public void SetUnfresh()
+    {
+        FreshLoad = false;
     }
 }

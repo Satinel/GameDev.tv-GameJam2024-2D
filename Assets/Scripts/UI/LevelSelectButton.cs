@@ -4,13 +4,8 @@ using UnityEngine.UI;
 public class LevelSelectButton : MonoBehaviour
 {
     [SerializeField] GameObject _clearedGameObject, _lockedGameObject;
+    [SerializeField] Button _button;
 
-    Button _button;
-
-    void Awake()
-    {
-        _button = GetComponent<Button>();
-    }
 
     public void Unlock()
     {

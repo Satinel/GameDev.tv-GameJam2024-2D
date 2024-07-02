@@ -219,4 +219,13 @@ public class TeamManager : MonoBehaviour
             SelectAll();
         }
     }
+
+    public void LoadSavedData(int unlockedUnits)
+    {
+        for(int i = 1; i < unlockedUnits; i++)
+        {
+            _lockedUnits[i - 1].gameObject.SetActive(true);
+            _activeUnits.Insert(_activeUnits.Count, _lockedUnits[i - 1]);
+        }
+    }
 }
