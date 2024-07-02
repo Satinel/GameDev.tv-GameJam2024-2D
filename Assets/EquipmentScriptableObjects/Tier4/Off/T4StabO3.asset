@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f86f0e575a772274fad942e2dbbc8bcb, type: 3}
   m_Name: T4StabO3
   m_EditorClassIdentifier: 
-  Name: Winged Blade
+  Name: Ramza
   Slot: 1
   Sprite: {fileID: -1352436816, guid: 3536e8b12ea3b3b44ac96602e2b0192c, type: 3}
   RareSprite: {fileID: 1813194950, guid: 6956e2feebab5314d9497cc7eb66c5d9, type: 3}

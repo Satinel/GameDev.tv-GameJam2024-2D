@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -5,6 +6,8 @@ using TMPro;
 
 public class Shop : MonoBehaviour
 {
+    public static event Action OnShopReady;
+
     [SerializeField] int _rerollCost = 1;
     [SerializeField] int _rerollCostMultiplyer = 3;
 
@@ -126,6 +129,10 @@ public class Shop : MonoBehaviour
             _rerollText.text = _rerollCost.ToString();
             _campaign.SetUnfresh();
             CheckForUpgrades();
+        }
+        else
+        {
+            OnShopReady?.Invoke();
         }
     }
 
@@ -251,38 +258,38 @@ public class Shop : MonoBehaviour
 
             if(!shopItem.IsLocked)
             {
-                int tier = Random.Range(1, _wins + 1); // 0 wins: 1 to 1 = 1 // 1 win: 1 to 2 = 1 // 2 wins: 1 to 3 = 1-2 // 3 wins: 1 to 4 = 1-3 // 4 wins: 1 to 5 = 1-4 //
+                int tier = UnityEngine.Random.Range(1, _wins + 1); // 0 wins: 1 to 1 = 1 // 1 win: 1 to 2 = 1 // 2 wins: 1 to 3 = 1-2 // 3 wins: 1 to 4 = 1-3 // 4 wins: 1 to 5 = 1-4 //
 
                 switch(tier)
                 {
                     case 1:
                         if(_wins > 3)
                         {
-                            shopItem.Setup(_tier4Equipment[Random.Range(0, _tier4Equipment.Count)]);
+                            shopItem.Setup(_tier4Equipment[UnityEngine.Random.Range(0, _tier4Equipment.Count)]);
                         }
                         else
                         {
-                            shopItem.Setup(_tier1Equipment[Random.Range(0, _tier1Equipment.Count)]);
+                            shopItem.Setup(_tier1Equipment[UnityEngine.Random.Range(0, _tier1Equipment.Count)]);
                         }
                         break;
                     case 2:
                         if(_wins > 4)
                         {
-                            shopItem.Setup(_tier3Equipment[Random.Range(0, _tier3Equipment.Count)]);
+                            shopItem.Setup(_tier3Equipment[UnityEngine.Random.Range(0, _tier3Equipment.Count)]);
                         }
                         else
                         {
-                            shopItem.Setup(_tier2Equipment[Random.Range(0, _tier2Equipment.Count)]);
+                            shopItem.Setup(_tier2Equipment[UnityEngine.Random.Range(0, _tier2Equipment.Count)]);
                         }
                         break;
                     case 3:
-                        shopItem.Setup(_tier3Equipment[Random.Range(0, _tier3Equipment.Count)]);
+                        shopItem.Setup(_tier3Equipment[UnityEngine.Random.Range(0, _tier3Equipment.Count)]);
                         break;
                     case >3:
-                        shopItem.Setup(_tier4Equipment[Random.Range(0, _tier4Equipment.Count)]);
+                        shopItem.Setup(_tier4Equipment[UnityEngine.Random.Range(0, _tier4Equipment.Count)]);
                         break;
                     default:
-                        shopItem.Setup(_tier1Equipment[Random.Range(0, _tier1Equipment.Count)]);
+                        shopItem.Setup(_tier1Equipment[UnityEngine.Random.Range(0, _tier1Equipment.Count)]);
                         break;
                 }                
             }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -22,11 +23,13 @@ public class SaveSystem : MonoBehaviour
     void OnEnable()
     {
         Campaign.OnReturnToTown += AutoSaveMoney;
+        Shop.OnShopReady += AutoSave;
     }
 
     void OnDisable()
     {
         Campaign.OnReturnToTown -= AutoSaveMoney;
+        Shop.OnShopReady -= AutoSave;
     }
 
     // void Update() // TODO DELETE THIS
@@ -126,7 +129,12 @@ public class SaveSystem : MonoBehaviour
         _wallet.LoadMoney(AutoSavedMoney);
     }
 
-    public void SaveDataFile() // TODO Prompt about overwriting save data
+    public void AutoSave()
+    {
+        SaveDataFile("autoSave.txt");
+    }
+
+    public void SaveDataFile(string fileName)
     {
         Shop shop = FindFirstObjectByType<Shop>();
 
@@ -138,7 +146,7 @@ public class SaveSystem : MonoBehaviour
 
 #if UNITY_WEBGL
 {
-        _path = "/idbfs/MangoKamenLastStand" + "/gameData.txt";
+        _path = "/idbfs/MangoKamenLastStand" + "/" + fileName;
         if(!Directory.Exists(_path))
         {
             Directory.CreateDirectory("/idbfs/MangoKamenLastStand");
@@ -146,7 +154,7 @@ public class SaveSystem : MonoBehaviour
 }
 #else
 {
-        _path = Application.persistentDataPath + "gameData.txt";
+        _path = Application.persistentDataPath + fileName;
 }
 #endif
 
@@ -218,23 +226,33 @@ public class SaveSystem : MonoBehaviour
         }
         
         File.WriteAllLines(_path, dataStrings);
-        _savePrompt.SetActive(false);
-        _saveMenu.SetActive(false);
-        _animator.SetTrigger(SAVED_HASH);
+        if(File.Exists(_path))
+        {
+            if(fileName == "autoSave.txt") { return; }
+            _savePrompt.SetActive(false);
+            _saveMenu.SetActive(false);
+            _animator.SetTrigger(SAVED_HASH);
+        }
+        else
+        {
+            _animator.SetTrigger(SAVEFAILED_HASH);
+            return;
+        }
+
     }
 
-    public void LoadDataFile() // TODO Prompt about loading data
+    public void LoadDataFile(string fileName) // TODO Prompt about loading data
     {
 #if UNITY_WEBGL
 {
-            _path = "/idbfs/MangoKamenLastStand" + "/gameData.txt";
+            _path = "/idbfs/MangoKamenLastStand" + "/" + fileName;
 }
 #else
 {
             _path = Application.persistentDataPath + "gameData.txt";
 }
 #endif
-        if (File.Exists(_path))
+        if(File.Exists(_path))
         {
             _dataArray = File.ReadAllLines(_path);
         }

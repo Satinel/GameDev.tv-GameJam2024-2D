@@ -226,6 +226,7 @@ public class Campaign : MonoBehaviour
     void Portal_OnShopOpened()
     {
         _toBattleButton.SetActive(true);
+        _saveButton.interactable = true;
         OnSetLockedItems?.Invoke(this, LockedItems);
     }
 
@@ -483,7 +484,6 @@ public class Campaign : MonoBehaviour
         }
         _screenWipeImage.fillAmount = 0;
         OnTownLoaded?.Invoke(this, playCutscene);
-        _saveButton.interactable = true;
         _isTransitioning = false;
     }
 
