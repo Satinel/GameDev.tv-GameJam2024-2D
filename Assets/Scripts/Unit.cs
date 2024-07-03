@@ -169,6 +169,7 @@ public class Unit : MonoBehaviour
     void Campaign_OnSceneLoading()
     {
         ShowUpgradeIndicator(false);
+        _targetIndicator.gameObject.SetActive(false);
     }
 
     void SetTarget(Enemy enemy)

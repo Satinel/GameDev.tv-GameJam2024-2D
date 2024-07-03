@@ -44,6 +44,7 @@ public class Campaign : MonoBehaviour
     [SerializeField] Wallet _wallet;
     [SerializeField] GameObject _levelSelect;
     [SerializeField] Button _saveButton;
+    [SerializeField] GameObject _thankYouMessage;
 
     bool _isTransitioning;
     float _savedBattleSpeed = 1f;
@@ -533,8 +534,7 @@ public class Campaign : MonoBehaviour
 
     public void TheEndButton()
     {
-        // TODO Credits or something!
-        SceneManager.LoadScene(0); // TODO REPLACE THIS!!!!!!!
+        _thankYouMessage.SetActive(true);
     }
 
     public void LoadSavedData(int wins, int losses, int days, int bossDamage, string bossIntroDone, string bossBattleStarted)
