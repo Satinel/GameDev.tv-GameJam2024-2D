@@ -12,6 +12,7 @@ public class SaveSystem : MonoBehaviour
     [SerializeField] Arsenal _arsenal;
     [SerializeField] GameObject _loadPrompt, _loadMenu, _savePrompt, _saveMenu;
     [SerializeField] Animator _animator;
+    [SerializeField] SaveButton _loadButton, _loadAutoSaveButton, _saveButton;
 
     string _path;
     string[] _dataArray;
@@ -19,6 +20,8 @@ public class SaveSystem : MonoBehaviour
     static readonly int SAVED_HASH = Animator.StringToHash("Saved");
     static readonly int NOFILE_HASH = Animator.StringToHash("NoFile");
     static readonly int SAVEFAILED_HASH = Animator.StringToHash("SaveFailed");
+    const string SAVENAME = "gameData.txt";
+    const string AUTOSAVENAME = "autoSave.txt";
 
     void OnEnable()
     {
@@ -32,18 +35,33 @@ public class SaveSystem : MonoBehaviour
         Shop.OnShopReady -= AutoSave;
     }
 
-    // void Update() // TODO DELETE THIS
-    // {
-    //     if(Input.GetKeyDown(KeyCode.S))
-    //     {
-    //         SaveDataFile();
-    //     }
-
-    //     if(Input.GetKeyDown(KeyCode.L))
-    //     {
-    //         LoadDataFile();
-    //     }
-    // }
+    void Start()
+    {
+        string path;
+        string autoPath;
+#if UNITY_WEBGL
+{
+            path = "/idbfs/MangoKamenLastStand" + "/" + SAVENAME;
+            autoPath = "/idbfs/MangoKamenLastStand" + "/" +  AUTOSAVENAME;
+}
+#else
+{
+            path = Application.persistentDataPath + SAVENAME;
+            path = Application.persistentDataPath + AUTOSAVENAME;
+}
+#endif
+        if(File.Exists(path))
+        {
+            string[] data = File.ReadAllLines(path);
+            _loadButton.Setup(data[0], data[1], data[2], data[3], data[8]);
+            _saveButton.Setup(data[0], data[1], data[2], data[3], data[8]);
+        }
+        if(File.Exists(autoPath))
+        {
+            string[] data = File.ReadAllLines(autoPath);
+            _loadAutoSaveButton.Setup(data[0], data[1], data[2], data[3], data[8]);
+        }
+    }
 
     public void OpenLoadMenu()
     {
@@ -131,7 +149,7 @@ public class SaveSystem : MonoBehaviour
 
     public void AutoSave()
     {
-        SaveDataFile("autoSave.txt");
+        SaveDataFile(AUTOSAVENAME);
     }
 
     public void SaveDataFile(string fileName)
@@ -230,11 +248,14 @@ public class SaveSystem : MonoBehaviour
         {
             if(fileName == "autoSave.txt") { return; }
             _savePrompt.SetActive(false);
-            _saveMenu.SetActive(false);
+            // _saveMenu.SetActive(false);
             _animator.SetTrigger(SAVED_HASH);
+            _saveButton.Setup(dataStrings[0], dataStrings[1], dataStrings[2], dataStrings[3], dataStrings[8]);
+            _loadButton.Setup(dataStrings[0], dataStrings[1], dataStrings[2], dataStrings[3], dataStrings[8]);
         }
         else
         {
+            _savePrompt.SetActive(false);
             _animator.SetTrigger(SAVEFAILED_HASH);
             return;
         }
