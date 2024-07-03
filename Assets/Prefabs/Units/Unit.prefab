@@ -2633,6 +2633,7 @@ MonoBehaviour:
   _dodgeSFX: {fileID: 8300000, guid: 9002661ab9c14774b895d12eb0fe62df, type: 3}
   _faintVolume: 1
   _dodgeVolume: 1
+  _unArmedSkill: {fileID: 2244969477838524304}
 --- !u!95 &8647161984636256011
 Animator:
   serializedVersion: 5
@@ -3388,6 +3389,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e742c6a9e201bb4eb887f69e4de513c, type: 3}
+--- !u!114 &2244969477838524304 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -3948191308740453473, guid: 4e742c6a9e201bb4eb887f69e4de513c, type: 3}
+  m_PrefabInstance: {fileID: 6202177093885056015}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56d95ea235d3dd54390ea805dfe293ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7645972585741505393 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4326126058264463230, guid: 4e742c6a9e201bb4eb887f69e4de513c, type: 3}

@@ -34,9 +34,9 @@ public class EquipmentSlot : MonoBehaviour
         _spriteRenderer.transform.localScale = gear.SpriteScale;
         _spriteRenderer.flipX = gear.SpriteFlipped;
         
-        if(GetComponentInChildren<BaseSkill>())
+        if(GetComponentInChildren<BaseSkill>(true))
         {
-            Destroy(GetComponentInChildren<BaseSkill>().gameObject);
+            Destroy(GetComponentInChildren<BaseSkill>(true).gameObject);
         }
         Skill = Instantiate(gear.Skill, transform);
         Skill.SetUI(_cooldownUI, _cooldownFillImage);
@@ -89,9 +89,9 @@ public class EquipmentSlot : MonoBehaviour
         }
     }
 
-    public void SetSkill()
+    public void SetUnarmedSkill(BaseSkill skill)
     {
-        Skill = GetComponentInChildren<BaseSkill>();
+        Skill = skill;
         Skill.SetUI(_cooldownUI, _cooldownFillImage);
     }
 }

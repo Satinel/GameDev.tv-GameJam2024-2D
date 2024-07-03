@@ -31,6 +31,7 @@ public class Unit : MonoBehaviour
     [SerializeField] AudioSource _audioSource;
     [SerializeField] AudioClip _faintSFX, _dodgeSFX;
     [SerializeField] float _faintVolume, _dodgeVolume;
+    [SerializeField] BaseSkill _unArmedSkill;
 
     int _currentHealth;
     bool _isSelected = false;
@@ -81,7 +82,10 @@ public class Unit : MonoBehaviour
         _currentHealth = MaxHealth;
         _healthText.text = _currentHealth.ToString();
         _attackText.text = Attack.ToString();
-        _equipMain.SetSkill();
+        if(_unArmedSkill)
+        {
+            _equipMain.SetUnarmedSkill(_unArmedSkill);
+        }
         _normalSprite = _unitSpriteRenderer.sprite;
         foreach(SpriteRenderer spriteRenderer in _afterImage.GetComponentsInChildren<SpriteRenderer>(true))
         {
@@ -398,6 +402,8 @@ public class Unit : MonoBehaviour
 
     public void LoadEquipmentMain(EquipmentScriptableObject gearMain, int upgradeMain)
     {
+        _unArmedSkill = null;
+
         ChangeMaxHealth(gearMain.HealthIncrease * upgradeMain);
         ChangeAttack(gearMain.AttackIncrease * upgradeMain);
 
