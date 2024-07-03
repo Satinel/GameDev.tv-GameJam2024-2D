@@ -46,8 +46,8 @@ public class SaveSystem : MonoBehaviour
 }
 #else
 {
-            path = Application.persistentDataPath + SAVENAME;
-            autoPath = Application.persistentDataPath + AUTOSAVENAME;
+            path = Application.persistentDataPath + "/" +  SAVENAME;
+            autoPath = Application.persistentDataPath + "/" +  AUTOSAVENAME;
 }
 #endif
         if(File.Exists(path))
@@ -172,7 +172,7 @@ public class SaveSystem : MonoBehaviour
 }
 #else
 {
-        _path = Application.persistentDataPath + fileName;
+        _path = Application.persistentDataPath + "/" +  fileName;
 }
 #endif
 
@@ -246,7 +246,7 @@ public class SaveSystem : MonoBehaviour
         File.WriteAllLines(_path, dataStrings);
         if(File.Exists(_path))
         {
-            if(fileName == "autoSave.txt") { return; }
+            if(fileName == AUTOSAVENAME) { return; }
             _savePrompt.SetActive(false);
             // _saveMenu.SetActive(false);
             _animator.SetTrigger(SAVED_HASH);
@@ -270,7 +270,7 @@ public class SaveSystem : MonoBehaviour
 }
 #else
 {
-            _path = Application.persistentDataPath + "gameData.txt";
+            _path = Application.persistentDataPath + "/" +  fileName;
 }
 #endif
         if(File.Exists(_path))
