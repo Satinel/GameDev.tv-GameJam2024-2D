@@ -47,7 +47,7 @@ public class SaveSystem : MonoBehaviour
 #else
 {
             path = Application.persistentDataPath + SAVENAME;
-            path = Application.persistentDataPath + AUTOSAVENAME;
+            autoPath = Application.persistentDataPath + AUTOSAVENAME;
 }
 #endif
         if(File.Exists(path))
