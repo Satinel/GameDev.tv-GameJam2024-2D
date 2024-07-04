@@ -14,12 +14,14 @@ public class SaveSystem : MonoBehaviour
     [SerializeField] Animator _animator;
     [SerializeField] SaveButton _loadButton, _loadAutoSaveButton, _saveButton;
 
-    string _path;
-    string[] _dataArray;
+    bool _isSaving;
+    // string _path;
+    // string[] _dataArray;
 
     static readonly int SAVED_HASH = Animator.StringToHash("Saved");
     static readonly int NOFILE_HASH = Animator.StringToHash("NoFile");
     static readonly int SAVEFAILED_HASH = Animator.StringToHash("SaveFailed");
+    const string WEBPATH = "/idbfs/MangoKamenLastStand/";
     const string SAVENAME = "gameData.txt";
     const string AUTOSAVENAME = "autoSave.txt";
 
@@ -41,8 +43,8 @@ public class SaveSystem : MonoBehaviour
         string autoPath;
 #if UNITY_WEBGL
 {
-            path = "/idbfs/MangoKamenLastStand" + "/" + SAVENAME;
-            autoPath = "/idbfs/MangoKamenLastStand" + "/" +  AUTOSAVENAME;
+            path = WEBPATH + SAVENAME;
+            autoPath = WEBPATH + AUTOSAVENAME;
 }
 #else
 {
@@ -107,38 +109,47 @@ public class SaveSystem : MonoBehaviour
     }
 
     public void AutoSaveMoney()
-    {        
+    {
+        string saveMoneyPath;
 #if UNITY_WEBGL
 {
-        _path = "/idbfs/MangoKamenLastStand" + "/save.txt"; // Note that if the Unity Editor is set to WebGL build this will create a folder in the root of the drive it is on
-        if(!Directory.Exists(_path))
+        saveMoneyPath = WEBPATH + "save.txt"; // Note that if the Unity Editor is set to WebGL build this will create a folder in the root of the drive it is on
+        if(!Directory.Exists(saveMoneyPath))
         {
             Directory.CreateDirectory("/idbfs/MangoKamenLastStand");
         }
 }
 #else
 {
-        _path = Application.persistentDataPath + "/save.txt";
+        saveMoneyPath = Application.persistentDataPath + "/save.txt"; // Note the / is needed here but not in WEBGL
 }
 #endif
         int savedMoney = _wallet.SaveMoney();
-        File.WriteAllText(_path, savedMoney.ToString());
+        try
+        {
+            File.WriteAllText(saveMoneyPath, savedMoney.ToString());
+        }
+        catch (Exception ex)
+        {
+            Debug.Log(ex);
+        }
     }
 
     public void LoadMoney()
     {
+        string loadMoneyPath;
 #if UNITY_WEBGL
 {
-        _path = "/idbfs/MangoKamenLastStand" + "/save.txt";
+        loadMoneyPath = WEBPATH + "save.txt";
 }
 #else
 {
-        _path = Application.persistentDataPath + "/save.txt";
+        loadMoneyPath = Application.persistentDataPath + "/save.txt"; // Note the / is needed here but not in WEBGL
 }
 #endif
-        if(File.Exists(_path))
+        if(File.Exists(loadMoneyPath))
         {
-            AutoSavedMoney = int.Parse(File.ReadAllText(_path));
+            AutoSavedMoney = int.Parse(File.ReadAllText(loadMoneyPath));
         }
     }
 
@@ -152,27 +163,38 @@ public class SaveSystem : MonoBehaviour
         SaveDataFile(AUTOSAVENAME);
     }
 
+    public void ManualSave()
+    {
+        SaveDataFile(SAVENAME);
+    }
+
     public void SaveDataFile(string fileName)
     {
+        if(_isSaving) { return; }
+
+        _isSaving = true;
+
+        string savePath;
         Shop shop = FindFirstObjectByType<Shop>();
 
         if(!shop)
         {
             _animator.SetTrigger(SAVEFAILED_HASH);
+            _isSaving = false;
             return;
         }
 
 #if UNITY_WEBGL
 {
-        _path = "/idbfs/MangoKamenLastStand" + "/" + fileName;
-        if(!Directory.Exists(_path))
+        savePath = WEBPATH + fileName;
+        if(!Directory.Exists(savePath))
         {
             Directory.CreateDirectory("/idbfs/MangoKamenLastStand");
         }
 }
 #else
 {
-        _path = Application.persistentDataPath + "/" +  fileName;
+        savePath = Application.persistentDataPath + "/" +  fileName; // Note the / is needed here but not in WEBGL
 }
 #endif
 
@@ -242,40 +264,43 @@ public class SaveSystem : MonoBehaviour
                 dataStrings.Insert(dataStrings.Count, "null");
             }
         }
-        
-        File.WriteAllLines(_path, dataStrings);
-        if(File.Exists(_path))
+        try
         {
-            if(fileName == AUTOSAVENAME) { return; }
+            File.WriteAllLines(savePath, dataStrings);
+            
+            if(fileName == AUTOSAVENAME) { _isSaving = false; return; }
+            
             _savePrompt.SetActive(false);
-            // _saveMenu.SetActive(false);
             _animator.SetTrigger(SAVED_HASH);
-            _saveButton.Setup(dataStrings[0], dataStrings[1], dataStrings[2], dataStrings[3], dataStrings[8]);
-            _loadButton.Setup(dataStrings[0], dataStrings[1], dataStrings[2], dataStrings[3], dataStrings[8]);
+            string[] savedData = File.ReadAllLines(savePath);
+            _saveButton.Setup(savedData[0], savedData[1], savedData[2], savedData[3], savedData[8]);
+            // _loadButton.Setup(savedData[0], savedData[1], savedData[2], savedData[3], savedData[8]); // Since Loading is only currently available at Main Title this should be irrelevant
         }
-        else
+        catch(Exception ex)
         {
+            Debug.Log(ex);
             _savePrompt.SetActive(false);
             _animator.SetTrigger(SAVEFAILED_HASH);
-            return;
         }
-
+        _isSaving = false;
     }
 
     public void LoadDataFile(string fileName) // TODO Prompt about loading data
     {
+        string loadPath;
+        string[] dataArray;
 #if UNITY_WEBGL
 {
-            _path = "/idbfs/MangoKamenLastStand" + "/" + fileName;
+            loadPath = WEBPATH + fileName;
 }
 #else
 {
-            _path = Application.persistentDataPath + "/" +  fileName;
+            loadPath = Application.persistentDataPath + "/" +  fileName; // Note again the "/" is needed here but not in WEBGL
 }
 #endif
-        if(File.Exists(_path))
+        if(File.Exists(loadPath))
         {
-            _dataArray = File.ReadAllLines(_path);
+            dataArray = File.ReadAllLines(loadPath);
         }
         else
         {
@@ -284,23 +309,23 @@ public class SaveSystem : MonoBehaviour
             return;
         }
 
-        _wallet.LoadMoney(int.Parse(_dataArray[0]));
-        _teamManager.LoadSavedData(int.Parse(_dataArray[1]));
-        _campaign.LoadSavedData(int.Parse(_dataArray[2]), int.Parse(_dataArray[3]), int.Parse(_dataArray[4]), int.Parse(_dataArray[5]), _dataArray[6], _dataArray[7]);
+        _wallet.LoadMoney(int.Parse(dataArray[0]));
+        _teamManager.LoadSavedData(int.Parse(dataArray[1]));
+        _campaign.LoadSavedData(int.Parse(dataArray[2]), int.Parse(dataArray[3]), int.Parse(dataArray[4]), int.Parse(dataArray[5]), dataArray[6], dataArray[7]);
 
         Unit peanut = _teamManager.GetActiveUnits()[0];
-        peanut.SetHeroName(_dataArray[8]);
+        peanut.SetHeroName(dataArray[8]);
 
         Unit[] units = GetComponentsInChildren<Unit>(true);
 
         for (int i = 0; i < units.Length; i++)
         {
-            LoadUnitEquipment(units[i], _dataArray[(i * 6) + 9], int.Parse(_dataArray[(i * 6) + 10]), 
-                                _dataArray[(i * 6) + 11], int.Parse(_dataArray[(i * 6) + 12]), 
-                                _dataArray[(i * 6) + 13], int.Parse(_dataArray[(i * 6) + 14]));
+            LoadUnitEquipment(units[i], dataArray[(i * 6) + 9], int.Parse(dataArray[(i * 6) + 10]), 
+                                dataArray[(i * 6) + 11], int.Parse(dataArray[(i * 6) + 12]), 
+                                dataArray[(i * 6) + 13], int.Parse(dataArray[(i * 6) + 14]));
         }
 
-        _campaign.LoadShopItems(int.Parse(_dataArray[39]), int.Parse(_dataArray[40]), LoadShopItems(_dataArray[41], _dataArray[42], _dataArray[43], _dataArray[44], _dataArray[45], _dataArray[46]));
+        _campaign.LoadShopItems(int.Parse(dataArray[39]), int.Parse(dataArray[40]), LoadShopItems(dataArray[41], dataArray[42], dataArray[43], dataArray[44], dataArray[45], dataArray[46]));
         CloseLoadMenu();
     }
 
