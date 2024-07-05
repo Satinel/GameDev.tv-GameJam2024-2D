@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using TMPro;
 
 public class SaveSystem : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class SaveSystem : MonoBehaviour
     [SerializeField] GameObject _loadPrompt, _loadMenu, _savePrompt, _saveMenu;
     [SerializeField] Animator _animator;
     [SerializeField] SaveButton _loadButton, _loadAutoSaveButton, _saveButton;
+    [SerializeField] TextMeshProUGUI _errorText;
 
     bool _isSaving;
     // string _path;
@@ -125,14 +127,7 @@ public class SaveSystem : MonoBehaviour
 }
 #endif
         int savedMoney = _wallet.SaveMoney();
-        try
-        {
-            File.WriteAllText(saveMoneyPath, savedMoney.ToString());
-        }
-        catch (Exception ex)
-        {
-            Debug.Log(ex);
-        }
+        File.WriteAllText(saveMoneyPath, savedMoney.ToString());
     }
 
     public void LoadMoney()
@@ -179,6 +174,7 @@ public class SaveSystem : MonoBehaviour
 
         if(!shop)
         {
+            _errorText.text = "Unable to Save outside of Shop (sorry)";
             _animator.SetTrigger(SAVEFAILED_HASH);
             _isSaving = false;
             return;
@@ -278,7 +274,7 @@ public class SaveSystem : MonoBehaviour
         }
         catch(Exception ex)
         {
-            Debug.Log(ex);
+            _errorText.text = $"Failed to Save: {ex}";
             _savePrompt.SetActive(false);
             _animator.SetTrigger(SAVEFAILED_HASH);
         }

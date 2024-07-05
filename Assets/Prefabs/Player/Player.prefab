@@ -1960,6 +1960,7 @@ MonoBehaviour:
   _loadButton: {fileID: 1352676267266296270}
   _loadAutoSaveButton: {fileID: 216200210510254754}
   _saveButton: {fileID: 3943512600469022883}
+  _errorText: {fileID: 479181659524412551}
 --- !u!114 &587274676638608327
 MonoBehaviour:
   m_ObjectHideFlags: 0
