@@ -1961,6 +1961,7 @@ MonoBehaviour:
   _loadAutoSaveButton: {fileID: 216200210510254754}
   _saveButton: {fileID: 3943512600469022883}
   _errorText: {fileID: 479181659524412551}
+  _saveButtonText: {fileID: 2681065494503975394}
 --- !u!114 &587274676638608327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5792,6 +5793,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7ff938e3657c6b4fa454cf65151deb3, type: 3}
+--- !u!114 &2681065494503975394 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8505843607066915577, guid: e7ff938e3657c6b4fa454cf65151deb3, type: 3}
+  m_PrefabInstance: {fileID: 5998756689325021979}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6516423656717908117 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 671354821833925518, guid: e7ff938e3657c6b4fa454cf65151deb3, type: 3}

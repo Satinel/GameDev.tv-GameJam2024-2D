@@ -14,7 +14,7 @@ public class SaveSystem : MonoBehaviour
     [SerializeField] GameObject _loadPrompt, _loadMenu, _savePrompt, _saveMenu;
     [SerializeField] Animator _animator;
     [SerializeField] SaveButton _loadButton, _loadAutoSaveButton, _saveButton;
-    [SerializeField] TextMeshProUGUI _errorText;
+    [SerializeField] TextMeshProUGUI _errorText, _saveButtonText;
 
     bool _isSaving;
     // string _path;
@@ -47,6 +47,7 @@ public class SaveSystem : MonoBehaviour
 {
             path = WEBPATH + SAVENAME;
             autoPath = WEBPATH + AUTOSAVENAME;
+            _saveButtonText.text = "Save & Quit";
 }
 #else
 {
@@ -271,6 +272,11 @@ public class SaveSystem : MonoBehaviour
             string[] savedData = File.ReadAllLines(savePath);
             _saveButton.Setup(savedData[0], savedData[1], savedData[2], savedData[3], savedData[8]);
             // _loadButton.Setup(savedData[0], savedData[1], savedData[2], savedData[3], savedData[8]); // Since Loading is only currently available at Main Title this should be irrelevant
+#if UNITY_WEBGL
+{
+            _campaign.ReturnToTitle();
+}
+#endif
         }
         catch(Exception ex)
         {
