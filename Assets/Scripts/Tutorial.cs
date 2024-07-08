@@ -66,6 +66,7 @@ public class Tutorial : MonoBehaviour
     {
         _pointer.SetActive(false);
         _battle.PauseBattle();
+        _battle.SetIsPausable(false);
         _textBox.SetActive(true);
         _text.text = "Would you like to join me in a short tutorial?";
         _button1.gameObject.SetActive(true);
@@ -119,6 +120,7 @@ public class Tutorial : MonoBehaviour
         }
         _retreatButton.gameObject.SetActive(true);
         _battle.UnpauseBattle();
+        _battle.SetIsPausable(true);
         Destroy(gameObject);
     }
 
@@ -278,6 +280,7 @@ public class Tutorial : MonoBehaviour
         _playButton.interactable = true;
         _pauseButton.interactable = true;
         _speedChanged = true;
+        _battle.SetIsPausable(true);
     }
 
     void Timer_OnHalfTime()
@@ -287,6 +290,7 @@ public class Tutorial : MonoBehaviour
         _pauseButton.interactable = false;
         _doubleFastButton.interactable = false;
         _battle.PauseBattle();
+        _battle.SetIsPausable(false);
         _textBox.SetActive(true);
         _text.text = "Halfway through the night, monsters will enter a <color=#ff0000>Frenzied</color> state. ";
         _text.text += "They'll be twice as strong and twice as tough!";
@@ -316,5 +320,6 @@ public class Tutorial : MonoBehaviour
         _battle.UnpauseBattle();
         _button8.gameObject.SetActive(false);
         _retreatButton.interactable = true;
+        _battle.SetIsPausable(true);
     }
 }

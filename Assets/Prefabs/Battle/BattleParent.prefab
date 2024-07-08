@@ -4834,6 +4834,7 @@ MonoBehaviour:
   _lastStandMessage: {fileID: 7825672252740023834}
   _unitKilledMessage: {fileID: 8407559135369148856}
   _escapePrompt: {fileID: 496358898912506486}
+  _pauseButton: {fileID: 308423041578908966}
   _lifeCountText: {fileID: 5341389186778935479}
   _unitKilledText: {fileID: 2054521212697204569}
 --- !u!1 &8886394718199466675
@@ -5183,6 +5184,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16ceef4a0d2d43c4a93a7471ebe79e52, type: 3}
+--- !u!1 &308423041578908966 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 200333570811330391, guid: 16ceef4a0d2d43c4a93a7471ebe79e52, type: 3}
+  m_PrefabInstance: {fileID: 468382390504407665}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &4829253461007136369 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5009396016197645312, guid: 16ceef4a0d2d43c4a93a7471ebe79e52, type: 3}

@@ -113,6 +113,7 @@ public class BossBattle : MonoBehaviour
         _heartMinion.SetIsFighting();
         OnBossBattleStarted?.Invoke();
         _speedButtons.SetActive(true);
+        _battle.SetIsPausable(true);
     }
 
     public void ParallaxEnabledAnimationEvent()
@@ -138,5 +139,6 @@ public class BossBattle : MonoBehaviour
     void SetSpeedButtonsActive(bool active)
     {
         _speedButtons.SetActive(active);
+        _battle.SetIsPausable(active);
     }
 }

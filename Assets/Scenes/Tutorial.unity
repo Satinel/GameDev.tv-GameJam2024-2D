@@ -6770,6 +6770,7 @@ MonoBehaviour:
   _lastStandMessage: {fileID: 289011527}
   _unitKilledMessage: {fileID: 1563137102}
   _escapePrompt: {fileID: 0}
+  _pauseButton: {fileID: 6062955209724904074}
   _lifeCountText: {fileID: 0}
   _unitKilledText: {fileID: 1578688851}
 --- !u!1 &6005807029120965992

@@ -25,7 +25,7 @@ public class Battle : MonoBehaviour
     [SerializeField] TextMeshProUGUI _lifeCountText, _unitKilledText;
 
     float _currentTimeSpeed = 1;
-    bool _wasPaused, _noRetreat, _canEscape = false;
+    bool _wasPaused, _noRetreat, _canEscape = false, _isPausable = true;
 
     void OnEnable()
     {
@@ -77,6 +77,23 @@ public class Battle : MonoBehaviour
         if(_iRow1Sprite.enabled) _iRow1Sprite.sprite = _incomingRow1.Sprite;
         if(_iRow2Sprite.enabled) _iRow2Sprite.sprite = _incomingRow2.Sprite;
         if(_iRow3Sprite.enabled) _iRow3Sprite.sprite = _incomingRow3.Sprite;
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            if(!_isPausable) { return; }
+
+            if(Time.timeScale > 0f)
+            {   
+                PauseBattle();
+            }
+            else
+            {
+                UnpauseBattle();
+            }
+        }
     }
 
     void Campaign_OnBattleLoaded(object sender, bool frenzy)
@@ -135,6 +152,7 @@ public class Battle : MonoBehaviour
     void Defeat()
     {
         StopAllCoroutines();
+        SetIsPausable(false);
         OnBattleEnded?.Invoke();
         OnBattleLost?.Invoke();
     }
@@ -163,6 +181,7 @@ public class Battle : MonoBehaviour
     public void ConfirmRetreat()
     {
         StopAllCoroutines();
+        SetIsPausable(false);
         OnBattleEnded?.Invoke();
         OnRetreated?.Invoke();
     }
@@ -174,9 +193,15 @@ public class Battle : MonoBehaviour
         UnpauseBattle();
     }
 
+    public void SetIsPausable(bool canPause)
+    {
+        _isPausable = canPause;
+    }
+
     void Victory()
     {
         StopAllCoroutines();
+        SetIsPausable(false);
         OnBattleEnded?.Invoke();
         OnBattleWon?.Invoke();
     }
@@ -223,6 +248,7 @@ public class Battle : MonoBehaviour
         else
         {
             OnBossBattleWon?.Invoke();
+            SetIsPausable(false);
             OnBattleEnded?.Invoke();
         }
     }
