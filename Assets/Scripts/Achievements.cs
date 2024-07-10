@@ -1,9 +1,16 @@
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Achievements : MonoBehaviour
 {
     [SerializeField] GameObject _mainWindow, _popupOne, _popupTwo, _popupThree;
     [SerializeField] Animator _aniPopOne, _aniPopTwo, _aniPopThree;
+    [SerializeField] Image _imgPopOne, _imgPopTwo, _imgPopThree;
+    [SerializeField] TextMeshProUGUI _txtPopOne, _txtPopTwo, _txtPopThree;
+
+    [SerializeField] List<GameObject> _achievementList = new ();
 
     static readonly int POP_HASH = Animator.StringToHash("Pop");
 
@@ -19,41 +26,59 @@ public class Achievements : MonoBehaviour
         _mainWindow.SetActive(false);
     }
 
-    void PopAcheivement()
+    void PopAcheivement(Achievement achievement)
     {
         if(!_popupOne.activeSelf)
         {
-            // TODO Set Up the achievement here!
-            _aniPopOne.SetTrigger(POP_HASH);
+            SetPopUpOne(achievement);
         }
         else if(!_popupTwo.activeSelf)
         {
-            // TODO Set Up the achievement here!
-            _aniPopTwo.SetTrigger(POP_HASH);
+            SetPopUpTwo(achievement);
         }
         else if(!_popupThree.activeSelf)
         {
-            // TODO Set Up the achievement here!
-            _aniPopThree.SetTrigger(POP_HASH);
+            SetPopUpThree(achievement);
         }
         else
         {
-            // TODO Set Up the achievement here!
-            _aniPopOne.SetTrigger(POP_HASH);
+            _aniPopOne.StopPlayback();
+            _popupOne.SetActive(false);
+            SetPopUpOne(achievement);
         }
+    }
+
+    void SetPopUpOne(Achievement achievement)
+    {
+        _imgPopOne.sprite = achievement.Icon;
+        _txtPopOne.text = achievement.Text;
+        _aniPopOne.SetTrigger(POP_HASH);
+    }
+
+    void SetPopUpTwo(Achievement achievement)
+    {
+        _imgPopTwo.sprite = achievement.Icon;
+        _txtPopTwo.text = achievement.Text;
+        _aniPopTwo.SetTrigger(POP_HASH);
+    }
+
+    void SetPopUpThree(Achievement achievement)
+    {
+        _imgPopThree.sprite = achievement.Icon;
+        _txtPopThree.text = achievement.Text;
+        _aniPopThree.SetTrigger(POP_HASH);
     }
 
     // Method to unlock achievement
 
     // Specifid achievements:
-        // No One Survives the First Night: tutorial complete
-        // I Just Wanna Play a Game!: skip tutorial
-        // Perfect Defense: Clear Battle 6 with starting Campaign.Life count
-        // Legendary: Upgrade any weapon (not hat?) to Legendary
-        // Greed is Good: Equip 5 Tophats at same time
-        // Bearshaman Challenge: Defeat boss without any equipped offhand items
-        // Megaton Punch: Deal >= X damage with an unarmed attack
-        // Total Victory: Defeat Boss
+    // No One Survives the First Night: tutorial complete
+    // I Just Wanna Play a Game!: skip tutorial
+    // Perfect Defense: Clear Battle 6 with starting Campaign.Life count
+    // Legendary: Upgrade any weapon (not hat?) to Legendary
+    // Greed is Good: Equip 5 Tophats at same time
+    // Megaton Punch: Deal >= X damage with an unarmed attack
+    // Total Victory: Defeat Boss
+    // Bearshaman Challenge: Defeat boss without any equipped offhand items
 
-        // One for each Battle clear?? (probably not)
 }

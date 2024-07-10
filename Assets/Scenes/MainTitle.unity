@@ -5656,6 +5656,10 @@ PrefabInstance:
       propertyPath: _newGamePlusButton
       value: 
       objectReference: {fileID: 444098933}
+    - target: {fileID: 7964438374148653968, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
+      propertyPath: _achievements.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8767648570688968777, guid: 244c23db096f6f44ab6c79aec7acbc26, type: 3}
       propertyPath: _quitPrompt
       value: 
