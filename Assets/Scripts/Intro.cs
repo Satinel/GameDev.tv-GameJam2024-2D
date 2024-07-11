@@ -15,6 +15,11 @@ public class Intro : MonoBehaviour
     static readonly int INTRO_Hash = Animator.StringToHash("Intro");
     static readonly int SKIPINTRO_Hash = Animator.StringToHash("SkipIntro");
 
+    void Start()
+    {
+        Time.timeScale = 1;
+    }
+
     void Update()
     {
         if(!_introStarted) { return; }

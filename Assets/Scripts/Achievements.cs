@@ -2,9 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
 
 public class Achievements : MonoBehaviour
 {
+    public static event Action OnAnyAchievementUnlocked;
+
     [SerializeField] GameObject _mainWindow, _popupOne, _popupTwo, _popupThree;
     [SerializeField] Animator _aniPopOne, _aniPopTwo, _aniPopThree;
     [SerializeField] Image _imgPopOne, _imgPopTwo, _imgPopThree;
@@ -65,6 +68,7 @@ public class Achievements : MonoBehaviour
         {
             achievement.Unlock();
             PopAcheivement(achievement);
+            OnAnyAchievementUnlocked?.Invoke();
         }
     }
 
@@ -161,6 +165,29 @@ public class Achievements : MonoBehaviour
             }
 
             UnlockAchievement(_achievementList[7]);
+        }
+    }
+
+    public List<string> GetSaveData()
+    {
+        List<string> data = new();
+
+        foreach(Achievement achievement in _achievementList)
+        {
+            data.Insert(data.Count, achievement.IsLocked.ToString());
+        }
+
+        return data;
+    }
+
+    public void LoadData(string[] data)
+    {
+        for(int i = 0; i < data.Length; i++)
+        {
+            if(data[i] == "False")
+            {
+                _achievementList[i].Unlock();
+            }
         }
     }
 }

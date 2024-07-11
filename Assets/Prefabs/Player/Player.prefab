@@ -1955,6 +1955,7 @@ MonoBehaviour:
   _wallet: {fileID: 2017619771496907475}
   _teamManager: {fileID: 8801427850446944455}
   _arsenal: {fileID: 587274676638608327}
+  _achievements: {fileID: 7964438374148653968}
   _loadPrompt: {fileID: 4659727472340459634}
   _loadMenu: {fileID: 3577986318796416999}
   _savePrompt: {fileID: 4036314247619484313}

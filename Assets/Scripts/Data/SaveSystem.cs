@@ -8,9 +8,10 @@ public class SaveSystem : MonoBehaviour
 {
     public int AutoSavedMoney { get; private set; } = 0;
     [SerializeField] Campaign _campaign;
-    [SerializeField] Wallet _wallet; // TODO Rather than getting reference to Wallet etc. we make an interface for things we want to have save data
+    [SerializeField] Wallet _wallet;
     [SerializeField] TeamManager _teamManager;
     [SerializeField] Arsenal _arsenal;
+    [SerializeField] Achievements _achievements;
     [SerializeField] GameObject _loadPrompt, _loadMenu, _savePrompt, _saveMenu;
     [SerializeField] Animator _animator;
     [SerializeField] SaveButton _loadButton, _loadAutoSaveButton, _saveButton;
@@ -31,12 +32,14 @@ public class SaveSystem : MonoBehaviour
     {
         Campaign.OnReturnToTown += AutoSaveMoney;
         Shop.OnShopReady += AutoSave;
+        Achievements.OnAnyAchievementUnlocked += AutoSaveAchievements;
     }
 
     void OnDisable()
     {
         Campaign.OnReturnToTown -= AutoSaveMoney;
         Shop.OnShopReady -= AutoSave;
+        Achievements.OnAnyAchievementUnlocked -= AutoSaveAchievements;
     }
 
     void Start()
@@ -66,6 +69,8 @@ public class SaveSystem : MonoBehaviour
             string[] data = File.ReadAllLines(autoPath);
             _loadAutoSaveButton.Setup(data[0], data[1], data[2], data[3], data[8]);
         }
+
+        AutoLoadAchievements();
     }
 
     public void OpenLoadMenu()
@@ -129,6 +134,46 @@ public class SaveSystem : MonoBehaviour
 #endif
         int savedMoney = _wallet.SaveMoney();
         File.WriteAllText(saveMoneyPath, savedMoney.ToString());
+    }
+
+    public void AutoSaveAchievements()
+    {
+        string saveAchievementPath;
+#if UNITY_WEBGL
+{
+        saveAchievementPath = WEBPATH + "saveA.txt";
+        if(!Directory.Exists(saveAchievementPath))
+        {
+            Directory.CreateDirectory("/idbfs/MangoKamenLastStand");
+        }
+}
+#else
+{
+        saveAchievementPath = Application.persistentDataPath + "/saveA.txt"; // Note the / is needed here but not in WEBGL
+}
+#endif
+        List<string> achievementStrings = _achievements.GetSaveData();
+
+        File.WriteAllLines(saveAchievementPath, achievementStrings);
+    }
+
+    public void AutoLoadAchievements()
+    {
+        string loadAchievementPath;
+#if UNITY_WEBGL
+{
+        loadAchievementPath = WEBPATH + "saveA.txt";
+}
+#else
+{
+        loadAchievementPath = Application.persistentDataPath + "/saveA.txt"; // Note the / is needed here but not in WEBGL
+}
+#endif
+        if(File.Exists(loadAchievementPath))
+        {
+            string[] saveData = File.ReadAllLines(loadAchievementPath);
+            _achievements.LoadData(saveData);
+        }
     }
 
     public void LoadMoney()
