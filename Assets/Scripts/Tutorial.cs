@@ -6,6 +6,8 @@ using System;
 public class Tutorial : MonoBehaviour
 {
     public static event Action OnTargetingTutorialOver;
+    public static event Action OnTutorialSkipped;
+    public static event Action OnTutorialCompleted;
 
     [SerializeField] Battle _battle;
     [SerializeField] Unit _unit;
@@ -96,6 +98,7 @@ public class Tutorial : MonoBehaviour
             _button2Text.text = "Okay, bye!";
             _button1.gameObject.SetActive(false);
             _rejectedTutorial = true;
+            OnTutorialSkipped?.Invoke();
         }
         else
         {
@@ -321,5 +324,6 @@ public class Tutorial : MonoBehaviour
         _button8.gameObject.SetActive(false);
         _retreatButton.interactable = true;
         _battle.SetIsPausable(true);
+        OnTutorialCompleted?.Invoke();
     }
 }

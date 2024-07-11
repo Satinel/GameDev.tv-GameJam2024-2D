@@ -9,12 +9,45 @@ public class Achievements : MonoBehaviour
     [SerializeField] Animator _aniPopOne, _aniPopTwo, _aniPopThree;
     [SerializeField] Image _imgPopOne, _imgPopTwo, _imgPopThree;
     [SerializeField] TextMeshProUGUI _txtPopOne, _txtPopTwo, _txtPopThree;
+    [SerializeField] AudioSource _audioSource;
+    [SerializeField] AudioClip _audioClip;
 
-    [SerializeField] List<GameObject> _achievementList = new ();
+    [SerializeField] List<Achievement> _achievementList = new ();
+
+    [SerializeField] TeamManager _teamManager;
 
     static readonly int POP_HASH = Animator.StringToHash("Pop");
 
-    // Various references and/or Events to detect achievments
+    // TODO Saving/Loading
+
+    // Legendary: Upgrade any weapon (not hat!) to Legendary                TODO TEST
+    // Perfect Defense: Clear Battle 6 with starting Campaign.Life count    TODO TEST
+    // Greed is Good: Equip 5 Tophats at same time                          TODO TEST
+    // Megaton Punch: Deal >= 5000 damage with an unarmed attack            TODO TEST
+    // Total Victory: Defeat Boss                                           TODO TEST
+    // Bearshaman Challenge: Defeat boss without any equipped offhand items TODO TEST
+
+    void OnEnable()
+    {
+        Tutorial.OnTutorialCompleted += Tutorial_OnTutorialCompleted;
+        Tutorial.OnTutorialSkipped += Tutorial_OnTutorialSkipped;
+        EquipmentSlot.OnLegendaryUpgrade += EquipmentSlot_OnLegendaryUpgrade;
+        Campaign.OnPerfectDefense += Campaign_OnPerfectDefense;
+        TeamManager.OnGreedIsGood += TeamManager_OnGreedIsGood;
+        UnarmedSkill.OnMegatonPunch += UnarmedSkill_OnMegatonPunch;
+        BossBattle.OnBossDefeated += BossBattle_OnBossDefeated;
+    }
+
+    void OnDisable()
+    {
+        Tutorial.OnTutorialCompleted -= Tutorial_OnTutorialCompleted;
+        Tutorial.OnTutorialSkipped -= Tutorial_OnTutorialSkipped;
+        EquipmentSlot.OnLegendaryUpgrade -= EquipmentSlot_OnLegendaryUpgrade;
+        Campaign.OnPerfectDefense -= Campaign_OnPerfectDefense;
+        TeamManager.OnGreedIsGood -= TeamManager_OnGreedIsGood;
+        UnarmedSkill.OnMegatonPunch -= UnarmedSkill_OnMegatonPunch;
+        BossBattle.OnBossDefeated -= BossBattle_OnBossDefeated;
+    }
 
     public void OpenAchievements()
     {
@@ -26,8 +59,22 @@ public class Achievements : MonoBehaviour
         _mainWindow.SetActive(false);
     }
 
+    void UnlockAchievement(Achievement achievement)
+    {
+        if(achievement.IsLocked)
+        {
+            achievement.Unlock();
+            PopAcheivement(achievement);
+        }
+    }
+
     void PopAcheivement(Achievement achievement)
     {
+        if(_audioSource && _audioClip)
+        {
+            _audioSource.PlayOneShot(_audioClip);
+        }
+
         if(!_popupOne.activeSelf)
         {
             SetPopUpOne(achievement);
@@ -69,16 +116,51 @@ public class Achievements : MonoBehaviour
         _aniPopThree.SetTrigger(POP_HASH);
     }
 
-    // Method to unlock achievement
+    void Tutorial_OnTutorialCompleted()
+    {
+        UnlockAchievement(_achievementList[0]);
+    }
 
-    // Specifid achievements:
-    // No One Survives the First Night: tutorial complete
-    // I Just Wanna Play a Game!: skip tutorial
-    // Perfect Defense: Clear Battle 6 with starting Campaign.Life count
-    // Legendary: Upgrade any weapon (not hat?) to Legendary
-    // Greed is Good: Equip 5 Tophats at same time
-    // Megaton Punch: Deal >= X damage with an unarmed attack
-    // Total Victory: Defeat Boss
-    // Bearshaman Challenge: Defeat boss without any equipped offhand items
+    void Tutorial_OnTutorialSkipped()
+    {
+        UnlockAchievement(_achievementList[1]);
+    }
 
+    void EquipmentSlot_OnLegendaryUpgrade()
+    {
+        UnlockAchievement(_achievementList[2]);
+    }
+
+    void Campaign_OnPerfectDefense()
+    {
+        UnlockAchievement(_achievementList[3]);
+    }
+
+    void TeamManager_OnGreedIsGood()
+    {
+        UnlockAchievement(_achievementList[4]);
+    }
+
+    void UnarmedSkill_OnMegatonPunch()
+    {
+        UnlockAchievement(_achievementList[5]);
+    }
+
+    void BossBattle_OnBossDefeated()    
+    {
+        UnlockAchievement(_achievementList[6]);
+
+        if(_achievementList[7].IsLocked)
+        {
+            foreach (Unit unit in _teamManager.GetActiveUnits())
+            {
+                if(unit.Offhand().Gear != null)
+                {
+                    return;
+                }
+            }
+
+            UnlockAchievement(_achievementList[7]);
+        }
+    }
 }

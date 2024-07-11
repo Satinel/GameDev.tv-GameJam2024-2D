@@ -1,7 +1,11 @@
+using System;
 using UnityEngine;
 
 public class EquipmentSlot : MonoBehaviour
 {
+    public static event Action OnLegendaryUpgrade;
+    public static event Action OnTophatEquipped;
+
     [field:SerializeField] public EquipmentScriptableObject Gear {get; private set;}
     public int UpgradeLevel {get; private set;} = 1;
     public string UpgradeName {get; private set;}
@@ -12,6 +16,7 @@ public class EquipmentSlot : MonoBehaviour
 
     public Sprite ItemSprite() => _spriteRenderer.sprite;
 
+    const string _tophatName = "Top Hat";
 
     void Awake()
     {
@@ -40,6 +45,11 @@ public class EquipmentSlot : MonoBehaviour
         }
         Skill = Instantiate(gear.Skill, transform);
         Skill.SetUI(_cooldownUI, _cooldownFillImage);
+
+        if(gear.Slot == EquipmentType.Headgear && gear.Name == _tophatName)
+        {
+            OnTophatEquipped?.Invoke();
+        }
     }
 
     public void UpgradeItem(EquipmentScriptableObject gear)
@@ -79,6 +89,10 @@ public class EquipmentSlot : MonoBehaviour
             case 10:
                 UpgradeName = $"<color=#FF6500>Legendary</color>\n {gear.Name}";
                 _spriteRenderer.sprite = gear.LegendarySprite;
+                if(gear.Slot != EquipmentType.Headgear)
+                {
+                    OnLegendaryUpgrade?.Invoke();
+                }
                 break;
             case >10:
                 UpgradeName = $"<color=#FF6500>Legendary</color>\n {gear.Name} +{UpgradeLevel - 10}";

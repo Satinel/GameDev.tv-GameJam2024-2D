@@ -6,6 +6,7 @@ public class TeamManager : MonoBehaviour
 {
     public static event Action OnPartyWipe;
     public static event Action OnManualPressed;
+    public static event Action OnGreedIsGood;
 
     [field:SerializeField] public List<Unit> Team { get; private set; } = new();
     [field:SerializeField] public GameObject ManualButton { get; private set; }
@@ -19,6 +20,8 @@ public class TeamManager : MonoBehaviour
     bool _isTutorial = false;
     bool _inShop = false, _goingToShop = false;
 
+    const string _tophatName = "Top Hat";
+
     void OnEnable()
     {
         Battle.OnBattleStarted += Battle_OnBattleStarted;
@@ -29,6 +32,7 @@ public class TeamManager : MonoBehaviour
         Tutorial.OnTargetingTutorialOver += Tutorial_OnTargetingTutorialOver;
         Portal.OnUnitSummoned += Portal_OnUnitSummoned;
         Portal.OnShopOpened += Portal_OnShopOpened;
+        EquipmentSlot.OnTophatEquipped += EquipmentSlot_OnTophatEquipped;
     }
 
     void OnDisable()
@@ -41,6 +45,7 @@ public class TeamManager : MonoBehaviour
         Tutorial.OnTargetingTutorialOver += Tutorial_OnTargetingTutorialOver;
         Portal.OnUnitSummoned -= Portal_OnUnitSummoned;
         Portal.OnShopOpened -= Portal_OnShopOpened;
+        EquipmentSlot.OnTophatEquipped -= EquipmentSlot_OnTophatEquipped;
     }
 
     void Unit_OnAnyUnitKilled(object sender, Unit unit)
@@ -117,6 +122,26 @@ public class TeamManager : MonoBehaviour
     {
         _inShop = true;
         _goingToShop = false;
+    }
+
+    void EquipmentSlot_OnTophatEquipped()
+    {
+        int topHatsEquipped = 0;
+
+        foreach(Unit unit in _activeUnits)
+        {
+            if(unit.Headgear().Gear == null) { return; }
+
+            if(unit.Headgear().Gear.Name == _tophatName)
+            {
+                topHatsEquipped++;
+            }
+        }
+
+        if(topHatsEquipped >= 5)
+        {
+            OnGreedIsGood?.Invoke();
+        }
     }
 
     public void AddUnit(Unit unit)

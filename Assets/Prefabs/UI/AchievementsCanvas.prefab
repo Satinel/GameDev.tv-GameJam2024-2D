@@ -597,7 +597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShowMaskGraphic: 1
+  m_ShowMaskGraphic: 0
 --- !u!1 &5356163200516658278
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,7 +687,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShowMaskGraphic: 1
+  m_ShowMaskGraphic: 0
 --- !u!1 &6041867630750137882
 GameObject:
   m_ObjectHideFlags: 0
@@ -852,7 +852,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShowMaskGraphic: 1
+  m_ShowMaskGraphic: 0
 --- !u!1 &6952432941988766004
 GameObject:
   m_ObjectHideFlags: 0
@@ -2466,7 +2466,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 652316923892491209, guid: 25c85703ecd8dd748a0c7292bc0b1958, type: 3}
       propertyPath: m_text
-      value: 'Equip 5 Tophats
+      value: 'Equip 5 Top Hats
 
         at the Same Time'
       objectReference: {fileID: 0}
@@ -2482,7 +2482,7 @@ PrefabInstance:
       propertyPath: m_text
       value: 'Greed is Good
 
-        <sup>Equip 5 Tophats at the Same Time</sup>'
+        <sup>Equip 5 Top Hats at the Same Time</sup>'
       objectReference: {fileID: 0}
     - target: {fileID: 6502231774910609713, guid: 25c85703ecd8dd748a0c7292bc0b1958, type: 3}
       propertyPath: m_fontSize

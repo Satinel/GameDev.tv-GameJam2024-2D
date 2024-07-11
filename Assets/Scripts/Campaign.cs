@@ -16,6 +16,7 @@ public class Campaign : MonoBehaviour
     public static event EventHandler<List<EquipmentScriptableObject>> OnSetLockedItems;
     public static event Action OnCanEscape;
     public static event EventHandler<bool> OnWitchHatSet;
+    public static event Action OnPerfectDefense;
 
     [field:SerializeField] public int Wins { get; private set; }
     [field:SerializeField] public int Losses { get; private set; } = 5;
@@ -137,6 +138,11 @@ public class Campaign : MonoBehaviour
             if(_levelSelectButtons.Count > nextLevelIndex + 1)
             {
                 _levelSelectButtons[nextLevelIndex + 1].gameObject.SetActive(true);
+            }
+
+            if(Wins == 6 && Losses >= 5)
+            {
+                OnPerfectDefense?.Invoke();
             }
         }
     }

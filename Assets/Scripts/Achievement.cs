@@ -4,6 +4,8 @@ using TMPro;
 
 public class Achievement : MonoBehaviour
 {
+    public bool IsLocked { get; private set; } = true;
+
     public Sprite Icon => _image.sprite;
     public string Text => _text.text;
     
@@ -14,6 +16,7 @@ public class Achievement : MonoBehaviour
 
     public void Unlock()
     {
+        IsLocked = false;
         _lock.SetActive(false);
     }
 }
