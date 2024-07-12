@@ -21,15 +21,6 @@ public class Achievements : MonoBehaviour
 
     static readonly int POP_HASH = Animator.StringToHash("Pop");
 
-    // TODO Saving/Loading
-
-    // Legendary: Upgrade any weapon (not hat!) to Legendary                TODO TEST
-    // Perfect Defense: Clear Battle 6 with starting Campaign.Life count    TODO TEST
-    // Greed is Good: Equip 5 Tophats at same time                          TODO TEST
-    // Megaton Punch: Deal >= 5000 damage with an unarmed attack            TODO TEST
-    // Total Victory: Defeat Boss                                           TODO TEST
-    // Bearshaman Challenge: Defeat boss without any equipped offhand items TODO TEST
-
     void OnEnable()
     {
         Tutorial.OnTutorialCompleted += Tutorial_OnTutorialCompleted;
@@ -38,6 +29,7 @@ public class Achievements : MonoBehaviour
         Campaign.OnPerfectDefense += Campaign_OnPerfectDefense;
         TeamManager.OnGreedIsGood += TeamManager_OnGreedIsGood;
         UnarmedSkill.OnMegatonPunch += UnarmedSkill_OnMegatonPunch;
+        Battle.OnBossBattleWon += Battle_OnBossBattleWon;
         BossBattle.OnBossDefeated += BossBattle_OnBossDefeated;
     }
 
@@ -49,6 +41,7 @@ public class Achievements : MonoBehaviour
         Campaign.OnPerfectDefense -= Campaign_OnPerfectDefense;
         TeamManager.OnGreedIsGood -= TeamManager_OnGreedIsGood;
         UnarmedSkill.OnMegatonPunch -= UnarmedSkill_OnMegatonPunch;
+        Battle.OnBossBattleWon -= Battle_OnBossBattleWon;
         BossBattle.OnBossDefeated -= BossBattle_OnBossDefeated;
     }
 
@@ -150,10 +143,13 @@ public class Achievements : MonoBehaviour
         UnlockAchievement(_achievementList[5]);
     }
 
-    void BossBattle_OnBossDefeated()    
+    void Battle_OnBossBattleWon()
     {
         UnlockAchievement(_achievementList[6]);
+    }
 
+    void BossBattle_OnBossDefeated()    
+    {
         if(_achievementList[7].IsLocked)
         {
             foreach (Unit unit in _teamManager.GetActiveUnits())
@@ -163,7 +159,6 @@ public class Achievements : MonoBehaviour
                     return;
                 }
             }
-
             UnlockAchievement(_achievementList[7]);
         }
     }
