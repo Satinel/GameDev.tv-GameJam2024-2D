@@ -1383,11 +1383,13 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 652316923892491209, guid: 25c85703ecd8dd748a0c7292bc0b1958, type: 3}
       propertyPath: m_text
-      value: Clear Battle 6 With No Losses
+      value: 'Clear Battle 6 With
+
+        5 Intact Castles Left'
       objectReference: {fileID: 0}
     - target: {fileID: 652316923892491209, guid: 25c85703ecd8dd748a0c7292bc0b1958, type: 3}
       propertyPath: m_fontSize
-      value: 43.85
+      value: 64.65
       objectReference: {fileID: 0}
     - target: {fileID: 2624275266300744715, guid: 25c85703ecd8dd748a0c7292bc0b1958, type: 3}
       propertyPath: m_Name
@@ -1397,7 +1399,7 @@ PrefabInstance:
       propertyPath: m_text
       value: 'Perfect Defense
 
-        <sup>Clear Battle 6 With No Losses</sup>'
+        <sup>Clear Battle 6 With 5 Intact Castles</sup>'
       objectReference: {fileID: 0}
     - target: {fileID: 6502231774910609713, guid: 25c85703ecd8dd748a0c7292bc0b1958, type: 3}
       propertyPath: m_fontSize

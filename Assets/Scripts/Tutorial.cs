@@ -67,7 +67,7 @@ public class Tutorial : MonoBehaviour
     void Battle_OnBattleStarted()
     {
         _pointer.SetActive(false);
-        _battle.PauseBattle();
+        _battle.PauseBattleNoMessage();
         _battle.SetIsPausable(false);
         _textBox.SetActive(true);
         _text.text = "Would you like to join me in a short tutorial?";
@@ -213,9 +213,9 @@ public class Tutorial : MonoBehaviour
     {
         if(!_enemyKilled)
         {
-            _battle.PauseBattle();
+            _battle.PauseBattleNoMessage();
             _enemyKilled = true;
-            _battle.PauseBattle();
+            _battle.PauseBattleNoMessage();
             _textBox.SetActive(true);
             _pointer.SetActive(true);
             _pointer.transform.position = _incomingEnemy.transform.position;
@@ -262,7 +262,7 @@ public class Tutorial : MonoBehaviour
         _fastForwardButton.interactable = false;
         _playButton.interactable = false;
         _pauseButton.interactable = false;
-        _battle.PauseBattle();
+        _battle.PauseBattleNoMessage();
         _textBox.SetActive(true);
         _text.text = "Pretty useful, right? ";
         _text.text += "You can also pause time like I keep doing. ";
@@ -292,7 +292,7 @@ public class Tutorial : MonoBehaviour
         _playButton.interactable = false;
         _pauseButton.interactable = false;
         _doubleFastButton.interactable = false;
-        _battle.PauseBattle();
+        _battle.PauseBattleNoMessage();
         _battle.SetIsPausable(false);
         _textBox.SetActive(true);
         _text.text = "Halfway through the night, monsters will enter a <color=#ff0000>Frenzied</color> state. ";

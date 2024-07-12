@@ -490,6 +490,7 @@ public class Campaign : MonoBehaviour
             yield return null;
         }
         _screenWipeImage.fillAmount = 0;
+        _bossDamageUI.SetActive(false);
         OnTownLoaded?.Invoke(this, playCutscene);
         _isTransitioning = false;
     }
@@ -529,7 +530,7 @@ public class Campaign : MonoBehaviour
     void Enemy_OnBossDamaged(object sender, int damage)
     {
         BossDamage += damage;
-        _bossDamageUIText.text = $"Total Boss Damge: {BossDamage}";
+        _bossDamageUIText.text = $"Total Boss Damage: {BossDamage}";
     }
 
     void BossBattle_OnBossBattleStarted()

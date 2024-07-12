@@ -21,7 +21,7 @@ public class Battle : MonoBehaviour
     [SerializeField] EnemyScriptableObject _incomingRow1, _incomingRow2, _incomingRow3;
     [SerializeField] SpriteRenderer _iRow1Sprite, _iRow2Sprite, _iRow3Sprite;
     [SerializeField] List<EnemyScriptableObject> _bestiary = new();
-    [SerializeField] GameObject _retreatPrompt, _noRetreatPrompt, _lastStandMessage, _unitKilledMessage, _escapePrompt;
+    [SerializeField] GameObject _retreatPrompt, _noRetreatPrompt, _lastStandMessage, _unitKilledMessage, _escapePrompt, _pauseMessage;
     [SerializeField] TextMeshProUGUI _lifeCountText, _unitKilledText;
 
     float _currentTimeSpeed = 1;
@@ -86,7 +86,7 @@ public class Battle : MonoBehaviour
             if(!_isPausable) { return; }
 
             if(Time.timeScale > 0f)
-            {   
+            {
                 PauseBattle();
             }
             else
@@ -121,9 +121,10 @@ public class Battle : MonoBehaviour
 
     void Options_OnOptionsOpened()
     {
+        _isPausable = false;
         if(Time.timeScale > 0f)
         {   
-            PauseBattle();
+            PauseBattleNoMessage();
             _wasPaused = false;
         }
         else
@@ -134,6 +135,7 @@ public class Battle : MonoBehaviour
 
     void Options_OnOptionsClosed()
     {
+        _isPausable = true;
         if(_wasPaused) { return; }
 
         UnpauseBattle();
@@ -159,7 +161,7 @@ public class Battle : MonoBehaviour
 
     public void PromptRetreat()
     {
-        PauseBattle();
+        PauseBattleNoMessage();
 
         if(!_noRetreat)
         {
@@ -229,6 +231,15 @@ public class Battle : MonoBehaviour
 
     public void PauseBattle()
     {
+        if(_pauseMessage)
+        {
+            _pauseMessage.SetActive(true);
+        }
+        Time.timeScale = 0f;
+    }
+
+    public void PauseBattleNoMessage()
+    {
         Time.timeScale = 0f;
     }
 
@@ -237,6 +248,10 @@ public class Battle : MonoBehaviour
         Time.timeScale = _currentTimeSpeed;
         _retreatPrompt.SetActive(false);
         _noRetreatPrompt.SetActive(false);
+        if(_pauseMessage)
+        {
+            _pauseMessage.SetActive(false);
+        }
     }
 
     void Enemy_OnAnyEnemyKilled(object sender, Enemy enemy)
